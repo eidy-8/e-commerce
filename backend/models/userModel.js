@@ -17,6 +17,24 @@ async function getUserByUsername(data) {
     });
 }
 
+async function getUserByEmail(data) {
+    return new Promise((resolve, reject) => {
+        const query = 'SELECT * FROM Users WHERE email = $1';        
+        db.query(
+            query, 
+            [data], 
+            (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result.rows);
+                }
+            }
+        );
+    });
+}
+
 module.exports = {
-    getUserByUsername
+    getUserByUsername,
+    getUserByEmail
 }

@@ -1,5 +1,5 @@
 const jsonWebToken = require("jsonwebtoken");
-const loginModel = require("../models/loginModel")
+const userModel = require("../models/userModel");
 const dotenv = require("dotenv");
 const bcrypt = require("bcryptjs");
 
@@ -11,25 +11,31 @@ exports.login = async (req, res) => {
     const { username, email, password } = req.body;
 
     try {        
-        const user = await loginModel.getUserByUsername(username);
+        const usersUsername = await userModel.getUserByUsername(username);
+        const usersEmail = await userModel.getUserByEmail(email);
 
-        if (user.length > 0) {
-            const isEmailValid = await bcrypt.compare(email, user[0].email);
-            const isPasswordValid = await bcrypt.compare(password, user[0].password);
+        if (usersUsername.length > 0 && usersEmail.length > 0) {
+            const isPasswordValid = await bcrypt.compare(password, usersUsername[0].password);
 
-            if (!isEmailValid || !isPasswordValid) {
-                return res.status(401).json({message: 'Credencais inválidas. Verifique o usuário e a senha.'})
+            if (!isPasswordValid) {
+                return res.status(401).json({
+                    message: 'Credencais inválidas.'
+                });
             }
 
             const token = jsonWebToken.sign(
-                { user: JSON.stringify(user[0]) },
+                { user: JSON.stringify(usersUsername[0]) },
                 PRIVATE_KEY,
                 { expiresIn: '60m' }
             );
 
-            return res.status(200).json({ data: { token, isLogged: true }});
+            return res.status(200).json({ 
+                data: { token }
+            });
         } else {
-            return res.json({ data: { isLogged: false } });
+            return res.status(401).json({
+                message: 'Credencais inválidas.'
+            });
         }
     } catch (error) {
         console.log(error);
