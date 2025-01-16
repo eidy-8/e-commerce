@@ -6,11 +6,11 @@ async function getUserByUsername(data) {
         db.query(
             query, 
             [data], 
-            (err, rows) => {
+            (err, result) => {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(rows);
+                    resolve(result.rows);
                 }
             }
         );
