@@ -1,1 +1,62 @@
-<p>register works!</p>
+<div class="flex flex-col items-center">
+  <p class="text-quaternary-color text-3xl mb-20 mt-10 px-2">
+    Preencha os dados para criar sua conta
+  </p>
+  <form
+    class="bg-white shadow-md rounded px-8 pb-8 pt-8 lg:w-1/4 md:w-2/4 sm:w-full"
+  >
+    <div class="mb-4">
+      <label class="block text-quaternary-color text-sm mb-2" for="email">E-mail</label>
+      <input
+        [(ngModel)]="email"
+        name="email"
+        [ngClass]="{ 'border-tertiary-color': registerError }"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-quaternary-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+        id="email"
+        type="text"
+        placeholder="Insira seu e-mail"
+      />
+    </div>
+
+    <div class="mb-4">
+        <label class="block text-quaternary-color text-sm mb-2" for="email">Nome</label>
+        <input
+          [(ngModel)]="name"
+          name="name"
+          [ngClass]="{ 'border-tertiary-color': registerError }"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-quaternary-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+          id="name"
+          type="text"
+          placeholder="Insira seu nome"
+        />
+    </div>
+
+    <div class="mb-6">
+      <label class="block text-quaternary-color text-sm mb-2" for="password"
+        >Senha</label
+      >
+      <input
+        [(ngModel)]="password"
+        name="password"
+        [ngClass]="{ 'border-tertiary-color': registerError }"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-quaternary-color mb-3 leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+        id="password"
+        type="password"
+        placeholder="Insira sua senha"
+      />
+    </div>
+    <div class="flex items-center justify-between">
+      <button
+        (click)="register()"
+        class="bg-primary-color hover:bg-secondary-color text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        type="button"
+      >
+        Criar conta
+      </button>
+  
+    </div>
+    <p *ngIf="registerError" class="text-tertiary-color text-xs italic mb-4 mt-3">
+      Credenciais inválidas, tente novamente.
+    </p>
+  </form>
+</div>
