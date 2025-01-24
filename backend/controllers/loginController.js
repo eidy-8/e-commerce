@@ -8,14 +8,13 @@ dotenv.config();
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 exports.login = async (req, res) => {
-    const { username, email, password } = req.body;
+    const { email, password } = req.body;
 
     try {        
-        const usersUsername = await userModel.getUserByUsername(username);
         const usersEmail = await userModel.getUserByEmail(email);
 
-        if (usersUsername.length > 0 && usersEmail.length > 0) {
-            const isPasswordValid = await bcrypt.compare(password, usersUsername[0].password);
+        if (usersEmail.length > 0) {
+            const isPasswordValid = await bcrypt.compare(password, usersEmail[0].password);
 
             if (!isPasswordValid) {
                 return res.status(401).json({
@@ -24,7 +23,7 @@ exports.login = async (req, res) => {
             }
 
             const token = jsonWebToken.sign(
-                { user: JSON.stringify(usersUsername[0]) },
+                { user: JSON.stringify(usersEmail[0]) },
                 PRIVATE_KEY,
                 { expiresIn: '60m' }
             );

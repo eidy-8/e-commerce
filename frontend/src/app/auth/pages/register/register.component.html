@@ -10,7 +10,7 @@
       <input
         [(ngModel)]="email"
         name="email"
-        [ngClass]="{ 'border-tertiary-color': registerError }"
+        [ngClass]="{ 'border-tertiary-color': emailRegisterError }"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-quaternary-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
         id="email"
         type="text"
@@ -31,20 +31,41 @@
         />
     </div>
 
-    <div class="mb-6">
+    <div class="mb-4">
       <label class="block text-quaternary-color text-sm mb-2" for="password"
         >Senha</label
       >
       <input
         [(ngModel)]="password"
         name="password"
-        [ngClass]="{ 'border-tertiary-color': registerError }"
+        [ngClass]="{ 'border-tertiary-color': passwordRegisterError }"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-quaternary-color mb-3 leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
         id="password"
-        type="password"
+        [type]="showPassword ? 'text' : 'password'"
         placeholder="Insira sua senha"
       />
+      <i
+        class="-translate-x-8 translate-y-2.5 fa absolute text-quaternary-color cursor-pointer"
+        [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"  
+        (click)="togglePasswordVisibility()"
+      ></i>
     </div>
+
+    <div class="mb-6">
+      <label class="block text-quaternary-color text-sm mb-2" for="password2"
+        >Confirme a senha</label
+      >
+      <input
+        [(ngModel)]="password2"
+        name="password2"
+        [ngClass]="{ 'border-tertiary-color': passwordRegisterError }"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-quaternary-color mb-3 leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+        id="password2"
+        type="password"
+        placeholder="Confirme sua senha"
+      />
+    </div>
+
     <div class="flex items-center justify-between">
       <button
         (click)="register()"
