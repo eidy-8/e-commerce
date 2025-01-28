@@ -10,13 +10,9 @@ exports.register = async (req, res) => {
         const usersEmail = await userModel.getUserByEmail(email);
 
         if (usersUsername.length > 0) {
-            return res.status(400).json({
-                message: 'O username inserido já está associado a uma conta.'
-            });
+            throw new Error('O username inserido já está associado a uma conta.');
         } else if (usersEmail.length > 0) {
-            return res.status(400).json({
-                message: 'O e-mail inserido já está associado a uma conta.'
-            });
+                throw new Error('O e-mail inserido já está associado a uma conta.');
         } else {
             const saltRounds = 10;
             const hashPassword = await bcrypt.hash(password, saltRounds);
