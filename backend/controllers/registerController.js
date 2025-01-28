@@ -12,7 +12,7 @@ exports.register = async (req, res) => {
         if (usersUsername.length > 0) {
             throw new Error('O username inserido já está associado a uma conta.');
         } else if (usersEmail.length > 0) {
-                throw new Error('O e-mail inserido já está associado a uma conta.');
+            throw new Error('O e-mail inserido já está associado a uma conta.');
         } else {
             const saltRounds = 10;
             const hashPassword = await bcrypt.hash(password, saltRounds);
@@ -30,9 +30,9 @@ exports.register = async (req, res) => {
             });
         } 
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ 
-            message: 'Erro ao criar o usuário'
-        })
+        console.error(error.message); 
+        res.status(400).json({  
+            message: error.message 
+        });
     }
 }

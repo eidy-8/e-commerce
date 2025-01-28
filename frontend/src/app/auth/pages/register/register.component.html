@@ -15,6 +15,7 @@
         id="email"
         type="text"
         placeholder="Insira seu e-mail"
+        (keydown)="sharedMethod.preventSpace($event)"
       />
     </div>
 
@@ -28,6 +29,7 @@
           id="name"
           type="text"
           placeholder="Insira seu nome"
+          (keydown)="sharedMethod.preventSpace($event)"
         />
     </div>
 
@@ -43,6 +45,7 @@
         id="password"
         [type]="showPassword ? 'text' : 'password'"
         placeholder="Insira sua senha"
+        (keydown)="sharedMethod.preventSpace($event)"
       />
       <i
         class="-translate-x-8 translate-y-2.5 fa absolute text-quaternary-color cursor-pointer"
@@ -63,6 +66,7 @@
         id="password2"
         type="password"
         placeholder="Confirme sua senha"
+        (keydown)="sharedMethod.preventSpace($event)"
       />
     </div>
 
@@ -76,8 +80,10 @@
       </button>
   
     </div>
-    <p *ngIf="registerError" class="text-tertiary-color text-xs italic mb-4 mt-3">
-      Credenciais inválidas, tente novamente.
-    </p>
+    @if (registerError || emailRegisterError || passwordRegisterError) {
+      <p class="text-tertiary-color text-xs italic mb-4 mt-3">
+        {{ errorMessage }}
+      </p>
+    }
   </form>
 </div>

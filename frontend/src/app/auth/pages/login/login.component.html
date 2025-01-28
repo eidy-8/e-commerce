@@ -15,6 +15,7 @@
         id="email"
         type="text"
         placeholder="Insira seu e-mail"
+        (keydown)="sharedMethod.preventSpace($event)"
       />
     </div>
     <div class="mb-6">
@@ -29,6 +30,7 @@
         id="password"
         type="password"
         placeholder="Insira sua senha"
+        (keydown)="sharedMethod.preventSpace($event)"
       />
     </div>
     <div class="flex items-center justify-between">
@@ -46,8 +48,10 @@
         Criar conta
       </a>
     </div>
-    <p *ngIf="loginError" class="text-tertiary-color text-xs italic mb-4 mt-3">
-      Credenciais inválidas, tente novamente.
-    </p>
+    @if (loginError) {
+      <p class="text-tertiary-color text-xs italic mb-4 mt-3">
+        {{errorMessage}}
+      </p>
+    }
   </form>
 </div>

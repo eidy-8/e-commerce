@@ -43,12 +43,23 @@ export class ApiDataService {
   
   private handleError(error: HttpErrorResponse) {
     let errorMessage = '';
+  
     if (error.error instanceof ErrorEvent) {
-      errorMessage = error.error.message;
+      errorMessage = `Erro: ${error.error.message}`;
     } else {
-      errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
+      if (error.error && error.error.message) {
+        errorMessage = error.error.message;
+      } else {
+        errorMessage = `Código do erro: ${error.status}, mensagem: ${error.message}`;
+      }
     }
-    console.log(errorMessage);
-    return throwError(errorMessage);
-  };
+  
+    console.error('Erro capturado pelo handleError:', error);
+  
+    return throwError(() => ({
+      status: error.status, 
+      message: errorMessage, 
+      fullError: error 
+    }));
+  }
 }
