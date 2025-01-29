@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { ApiDataService } from '../../services/api-data.service';
 import { Router } from '@angular/router';
-import { MethodsService } from '../../../shared/shared.service';
+import { MethodsService } from '../../../shared/services/shared.service';
 
 @Component({
   selector: 'app-register',
