@@ -34,7 +34,7 @@ export class LoginComponent {
     this.apiData.postLogin(loginData).pipe( takeUntil( this.unsubscribe ) ).subscribe({
       next: res => {
         sessionStorage.setItem("Session-Token", res.data.token);
-        this.router.navigate([`/user/home`]); 
+        this.router.navigate([`/`]); 
       },
       error: error => {
         this.errorMessage = error.message;

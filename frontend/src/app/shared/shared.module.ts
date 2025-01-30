@@ -5,13 +5,15 @@ import { HeaderSearchComponent } from './components/header-search/header-search.
 import { FooterRegularComponent } from './components/footer-regular/footer-regular.component';
 import { HeaderRegularComponent } from './components/header-regular/header-regular.component';
 import { HeaderSubLoggedComponent } from './components/header-sub-logged/header-sub-logged.component';
+import { HeaderSubNotLoggedComponent } from './components/header-sub-not-logged/header-sub-not-logged.component';
 
 @NgModule({
   declarations: [
     HeaderSearchComponent,
     FooterRegularComponent,
     HeaderRegularComponent,
-    HeaderSubLoggedComponent
+    HeaderSubLoggedComponent,
+    HeaderSubNotLoggedComponent
   ],
   imports: [
     CommonModule
@@ -21,7 +23,8 @@ import { HeaderSubLoggedComponent } from './components/header-sub-logged/header-
     HeaderSearchComponent,
     FooterRegularComponent,
     HeaderRegularComponent,
-    HeaderSubLoggedComponent
+    HeaderSubLoggedComponent,
+    HeaderSubNotLoggedComponent
   ]
 })
 export class SharedModule { }

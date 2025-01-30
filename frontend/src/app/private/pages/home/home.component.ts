@@ -8,11 +8,5 @@ import { Router } from '@angular/router';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  constructor(private authService: AuthService, private router: Router) {}
 
-  protected logout() {
-    this.authService.logout();
-
-    this.router.navigate([`/`]);
-  }
 }
