@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideHttpClient } from '@angular/common/http';
 import { SharedModule } from "./shared/shared.module";
+import { PublicModule } from './public/public.module';
+import { PrivateModule } from './private/private.module';
 
 @NgModule({
   declarations: [
@@ -13,8 +15,10 @@ import { SharedModule } from "./shared/shared.module";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
-],
+    SharedModule,
+    PublicModule,
+    PrivateModule
+  ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })
