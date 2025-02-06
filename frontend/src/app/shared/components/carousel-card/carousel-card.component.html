@@ -1,27 +1,31 @@
 <div class="carousel-container">
-    <!-- Botão Esquerdo -->
-    <button class="nav-button left" (click)="prev()" [disabled]="currentIndex === 0">
-      <span>&lt;</span>
-    </button>
-  
-    <!-- Carrossel -->
-    <div class="carousel">
-      <div class="carousel-track" [style.transform]="getTransform()">
-        <div class="card" *ngFor="let card of cards">
-          <!-- Conteúdo do Card -->
-          <h3>{{ card.title }}</h3>
-          <p>{{ card.description }}</p>
-        </div>
+  <button
+    class="nav-button left"
+    (click)="prev()"
+    [disabled]="currentIndex === 0"
+  >
+    <span>&lt;</span>
+  </button>
+
+  <div class="carousel">
+    <div class="carousel-track" [style.transform]="getTransform()">
+      <div class="card" *ngFor="let card of cards">
+        <b class="font-bold text-base">{{ card.title }}</b>
+        <br><br>
+        <img src="../../../../assets/undraw_breakfast_rgx5.svg" alt="">
+        <br>
+        <p class="text-xs text-center">{{ card.description }}</p>
+        <br><br>
+        <button class="rounded-md bg-blue-400 text-blue-700">Mostrar produtos</button>
       </div>
     </div>
-  
-    <!-- Botão Direito -->
-    <button
-      class="nav-button right"
-      (click)="next()"
-      [disabled]="currentIndex >= cards.length - 6"
-    >
-      <span>&gt;</span>
-    </button>
+  </div>
+
+  <button
+    class="nav-button right"
+    (click)="next()"
+    [disabled]="currentIndex >= cards.length - cardsPerPage"
+  >
+    <span>&gt;</span>
+  </button>
 </div>
-  

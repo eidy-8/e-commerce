@@ -6,25 +6,25 @@ import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
   styleUrl: './carousel-card.component.css'
 })
 export class CarouselCardComponent {
-  @Input() cards: any[] = []; // Recebe o array de objetos
-  currentIndex: number = 0; // Índice do primeiro card visível
+  @Input() cards: any[] = [];
+  currentIndex: number = 0; 
+  cardsPerPage: number = 6;
+  scrollStep: number = 3; 
 
-  // Avançar os cards
   next() {
-    if (this.currentIndex < this.cards.length - 6) {
-      this.currentIndex++;
+    const maxIndex = this.cards.length - this.cardsPerPage;
+    if (this.currentIndex < maxIndex) {
+      this.currentIndex = Math.min(this.currentIndex + this.scrollStep, maxIndex);
     }
   }
 
-  // Voltar os cards
   prev() {
     if (this.currentIndex > 0) {
-      this.currentIndex--;
+      this.currentIndex = Math.max(this.currentIndex - this.scrollStep, 0);
     }
   }
 
-  // Calcula o estilo para aplicar o deslocamento com animação
   getTransform() {
-    return `translateX(-${this.currentIndex * (100 / 6)}%)`;
+    return `translateX(-${this.currentIndex * (100 / this.cardsPerPage)}%)`;
   }
 }
