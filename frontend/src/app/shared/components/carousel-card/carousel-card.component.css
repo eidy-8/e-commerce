@@ -1,0 +1,73 @@
+.carousel-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.nav-button {
+  background-color: #fff;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  top: 50%; /* Centraliza verticalmente */
+  transform: translateY(-50%); /* Ajusta o botão para o centro vertical */
+  z-index: 10;
+}
+
+.nav-button.left {
+  left: -20px; /* Metade do botão fica para fora */
+}
+
+.nav-button.right {
+  right: -20px; /* Metade do botão fica para fora */
+}
+
+.nav-button span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.nav-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.carousel {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.card {
+  flex: 1 0 calc(100% / 6); /* 6 cards por vez */
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+  background-color: #f9f9f9;
+  margin: 5px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+  font-size: 16px;
+  margin: 0 0 8px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #666;
+}

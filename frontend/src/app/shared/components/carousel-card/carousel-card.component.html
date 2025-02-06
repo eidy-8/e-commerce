@@ -1,0 +1,27 @@
+<div class="carousel-container">
+    <!-- Botão Esquerdo -->
+    <button class="nav-button left" (click)="prev()" [disabled]="currentIndex === 0">
+      <span>&lt;</span>
+    </button>
+  
+    <!-- Carrossel -->
+    <div class="carousel">
+      <div class="carousel-track" [style.transform]="getTransform()">
+        <div class="card" *ngFor="let card of cards">
+          <!-- Conteúdo do Card -->
+          <h3>{{ card.title }}</h3>
+          <p>{{ card.description }}</p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Botão Direito -->
+    <button
+      class="nav-button right"
+      (click)="next()"
+      [disabled]="currentIndex >= cards.length - 6"
+    >
+      <span>&gt;</span>
+    </button>
+</div>
+  

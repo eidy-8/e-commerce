@@ -55,4 +55,7 @@ O projeto foi desenvolvido com as seguintes tecnologias e ferramentas:
 ---
 
 ## Créditos
-[svgrepo](https://www.svgrepo.com/svg/215127/shopping-cart) - Logo da empresa fictícia.
+- [svgrepo](https://www.svgrepo.com/svg/215127/shopping-cart) - Logo da empresa fictícia.
+- [canva](https://www.canva.com/) - Artes dos carrosseis.
+- [undraw](https://undraw.co/) - Imagens animadas.
+- [vecteezy](https://www.vecteezy.com/) - Imagens dos produtos.
