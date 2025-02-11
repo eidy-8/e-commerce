@@ -10,13 +10,14 @@
   <div class="carousel">
     <div class="carousel-track" [style.transform]="getTransform()">
       <div class="card" *ngFor="let card of cards">
-        <b class="font-bold text-base">{{ card.title }}</b>
-        <br><br>
-        <img src="../../../../assets/undraw_breakfast_rgx5.svg" alt="">
+        <b>{{ card.title }}</b>
         <br>
-        <p class="text-xs text-center">{{ card.description }}</p>
-        <br><br>
-        <button class="rounded-md bg-blue-400 text-blue-700">Mostrar produtos</button>
+        <img src={{card.image}} alt="Imagens do carrossel">
+        <br>
+        <p>{{ card.description }}</p>
+        <a href={{card.link}}>
+          <button>Mostrar produtos</button>
+        </a>
       </div>
     </div>
   </div>
