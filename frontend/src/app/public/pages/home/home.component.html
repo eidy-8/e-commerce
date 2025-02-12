@@ -4,6 +4,10 @@
     <swiper-slide><img class="block w-full h-36 sm:h-96 object-cover sm:mask-gradient" src="../../../../assets/Movel.png" alt="Imagem de um móvel"></swiper-slide>
 </swiper-container>
 
-<div class="mx-auto max-w-7xl lg:px-32 flex justify-center items-center">
-    <app-carousel-card [cards]="cards"></app-carousel-card>
+<div class="mx-0 sm:mx-80">
+    <app-carousel-card [cards]="cards" [cardsPerPage]="cardsPerPage" [scrollStep]="scrollStep"></app-carousel-card>
+</div>
+<br>
+<div class="mx-0 sm:mx-80">
+    <app-catalog [products]="products" [cardsPerPage]="cardsPerPage" [scrollStep]="scrollStep"></app-catalog>
 </div>

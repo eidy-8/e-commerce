@@ -4,12 +4,14 @@
     (click)="prev()"
     [disabled]="currentIndex === 0"
   >
-    <span>&lt;</span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+      <path d="M15.41 16.59 10.83 12l4.58-4.59L14 6l-6 6 6 6z" />
+    </svg>
   </button>
 
   <div class="carousel">
     <div class="carousel-track" [style.transform]="getTransform()">
-      <div class="card" *ngFor="let card of cards">
+      <div class="card"[style.flex]="'0 0 calc((100% / ' + cardsPerPage + ') - 18px)'" *ngFor="let card of cards">
         <b>{{ card.title }}</b>
         <br>
         <img src={{card.image}} alt="Imagens do carrossel">
@@ -27,6 +29,8 @@
     (click)="next()"
     [disabled]="currentIndex >= cards.length - cardsPerPage"
   >
-    <span>&gt;</span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+      <path d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z" />
+    </svg>
   </button>
 </div>

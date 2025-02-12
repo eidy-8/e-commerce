@@ -1,18 +1,18 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-carousel-card',
-  templateUrl: './carousel-card.component.html',
-  styleUrl: './carousel-card.component.css'
+  selector: 'app-catalog',
+  templateUrl: './catalog.component.html',
+  styleUrl: './catalog.component.css'
 })
-export class CarouselCardComponent {
-  @Input() cards: any[] = [];
+export class CatalogComponent {
+  @Input() products: any[] = [];
   @Input() cardsPerPage: number = 6;
   @Input() scrollStep: number = 6; 
   currentIndex: number = 0; 
 
   next() {
-    const maxIndex = this.cards.length - this.cardsPerPage;
+    const maxIndex = this.products.length - this.cardsPerPage;
     if (this.currentIndex < maxIndex) {
       this.currentIndex = Math.min(this.currentIndex + this.scrollStep, maxIndex);
     }

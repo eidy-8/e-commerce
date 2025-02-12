@@ -1,0 +1,37 @@
+<div class="catalog-container">
+    <button
+      class="nav-button left"
+      (click)="prev()"
+      [disabled]="currentIndex === 0"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+        <path d="M15.41 16.59 10.83 12l4.58-4.59L14 6l-6 6 6 6z" />
+      </svg>
+    </button>
+  
+    <div class="catalog">
+      <b>Tendência para a sua beleza</b>
+      <br><br>
+      <div class="catalog-track" [style.transform]="getTransform()">
+        <div class="card"[style.flex]="'0 0 calc((100% / ' + cardsPerPage + ') - 18px)'" *ngFor="let product of products">
+          <a href={{product.link}}>
+              <img src={{product.image}} alt="Imagens do catálogo">
+              <p>{{ product.title }}</p>
+              <br><br>
+              <p>{{ product.price }}</p>
+          </a>  
+        </div>
+      </div>
+    </div>
+  
+    <button
+      class="nav-button right"
+      (click)="next()"
+      [disabled]="currentIndex >= products.length - cardsPerPage"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+        <path d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z" />
+      </svg>
+    </button>
+  </div>
+  

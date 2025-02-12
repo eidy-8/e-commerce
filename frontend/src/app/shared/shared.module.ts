@@ -7,6 +7,7 @@ import { HeaderRegularComponent } from './components/header-regular/header-regul
 import { HeaderSubLoggedComponent } from './components/header-sub-logged/header-sub-logged.component';
 import { HeaderSubNotLoggedComponent } from './components/header-sub-not-logged/header-sub-not-logged.component';
 import { CarouselCardComponent } from './components/carousel-card/carousel-card.component';
+import { CatalogComponent } from './components/catalog/catalog.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CarouselCardComponent } from './components/carousel-card/carousel-card.
     HeaderRegularComponent,
     HeaderSubLoggedComponent,
     HeaderSubNotLoggedComponent,
-    CarouselCardComponent
+    CarouselCardComponent,
+    CatalogComponent
   ],
   imports: [
     CommonModule
@@ -27,7 +29,8 @@ import { CarouselCardComponent } from './components/carousel-card/carousel-card.
     HeaderRegularComponent,
     HeaderSubLoggedComponent,
     HeaderSubNotLoggedComponent,
-    CarouselCardComponent
+    CarouselCardComponent,
+    CatalogComponent
   ]
 })
 export class SharedModule { }

@@ -8,7 +8,7 @@ img {
   height: 5rem;
 }
 
-p {
+.card p {
   text-align: center;
   font-size: 0.75rem;
   line-height: 1rem;
@@ -22,12 +22,13 @@ a {
 
 button {
   font-size: 12px;
-  line-height:16px;
+  line-height: 16px;
   border-radius: 6px;
   background-color: #e3edfb;
   color: #007bff;
   padding: 4px;
 }
+
 button:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -36,7 +37,7 @@ button:hover {
   fill: #007bff;
 }
 
-.carousel-container {
+.catalog-container {
   display: flex;
   align-items: center;
   position: relative;
@@ -44,6 +45,7 @@ button:hover {
   margin-left: 24px;
   background-color: pink;
   border-radius: 8px;
+  padding: 15px;
 }
 
 .nav-button {
@@ -79,23 +81,22 @@ button:hover {
   visibility: hidden;
 }
 
-.carousel {
+.catalog {
   overflow: hidden;
   width: 100%;
 }
 
-.carousel-track {
+.catalog-track {
   display: flex;
-  gap: 18px; 
-  transition: transform 0.3s ease-in-out; 
+  gap: 18px;
+  transition: transform 0.3s ease-in-out;
   margin-left: 18px;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  padding: 15px; 
   background-color: #f9f9f9;
-  border-radius: 8px;
-  height: 288px;
+  height: 200px;
+  padding: 8px;
 }
