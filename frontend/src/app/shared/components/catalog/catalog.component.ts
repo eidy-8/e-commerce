@@ -6,9 +6,10 @@ import { Component, Input } from '@angular/core';
   styleUrl: './catalog.component.css'
 })
 export class CatalogComponent {
+  @Input() catalogTitle: string = '';
   @Input() products: any[] = [];
-  @Input() cardsPerPage: number = 6;
-  @Input() scrollStep: number = 6; 
+  @Input() cardsPerPage: number = 0;
+  @Input() scrollStep: number = 0; 
   currentIndex: number = 0; 
 
   next() {

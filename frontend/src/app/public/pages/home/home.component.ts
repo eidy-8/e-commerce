@@ -6,19 +6,22 @@ import { Component, HostListener, OnInit } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
-  public cards = [{}];
-  public products = [{}];
-  cardsPerPage: number = 6;
-  scrollStep: number = 6;
+  protected cards = [{}];
+  protected products = [{}];
+  protected product = [{}];
+  protected cardsPerPage: number = 6;
+  protected scrollStep: number = 6;
+  protected catalogCardsPerPage: number = 6;
+  protected catalogScrollStep: number = 6;
 
   @HostListener('window:resize', ['$event'])
   onResize(event?: any) {
     if (window.innerWidth <= 768) { 
-      this.cardsPerPage = 2;
-      this.scrollStep = 2;
-    } else {
-      this.cardsPerPage = 6;
-      this.scrollStep = 6;
+      this.cardsPerPage = 1;
+      this.scrollStep = 1;
+
+      this.catalogCardsPerPage = 2;
+      this.catalogScrollStep = 2;
     }
   }
 
@@ -45,6 +48,10 @@ export class HomeComponent implements OnInit {
       { title: 'Card 7', price: '1 real', image: '../../../../assets/undraw_breakfast_rgx5.svg', link: 'http://localhost:4200/' },
       { title: 'Card 8', price: '1 real', image: '../../../../assets/undraw_breakfast_rgx5.svg', link: 'http://localhost:4200/' },
       { title: 'Card 9', price: '1 real', image: '../../../../assets/undraw_breakfast_rgx5.svg', link: 'http://localhost:4200/' }
+    ];
+
+    this.product = [
+      { title: 'Comida', price: '1 real', image: '../../../../assets/undraw_breakfast_rgx5.svg', link: 'http://localhost:4200/' }
     ]
 
     this.onResize();

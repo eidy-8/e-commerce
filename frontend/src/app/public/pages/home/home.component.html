@@ -9,5 +9,16 @@
 </div>
 <br>
 <div class="mx-0 sm:mx-80">
-    <app-catalog [products]="products" [cardsPerPage]="cardsPerPage" [scrollStep]="scrollStep"></app-catalog>
+    <app-catalog [catalogTitle]="'Tendências para a sua beleza'" [products]="products" [cardsPerPage]="catalogCardsPerPage" [scrollStep]="catalogScrollStep"></app-catalog>
+</div>  
+<br>
+<div class="mx-0 sm:mx-80 flex">
+    <app-catalog class="flex-[3]" [catalogTitle]="'Produto do dia'" [products]="product" [cardsPerPage]="1"></app-catalog>
+    <app-catalog class="hidden sm:flex flex-[7]" [catalogTitle]="'Produtos populares'" [products]="products" [cardsPerPage]="4" [scrollStep]="4"></app-catalog>
+</div>
+<br>
+<div class="mx-0 sm:mx-80 flex">
+    <app-catalog class="flex-[3]" [catalogTitle]="'Produto do dia'" [products]="product" [cardsPerPage]="1"></app-catalog>
+    <app-catalog class="flex-[3]" [catalogTitle]="'Produto do dia'" [products]="product" [cardsPerPage]="1"></app-catalog>
+    <app-catalog class="flex-[3]" [catalogTitle]="'Produto do dia'" [products]="product" [cardsPerPage]="1"></app-catalog>
 </div>

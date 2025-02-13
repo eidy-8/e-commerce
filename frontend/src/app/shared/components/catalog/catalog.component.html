@@ -10,14 +10,15 @@
     </button>
   
     <div class="catalog">
-      <b>Tendência para a sua beleza</b>
-      <br><br>
+      <b>{{ catalogTitle }}</b>
+      <br>
       <div class="catalog-track" [style.transform]="getTransform()">
         <div class="card"[style.flex]="'0 0 calc((100% / ' + cardsPerPage + ') - 18px)'" *ngFor="let product of products">
           <a href={{product.link}}>
               <img src={{product.image}} alt="Imagens do catálogo">
+              <br>
               <p>{{ product.title }}</p>
-              <br><br>
+              <br>
               <p>{{ product.price }}</p>
           </a>  
         </div>
