@@ -11,7 +11,7 @@
     <app-catalog [catalogTitle]="'Tendências para a sua beleza'" [products]="products" [cardsPerPage]="catalogCardsPerPage" [scrollStep]="catalogScrollStep"></app-catalog>
     <br>
 
-    <img class="w-auto mx-6 rounded-md sm:max-w-[1255px]" src="../../../../assets/Banner1.png" alt="">
+    <div>video do youtube</div>
     <br>
 
     <div class="flex">
@@ -20,9 +20,22 @@
     </div>
     <br>
 
-    <div class="flex">
-        <app-catalog class="flex-[3]" [catalogTitle]="'Produto do dia'" [products]="product" [cardsPerPage]="1"></app-catalog>
-        <app-catalog class="hidden sm:flex-[3]" [catalogTitle]="'Produto do dia'" [products]="product" [cardsPerPage]="1"></app-catalog>
-        <app-catalog class="hidden sm:flex-[3]" [catalogTitle]="'Produto do dia'" [products]="product" [cardsPerPage]="1"></app-catalog>
+    <div class="w-full mx-auto px-6">
+        <img class="w-full h-auto rounded-md" src="../../../../assets/Banner2.png" alt="">
     </div>
+    <br>
+
+    <div class="flex">
+        <app-catalog class="flex-[3]" [catalogTitle]="'MÓVEIS: COMPROU, CHEGOU'" [products]="product" [cardsPerPage]="1"></app-catalog>
+        <app-catalog class="hidden sm:block flex-[3]" [catalogTitle]="'ALIMENTO PARA O SEU DIA A DIA'" [products]="product" [cardsPerPage]="1"></app-catalog>
+        <app-catalog class="hidden sm:block flex-[3]" [catalogTitle]="'PARA AS CRIANÇAS'" [products]="product" [cardsPerPage]="1"></app-catalog>
+    </div>
+    <br>
+
+    <div class="w-full mx-auto px-6">
+        <img class="w-full h-auto rounded-md" src="../../../../assets/Banner1.png" alt="">
+    </div>
+    <br>
+
+    <app-catalog [catalogTitle]="'Tendências para a sua beleza'" [products]="products" [cardsPerPage]="catalogCardsPerPage" [scrollStep]="catalogScrollStep"></app-catalog>
 </div>
