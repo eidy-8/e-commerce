@@ -4,21 +4,25 @@
     <swiper-slide><img class="block w-full h-36 sm:h-96 object-cover sm:mask-gradient" src="../../../../assets/Movel.png" alt="Imagem de um móvel"></swiper-slide>
 </swiper-container>
 
-<div class="mx-0 sm:mx-80">
+<div class="max-w-[1300px] mx-auto">
     <app-carousel-card [cards]="cards" [cardsPerPage]="cardsPerPage" [scrollStep]="scrollStep"></app-carousel-card>
-</div>
-<br>
-<div class="mx-0 sm:mx-80">
+    <br>
+
     <app-catalog [catalogTitle]="'Tendências para a sua beleza'" [products]="products" [cardsPerPage]="catalogCardsPerPage" [scrollStep]="catalogScrollStep"></app-catalog>
-</div>  
-<br>
-<div class="mx-0 sm:mx-80 flex">
-    <app-catalog class="flex-[3]" [catalogTitle]="'Produto do dia'" [products]="product" [cardsPerPage]="1"></app-catalog>
-    <app-catalog class="hidden sm:flex flex-[7]" [catalogTitle]="'Produtos populares'" [products]="products" [cardsPerPage]="4" [scrollStep]="4"></app-catalog>
-</div>
-<br>
-<div class="mx-0 sm:mx-80 flex">
-    <app-catalog class="flex-[3]" [catalogTitle]="'Produto do dia'" [products]="product" [cardsPerPage]="1"></app-catalog>
-    <app-catalog class="flex-[3]" [catalogTitle]="'Produto do dia'" [products]="product" [cardsPerPage]="1"></app-catalog>
-    <app-catalog class="flex-[3]" [catalogTitle]="'Produto do dia'" [products]="product" [cardsPerPage]="1"></app-catalog>
+    <br>
+
+    <img class="w-auto mx-6 rounded-md sm:max-w-[1255px]" src="../../../../assets/Banner1.png" alt="">
+    <br>
+
+    <div class="flex">
+        <app-catalog class="flex-[3]" [catalogTitle]="'Produto do dia'" [products]="product" [cardsPerPage]="1"></app-catalog>
+        <app-catalog class="hidden sm:flex flex-[7]" [catalogTitle]="'Produtos populares'" [products]="products" [cardsPerPage]="4" [scrollStep]="4"></app-catalog>
+    </div>
+    <br>
+
+    <div class="flex">
+        <app-catalog class="flex-[3]" [catalogTitle]="'Produto do dia'" [products]="product" [cardsPerPage]="1"></app-catalog>
+        <app-catalog class="hidden sm:flex-[3]" [catalogTitle]="'Produto do dia'" [products]="product" [cardsPerPage]="1"></app-catalog>
+        <app-catalog class="hidden sm:flex-[3]" [catalogTitle]="'Produto do dia'" [products]="product" [cardsPerPage]="1"></app-catalog>
+    </div>
 </div>
