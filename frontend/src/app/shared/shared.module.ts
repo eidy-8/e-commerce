@@ -8,6 +8,7 @@ import { HeaderSubLoggedComponent } from './components/header-sub-logged/header-
 import { HeaderSubNotLoggedComponent } from './components/header-sub-not-logged/header-sub-not-logged.component';
 import { CarouselCardComponent } from './components/carousel-card/carousel-card.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
+import { YouTubePlayer } from '@angular/youtube-player';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CatalogComponent } from './components/catalog/catalog.component';
     CatalogComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    YouTubePlayer
   ],
   exports: [
     FormsModule,
@@ -30,7 +32,8 @@ import { CatalogComponent } from './components/catalog/catalog.component';
     HeaderSubLoggedComponent,
     HeaderSubNotLoggedComponent,
     CarouselCardComponent,
-    CatalogComponent
+    CatalogComponent,
+    YouTubePlayer
   ]
 })
 export class SharedModule { }

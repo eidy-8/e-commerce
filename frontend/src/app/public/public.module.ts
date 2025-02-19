@@ -5,6 +5,7 @@ import { PublicRoutingModule } from './public-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { MainComponent } from './main/main.component';
 import { HomeComponent } from './pages/home/home.component';
+import { YouTubePlayer } from '@angular/youtube-player';
 
 
 @NgModule({

@@ -1,41 +1,118 @@
-<swiper-container loop="true" navigation="true" pagination="true" autoplay-delay="4000">
-    <swiper-slide><img class="block w-full h-36 sm:h-96 object-cover sm:mask-gradient" src="../../../../assets/Fone.png" alt="Imagem de um fone"></swiper-slide>
-    <swiper-slide><img class="block w-full h-36 sm:h-96 object-cover sm:mask-gradient" src="../../../../assets/Comida.png" alt="Imagem de uma tigela com comida"></swiper-slide>
-    <swiper-slide><img class="block w-full h-36 sm:h-96 object-cover sm:mask-gradient" src="../../../../assets/Movel.png" alt="Imagem de um móvel"></swiper-slide>
+<swiper-container
+  loop="true"
+  navigation="true"
+  pagination="true"
+  autoplay-delay="4000"
+>
+  <swiper-slide
+    ><img
+      class="block w-full h-36 sm:h-96 object-cover sm:mask-gradient"
+      src="../../../../assets/Fone.png"
+      alt="Imagem de um fone"
+  /></swiper-slide>
+  <swiper-slide
+    ><img
+      class="block w-full h-36 sm:h-96 object-cover sm:mask-gradient"
+      src="../../../../assets/Comida.png"
+      alt="Imagem de uma tigela com comida"
+  /></swiper-slide>
+  <swiper-slide
+    ><img
+      class="block w-full h-36 sm:h-96 object-cover sm:mask-gradient"
+      src="../../../../assets/Movel.png"
+      alt="Imagem de um móvel"
+  /></swiper-slide>
 </swiper-container>
 
 <div class="max-w-[1300px] mx-auto">
-    <app-carousel-card [cards]="cards" [cardsPerPage]="cardsPerPage" [scrollStep]="scrollStep"></app-carousel-card>
-    <br>
+  <app-carousel-card
+    [cards]="cards"
+    [cardsPerPage]="cardsPerPage"
+    [scrollStep]="scrollStep"
+  ></app-carousel-card>
+  <br />
 
-    <app-catalog [catalogTitle]="'Tendências para a sua beleza'" [products]="products" [cardsPerPage]="catalogCardsPerPage" [scrollStep]="catalogScrollStep"></app-catalog>
-    <br>
+  <app-catalog
+    [catalogTitle]="'Tendências para a sua beleza'"
+    [products]="products"
+    [cardsPerPage]="catalogCardsPerPage"
+    [scrollStep]="catalogScrollStep"
+  ></app-catalog>
+  <br />
 
-    <div>video do youtube</div>
-    <br>
+  <div class="hidden xl:block w-full mx-auto px-6">
+    <youtube-player
+      [width]="1250"
+      [height]="300"
+      videoId="cshuaJ7p_zo"
+      disablePlaceholder="true"
+      [playerVars]="playerVars"
+      muted="true"
+    />
+  </div>
+  <br />
 
-    <div class="flex">
-        <app-catalog class="flex-[3]" [catalogTitle]="'Produto do dia'" [products]="product" [cardsPerPage]="1"></app-catalog>
-        <app-catalog class="hidden sm:flex flex-[7]" [catalogTitle]="'Produtos populares'" [products]="products" [cardsPerPage]="4" [scrollStep]="4"></app-catalog>
-    </div>
-    <br>
+  <div class="flex">
+    <app-catalog
+      class="flex-[3]"
+      [catalogTitle]="'Produto do dia'"
+      [products]="product"
+      [cardsPerPage]="1"
+    ></app-catalog>
+    <app-catalog
+      class="hidden sm:flex flex-[7]"
+      [catalogTitle]="'Produtos populares'"
+      [products]="products"
+      [cardsPerPage]="4"
+      [scrollStep]="4"
+    ></app-catalog>
+  </div>
+  <br />
 
-    <div class="w-full mx-auto px-6">
-        <img class="w-full h-auto rounded-md" src="../../../../assets/Banner2.png" alt="">
-    </div>
-    <br>
+  <div class="w-full mx-auto px-6">
+    <img
+      class="w-full h-auto rounded-md"
+      src="../../../../assets/Banner2.png"
+      alt=""
+    />
+  </div>
+  <br />
 
-    <div class="flex">
-        <app-catalog class="flex-[3]" [catalogTitle]="'MÓVEIS: COMPROU, CHEGOU'" [products]="product" [cardsPerPage]="1"></app-catalog>
-        <app-catalog class="hidden sm:block flex-[3]" [catalogTitle]="'ALIMENTO PARA O SEU DIA A DIA'" [products]="product" [cardsPerPage]="1"></app-catalog>
-        <app-catalog class="hidden sm:block flex-[3]" [catalogTitle]="'PARA AS CRIANÇAS'" [products]="product" [cardsPerPage]="1"></app-catalog>
-    </div>
-    <br>
+  <div class="flex">
+    <app-catalog
+      class="flex-[3]"
+      [catalogTitle]="'MÓVEIS: COMPROU, CHEGOU'"
+      [products]="product"
+      [cardsPerPage]="1"
+    ></app-catalog>
+    <app-catalog
+      class="hidden sm:block flex-[3]"
+      [catalogTitle]="'ALIMENTO PARA O SEU DIA A DIA'"
+      [products]="product"
+      [cardsPerPage]="1"
+    ></app-catalog>
+    <app-catalog
+      class="hidden sm:block flex-[3]"
+      [catalogTitle]="'PARA AS CRIANÇAS'"
+      [products]="product"
+      [cardsPerPage]="1"
+    ></app-catalog>
+  </div>
+  <br />
 
-    <div class="w-full mx-auto px-6">
-        <img class="w-full h-auto rounded-md" src="../../../../assets/Banner1.png" alt="">
-    </div>
-    <br>
+  <div class="w-full mx-auto px-6">
+    <img
+      class="w-full h-auto rounded-md"
+      src="../../../../assets/Banner1.png"
+      alt=""
+    />
+  </div>
+  <br />
 
-    <app-catalog [catalogTitle]="'Tendências para a sua beleza'" [products]="products" [cardsPerPage]="catalogCardsPerPage" [scrollStep]="catalogScrollStep"></app-catalog>
+  <app-catalog
+    [catalogTitle]="'Tendências para a sua beleza'"
+    [products]="products"
+    [cardsPerPage]="catalogCardsPerPage"
+    [scrollStep]="catalogScrollStep"
+  ></app-catalog>
 </div>
