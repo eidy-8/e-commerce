@@ -22,5 +22,13 @@ export class FooterDynamicComponent {
 
   toggleInfo() {
     this.isOpen = !this.isOpen;
+
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        left: 0,
+        behavior: "smooth",
+      });
+    }, 200);
   }
 }
