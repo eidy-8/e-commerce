@@ -7,6 +7,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { SharedModule } from "./shared/shared.module";
 import { PublicModule } from './public/public.module';
 import { PrivateModule } from './private/private.module';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { PrivateModule } from './private/private.module';
     PublicModule,
     PrivateModule
   ],
-  providers: [provideHttpClient()],
+  providers: [provideHttpClient(), provideAnimations()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

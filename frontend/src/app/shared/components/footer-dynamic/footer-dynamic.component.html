@@ -1,0 +1,42 @@
+<div class="flex justify-center">
+  <button
+    (click)="toggleInfo()"
+    class="bg-neutral-100 text-gray-500 w-36 h-8 rounded-t-lg text-xs flex items-center justify-center"
+  >
+    Mais informações
+    <i
+      class="fa"
+      [ngClass]="isOpen ? 'fa-chevron-down' : 'fa-chevron-up'"
+      aria-hidden="true"
+    ></i>
+  </button>
+</div>
+
+<div
+  *ngIf="isOpen"
+  @slideToggle
+  class="bg-neutral-200 text-gray-700 p-4 text-xs text-center"
+>
+  <b>Redes Sociais</b>
+  <br /><br />
+  <a
+    href="https://linkedin.com/in/enrique-onaga-3b92bb1b6"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="block text-gray-700 hover:underline transition-all"
+  >
+    Linkedin
+  </a>
+  <a
+    href="https://stackoverflow.com/users/22126327"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="block text-gray-700 hover:underline transition-all"
+  >
+    Stackoverflow
+  </a>
+</div>
+
+<footer class="bottom-0 inset-x-0 bg-neutral-100 text-center text-xs p-7">
+  GitHub: Eidy.8
+</footer>
