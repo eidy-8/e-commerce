@@ -17,6 +17,14 @@ export class ApiDataService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
+  // public getUser(): Observable<any> {
+  //   return this.httpClient.get<any>(`${this.}`, this.httpOptions)
+  //     .pipe(
+  //       retry(1),
+  //       catchError(this.handleError)
+  //     )
+  // }
+
   public postLogin(loginData: any): Observable<any> {
     return this.httpClient.post<any>(this.urlLogin, JSON.stringify(loginData), this.httpOptions)
       .pipe(
