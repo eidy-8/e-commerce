@@ -1,0 +1,7 @@
+<app-header-search></app-header-search>
+
+@if (isLogged) {
+    <app-header-sub-logged></app-header-sub-logged>
+} @else {
+    <app-header-sub-not-logged></app-header-sub-not-logged>
+}

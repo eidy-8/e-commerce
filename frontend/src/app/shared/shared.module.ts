@@ -10,6 +10,7 @@ import { CarouselCardComponent } from './components/carousel-card/carousel-card.
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { YouTubePlayer } from '@angular/youtube-player';
 import { FooterDynamicComponent } from './components/footer-dynamic/footer-dynamic.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FooterDynamicComponent } from './components/footer-dynamic/footer-dynam
     HeaderSubNotLoggedComponent,
     CarouselCardComponent,
     CatalogComponent,
-    FooterDynamicComponent
+    FooterDynamicComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,8 @@ import { FooterDynamicComponent } from './components/footer-dynamic/footer-dynam
     CarouselCardComponent,
     CatalogComponent,
     YouTubePlayer,
-    FooterDynamicComponent
+    FooterDynamicComponent,
+    HeaderComponent
   ]
 })
 export class SharedModule { }

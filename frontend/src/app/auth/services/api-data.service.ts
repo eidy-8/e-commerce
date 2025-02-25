@@ -11,19 +11,11 @@ export class ApiDataService {
   protected urlLogin = `${Environment.ENV_LOGIN}`;
   protected urlRegister = `${Environment.ENV_REGISTER}`;
 
-  constructor(private httpClient: HttpClient) { }
-
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
-  // public getUser(): Observable<any> {
-  //   return this.httpClient.get<any>(`${this.}`, this.httpOptions)
-  //     .pipe(
-  //       retry(1),
-  //       catchError(this.handleError)
-  //     )
-  // }
+  constructor(private httpClient: HttpClient) { }
 
   public postLogin(loginData: any): Observable<any> {
     return this.httpClient.post<any>(this.urlLogin, JSON.stringify(loginData), this.httpOptions)

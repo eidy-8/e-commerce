@@ -50,7 +50,8 @@ exports.verifyToken = async (req, res) => {
         }
 
         res.status(200).send({
-            valid: true
+            valid: true,
+            token: token
         });
     });
 };
