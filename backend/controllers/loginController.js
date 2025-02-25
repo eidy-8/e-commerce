@@ -11,13 +11,17 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     try {        
-        const user = await userService.getUserByEmail(email);        
-        
-        if (user.length == 0) {
-            return res.status(401).json({ message: "E-mail não encontrado." });
+        const user = await userService.findUserByEmail(email);    
+                
+        if (!user) {
+            return res.status(401).json({ message: "Preencha o campo E-mail." });
         }
 
-        const isPasswordValid = await bcrypt.compare(password, user[0].password);        
+        if (!password) {
+            return res.status(401).json({ message: "Insira a sua senha." });
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, user.password);       
         if (!isPasswordValid) {
             return res.status(401).json({ message: "Credenciais inválidas." });
         }
