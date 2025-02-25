@@ -1,5 +1,5 @@
 const jsonWebToken = require("jsonwebtoken");
-const userModel = require("../models/userModel");
+const userService = require("../services/userService");
 const dotenv = require("dotenv");
 const bcrypt = require("bcryptjs");
 
@@ -11,31 +11,24 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     try {        
-        const usersEmail = await userModel.getUserByEmail(email);
-
-        if (usersEmail.length > 0) {
-            const isPasswordValid = await bcrypt.compare(password, usersEmail[0].password);
-
-            if (!isPasswordValid) {
-                return res.status(401).json({
-                    message: 'Credencais inválidas.'
-                });
-            }
-
-            const token = jsonWebToken.sign(
-                { user: JSON.stringify(usersEmail[0]) },
-                PRIVATE_KEY,
-                { expiresIn: '60m' }
-            );
-
-            return res.status(200).json({ 
-                data: { token }
-            });
-        } else {
-            return res.status(401).json({
-                message: 'Credencais inválidas.'
-            });
+        const user = await userService.getUserByEmail(email);        
+        
+        if (user.length == 0) {
+            return res.status(401).json({ message: "E-mail não encontrado." });
         }
+
+        const isPasswordValid = await bcrypt.compare(password, user[0].password);        
+        if (!isPasswordValid) {
+            return res.status(401).json({ message: "Credenciais inválidas." });
+        }
+
+        const token = jsonWebToken.sign(
+            { user: JSON.stringify(user) },
+            PRIVATE_KEY,
+            { expiresIn: "60m" }
+        );
+
+        return res.status(200).json({ data: { token } });
     } catch (error) {
         console.log(error);
         return res.send(error);

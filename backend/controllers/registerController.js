@@ -1,5 +1,4 @@
 const bcrypt = require("bcryptjs");
-const registerModel = require("../models/registerModel");
 const userModel = require("../models/userModel");
 
 exports.register = async (req, res) => {
@@ -23,7 +22,7 @@ exports.register = async (req, res) => {
                 password: hashPassword
             };
 
-            registerModel.postUser(newUserData);
+            userModel.postUser(newUserData);
 
             return res.status(200).json({
                 message: 'Usuário incluído com sucesso.'
