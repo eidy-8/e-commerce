@@ -11,6 +11,7 @@ import { CatalogComponent } from './components/catalog/catalog.component';
 import { YouTubePlayer } from '@angular/youtube-player';
 import { FooterDynamicComponent } from './components/footer-dynamic/footer-dynamic.component';
 import { HeaderComponent } from './components/header/header.component';
+import { PopupMenuComponent } from './components/popup-menu/popup-menu.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HeaderComponent } from './components/header/header.component';
     CarouselCardComponent,
     CatalogComponent,
     FooterDynamicComponent,
-    HeaderComponent
+    HeaderComponent,
+    PopupMenuComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +41,8 @@ import { HeaderComponent } from './components/header/header.component';
     CatalogComponent,
     YouTubePlayer,
     FooterDynamicComponent,
-    HeaderComponent
+    HeaderComponent,
+    PopupMenuComponent
   ]
 })
 export class SharedModule { }

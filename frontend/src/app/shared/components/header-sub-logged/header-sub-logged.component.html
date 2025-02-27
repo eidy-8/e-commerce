@@ -1,6 +1,7 @@
 <header class="bg-primary-color">
     <nav class="mx-auto flex max-w-[1250px] items-center justify-between p-2">
-        <button>{{ this.username }}</button>
+        <button>{{ this.username }}<i class="fa fa-chevron-down text-gray-500" aria-hidden="true"></i></button>
+        <app-popup-menu text="EnriqueOnaga"></app-popup-menu>
         <button (click)="logout()">Sair</button>
         <button>Compras</button>
         <button>Favoritos</button>

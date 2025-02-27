@@ -4,9 +4,7 @@
     (click)="prev()"
     [disabled]="currentIndex === 0"
   >
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-      <path d="M15.41 16.59 10.83 12l4.58-4.59L14 6l-6 6 6 6z" />
-    </svg>
+    <i class="fa fa-chevron-left" aria-hidden="true"></i>
   </button>
 
   <div class="carousel">
@@ -29,8 +27,6 @@
     (click)="next()"
     [disabled]="currentIndex >= cards.length - cardsPerPage"
   >
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-      <path d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z" />
-    </svg>
+    <i class="fa fa-chevron-right" aria-hidden="true"></i>
   </button>
 </div>
