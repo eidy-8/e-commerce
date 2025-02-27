@@ -10,3 +10,5 @@ CREATE TABLE Users (
 );
 
 SELECT * FROM Users;
+
+ALTER TABLE Users ADD COLUMN imageUrl varchar(512);
