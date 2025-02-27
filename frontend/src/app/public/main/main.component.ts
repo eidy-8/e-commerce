@@ -6,13 +6,4 @@ import { AuthService } from '../../auth/services/auth.service';
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
-export class MainComponent implements OnInit {
-
-  public isLogged: boolean = false;
-
-  constructor(public authService: AuthService) {}
-
-  async ngOnInit(): Promise<void> {
-    this.isLogged = await this.authService.isAuthenticated();     
-  }
-}
+export class MainComponent{}

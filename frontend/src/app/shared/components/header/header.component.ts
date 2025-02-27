@@ -18,11 +18,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(public authService: AuthService, private apiData: ApiDataService) {}
 
   async ngOnInit(): Promise<void> {
-    this.isLogged = await this.authService.isAuthenticated();     
 
-    this.apiData.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {      
-          this.username = res.data.userLogged.username;
-    })
+    if (sessionStorage.getItem('Session-Token')) {
+      this.isLogged = await this.authService.isAuthenticated();     
+  
+      this.apiData.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {      
+        this.username = res.data.userLogged.username;
+      });
+    }
   }
 
   ngOnDestroy(): void {
