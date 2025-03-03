@@ -1,5 +1,4 @@
 import { Component, HostListener, Inject, OnInit } from '@angular/core';
-import { YouTubePlayerConfig } from '@angular/youtube-player';
 
 @Component({
   selector: 'app-home',
@@ -14,13 +13,6 @@ export class HomeComponent implements OnInit {
   protected scrollStep: number = 6;
   protected catalogCardsPerPage: number = 6;
   protected catalogScrollStep: number = 6;
-
-  protected playerVars = {
-    autoplay: 1, 
-    controls: 1, 
-    showinfo: 0,
-    rel: 0
-  };
 
   @HostListener('window:resize', ['$event'])
   onResize(event?: any) {
