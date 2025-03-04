@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { ApiDataService } from '../../services/api-data.service';
 import { Router } from '@angular/router';
@@ -11,9 +11,6 @@ import { MethodsService } from '../../../shared/services/shared.service';
 })
 export class RegisterComponent {
   private unsubscribe = new Subject<void>;
-
-  constructor(public apiData: ApiDataService, private router: Router, public sharedMethod: MethodsService) {}
-
   protected email!: string;
   protected name!: string;
   protected password!: string;
@@ -24,6 +21,13 @@ export class RegisterComponent {
   protected emailRegisterError: boolean = false;
   protected passwordRegisterError: boolean = false;
   protected errorMessage!: string;
+
+  constructor(public apiData: ApiDataService, private router: Router, public sharedMethod: MethodsService) {}
+
+  @HostListener('document:keydown.enter', ['$event'])
+    handleEnter(event: KeyboardEvent) {
+      this.register();
+  }
   
   protected togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
@@ -51,6 +55,9 @@ export class RegisterComponent {
         email: this.email,
         password: this.password
       }
+
+      console.log(registerData);
+      
   
       this.apiData.postUser(registerData).pipe( takeUntil( this.unsubscribe ) ).subscribe({
         next: res => {

@@ -17,10 +17,10 @@ exports.register = async (req, res) => {
             const hashPassword = await bcrypt.hash(password, saltRounds);
 
             const newUserData = {
-                username,
+                username: username,
                 email: email,
                 password: hashPassword
-            };
+            };            
 
             userService.createUser(newUserData);
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ApiDataService } from '../../services/api-data.service';
@@ -11,14 +11,17 @@ import { MethodsService } from '../../../shared/services/shared.service';
 })
 export class LoginComponent {
   private unsubscribe = new Subject<void>;
-
-  constructor(public apiData: ApiDataService, private router: Router, public sharedMethod: MethodsService) {}
-
   protected email!: string;
   protected password!: string;
   protected loginError: boolean = false;
-
   protected errorMessage!: string;
+
+  constructor(public apiData: ApiDataService, private router: Router, public sharedMethod: MethodsService) {}
+  
+  @HostListener('document:keydown.enter', ['$event'])
+  handleEnter(event: KeyboardEvent) {
+    this.login();
+  }
 
   protected login() {
     if (this.email == undefined || this.password == undefined) {      
