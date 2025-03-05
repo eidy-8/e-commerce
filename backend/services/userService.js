@@ -26,8 +26,17 @@ async function createUser({ username, email, password }) {
     }
 };
 
+async function registerLastLogin(email) {
+    try {
+        return await userModel.updateLastLogin(email);
+    } catch (error) {
+        throw new Error("Erro ao atualizar a informação da data do último login do usuário.");
+    }
+}
+
 module.exports = {
     findUserByEmail,
     findUserByUsername,
-    createUser
+    createUser,
+    registerLastLogin
 };

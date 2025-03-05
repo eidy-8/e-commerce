@@ -21,7 +21,7 @@ exports.login = async (req, res) => {
             return res.status(401).json({ message: "Insira a sua senha." });
         }
 
-        const isPasswordValid = await bcrypt.compare(password, user.password);       
+        const isPasswordValid = await bcrypt.compare(password, user[0].password);       
         if (!isPasswordValid) {
             return res.status(401).json({ message: "Credenciais inválidas." });
         }
@@ -31,6 +31,8 @@ exports.login = async (req, res) => {
             PRIVATE_KEY,
             { expiresIn: "60m" }
         );
+
+        await userService.registerLastLogin(email);
 
         return res.status(200).json({ data: { token } });
     } catch (error) {

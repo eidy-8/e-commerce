@@ -51,8 +51,26 @@ async function postUser(data) {
     });
 }
 
+async function updateLastLogin(email) {
+    return new Promise((resolve, reject) => {
+        const query = "UPDATE Users SET lastlogin = NOW() WHERE email = ($1)";
+        db.query(
+            query,
+            [email],
+            (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+}
+
 module.exports = {
     getUserByUsername,
     getUserByEmail,
-    postUser
+    postUser,
+    updateLastLogin
 }
