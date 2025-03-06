@@ -1,3 +1,4 @@
+--Comandos para criar o banco
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE Users (
@@ -9,6 +10,27 @@ CREATE TABLE Users (
 	lastLogin TIMESTAMP
 );
 
-SELECT * FROM Users;
+CREATE TABLE Buyer (
+	id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+	user_id UUID UNIQUE NOT NULL REFERENCES Users(id) ON DELETE CASCADE
+);
 
-ALTER TABLE Users ADD COLUMN imageUrl varchar(512);
+CREATE TABLE Cart (
+	id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+	buyer_id UUID UNIQUE NOT NULL REFERENCES Buyer(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Wishlist (
+	id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+	buyer_id UUID UNIQUE NOT NULL REFERENCES Buyer(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Seller (
+	id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+	user_id UUID UNIQUE NOT NULL REFERENCES Users(id) ON DELETE CASCADE
+);
+
+--Comandos para testes
+SELECT * FROM Users;
+INSERT INTO Users (username, email, password) VALUES ('teste', 'teste@gmail.com', 'testehash');
+TRUNCATE TABLE Users CASCADE;
