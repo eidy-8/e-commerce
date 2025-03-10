@@ -6,7 +6,8 @@ import { Component, Input } from '@angular/core';
   styleUrl: './popup-menu.component.css'
 })
 export class PopupMenuComponent {
-  @Input() text: string = 'Passe o mouse aqui';
+  @Input() text: any;
+  @Input() options: any[] = [];
   visible = false;
   hideTimeout: any;
 

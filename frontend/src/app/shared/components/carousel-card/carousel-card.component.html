@@ -9,16 +9,18 @@
 
   <div class="carousel">
     <div class="carousel-track" [style.transform]="getTransform()">
-      <div class="card"[style.flex]="'0 0 calc((100% / ' + cardsPerPage + ') - 18px)'" *ngFor="let card of cards">
-        <b>{{ card.title }}</b>
-        <br>
-        <img src={{card.image}} alt="Imagens do carrossel">
-        <br>
-        <p>{{ card.description }}</p>
-        <a href={{card.link}}>
-          <button>Mostrar produtos</button>
-        </a>
-      </div>
+      @for (card of cards; track card) {
+        <div class="card"[style.flex]="'0 0 calc((100% / ' + cardsPerPage + ') - 18px)'">
+          <b>{{ card.title }}</b>
+          <br>
+          <img src={{card.image}} alt="Imagens do carrossel">
+          <br>
+          <p>{{ card.description }}</p>
+          <a href={{card.link}}>
+            <button>Mostrar produtos</button>
+          </a>
+        </div>
+      }
     </div>
   </div>
 

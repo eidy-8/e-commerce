@@ -6,6 +6,7 @@ CREATE TABLE Users (
 	username VARCHAR(255) UNIQUE NOT NULL,
 	email VARCHAR(320) UNIQUE NOT NULL,
 	password VARCHAR(255) NOT NULL,
+	imageUrl VARCHAR(512),
 	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	lastLogin TIMESTAMP
 );
@@ -30,7 +31,29 @@ CREATE TABLE Seller (
 	user_id UUID UNIQUE NOT NULL REFERENCES Users(id) ON DELETE CASCADE
 );
 
+CREATE TABLE Category (
+	id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+	name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Product (
+	id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+	name VARCHAR(255) NOT NULL,
+	price DECIMAL(18,2),
+	isUsed CHAR(1),
+	isActive CHAR(1),
+	imageUrl VARCHAR(512),
+	description VARCHAR(5000),
+	quantity NUMERIC(18),
+	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updatedAt TIMESTAMP,
+	seller_id UUID UNIQUE NOT NULL REFERENCES Seller(id) ON DELETE CASCADE,
+	category_id UUID UNIQUE NOT NULL REFERENCES Category(id) ON DELETE CASCADE
+);
+
 --Comandos para testes
+INSERT INTO Category (name) VALUES ('Beleza');
 SELECT * FROM Users;
-INSERT INTO Users (username, email, password) VALUES ('teste', 'teste@gmail.com', 'testehash');
+ALTER TABLE Users ADD COLUMN imageUrl VARCHAR(512);
 TRUNCATE TABLE Users CASCADE;
+DROP TABLE Users;

@@ -9,7 +9,7 @@ import { ApiDataService } from '../../../private/services/api-data.service';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  protected username!: string;
+  protected username: string = 'EnriqueOnaga';
 
   private unsubscribe = new Subject<void>;
 
@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (sessionStorage.getItem('Session-Token')) {
       this.isLogged = await this.authService.isAuthenticated();     
   
-      this.apiData.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {      
+      this.apiData.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
         this.username = res.data.userLogged.username;
       });
     }

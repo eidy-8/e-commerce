@@ -1,17 +1,23 @@
 <div class="popup-container" (mouseenter)="showPopup()" (mouseleave)="startHideTimer()">
-    <span class="trigger-text">
-      {{ text }}
-      <i class="fa fa-chevron-down text-gray-500" aria-hidden="true"></i>
-    </span>
-  
-    <div class="popup-menu" *ngIf="visible" (mouseenter)="showPopup()" (mouseleave)="startHideTimer()">
+  <span class="trigger-text">
+    {{ text }}
+    <i class="fa fa-chevron-down text-gray-500" aria-hidden="true"></i>
+  </span>
+
+  @if (visible) {
+    <div class="popup-menu" (mouseenter)="showPopup()" (mouseleave)="startHideTimer()">
       <div class="triangle"></div>
   
       <ul>
-        <li><a href="#">Minha Conta</a></li>
-        <li><a href="#">Compras</a></li>
-        <li><a href="#">Sair</a></li>
+        @for (option of options; track option) {
+          @if (option.link) {
+            <li><a href="{{ option.link }}">{{ option.name }}</a></li>
+          } @else {
+            <li><a (click)="option.action()">{{ option.name }}</a></li> 
+          }
+        }
       </ul>
     </div>
-  </div>
+  }
+</div>
   

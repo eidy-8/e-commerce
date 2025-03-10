@@ -33,9 +33,9 @@ export class HomeComponent implements OnInit {
       { title: 'Móveis', description: 'Móveis para o lar que você merece.', image: '../../../../assets/undraw_special-event_hv54.svg', link: 'http://localhost:4200/' },
       { title: 'Limpeza', description: 'Produtos de limpeza para uma ambiente limpo e agradável.', image: '../../../../assets/undraw_clean-up_af4s.svg', link: 'http://localhost:4200/' },
       { title: 'Brinquedo', description: 'Não precisa ser dia das crianças para presentear uma criança.', image: '../../../../assets/undraw_toy-car_ugyu.svg', link: 'http://localhost:4200/' },
-      { title: 'Card 7', description: 'Descrição do Card 7', image: '../../../../assets/undraw_breakfast_rgx5.svg', link: 'http://localhost:4200/' },
-      { title: 'Card 8', description: 'Descrição do Card 8', image: '../../../../assets/undraw_breakfast_rgx5.svg', link: 'http://localhost:4200/' },
-      { title: 'Card 9', description: 'Descrição do Card 9', image: '../../../../assets/undraw_breakfast_rgx5.svg', link: 'http://localhost:4200/' }
+      { title: 'Esporte', description: 'Acessórios para cuidar da sua saúde.', image: '../../../../assets/undraw_grand-slam_xvhp.svg', link: 'http://localhost:4200/' },
+      { title: 'Veículos', description: 'Adquira o seu veículo dos sonhos.', image: '../../../../assets/undraw_on-the-way_ahi2.svg', link: 'http://localhost:4200/' },
+      { title: 'Beleza', description: 'Todo auto-cuidado é pouco.', image: '../../../../assets/undraw_makeup-artist_0xtr.svg', link: 'http://localhost:4200/' }
     ];
 
     this.products = [
