@@ -6,7 +6,7 @@ import { FooterRegularComponent } from './components/footer-regular/footer-regul
 import { HeaderRegularComponent } from './components/header-regular/header-regular.component';
 import { HeaderSubLoggedComponent } from './components/header-sub-logged/header-sub-logged.component';
 import { HeaderSubNotLoggedComponent } from './components/header-sub-not-logged/header-sub-not-logged.component';
-import { CarouselCardComponent } from './components/carousel-card/carousel-card.component';
+import { CarouselCardComponent } from './components/reusable/carousel-card/carousel-card.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { YouTubePlayer } from '@angular/youtube-player';
 import { FooterDynamicComponent } from './components/footer-dynamic/footer-dynamic.component';

@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
 import { Router } from '@angular/router';
 
@@ -12,7 +12,7 @@ export class HeaderSubLoggedComponent {
   protected options = [
     { name: 'Minha conta', link: 'https://github.com/eidy-8/postgreAnotacao' },
     { name: 'Compras', link: 'https://github.com/eidy-8/postgreAnotacao' },
-    { name: 'Vender', action: () => this.router.navigate([ '/' ]) },
+    { name: 'Vender', action: () => this.router.navigate([ '/user/new-product' ]) },
     { name: 'Sair', action: () => this.logout() }
   ];
 

@@ -10,6 +10,7 @@ module.exports = {
         "secondary-color": "var(--secondary-color)",
         "tertiary-color": "var(--tertiary-color)",
         "quaternary-color": "var(--quaternary-color)",
+        "quinary-color": "var(--quinary-color)",
         "background-color": "var(--background-color)",
       },
     },
