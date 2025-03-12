@@ -9,6 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 export class ProductFormComponent implements OnInit {
   category: any;
 
+  teste: any;
+
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {

@@ -1,17 +1,17 @@
 <div class="flex flex-col items-center">
-  <p class="text-quaternary-color text-3xl mb-20 mt-10 px-2">
+  <p class="text-gray-color text-3xl mb-20 mt-10 px-2">
     Digite seu e-mail e senha para iniciar a sessão
   </p>
   <form
-    class="bg-white shadow-md rounded px-8 pb-8 pt-8 lg:w-1/4 md:w-2/4 sm:w-full"
+    class="bg-white shadow-md rounded-lg px-8 pb-8 pt-8 lg:w-1/4 md:w-2/4 sm:w-full"
   >
     <div class="mb-4">
-      <label class="block text-quaternary-color text-sm mb-2" for="email">E-mail</label>
+      <label class="block text-gray-color text-sm mb-2" for="email">E-mail</label>
       <input
         [(ngModel)]="email"
         name="email"
-        [ngClass]="{ 'border-tertiary-color': loginError }"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-quaternary-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+        [ngClass]="{ 'border-error-color': loginError }"
+        class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
         id="email"
         type="text"
         placeholder="Insira seu e-mail"
@@ -19,14 +19,14 @@
       />
     </div>
     <div class="mb-6">
-      <label class="block text-quaternary-color text-sm mb-2" for="password"
+      <label class="block text-gray-color text-sm mb-2" for="password"
         >Senha</label
       >
       <input
         [(ngModel)]="password"
         name="password"
-        [ngClass]="{ 'border-tertiary-color': loginError }"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-quaternary-color mb-3 leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+        [ngClass]="{ 'border-error-color': loginError }"
+        class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-color mb-3 leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
         id="password"
         type="password"
         placeholder="Insira sua senha"
@@ -36,20 +36,20 @@
     <div class="flex items-center justify-between">
       <button
         (click)="login()"
-        class="bg-primary-color hover:bg-secondary-color text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        class="bg-primary-button-color hover:bg-secondary-button-color text-white px-6 py-3 rounded-lg focus:outline-none focus:shadow-outline"
         type="button"
       >
         Entrar
       </button>
       <a
-        class="inline-block align-baseline text-sm text-primary-color hover:text-secondary-color"
+        class="inline-block align-baseline text-sm text-primary-button-color hover:text-secondary-button-color"
         href="http://localhost:4200/auth/register"
       >
         Criar conta
       </a>
     </div>
     @if (loginError) {
-      <p class="text-tertiary-color text-xs italic mb-4 mt-3">
+      <p class="text-error-color text-xs italic mb-4 mt-3">
         {{errorMessage}}
       </p>
     }

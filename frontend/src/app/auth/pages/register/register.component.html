@@ -1,17 +1,17 @@
 <div class="flex flex-col items-center">
-  <p class="text-quaternary-color text-3xl mb-20 mt-10 px-2">
+  <p class="text-gray-color text-3xl mb-20 mt-10 px-2">
     Preencha os dados para criar sua conta
   </p>
   <form
-    class="bg-white shadow-md rounded px-8 pb-8 pt-8 lg:w-1/4 md:w-2/4 sm:w-full"
+    class="bg-white shadow-md rounded-lg px-8 pb-8 pt-8 lg:w-1/4 md:w-2/4 sm:w-full"
   >
     <div class="mb-4">
-      <label class="block text-quaternary-color text-sm mb-2" for="email">E-mail</label>
+      <label class="block text-gray-color text-sm mb-2" for="email">E-mail</label>
       <input
         [(ngModel)]="email"
         name="email"
-        [ngClass]="{ 'border-tertiary-color': emailRegisterError }"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-quaternary-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+        [ngClass]="{ 'border-error-color': emailRegisterError }"
+        class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
         id="email"
         type="text"
         placeholder="Insira seu e-mail"
@@ -20,12 +20,12 @@
     </div>
 
     <div class="mb-4">
-        <label class="block text-quaternary-color text-sm mb-2" for="email">Nome</label>
+        <label class="block text-gray-color text-sm mb-2" for="email">Nome</label>
         <input
           [(ngModel)]="name"
           name="name"
-          [ngClass]="{ 'border-tertiary-color': registerError }"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-quaternary-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+          [ngClass]="{ 'border-error-color': registerError }"
+          class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
           id="name"
           type="text"
           placeholder="Insira seu nome"
@@ -34,35 +34,35 @@
     </div>
 
     <div class="mb-4">
-      <label class="block text-quaternary-color text-sm mb-2" for="password"
+      <label class="block text-gray-color text-sm mb-2" for="password"
         >Senha</label
       >
       <input
         [(ngModel)]="password"
         name="password"
-        [ngClass]="{ 'border-tertiary-color': passwordRegisterError }"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-quaternary-color mb-3 leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+        [ngClass]="{ 'border-error-color': passwordRegisterError }"
+        class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-color mb-3 leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
         id="password"
         [type]="showPassword ? 'text' : 'password'"
         placeholder="Insira sua senha"
         (keydown)="sharedMethod.preventSpace($event)"
       />
       <i
-        class="-translate-x-8 translate-y-2.5 fa absolute text-quaternary-color cursor-pointer"
+        class="-translate-x-8 translate-y-2.5 fa absolute text-gray-color cursor-pointer"
         [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"  
         (click)="togglePasswordVisibility()"
       ></i>
     </div>
 
     <div class="mb-6">
-      <label class="block text-quaternary-color text-sm mb-2" for="password2"
+      <label class="block text-gray-color text-sm mb-2" for="password2"
         >Confirme a senha</label
       >
       <input
         [(ngModel)]="password2"
         name="password2"
-        [ngClass]="{ 'border-tertiary-color': passwordRegisterError }"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-quaternary-color mb-3 leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+        [ngClass]="{ 'border-error-color': passwordRegisterError }"
+        class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-color mb-3 leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
         id="password2"
         type="password"
         placeholder="Confirme sua senha"
@@ -73,7 +73,7 @@
     <div class="flex items-center justify-between">
       <button
         (click)="register()"
-        class="bg-primary-color hover:bg-secondary-color text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        class="bg-primary-button-color hover:bg-secondary-button-color text-white px-6 py-3 rounded-lg focus:outline-none focus:shadow-outline"
         type="button"
       >
         Criar conta
@@ -81,7 +81,7 @@
   
     </div>
     @if (registerError || emailRegisterError || passwordRegisterError) {
-      <p class="text-tertiary-color text-xs italic mb-4 mt-3">
+      <p class="text-error-color text-xs italic mb-4 mt-3">
         {{ errorMessage }}
       </p>
     }

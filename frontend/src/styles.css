@@ -12,10 +12,13 @@
 :root{
     --primary-color: #87d6a5;
     --secondary-color: #5b9f77;
-    --tertiary-color: #e57373;
-    --quaternary-color: #374151;
-    --quinary-color: #b8eccf;
+    --tertiary-color: #b8eccf;
+    --gray-color: #374151;
+    --error-color: #e57373;
     --background-color: #ededed;
+    --primary-button-color: #007aff;
+    --secondary-button-color: #0061CC;
+    --tertiary-button-color: #e3edfb;
 }
 
 body {
