@@ -1,5 +1,5 @@
 <div class="flex flex-col items-center">
-    <div class="flex items-center mb-20 mt-10 px-2">
+    <div class="flex items-center mb-10 mt-10 px-2">
         <p class="text-gray-color text-2xl">
           Preencha todos os campos para anunciar o seu produto
         </p>
@@ -7,23 +7,35 @@
     </div>
 
     <form
-      class="bg-white shadow-md rounded-lg px-8 pb-8 pt-8 lg:w-1/4 md:w-2/4 sm:w-full"
+      class="bg-white shadow-md rounded-lg px-8 pb-8 pt-8 lg:w-2/4 md:w-3/4 sm:w-full"
     >
+        <p>Título</p>
+
+        <p>Por favor, preencha estes dados com as especificações do fabricante.</p>
+
+        <br>
+        <hr>
+        <br>
+
         <div class="mb-4 rounded-lg">
-            <label class="block text-gray-color text-sm mb-2" for="email">E-mail</label>
+            <label class="block text-gray-color text-sm mb-2" for="title">Título do anúncio</label>
             <input
             [(ngModel)]="teste"
-            name="email"
-            class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
-            id="email"
+            name="title"
+            class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+            id="title"
             type="text"
-            placeholder="Insira seu e-mail"
+            placeholder="Insira o título"
             />
         </div>
 
-        <div class="flex gap-5">
-            <button class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg">Cancelar</button>
+        <br>
+        <hr>
+        <br>
+
+        <div class="flex gap-5 flex-row-reverse">
             <button class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg">Confirmar</button>
+            <button class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg">Cancelar</button>
         </div>
     </form>
 </div>
