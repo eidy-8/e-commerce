@@ -14,14 +14,14 @@
     class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 lg:w-2/4 md:w-3/4 sm:w-full"
   >
     <p>Título</p>
-    <p>Por favor, preencha estes dados com as especificações do fabricante.</p>
+    <p class="text-gray-500">Por favor, preencha estes dados com as especificações do fabricante.</p>
 
     <br />
     <hr />
     <br />
 
     <div class="mb-4 rounded-lg">
-      <label class="block text-gray-color text-sm mb-2" for="title"
+      <label class="block text-sm mb-2" for="title"
         >Título do anúncio</label
       >
       <input
@@ -57,8 +57,64 @@
         Cancelar
       </button>
     </div>
-    @if (loading) {
+    @if (loadingFirstStep) {
         <app-loading-overlay></app-loading-overlay>
     }
   </form>
+
+  @if (isFirstStepCompleted) {
+    <br>
+  
+    <form
+      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 lg:w-2/4 md:w-3/4 sm:w-full"
+    >
+      <p>Preço</p>
+      <p class="text-gray-500">Informe o preço do produto.</p>
+  
+      <br />
+      <hr />
+      <br />
+  
+      <div class="mb-4 rounded-lg">
+        <label class="block text-sm mb-2" for="title"
+          >Preço do produto</label
+        >
+        <input
+          [(ngModel)]="productName"
+          [ngClass]="{ 'border-error-color': error }"
+          name="title"
+          class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+          id="title"
+          type="text"
+          placeholder="Insira o preço"
+        />
+        @if (error) {
+          <p class="text-error-color text-xs italic mb-4 mt-3">
+            {{errorMessage}}
+          </p>
+        }
+      </div>
+  
+      <br />
+      <hr />
+      <br />
+  
+      <div class="flex gap-5 flex-row-reverse">
+        <button
+          class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
+          (click)="confirmName()"
+        >
+          Confirmar
+        </button>
+        <button
+          class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg"
+        >
+          Cancelar
+        </button>
+      </div>
+      @if (loadingSecondStep) {
+          <app-loading-overlay></app-loading-overlay>
+      }
+    </form>
+  }
 </div>

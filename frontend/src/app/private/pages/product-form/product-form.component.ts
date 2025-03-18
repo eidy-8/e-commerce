@@ -10,9 +10,14 @@ export class ProductFormComponent implements OnInit {
 
   protected category: any;
   protected productName: any;
+
   protected error: any = false;
   protected errorMessage!: string;
-  loading: boolean = false;
+
+  protected loadingFirstStep: boolean = false;
+  protected loadingSecondStep: boolean = false;
+
+  protected isFirstStepCompleted: boolean = false;
 
   protected confirmName() {
     this.errorMessage = 'Preencha esse dado'
@@ -21,12 +26,24 @@ export class ProductFormComponent implements OnInit {
       this.error = true;
     } else {
       this.error = false;
-      this.loading = true;
+      this.loadingFirstStep = true;
 
       setTimeout(() => {
-        this.loading = false;
-        alert('Título confirmado com sucesso!'); 
-      }, 2000);
+        this.loadingFirstStep = false;
+
+        setTimeout(() => {
+          this.isFirstStepCompleted = true;
+
+          setTimeout(() => {
+
+            window.scrollTo({
+              top: document.body.scrollHeight,
+              left: 0,
+              behavior: "smooth",
+            });
+          }, 100);
+        }, 100);
+      }, 1000);
     }
   }
 
