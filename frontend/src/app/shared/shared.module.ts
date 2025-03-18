@@ -12,6 +12,7 @@ import { YouTubePlayer } from '@angular/youtube-player';
 import { FooterDynamicComponent } from './components/footer-dynamic/footer-dynamic.component';
 import { HeaderComponent } from './components/header/header.component';
 import { PopupMenuComponent } from './components/popup-menu/popup-menu.component';
+import { LoadingOverlayComponent } from './components/reusable/loading-overlay/loading-overlay.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PopupMenuComponent } from './components/popup-menu/popup-menu.component
     CatalogComponent,
     FooterDynamicComponent,
     HeaderComponent,
-    PopupMenuComponent
+    PopupMenuComponent,
+    LoadingOverlayComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { PopupMenuComponent } from './components/popup-menu/popup-menu.component
     YouTubePlayer,
     FooterDynamicComponent,
     HeaderComponent,
-    PopupMenuComponent
+    PopupMenuComponent,
+    LoadingOverlayComponent
   ]
 })
 export class SharedModule { }

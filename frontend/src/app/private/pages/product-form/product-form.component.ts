@@ -7,9 +7,28 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './product-form.component.css'
 })
 export class ProductFormComponent implements OnInit {
-  category: any;
 
-  teste: any;
+  protected category: any;
+  protected productName: any;
+  protected error: any = false;
+  protected errorMessage!: string;
+  loading: boolean = false;
+
+  protected confirmName() {
+    this.errorMessage = 'Preencha esse dado'
+    
+    if (!this.productName) {
+      this.error = true;
+    } else {
+      this.error = false;
+      this.loading = true;
+
+      setTimeout(() => {
+        this.loading = false;
+        alert('Título confirmado com sucesso!'); 
+      }, 2000);
+    }
+  }
 
   constructor(private route: ActivatedRoute) {}
 
