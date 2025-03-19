@@ -26,14 +26,15 @@
       >
       <input
         [(ngModel)]="productName"
-        [ngClass]="{ 'border-error-color': error }"
+        (ngModelChange)="onNameChange()"
+        [ngClass]="{ 'border-error-color': isNameError }"
         name="title"
         class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
         id="title"
         type="text"
         placeholder="Insira o título"
       />
-      @if (error) {
+      @if (isNameError) {
         <p class="text-error-color text-xs italic mb-4 mt-3">
           {{errorMessage}}
         </p>
@@ -47,12 +48,15 @@
     <div class="flex gap-5 flex-row-reverse">
       <button
         class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
+        [ngClass]="{ 'bg-tertiary-button-color pointer-events-none': isFirstStepCompleted }"
         (click)="confirmName()"
       >
         Confirmar
       </button>
       <button
         class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg"
+        [ngClass]="{ 'text-tertiary-button-color pointer-events-none': isFirstStepCompleted }"
+        (click)="cancelName()"
       >
         Cancelar
       </button>
@@ -62,11 +66,14 @@
     }
   </form>
 
-  @if (isFirstStepCompleted) {
+
+
+  @if (showSecondStep) {
     <br>
   
     <form
       class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 lg:w-2/4 md:w-3/4 sm:w-full"
+      [ngClass]="{ 'bg-white/25': blurSecond }"
     >
       <p>Preço</p>
       <p class="text-gray-500">Informe o preço do produto.</p>
@@ -80,15 +87,16 @@
           >Preço do produto</label
         >
         <input
-          [(ngModel)]="productName"
-          [ngClass]="{ 'border-error-color': error }"
+          [(ngModel)]="productPrice"
+          (ngModelChange)="onPriceChange()"
+          [ngClass]="{ 'border-error-color': isPriceError, 'bg-white/25 pointer-events-none': !isFirstStepCompleted }"
           name="title"
           class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
           id="title"
           type="text"
           placeholder="Insira o preço"
         />
-        @if (error) {
+        @if (isPriceError) {
           <p class="text-error-color text-xs italic mb-4 mt-3">
             {{errorMessage}}
           </p>
@@ -102,12 +110,74 @@
       <div class="flex gap-5 flex-row-reverse">
         <button
           class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
-          (click)="confirmName()"
+          (click)="confirmPrice()"
+          [ngClass]="{ 'bg-tertiary-button-color pointer-events-none': isSecondStepCompleted }"
         >
           Confirmar
         </button>
         <button
           class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg"
+          [ngClass]="{ 'text-tertiary-button-color pointer-events-none': isSecondStepCompleted }"
+        >
+          Cancelar
+        </button>
+      </div>
+      @if (loadingSecondStep) {
+          <app-loading-overlay></app-loading-overlay>
+      }
+    </form>
+  }
+
+
+
+  @if (showThirdStep) {
+    <br>
+  
+    <form
+      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 lg:w-2/4 md:w-3/4 sm:w-full"
+      [ngClass]="{ 'bg-white/25': !isFirstStepCompleted }"
+    >
+      <p>Condição</p>
+  
+      <br />
+      <hr />
+      <br />
+  
+      <div class="mb-4 rounded-lg">
+        <label class="block text-sm mb-2" for="title"
+          >Preço do produto</label
+        >
+        <input
+          [(ngModel)]="productPrice"
+          [ngClass]="{ 'border-error-color': isUsedError, 'bg-white/25 pointer-events-none': !isFirstStepCompleted }"
+          name="title"
+          class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+          id="title"
+          type="text"
+          placeholder="Insira o preço"
+        />
+        @if (isUsedError) {
+          <p class="text-error-color text-xs italic mb-4 mt-3">
+            {{errorMessage}}
+          </p>
+        }
+      </div>
+  
+      <br />
+      <hr />
+      <br />
+  
+      <div class="flex gap-5 flex-row-reverse">
+        <button
+          class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
+          (click)="confirmPrice()"
+          [ngClass]="{ 'bg-tertiary-button-color pointer-events-none': !isFirstStepCompleted }"
+        >
+          Confirmar
+        </button>
+        <button
+          class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg"
+          [ngClass]="{ 'text-tertiary-button-color pointer-events-none': !isFirstStepCompleted }"
         >
           Cancelar
         </button>
