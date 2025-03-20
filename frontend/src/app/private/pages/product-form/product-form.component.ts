@@ -12,22 +12,31 @@ export class ProductFormComponent implements OnInit {
 
   protected productName: any;
   protected productPrice: any;
+  protected productCondition!: boolean;
 
   protected isNameError: boolean = false;
   protected isPriceError: boolean = false;
-  protected isUsedError: boolean = false;
+  protected isConditionError: boolean = false;
   protected errorMessage: string = 'Preencha esse dado';
 
   protected loadingFirstStep: boolean = false;
   protected loadingSecondStep: boolean = false;
+  protected loadingThirdStep: boolean = false;
 
   protected isFirstStepCompleted: boolean = false;
   protected isSecondStepCompleted: boolean = false;
+  protected isThirdStepCompleted: boolean = false;
 
   protected showSecondStep: boolean = false;
   protected showThirdStep: boolean = false;
 
-  protected blurSecond: boolean = false;
+  protected blurFirstStep: boolean = false;
+  protected blurSecondStep: boolean = false;
+  protected blurThirdStep: boolean = false;
+
+  protected blurFirstButtons: boolean = false;
+  protected blurSecondButtons: boolean = false;
+  protected blurThirdButtons: boolean = false;
 
   constructor(private route: ActivatedRoute) {}
 
@@ -58,6 +67,13 @@ export class ProductFormComponent implements OnInit {
             });
 
             this.isFirstStepCompleted = true;
+            this.blurFirstButtons = true;
+
+            this.blurSecondStep = false;
+            this.blurSecondButtons = false;
+
+            this.blurThirdStep = false;
+            this.blurThirdButtons = false;
           }, 100);
         }, 100);
       }, 1000);
@@ -66,7 +82,23 @@ export class ProductFormComponent implements OnInit {
 
   protected cancelName() {
     if (this.productName) {
-      this.isFirstStepCompleted = true;
+      this.blurFirstButtons = true;
+
+      if (this.isSecondStepCompleted) {
+        this.blurSecondStep = false;
+        this.blurSecondButtons = true;
+      } else {
+        this.blurSecondStep = false;
+        this.blurSecondButtons = true;
+      }
+
+      if (this.isThirdStepCompleted) {
+        this.blurThirdStep = false;
+        this.blurThirdButtons = true;
+      } else {
+        this.blurThirdStep = false;
+        this.blurThirdButtons = true;
+      }
     }
   }
 
@@ -92,19 +124,112 @@ export class ProductFormComponent implements OnInit {
             });
 
             this.isSecondStepCompleted = true;
+            this.blurSecondButtons = true;
+
+            this.blurFirstStep = false;
+            this.blurFirstButtons = true;
+
+            this.blurThirdStep = false;
+            this.blurThirdButtons = false;
           }, 100);
         }, 100);
       }, 1000);
     }
   }
 
+  protected cancelPrice() {
+    if (this.productPrice) {
+      this.blurSecondButtons = true;
+
+      this.blurFirstStep = false;
+      this.blurFirstButtons = true;
+
+      this.blurThirdStep = false;
+      this.blurThirdButtons = false;
+    }
+  }
+
+
+  protected confirmCondition() { 
+    if (this.productCondition == undefined) {
+      this.isPriceError = true;
+    } else {
+      this.isPriceError = false;
+      this.loadingThirdStep = true;
+
+      setTimeout(() => {
+        this.loadingThirdStep = false;
+
+        setTimeout(() => {
+          // this.showForthStep = true;
+
+          setTimeout(() => {
+
+            window.scrollTo({
+              top: document.body.scrollHeight,
+              left: 0,
+              behavior: "smooth",
+            });
+
+            this.isThirdStepCompleted = true;
+            this.blurThirdButtons = true;
+
+            this.blurFirstStep = false;
+            this.blurFirstButtons = true;
+
+            this.blurSecondStep = false;
+            this.blurSecondButtons = false;
+          }, 100);
+        }, 100);
+      }, 1000);
+    }
+  }
+
+  protected cancelCondition() {
+    if (this.productCondition !== undefined) {
+      this.blurThirdButtons = true;
+
+      this.blurFirstStep = false;
+      this.blurFirstButtons = true;
+
+      this.blurSecondStep = false;
+      this.blurSecondButtons = false;
+    }
+  }
+
   onNameChange() {
     if (this.isFirstStepCompleted) {
-      this.blurSecond = true;
+      this.blurFirstButtons = false;
+
+      this.blurSecondStep = true;
+      this.blurSecondButtons = true;
+
+      this.blurThirdStep = true;
+      this.blurThirdButtons = true;
     }
   }
 
   onPriceChange() {
-    this.isSecondStepCompleted = false;
+    if (this.isSecondStepCompleted) {
+      this.blurSecondButtons = false;
+
+      this.blurFirstStep = true;
+      this.blurFirstButtons = true;
+
+      this.blurThirdStep = true;
+      this.blurThirdButtons = true;
+    }
+  }
+
+  onConditionChange() {
+    if (this.isThirdStepCompleted) {
+      this.blurThirdButtons = false;
+
+      this.blurFirstStep = true;
+      this.blurFirstButtons = true;
+
+      this.blurSecondStep = true;
+      this.blurSecondButtons = true;
+    }
   }
 }
