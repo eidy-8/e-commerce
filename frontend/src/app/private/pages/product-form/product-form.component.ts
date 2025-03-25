@@ -14,6 +14,10 @@ export class ProductFormComponent implements OnInit {
   protected productPrice: any;
   protected productCondition!: boolean;
 
+  protected updatedProductName: any;
+  protected updatedProductPrice: any;
+  protected updatedProductCondition!: boolean;
+
   protected isNameError: boolean = false;
   protected isPriceError: boolean = false;
   protected isConditionError: boolean = false;
@@ -42,7 +46,6 @@ export class ProductFormComponent implements OnInit {
 
   ngOnInit() {
     this.category = this.route.snapshot.paramMap.get('category'); 
-    console.log('Categoria selecionada:', this.category); 
   }
 
   protected confirmName() {    
