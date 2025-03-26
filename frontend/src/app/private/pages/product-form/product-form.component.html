@@ -15,7 +15,7 @@
     [ngClass]="{ 'bg-white/25': blurFirstStep }"
   >
     <p>Título</p>
-    <p class="text-gray-500">Por favor, preencha estes dados com as especificações do fabricante.</p>
+    <p class="text-gray-500">Por favor, preencha este dado com a especificação do fabricante.</p>
 
     <br />
     <hr />
@@ -140,6 +140,7 @@
       [ngClass]="{ 'bg-white/25': blurThirdStep }"
     >
       <p>Condição</p>
+      <p class="text-gray-500">Informe a condição do produto.</p>
   
       <br />
       <hr />
@@ -200,6 +201,130 @@
         </button>
       </div>
       @if (loadingThirdStep) {
+          <app-loading-overlay></app-loading-overlay>
+      }
+    </form>
+  }
+
+  
+
+  @if (showForthStep) {
+    <br>
+  
+    <form
+      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 lg:w-2/4 md:w-3/4 sm:w-full"
+      [ngClass]="{ 'bg-white/25': blurForthStep }"
+    >
+      <p>Estoque</p>
+      <p class="text-gray-500">Informe a quantidade disponível do produto.</p>
+  
+      <br />
+      <hr />
+      <br />
+  
+      <div class="mb-4 rounded-lg">
+        <label class="block text-sm mb-2" for="title"
+          >Estoque do produto</label
+        >
+        <input
+          [(ngModel)]="productQuantity"
+          (ngModelChange)="onQuantityChange()"
+          [ngClass]="{ 'border-error-color': isQuantityError, 'bg-white/25 pointer-events-none': blurForthStep }"
+          name="title"
+          class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+          id="title"
+          type="text"
+          placeholder="Insira a quantidade"
+        />
+        @if (isQuantityError) {
+          <p class="text-error-color text-xs italic mb-4 mt-3">
+            {{errorMessage}}
+          </p>
+        }
+      </div>
+  
+      <br />
+      <hr />
+      <br />
+  
+      <div class="flex gap-5 flex-row-reverse">
+        <button
+          class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
+          (click)="confirmQuantity()"
+          [ngClass]="{ 'bg-tertiary-button-color pointer-events-none': blurForthButtons }"
+        >
+          Confirmar
+        </button>
+        <button
+          class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg"
+          [ngClass]="{ 'text-tertiary-button-color pointer-events-none': blurForthButtons }"
+          (click)="cancelQuantity()"
+        >
+          Cancelar
+        </button>
+      </div>
+      @if (loadingForthStep) {
+          <app-loading-overlay></app-loading-overlay>
+      }
+    </form>
+  }
+
+
+
+  <!-- <img src="https://raw.githubusercontent.com/eidy-8/imagens/main/e-commerce/esporte/vecteezy_vibrant-cricket-helmet-in-yellow-with-a-polished-surface_55985493.png" alt="Imagem do produto"> -->
+  @if (showFifthStep) {
+    <br>
+  
+    <form
+      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 lg:w-2/4 md:w-3/4 sm:w-full"
+      [ngClass]="{ 'bg-white/25': blurFifthStep }"
+    >
+      <p>Foto</p>
+      <p class="text-gray-500">Envie uma foto boa para que o produto tenha destaque.</p>
+  
+      <br />
+      <hr />
+      <br />
+  
+      <div class="mb-4 rounded-lg">
+        <input
+          [(ngModel)]="productImage"
+          (ngModelChange)="onImageChange()"
+          [ngClass]="{ 'border-error-color': isImageError, 'bg-white/25 pointer-events-none': blurFifthStep }"
+          name="title"
+          class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+          id="title"
+          type="text"
+          placeholder="Insira a URL da imagem"
+        />
+        @if (isImageError) {
+          <p class="text-error-color text-xs italic mb-4 mt-3">
+            {{ errorMessage }}
+          </p>
+        }
+      </div>
+  
+      <br />
+      <hr />
+      <br />
+  
+      <div class="flex gap-5 flex-row-reverse">
+        <button
+          class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
+          (click)="confirmImage()"
+          [ngClass]="{ 'bg-tertiary-button-color pointer-events-none': blurFifthButtons }"
+        >
+          Confirmar
+        </button>
+        <button
+          class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg"
+          [ngClass]="{ 'text-tertiary-button-color pointer-events-none': blurFifthButtons }"
+          (click)="cancelImage()"
+        >
+          Cancelar
+        </button>
+      </div>
+      @if (loadingFifthStep) {
           <app-loading-overlay></app-loading-overlay>
       }
     </form>
