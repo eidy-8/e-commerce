@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: '',
     component: MainComponent,
-    canActivate: [authGuard],
+    //canActivate: [authGuard],
     children: [
       {
         path: 'new-product',
