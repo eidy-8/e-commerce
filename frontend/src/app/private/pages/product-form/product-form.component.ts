@@ -15,18 +15,21 @@ export class ProductFormComponent implements OnInit {
   protected productCondition!: boolean;
   protected productQuantity: any;
   protected productImage: any;
+  protected productDescription: any;
 
   protected previousProductName: any;
   protected previousProductPrice: any;
   protected previousProductCondition!: boolean;
   protected previousProductQuantity: any;
   protected previousProductImage: any
+  protected previousProductDescription: any;
 
   protected isNameError: boolean = false;
   protected isPriceError: boolean = false;
   protected isConditionError: boolean = false;
   protected isQuantityError: boolean = false;
   protected isImageError: boolean = false;
+  protected isDescriptionError: boolean = false;
   protected errorMessage: string = 'Informe esse dado';
 
   protected loadingFirstStep: boolean = false;
@@ -34,12 +37,14 @@ export class ProductFormComponent implements OnInit {
   protected loadingThirdStep: boolean = false;
   protected loadingForthStep: boolean = false;
   protected loadingFifthStep: boolean = false;
+  protected loadingSixthStep: boolean = false;
 
   protected isFirstStepCompleted: boolean = false;
   protected isSecondStepCompleted: boolean = false;
   protected isThirdStepCompleted: boolean = false;
   protected isForthStepCompleted: boolean = false;
   protected isFifthStepCompleted: boolean = false;
+  protected isSixthStepCompleted: boolean = false;
 
   protected showSecondStep: boolean = false;
   protected showThirdStep: boolean = false;
@@ -52,12 +57,16 @@ export class ProductFormComponent implements OnInit {
   protected blurThirdStep: boolean = false;
   protected blurForthStep: boolean = false;
   protected blurFifthStep: boolean = false;
+  protected blurSixthStep: boolean = false;
 
   protected blurFirstButtons: boolean = false;
   protected blurSecondButtons: boolean = false;
   protected blurThirdButtons: boolean = false;
   protected blurForthButtons: boolean = false;
   protected blurFifthButtons: boolean = false;
+  protected blurSixthButtons: boolean = false;
+
+  protected isAllStepsCompleted: boolean = false;
 
   constructor(private route: ActivatedRoute) {}
 
@@ -119,6 +128,13 @@ export class ProductFormComponent implements OnInit {
             } else {
               this.blurFifthStep = false;
             }
+
+            if (!this.isSixthStepCompleted) {
+              this.blurSixthStep = false;
+              this.blurSixthButtons = false;
+            } else {
+              this.blurSixthStep = false;
+            }
           }, 100);
         }, 100);
       }, 1000);
@@ -157,6 +173,13 @@ export class ProductFormComponent implements OnInit {
         this.blurFifthButtons = false;
       } else {
         this.blurFifthStep = false;
+      }
+
+      if (!this.isSixthStepCompleted) {
+        this.blurSixthStep = false;
+        this.blurSixthButtons = false;
+      } else {
+        this.blurSixthStep = false;
       }
     }
   }
@@ -214,6 +237,13 @@ export class ProductFormComponent implements OnInit {
             } else {
               this.blurFifthStep = false
             }
+
+            if (!this.isSixthStepCompleted) {
+              this.blurSixthStep = false;
+              this.blurSixthButtons = false;
+            } else {
+              this.blurSixthStep = false;
+            }
           }, 100);
         }, 100);
       }, 1000);
@@ -253,6 +283,13 @@ export class ProductFormComponent implements OnInit {
       } else {
         this.blurFifthStep = false
       }
+
+      if (!this.isSixthStepCompleted) {
+        this.blurSixthStep = false;
+        this.blurSixthButtons = false;
+      } else {
+        this.blurSixthStep = false;
+      }  
     }
   }
 
@@ -310,6 +347,13 @@ export class ProductFormComponent implements OnInit {
             } else {
               this.blurFifthStep = false
             }
+
+            if (!this.isSixthStepCompleted) {
+              this.blurSixthStep = false;
+              this.blurSixthButtons = false;
+            } else {
+              this.blurSixthStep = false;
+            }
           }, 100);
         }, 100);
       }, 1000);
@@ -349,6 +393,13 @@ export class ProductFormComponent implements OnInit {
       } else {
         this.blurFifthStep = false
       }
+
+      if (!this.isSixthStepCompleted) {
+        this.blurSixthStep = false;
+        this.blurSixthButtons = false;
+      } else {
+        this.blurSixthStep = false
+      }  
     }
   }
 
@@ -405,6 +456,13 @@ export class ProductFormComponent implements OnInit {
             } else {
               this.blurFifthStep = false
             }
+
+            if (!this.isSixthStepCompleted) {
+              this.blurSixthStep = false;
+              this.blurSixthButtons = false;
+            } else {
+              this.blurSixthStep = false;
+            }
           }, 100);
         }, 100);
       }, 1000);
@@ -442,7 +500,14 @@ export class ProductFormComponent implements OnInit {
         this.blurFifthStep = false;
         this.blurFifthButtons = false;
       } else {
-        this.blurFifthButtons = false;
+        this.blurFifthStep = false;
+      }
+
+      if (!this.isSixthStepCompleted) {
+        this.blurSixthStep = false;
+        this.blurSixthButtons = false;
+      } else {
+        this.blurSixthStep = false;
       }
     }
   }
@@ -500,6 +565,13 @@ export class ProductFormComponent implements OnInit {
             } else {
               this.blurForthStep = false
             }
+
+            if (!this.isSixthStepCompleted) {
+              this.blurSixthStep = false;
+              this.blurSixthButtons = false;
+            } else {
+              this.blurSixthStep = false
+            }
           }, 100);
         }, 100);
       }, 1000);
@@ -539,6 +611,118 @@ export class ProductFormComponent implements OnInit {
       } else {
         this.blurForthStep = false
       }
+
+      if (!this.isSixthStepCompleted) {
+        this.blurSixthStep = false;
+        this.blurSixthButtons = false;
+      } else {
+        this.blurSixthStep = false
+      }
+    }
+  }
+
+  protected confirmDescription() {    
+    if (!this.productDescription) {
+      this.isDescriptionError = true;
+    } else {
+      this.isDescriptionError = false;
+      this.loadingSixthStep = true;
+
+      this.previousProductDescription = this.productDescription;
+
+      setTimeout(() => {
+        this.loadingSixthStep = false;
+
+          setTimeout(() => {
+
+            window.scrollTo({
+              top: document.body.scrollHeight,
+              left: 0,
+              behavior: "smooth"
+            });
+
+            this.isSixthStepCompleted = true;
+            this.blurSixthButtons = true;
+
+            if (!this.isFirstStepCompleted) {
+              this.blurFirstStep = false;
+              this.blurFirstButtons = false;
+            } else {
+              this.blurFirstStep = false;
+            }
+           
+            if (!this.isSecondStepCompleted) {
+              this.blurSecondStep = false;
+              this.blurSecondButtons = false;
+            } else {
+              this.blurSecondStep = false
+            }
+
+            if (!this.isThirdStepCompleted) {
+              this.blurThirdStep = false;
+              this.blurThirdButtons = false;
+            } else {
+              this.blurThirdStep = false
+            }
+
+            if (!this.isForthStepCompleted) {
+              this.blurForthStep = false;
+              this.blurForthButtons = false;
+            } else {
+              this.blurForthStep = false
+            }
+
+            if (!this.isFifthStepCompleted) {
+              this.blurFifthStep = false;
+              this.blurFifthButtons = false;
+            } else {
+              this.blurFifthStep = false
+            }
+          }, 100);
+      }, 1000);
+    }
+  }
+
+  protected cancelDescription() {
+    if (this.productDescription) {
+      this.blurSixthButtons = true;
+
+      this.productDescription = this.previousProductDescription;
+
+      if (!this.isFirstStepCompleted) {
+        this.blurFirstStep = false;
+        this.blurFirstButtons = false;
+      } else {
+        this.blurFirstStep = false;
+      }
+     
+      if (!this.isSecondStepCompleted) {
+        this.blurSecondStep = false;
+        this.blurSecondButtons = false;
+      } else {
+        this.blurSecondStep = false
+      }
+
+      if (!this.isThirdStepCompleted) {
+        this.blurThirdStep = false;
+        this.blurThirdButtons = false;
+      } else {
+        this.blurThirdStep = false
+      }
+
+      if (!this.isForthStepCompleted) {
+        this.blurForthStep = false;
+        this.blurForthButtons = false;
+      } else {
+        this.blurForthStep = false
+      }
+
+      if (!this.isFifthStepCompleted) {
+        this.blurFifthStep = false;
+        this.blurFifthButtons = false;
+      } else {
+        this.blurFifthStep = false
+      }
     }
   }
 
@@ -555,6 +739,12 @@ export class ProductFormComponent implements OnInit {
 
       this.blurForthStep = true;
       this.blurForthButtons = true;
+
+      this.blurFifthStep = true;
+      this.blurFifthButtons = true;
+
+      this.blurSixthStep = true;
+      this.blurSixthButtons = true;
     } else {
       this.blurFirstButtons = true;
     }
@@ -573,6 +763,12 @@ export class ProductFormComponent implements OnInit {
 
       this.blurForthStep = true;
       this.blurForthButtons = true;
+
+      this.blurFifthStep = true;
+      this.blurFifthButtons = true;
+
+      this.blurSixthStep = true;
+      this.blurSixthButtons = true;
     } else {
       this.blurSecondButtons = true;
     }
@@ -591,6 +787,12 @@ export class ProductFormComponent implements OnInit {
 
       this.blurForthStep = true;
       this.blurForthButtons = true;
+
+      this.blurFifthStep = true;
+      this.blurFifthButtons = true;
+
+      this.blurSixthStep = true;
+      this.blurSixthButtons = true;
     } else {
       this.blurThirdButtons = true
     }
@@ -609,6 +811,12 @@ export class ProductFormComponent implements OnInit {
   
       this.blurThirdStep = true;
       this.blurThirdButtons = true;
+
+      this.blurFifthStep = true;
+      this.blurFifthButtons = true;
+
+      this.blurSixthStep = true;
+      this.blurSixthButtons = true;
     } else {
       this.blurForthButtons = true;
     }
@@ -630,8 +838,38 @@ export class ProductFormComponent implements OnInit {
   
       this.blurForthStep = true;
       this.blurForthButtons = true;
+
+      this.blurSixthStep = true;
+      this.blurSixthButtons = true;
     } else {
       this.blurFifthButtons = true;
     }
+  }
+
+  protected onDescriptionChange() {
+    if (this.productDescription) {
+      this.blurSixthStep = false;
+      this.blurSixthButtons = false;
+  
+      this.blurFirstStep = true;
+      this.blurFirstButtons = true;
+  
+      this.blurSecondStep = true;
+      this.blurSecondButtons = true;
+  
+      this.blurThirdStep = true;
+      this.blurThirdButtons = true;
+  
+      this.blurForthStep = true;
+      this.blurForthButtons = true;
+  
+      this.blurFifthStep = true;
+      this.blurFifthButtons = true;
+    } else {
+      this.blurSixthButtons = true;
+    }
+  }
+
+  protected advertiseProduct() {
   }
 }

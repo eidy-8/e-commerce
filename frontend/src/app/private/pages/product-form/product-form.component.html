@@ -329,4 +329,74 @@
       }
     </form>
   }
+
+
+
+  @if (showSixthStep) {
+    <br>
+  
+    <form
+      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 lg:w-2/4 md:w-3/4 sm:w-full"
+      [ngClass]="{ 'bg-white/25': blurSixthStep }"
+    >
+      <p>Descrição</p>
+      <p class="text-gray-500">Detalhe as principais características do seu produto.</p>
+  
+      <br />
+      <hr />
+      <br />
+  
+      <div class="mb-4 rounded-lg">
+        <textarea
+          [(ngModel)]="productDescription"
+          (ngModelChange)="onDescriptionChange()"
+          [ngClass]="{ 'border-error-color': isDescriptionError, 'bg-white/25 pointer-events-none': blurSixthStep }"
+          name="title"
+          class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+          id="title"
+          type="text"
+          placeholder="Digite aqui mais informações para seus compradores."
+          rows="10"
+          maxlength="5000"
+        ></textarea>
+        @if (isDescriptionError) {
+          <p class="text-error-color text-xs italic mb-4 mt-3">
+            {{ errorMessage }}
+          </p>
+        }
+      </div>
+  
+      <br />
+      <hr />
+      <br />
+  
+      <div class="flex gap-5 flex-row-reverse">
+        <button
+          class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
+          (click)="confirmDescription()"
+          [ngClass]="{ 'bg-tertiary-button-color pointer-events-none': blurSixthButtons }"
+        >
+          Confirmar
+        </button>
+        <button
+          class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg"
+          [ngClass]="{ 'text-tertiary-button-color pointer-events-none': blurSixthButtons }"
+          (click)="cancelDescription()"
+        >
+          Cancelar
+        </button>
+      </div>
+      @if (loadingSixthStep) {
+        <app-loading-overlay></app-loading-overlay>
+      }
+    </form>
+  }
+
+  <button
+    class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
+    (click)="advertiseProduct()"
+    [ngClass]="{ 'bg-tertiary-button-color pointer-events-none': !isAllStepsCompleted }"
+  >
+    Anunciar
+  </button>
 </div>
