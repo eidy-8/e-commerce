@@ -11,7 +11,7 @@
   </div>
 
   <form
-    class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 lg:w-2/4 md:w-3/4 sm:w-full"
+    class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 w-full lg:w-2/4 md:w-3/4 sm:w-full"
     [ngClass]="{ 'bg-white/25': blurFirstStep }"
   >
     <p>Título</p>
@@ -73,7 +73,7 @@
     <br>
   
     <form
-      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 lg:w-2/4 md:w-3/4 sm:w-full"
+      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 w-full lg:w-2/4 md:w-3/4 sm:w-full"
       [ngClass]="{ 'bg-white/25': blurSecondStep }"
     >
       <p>Preço</p>
@@ -94,8 +94,9 @@
           name="title"
           class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
           id="title"
-          type="text"
+          type="number"
           placeholder="Insira o preço"
+          (keydown)="sharedMethod.preventSpace($event)"
         />
         @if (isPriceError) {
           <p class="text-error-color text-xs italic mb-4 mt-3">
@@ -136,7 +137,7 @@
     <br>
   
     <form
-      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 lg:w-2/4 md:w-3/4 sm:w-full"
+      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 w-full lg:w-2/4 md:w-3/4 sm:w-full"
       [ngClass]="{ 'bg-white/25': blurThirdStep }"
     >
       <p>Condição</p>
@@ -212,7 +213,7 @@
     <br>
   
     <form
-      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 lg:w-2/4 md:w-3/4 sm:w-full"
+      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 w-full lg:w-2/4 md:w-3/4 sm:w-full"
       [ngClass]="{ 'bg-white/25': blurForthStep }"
     >
       <p>Estoque</p>
@@ -233,8 +234,9 @@
           name="title"
           class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
           id="title"
-          type="text"
+          type="number"
           placeholder="Insira a quantidade"
+          (keydown)="sharedMethod.preventSpace($event)"
         />
         @if (isQuantityError) {
           <p class="text-error-color text-xs italic mb-4 mt-3">
@@ -276,7 +278,7 @@
     <br>
   
     <form
-      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 lg:w-2/4 md:w-3/4 sm:w-full"
+      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 w-full lg:w-2/4 md:w-3/4 sm:w-full"
       [ngClass]="{ 'bg-white/25': blurFifthStep }"
     >
       <p>Foto</p>
@@ -296,6 +298,7 @@
           id="title"
           type="text"
           placeholder="Insira a URL da imagem"
+          (keydown)="sharedMethod.preventSpace($event)"
         />
         @if (isImageError) {
           <p class="text-error-color text-xs italic mb-4 mt-3">
@@ -336,7 +339,7 @@
     <br>
   
     <form
-      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 lg:w-2/4 md:w-3/4 sm:w-full"
+      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 w-full lg:w-2/4 md:w-3/4 sm:w-full"
       [ngClass]="{ 'bg-white/25': blurSixthStep }"
     >
       <p>Descrição</p>
@@ -392,11 +395,13 @@
     </form>
   }
 
-  <button
-    class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
-    (click)="advertiseProduct()"
-    [ngClass]="{ 'bg-tertiary-button-color pointer-events-none': !isAllStepsCompleted }"
-  >
-    Anunciar
-  </button>
+  <div class="flex justify-end w-full lg:w-2/4 md:w-3/4 sm:w-full">
+    <button
+      class="px-6 py-3 mt-8 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
+      (click)="advertiseProduct()"
+      [ngClass]="{ 'bg-tertiary-button-color pointer-events-none': !isAllStepsCompleted }"
+    >
+      Anunciar
+    </button>
+  </div>
 </div>
