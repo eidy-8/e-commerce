@@ -2,8 +2,11 @@ const express = require('express');
 const app = express();
 const dotenv = require("dotenv");
 const cors = require('cors');
+
 const registerRoute = require('./routes/registerRoute');
 const loginRoute = require('./routes/loginRoute');
+const productRoute = require('./routes/productRoute');
+
 const middlewares = require('./middlewares/tokenValited');
 
 dotenv.config();
@@ -24,6 +27,8 @@ app.use('/register', registerRoute);
 app.use('/login', loginRoute);
 
 app.use('*', middlewares.tokenValited);
+
+app.use('/product', productRoute);
 
 app.use('/private', (req, res) => {
     const { user } = req.headers
