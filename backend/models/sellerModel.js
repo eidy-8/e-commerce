@@ -17,6 +17,24 @@ async function postSeller(data) {
     });
 }
 
+async function getSellerByUserId(data) {
+    return new Promise((resolve, reject) => {
+        const query = 'SELECT * FROM Seller WHERE user_id = $1';        
+        db.query(
+            query, 
+            [data], 
+            (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result.rows[0]);
+                }
+            }
+        );
+    });
+}
+
 module.exports = {
-    postSeller
+    postSeller,
+    getSellerByUserId
 }

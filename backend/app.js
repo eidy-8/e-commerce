@@ -14,6 +14,9 @@ dotenv.config();
 const env = process.env;
 const port = env.EX_PORT;
 
+const sellerModel = require('./models/sellerModel');
+const buyerModel = require('./models/buyerModel');
+
 app.use(express.json());
 
 app.use(cors());
@@ -30,15 +33,29 @@ app.use('*', middlewares.tokenValited);
 
 app.use('/product', productRoute);
 
-app.use('/private', (req, res) => {
-    const { user } = req.headers
-    const currentUser = JSON.parse(user);
-    return res.status(200).json({
-        message: 'Isso é uma router privada...',
-        data: {
-            userLogged: currentUser
-        }
-    })
+app.use('/private', async (req, res) => {
+    try {
+        const { user } = req.headers;
+        const currentUser = JSON.parse(user);
+
+        const seller = await sellerModel.getSellerByUserId(currentUser[0].id);
+        const buyer = await buyerModel.getBuyerByUserId(currentUser[0].id);
+
+        return res.status(200).json({
+            message: 'Isso é uma router privada...',
+            data: {
+                userLogged: currentUser,
+                sellerId: seller ? seller.id : null,
+                buyerId: buyer ? buyer.id : null  
+            }
+        });
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).json({
+            message: 'Erro ao buscar informações do usuário.',
+            error: error.message
+        });
+    }
 });
 
 app.listen(port, () => {

@@ -17,6 +17,20 @@ async function postBuyer(data) {
     });
 }
 
+async function getBuyerByUserId(userId) {
+    return new Promise((resolve, reject) => {
+        const query = "SELECT id FROM Buyer WHERE user_id = $1";
+        db.query(query, [userId], (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result.rows[0]); 
+            }
+        });
+    });
+}
+
 module.exports = {
-    postBuyer
+    postBuyer,
+    getBuyerByUserId
 }

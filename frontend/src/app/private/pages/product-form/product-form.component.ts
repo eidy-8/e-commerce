@@ -81,8 +81,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.category = this.route.snapshot.paramMap.get('category'); 
 
-    await this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
-      console.log(res.data.userLogged[0].id);        
+    this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
+      this.currentSeller = res.data.sellerId;        
     });
 
 
@@ -97,7 +97,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       imageUrl: this.productImage,
       description: this.productDescription,
       quantity: this.productQuantity,
-      seller_id: "2815099b-0cb2-4192-8d08-edff52609209",
+      seller_id: this.currentSeller,
       category_id: "4935a834-10ee-408c-b573-987ff8533c20"
     }
 
