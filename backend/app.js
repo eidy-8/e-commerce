@@ -52,7 +52,7 @@ app.use('/private', async (req, res) => {
     } catch (error) {
         console.error(error.message);
         return res.status(500).json({
-            message: 'Erro ao buscar informações do usuário.',
+            message: 'Erro interno no servidor.',
             error: error.message
         });
     }

@@ -84,8 +84,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
       this.currentSeller = res.data.sellerId;        
     });
-
-
   }
 
   protected advertiseProduct() {
