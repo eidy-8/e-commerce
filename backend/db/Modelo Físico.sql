@@ -52,9 +52,11 @@ CREATE TABLE Product (
 );
 
 --Comandos para testes
-SELECT * FROM Users;
+SELECT * FROM buyer;
 
 INSERT INTO Seller (user_id) VALUES ('77ebb9bf-6426-428a-8cc0-98a286b8a2da');
+
+INSERT INTO Buyer (user_id) VALUES ('77ebb9bf-6426-428a-8cc0-98a286b8a2da');
 
 INSERT INTO Product (name, price, isUsed, isActive, imageUrl, description, quantity, seller_id, category_id) 
 VALUES ('nameTeste', 50.0, 'F', 'T', 'testeImageUrl', 'descriptionTeste', 2, '2815099b-0cb2-4192-8d08-edff52609209', '4935a834-10ee-408c-b573-987ff8533c20');
@@ -71,7 +73,7 @@ SET name = COALESCE('nameTesteModificado', name),
          quantity = COALESCE(1, quantity)
      WHERE id = 'f9593da0-00c0-4f6f-9595-f4ff98ae25cd';
 
-DELETE FROM Users WHERE id = 'a7e97f7f-22ab-441d-99eb-e443cdc65068';
+DELETE FROM Users WHERE id = '648efb8c-3571-4541-b654-9b3270144ef9';
 
 TRUNCATE TABLE Users CASCADE;
 

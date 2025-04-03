@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { ApiDataService } from './api-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements OnDestroy {
 
   private unsubscribe = new Subject<void>;
   private authenticated = false;
@@ -35,5 +35,10 @@ export class AuthService {
 
   logout(): void {
     sessionStorage.removeItem('Session-Token');
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ApiDataService } from '../../services/api-data.service';
@@ -9,7 +9,7 @@ import { MethodsService } from '../../../shared/services/shared.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   private unsubscribe = new Subject<void>;
   protected email!: string;
   protected password!: string;
@@ -44,5 +44,10 @@ export class LoginComponent {
         this.loginError = true;
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 }

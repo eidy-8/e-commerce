@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MethodsService } from '../../../shared/services/shared.service';
+import { ProductService } from '../../services/product.service';
+import { Subject, takeUntil } from 'rxjs';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.css'
 })
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent implements OnInit, OnDestroy {
 
   protected category: any;
 
@@ -69,11 +72,45 @@ export class ProductFormComponent implements OnInit {
 
   protected isAllStepsCompleted: boolean = false;
 
-  constructor(private route: ActivatedRoute, public sharedMethod: MethodsService) {}
+  private unsubscribe = new Subject<void>;
 
-  ngOnInit() {
+  private currentSeller!: string;
+
+  constructor(private route: ActivatedRoute, public sharedMethod: MethodsService, public productService: ProductService,  private router: Router, public userService: UserService) {}
+
+  async ngOnInit() {
     this.category = this.route.snapshot.paramMap.get('category'); 
-    console.log(this.category);
+
+    await this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
+      console.log(res.data.userLogged[0].id);        
+    });
+
+
+  }
+
+  protected advertiseProduct() {
+    const productData = {
+      name: this.productName,
+      price: this.productPrice,
+      isUsed: this.productCondition,
+      isActive: 1,
+      imageUrl: this.productImage,
+      description: this.productDescription,
+      quantity: this.productQuantity,
+      seller_id: "2815099b-0cb2-4192-8d08-edff52609209",
+      category_id: "4935a834-10ee-408c-b573-987ff8533c20"
+    }
+
+    this.productService.postProduct(productData).pipe( takeUntil( this.unsubscribe ) ).subscribe({
+      next: res => {
+        console.log(res.message);
+        this.router.navigate(['/']);
+      },
+      error: error => {
+        console.log(error);
+        this.errorMessage = error.message;
+      }
+    });
   }
 
   protected confirmName() {    
@@ -921,6 +958,8 @@ export class ProductFormComponent implements OnInit {
     }
   }
 
-  protected advertiseProduct() {
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 }

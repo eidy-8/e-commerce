@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { ApiDataService } from '../../services/api-data.service';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { MethodsService } from '../../../shared/services/shared.service';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnDestroy {
   private unsubscribe = new Subject<void>;
   protected email!: string;
   protected name!: string;
@@ -79,4 +79,9 @@ export class RegisterComponent {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
   };
+
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
 }

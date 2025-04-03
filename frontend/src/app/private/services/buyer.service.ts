@@ -6,26 +6,18 @@ import { catchError, Observable, retry, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class BuyerService {
 
-  protected urlProduct = `${Environment.ENV_PRODUCT}`;
-  
+  protected urlPrivate = `${Environment.ENV_PRIVATE}`;
+    
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
   constructor(private httpClient: HttpClient) { }
 
-  public getProduct(): Observable<any> {
-    return this.httpClient.get<any>(`${this.urlProduct}`)
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      )
-  }
-
-  public postProduct(productData: any): Observable<any> {
-    return this.httpClient.post<any>(this.urlProduct, JSON.stringify(productData), this.httpOptions)
+  public getBuyerById(): Observable<any> {
+    return this.httpClient.get<any>(`${this.urlPrivate}`)
       .pipe(
         retry(1),
         catchError(this.handleError)
