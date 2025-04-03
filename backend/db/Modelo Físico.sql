@@ -52,7 +52,7 @@ CREATE TABLE Product (
 );
 
 --Comandos para testes
-SELECT * FROM Product;
+SELECT * FROM Users;
 
 INSERT INTO Seller (user_id) VALUES ('77ebb9bf-6426-428a-8cc0-98a286b8a2da');
 
@@ -71,7 +71,7 @@ SET name = COALESCE('nameTesteModificado', name),
          quantity = COALESCE(1, quantity)
      WHERE id = 'f9593da0-00c0-4f6f-9595-f4ff98ae25cd';
 
-DELETE FROM Product WHERE id = 'f9593da0-00c0-4f6f-9595-f4ff98ae25cd';
+DELETE FROM Users WHERE id = 'a7e97f7f-22ab-441d-99eb-e443cdc65068';
 
 TRUNCATE TABLE Users CASCADE;
 

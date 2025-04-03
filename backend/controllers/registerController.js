@@ -1,12 +1,12 @@
 const bcrypt = require("bcryptjs");
-const userService = require("../services/userService");
+const userModel = require("../models/userModel");
 
 exports.register = async (req, res) => {
     const { username, email, password } = req.body;
 
     try {
-        const usersUsername = await userService.findUserByUsername(username);
-        const usersEmail = await userService.findUserByEmail(email);
+        const usersUsername = await userModel.getUserByUsername(username);
+        const usersEmail = await userModel.getUserByEmail(email);
 
         if (usersUsername.length > 0) {
             throw new Error('O username inserido já está associado a uma conta.');
@@ -22,7 +22,7 @@ exports.register = async (req, res) => {
                 password: hashPassword
             };            
 
-            userService.createUser(newUserData);
+            userModel.postUser(newUserData);
 
             return res.status(200).json({
                 message: 'Usuário incluído com sucesso.'

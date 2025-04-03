@@ -1,5 +1,5 @@
 const jsonWebToken = require("jsonwebtoken");
-const userService = require("../services/userService");
+const userModel = require("../models/userModel");
 const dotenv = require("dotenv");
 const bcrypt = require("bcryptjs");
 
@@ -11,7 +11,7 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     try {        
-        const user = await userService.findUserByEmail(email);    
+        const user = await userModel.getUserByEmail(email);    
                 
         if (!user) {
             return res.status(401).json({ message: "Preencha o campo E-mail." });
@@ -32,7 +32,7 @@ exports.login = async (req, res) => {
             { expiresIn: "60m" }
         );
 
-        await userService.registerLastLogin(email);
+        await userModel.updateLastLogin(email);
 
         return res.status(200).json({ data: { token } });
     } catch (error) {
