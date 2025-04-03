@@ -36,15 +36,15 @@ async function getUserByEmail(data) {
 
 async function postUser(data) {
     return new Promise((resolve, reject) => {
-        const query = "INSERT INTO Users (username, email, password) VALUES ($1, $2, $3)";
+        const query = "INSERT INTO Users (username, email, password) VALUES ($1, $2, $3) RETURNING id";
         db.query(
             query,
             [data.username, data.email, data.password],
-            (err, rows) => {
+            (err, result) => {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(rows);
+                    resolve(result.rows[0]);
                 }
             }
         );

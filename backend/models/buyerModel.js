@@ -1,8 +1,8 @@
 const db = require("../db/db");
 
-async function postSeller(data) {
+async function postBuyer(data) {
     return new Promise((resolve, reject) => {
-        const query = "INSERT INTO Seller (user_id) VALUES ($1)";
+        const query = "INSERT INTO Buyer (user_id) VALUES ($1)";
         db.query(
             query,
             [data],
@@ -18,5 +18,5 @@ async function postSeller(data) {
 }
 
 module.exports = {
-    postSeller
+    postBuyer
 }

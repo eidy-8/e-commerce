@@ -1,5 +1,7 @@
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/userModel");
+const buyerModel = require("../models/buyerModel");
+const sellerModel = require("../models/sellerModel");
 
 exports.register = async (req, res) => {
     const { username, email, password } = req.body;
@@ -22,7 +24,10 @@ exports.register = async (req, res) => {
                 password: hashPassword
             };            
 
-            userModel.postUser(newUserData);
+            const createdUser = await userModel.postUser(newUserData);
+
+            await buyerModel.postBuyer(createdUser.id);
+            await sellerModel.postSeller(createdUser.id);
 
             return res.status(200).json({
                 message: 'Usuário incluído com sucesso.'
