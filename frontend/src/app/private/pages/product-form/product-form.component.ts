@@ -82,22 +82,24 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.category = this.route.snapshot.paramMap.get('category'); 
 
     this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
-      this.currentSeller = res.data.sellerId;        
+      this.currentSeller = res.data.sellerId;           
     });
   }
 
   protected advertiseProduct() {
-    const productData = {
+    let productData = {
       name: this.productName,
       price: this.productPrice,
-      isUsed: this.productCondition,
-      isActive: 1,
+      isUsed: "0",
+      isActive: "1",
       imageUrl: this.productImage,
       description: this.productDescription,
       quantity: this.productQuantity,
       seller_id: this.currentSeller,
-      category_id: "4935a834-10ee-408c-b573-987ff8533c20"
+      category_id: this.category
     }
+
+    console.log(productData);
 
     this.productService.postProduct(productData).pipe( takeUntil( this.unsubscribe ) ).subscribe({
       next: res => {
@@ -221,6 +223,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       } else {
         this.blurSixthStep = false;
       }
+
+      this.checkAllStepsCompleted();
     }
   }
 
@@ -334,6 +338,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       } else {
         this.blurSixthStep = false;
       }  
+
+      this.checkAllStepsCompleted();
     }
   }
 
@@ -448,6 +454,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       } else {
         this.blurSixthStep = false
       }  
+
+      this.checkAllStepsCompleted();
     }
   }
 
@@ -561,6 +569,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       } else {
         this.blurSixthStep = false;
       }
+
+      this.checkAllStepsCompleted();
     }
   }
 
@@ -674,6 +684,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       } else {
         this.blurSixthStep = false
       }
+
+      this.checkAllStepsCompleted();
     }
   }
 
@@ -744,7 +756,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   protected cancelDescription() {
     this.checkAllStepsCompleted(false);
 
-    if (this.productDescription) {
+    if (this.productDescription) {      
       this.blurSixthButtons = true;
 
       this.productDescription = this.previousProductDescription;
@@ -783,6 +795,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       } else {
         this.blurFifthStep = false
       }
+
+      this.checkAllStepsCompleted();
     }
   }
 
