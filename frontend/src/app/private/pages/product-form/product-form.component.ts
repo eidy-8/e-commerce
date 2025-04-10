@@ -95,8 +95,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     let productData = {
       name: this.productName,
       price: this.productPrice,
-      isUsed: "0",
-      isActive: "1",
+      isUsed: this.productCondition,
+      isActive: 1,
       imageUrl: this.productImage,
       description: this.productDescription,
       quantity: this.productQuantity,

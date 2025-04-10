@@ -52,7 +52,7 @@ CREATE TABLE Product (
 );
 
 --Comandos para testes
-SELECT * FROM buyer;
+SELECT * FROM product;
 
 INSERT INTO Seller (user_id) VALUES ('77ebb9bf-6426-428a-8cc0-98a286b8a2da');
 
@@ -62,6 +62,10 @@ INSERT INTO Product (name, price, isUsed, isActive, imageUrl, description, quant
 VALUES ('nameTeste', 50.0, 'F', 'T', 'testeImageUrl', 'descriptionTeste', 2, '2815099b-0cb2-4192-8d08-edff52609209', '4935a834-10ee-408c-b573-987ff8533c20');
 
 ALTER TABLE Users ADD COLUMN imageUrl VARCHAR(512);
+
+ALTER TABLE Product
+ALTER COLUMN isUsed TYPE boolean
+USING isUsed::INTEGER::BOOLEAN;
 
 UPDATE Product 
 SET name = COALESCE('nameTesteModificado', name), 
@@ -75,6 +79,6 @@ SET name = COALESCE('nameTesteModificado', name),
 
 DELETE FROM Users WHERE id = '648efb8c-3571-4541-b654-9b3270144ef9';
 
-TRUNCATE TABLE Users CASCADE;
+TRUNCATE TABLE Product CASCADE;
 
 DROP TABLE Product;
