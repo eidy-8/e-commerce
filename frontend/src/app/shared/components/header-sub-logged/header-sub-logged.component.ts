@@ -13,6 +13,7 @@ export class HeaderSubLoggedComponent {
     { name: 'Minha conta', link: 'https://github.com/eidy-8/postgreAnotacao' },
     { name: 'Compras', link: 'https://github.com/eidy-8/postgreAnotacao' },
     { name: 'Vender', action: () => this.router.navigate([ '/user/new-product' ]) },
+    { name: 'Anúncios', action: () => this.router.navigate([ '/user/my-products' ]) },
     { name: 'Sair', action: () => this.logout() }
   ];
 

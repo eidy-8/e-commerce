@@ -4,6 +4,7 @@ import { MainComponent } from './main/main.component';
 import { authGuard } from '../auth/guards/auth.guard';
 import { NewProductComponent } from './pages/new-product/new-product.component';
 import { ProductFormComponent } from './pages/product-form/product-form.component';
+import { ProductsComponent } from './pages/products/products.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: 'new-product/product-form/:category',
         component: ProductFormComponent
+      },
+      {
+        path: 'my-products',
+        component: ProductsComponent
       }
     ]
   }

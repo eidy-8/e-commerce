@@ -6,13 +6,15 @@ import { SharedModule } from '../shared/shared.module';
 import { MainComponent } from './main/main.component';
 import { NewProductComponent } from './pages/new-product/new-product.component';
 import { ProductFormComponent } from './pages/product-form/product-form.component';
+import { ProductsComponent } from './pages/products/products.component';
 
 
 @NgModule({
   declarations: [
     MainComponent,
     NewProductComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProductsComponent
   ],
   imports: [
     CommonModule,
