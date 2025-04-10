@@ -23,7 +23,7 @@ import { Interceptor } from './auth/interceptors/interceptor';
   ],
   providers: [
     provideHttpClient(
-      withInterceptorsFromDi() // Permite que interceptores sejam injetados
+      withInterceptorsFromDi()
     ), 
     provideAnimations(),
     {

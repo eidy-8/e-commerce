@@ -1,23 +1,27 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { inject, Injectable } from "@angular/core";
+import { finalize, Observable } from "rxjs";
+import { LoadingService } from "../../shared/services/loading.service";
 
 @Injectable()
 export class Interceptor implements HttpInterceptor {
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {        
-        const token = sessionStorage.getItem('Session-Token');
+  constructor(private loadingService: LoadingService) {}
 
-        if ( token ) {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const token = sessionStorage.getItem('Session-Token');
 
-            const modifiedReq = req.clone({
-              headers: req.headers.set('Authorization', `Bearer ${token}`),
-            });
-      
-            return next.handle(modifiedReq);
-      
-          } else {
-      
-            return next.handle(req);
-          };
+    this.loadingService.show();
+
+    let modifiedReq = req;
+
+    if (token) {
+      modifiedReq = req.clone({
+        headers: req.headers.set('Authorization', `Bearer ${token}`),
+      });
     }
+
+    return next.handle(modifiedReq).pipe(
+      finalize(() => this.loadingService.hide())
+    );
+  }
 }

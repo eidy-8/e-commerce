@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MethodsService } from '../../../shared/services/shared.service';
 import { ProductService } from '../../services/product.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { UserService } from '../../services/user.service';
+import { LoadingService } from '../../../shared/services/loading.service';
 
 @Component({
   selector: 'app-product-form',
@@ -76,7 +77,11 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
   private currentSeller!: string;
 
-  constructor(private route: ActivatedRoute, public sharedMethod: MethodsService, public productService: ProductService,  private router: Router, public userService: UserService) {}
+  protected isLoading$: Observable<boolean>;
+
+  constructor(private route: ActivatedRoute, public sharedMethod: MethodsService, public productService: ProductService,  private router: Router, public userService: UserService, private loadingService: LoadingService) {
+    this.isLoading$ = this.loadingService.loading$;
+  }
 
   async ngOnInit() {
     this.category = this.route.snapshot.paramMap.get('category'); 

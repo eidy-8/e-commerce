@@ -14,7 +14,7 @@ export class NewProductComponent {
         break;
       }
       case 1: {
-        this.router.navigate(['/user/new-product/product-form/4935a834-10ee-408c-b573-987ff8533c20']);
+        this.router.navigate(['/user/new-product/product-form/e37a2ac8-f409-4e09-82f8-ce1616a4df36']);
         break;
       }
       case 2: {
