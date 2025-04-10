@@ -1,6 +1,37 @@
 @if (this.isLoading$ | async) {
-  <app-loading-overlay [fullScreen]="true"></app-loading-overlay>
+<app-loading-overlay [fullScreen]="true"></app-loading-overlay>
 }
+
+<app-modal
+  [isOpen]="isModalOpen"
+  title="Pronto!"
+  [primaryButton]="{
+    label: 'Ir para Anúncios',
+    styleClass: 'btn-primary',
+    action: advertiseProduct
+  }"
+  [secondaryButton]="{
+    label: 'Ver anúncio',
+    styleClass: 'btn-secondary',
+    action: advertiseProduct
+  }"
+>
+  <div class="wrapper">
+    <svg
+      class="checkmark"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 52 52"
+    >
+      <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+      <path
+        class="checkmark__check"
+        fill="none"
+        d="M14.1 27.2l7.1 7.2 16.7-16.8"
+      />
+    </svg>
+  </div>
+  <p class="text-center">Você já concluiu seu anúncio</p>
+</app-modal>
 
 <div class="flex flex-col items-center">
   <div class="flex items-center mb-10 mt-10 px-2">
@@ -19,20 +50,23 @@
     [ngClass]="{ 'bg-white/25': blurFirstStep }"
   >
     <p>Título</p>
-    <p class="text-gray-500">Por favor, preencha este dado com a especificação do fabricante.</p>
+    <p class="text-gray-500">
+      Por favor, preencha este dado com a especificação do fabricante.
+    </p>
 
     <br />
     <hr />
     <br />
 
     <div class="mb-4 rounded-lg">
-      <label class="block text-sm mb-2" for="title"
-        >Título do anúncio</label
-      >
+      <label class="block text-sm mb-2" for="title">Título do anúncio</label>
       <input
         [(ngModel)]="productName"
         (ngModelChange)="onNameChange()"
-        [ngClass]="{ 'border-error-color': isNameError, 'bg-white/25 pointer-events-none': blurFirstStep }"
+        [ngClass]="{
+          'border-error-color': isNameError,
+          'bg-white/25 pointer-events-none': blurFirstStep
+        }"
         name="title"
         class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
         id="title"
@@ -40,9 +74,9 @@
         placeholder="Insira o título"
       />
       @if (isNameError) {
-        <p class="text-error-color text-xs italic mb-4 mt-3">
-          {{errorMessage}}
-        </p>
+      <p class="text-error-color text-xs italic mb-4 mt-3">
+        {{ errorMessage }}
+      </p>
       }
     </div>
 
@@ -53,357 +87,379 @@
     <div class="flex gap-5 flex-row-reverse">
       <button
         class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
-        [ngClass]="{ 'bg-tertiary-button-color pointer-events-none': blurFirstButtons }"
+        [ngClass]="{
+          'bg-tertiary-button-color pointer-events-none': blurFirstButtons
+        }"
         (click)="confirmName()"
       >
         Confirmar
       </button>
       <button
         class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg"
-        [ngClass]="{ 'text-tertiary-button-color pointer-events-none': blurFirstButtons }"
+        [ngClass]="{
+          'text-tertiary-button-color pointer-events-none': blurFirstButtons
+        }"
         (click)="cancelName()"
       >
         Cancelar
       </button>
     </div>
     @if (loadingFirstStep) {
-        <app-loading-overlay></app-loading-overlay>
+    <app-loading-overlay></app-loading-overlay>
     }
   </form>
 
-
-
   @if (showSecondStep) {
-    <br>
-  
-    <form
-      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 w-full lg:w-2/4 md:w-3/4 sm:w-full"
-      [ngClass]="{ 'bg-white/25': blurSecondStep }"
-    >
-      <p>Preço</p>
-      <p class="text-gray-500">Informe o preço do produto.</p>
-  
-      <br />
-      <hr />
-      <br />
-  
-      <div class="mb-4 rounded-lg">
-        <label class="block text-sm mb-2" for="title"
-          >Preço do produto</label
-        >
-        <input
-          [(ngModel)]="productPrice"
-          (ngModelChange)="onPriceChange()"
-          [ngClass]="{ 'border-error-color': isPriceError, 'bg-white/25 pointer-events-none': blurSecondStep }"
-          name="title"
-          class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
-          id="title"
-          type="number"
-          placeholder="Insira o preço"
-          (keydown)="sharedMethod.preventSpace($event)"
-        />
-        @if (isPriceError) {
-          <p class="text-error-color text-xs italic mb-4 mt-3">
-            {{errorMessage}}
-          </p>
-        }
-      </div>
-  
-      <br />
-      <hr />
-      <br />
-  
-      <div class="flex gap-5 flex-row-reverse">
-        <button
-          class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
-          (click)="confirmPrice()"
-          [ngClass]="{ 'bg-tertiary-button-color pointer-events-none': blurSecondButtons }"
-        >
-          Confirmar
-        </button>
-        <button
-          class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg"
-          [ngClass]="{ 'text-tertiary-button-color pointer-events-none': blurSecondButtons }"
-          (click)="cancelPrice()"
-        >
-          Cancelar
-        </button>
-      </div>
-      @if (loadingSecondStep) {
-          <app-loading-overlay></app-loading-overlay>
+  <br />
+
+  <form
+    class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 w-full lg:w-2/4 md:w-3/4 sm:w-full"
+    [ngClass]="{ 'bg-white/25': blurSecondStep }"
+  >
+    <p>Preço</p>
+    <p class="text-gray-500">Informe o preço do produto.</p>
+
+    <br />
+    <hr />
+    <br />
+
+    <div class="mb-4 rounded-lg">
+      <label class="block text-sm mb-2" for="title">Preço do produto</label>
+      <input
+        [(ngModel)]="productPrice"
+        (ngModelChange)="onPriceChange()"
+        [ngClass]="{
+          'border-error-color': isPriceError,
+          'bg-white/25 pointer-events-none': blurSecondStep
+        }"
+        name="title"
+        class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+        id="title"
+        type="number"
+        placeholder="Insira o preço"
+        (keydown)="sharedMethod.preventSpace($event)"
+      />
+      @if (isPriceError) {
+      <p class="text-error-color text-xs italic mb-4 mt-3">
+        {{ errorMessage }}
+      </p>
       }
-    </form>
-  }
+    </div>
 
+    <br />
+    <hr />
+    <br />
 
+    <div class="flex gap-5 flex-row-reverse">
+      <button
+        class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
+        (click)="confirmPrice()"
+        [ngClass]="{
+          'bg-tertiary-button-color pointer-events-none': blurSecondButtons
+        }"
+      >
+        Confirmar
+      </button>
+      <button
+        class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg"
+        [ngClass]="{
+          'text-tertiary-button-color pointer-events-none': blurSecondButtons
+        }"
+        (click)="cancelPrice()"
+      >
+        Cancelar
+      </button>
+    </div>
+    @if (loadingSecondStep) {
+    <app-loading-overlay></app-loading-overlay>
+    }
+  </form>
+  } @if (showThirdStep) {
+  <br />
 
-  @if (showThirdStep) {
-    <br>
-  
-    <form
-      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 w-full lg:w-2/4 md:w-3/4 sm:w-full"
-      [ngClass]="{ 'bg-white/25': blurThirdStep }"
-    >
-      <p>Condição</p>
-      <p class="text-gray-500">Informe a condição do produto.</p>
-  
-      <br />
-      <hr />
-      <br />
-  
-      <div class="mb-4 rounded-lg">
-        <div class="flex gap-4 flex-col">
-          <label>
-            <input
-              type="radio"
-              [(ngModel)]="productCondition"
-              (ngModelChange)="onConditionChange()"
-              [value]=0
-              [disabled]="blurThirdStep"
-              name="productCondition"
-              class="mr-2"
-            />
-            Novo
-          </label>
-          <label>
-            <input
-              type="radio"
-              [(ngModel)]="productCondition"
-              (ngModelChange)="onConditionChange()"
-              [value]=1
-              [disabled]="blurThirdStep"
-              name="productCondition"
-              class="mr-2"
-            />
-            Usado
-          </label>
-        </div>
-        @if (isConditionError) {
-          <p class="text-error-color text-xs italic mb-4 mt-3">
-            {{ errorMessage }}
-          </p>
-        }
+  <form
+    class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 w-full lg:w-2/4 md:w-3/4 sm:w-full"
+    [ngClass]="{ 'bg-white/25': blurThirdStep }"
+  >
+    <p>Condição</p>
+    <p class="text-gray-500">Informe a condição do produto.</p>
+
+    <br />
+    <hr />
+    <br />
+
+    <div class="mb-4 rounded-lg">
+      <div class="flex gap-4 flex-col">
+        <label>
+          <input
+            type="radio"
+            [(ngModel)]="productCondition"
+            (ngModelChange)="onConditionChange()"
+            [value]="0"
+            [disabled]="blurThirdStep"
+            name="productCondition"
+            class="mr-2"
+          />
+          Novo
+        </label>
+        <label>
+          <input
+            type="radio"
+            [(ngModel)]="productCondition"
+            (ngModelChange)="onConditionChange()"
+            [value]="1"
+            [disabled]="blurThirdStep"
+            name="productCondition"
+            class="mr-2"
+          />
+          Usado
+        </label>
       </div>
-  
-      <br />
-      <hr />
-      <br />
-  
-      <div class="flex gap-5 flex-row-reverse">
-        <button
-          class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
-          (click)="confirmCondition()"
-          [ngClass]="{ 'bg-tertiary-button-color pointer-events-none': blurThirdButtons }"
-        >
-          Confirmar
-        </button>
-        <button
-          class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg"
-          [ngClass]="{ 'text-tertiary-button-color pointer-events-none': blurThirdButtons }"
-          (click)="cancelCondition()"
-        >
-          Cancelar
-        </button>
-      </div>
-      @if (loadingThirdStep) {
-          <app-loading-overlay></app-loading-overlay>
+      @if (isConditionError) {
+      <p class="text-error-color text-xs italic mb-4 mt-3">
+        {{ errorMessage }}
+      </p>
       }
-    </form>
-  }
+    </div>
 
-  
+    <br />
+    <hr />
+    <br />
 
-  @if (showForthStep) {
-    <br>
-  
-    <form
-      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 w-full lg:w-2/4 md:w-3/4 sm:w-full"
-      [ngClass]="{ 'bg-white/25': blurForthStep }"
-    >
-      <p>Estoque</p>
-      <p class="text-gray-500">Informe a quantidade disponível do produto.</p>
-  
-      <br />
-      <hr />
-      <br />
-  
-      <div class="mb-4 rounded-lg">
-        <label class="block text-sm mb-2" for="title"
-          >Estoque do produto</label
-        >
-        <input
-          [(ngModel)]="productQuantity"
-          (ngModelChange)="onQuantityChange()"
-          [ngClass]="{ 'border-error-color': isQuantityError, 'bg-white/25 pointer-events-none': blurForthStep }"
-          name="title"
-          class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
-          id="title"
-          type="number"
-          placeholder="Insira a quantidade"
-          (keydown)="sharedMethod.preventSpace($event)"
-        />
-        @if (isQuantityError) {
-          <p class="text-error-color text-xs italic mb-4 mt-3">
-            {{errorMessage}}
-          </p>
-        }
-      </div>
-  
-      <br />
-      <hr />
-      <br />
-  
-      <div class="flex gap-5 flex-row-reverse">
-        <button
-          class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
-          (click)="confirmQuantity()"
-          [ngClass]="{ 'bg-tertiary-button-color pointer-events-none': blurForthButtons }"
-        >
-          Confirmar
-        </button>
-        <button
-          class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg"
-          [ngClass]="{ 'text-tertiary-button-color pointer-events-none': blurForthButtons }"
-          (click)="cancelQuantity()"
-        >
-          Cancelar
-        </button>
-      </div>
-      @if (loadingForthStep) {
-          <app-loading-overlay></app-loading-overlay>
+    <div class="flex gap-5 flex-row-reverse">
+      <button
+        class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
+        (click)="confirmCondition()"
+        [ngClass]="{
+          'bg-tertiary-button-color pointer-events-none': blurThirdButtons
+        }"
+      >
+        Confirmar
+      </button>
+      <button
+        class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg"
+        [ngClass]="{
+          'text-tertiary-button-color pointer-events-none': blurThirdButtons
+        }"
+        (click)="cancelCondition()"
+      >
+        Cancelar
+      </button>
+    </div>
+    @if (loadingThirdStep) {
+    <app-loading-overlay></app-loading-overlay>
+    }
+  </form>
+  } @if (showForthStep) {
+  <br />
+
+  <form
+    class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 w-full lg:w-2/4 md:w-3/4 sm:w-full"
+    [ngClass]="{ 'bg-white/25': blurForthStep }"
+  >
+    <p>Estoque</p>
+    <p class="text-gray-500">Informe a quantidade disponível do produto.</p>
+
+    <br />
+    <hr />
+    <br />
+
+    <div class="mb-4 rounded-lg">
+      <label class="block text-sm mb-2" for="title">Estoque do produto</label>
+      <input
+        [(ngModel)]="productQuantity"
+        (ngModelChange)="onQuantityChange()"
+        [ngClass]="{
+          'border-error-color': isQuantityError,
+          'bg-white/25 pointer-events-none': blurForthStep
+        }"
+        name="title"
+        class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+        id="title"
+        type="number"
+        placeholder="Insira a quantidade"
+        (keydown)="sharedMethod.preventSpace($event)"
+      />
+      @if (isQuantityError) {
+      <p class="text-error-color text-xs italic mb-4 mt-3">
+        {{ errorMessage }}
+      </p>
       }
-    </form>
+    </div>
+
+    <br />
+    <hr />
+    <br />
+
+    <div class="flex gap-5 flex-row-reverse">
+      <button
+        class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
+        (click)="confirmQuantity()"
+        [ngClass]="{
+          'bg-tertiary-button-color pointer-events-none': blurForthButtons
+        }"
+      >
+        Confirmar
+      </button>
+      <button
+        class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg"
+        [ngClass]="{
+          'text-tertiary-button-color pointer-events-none': blurForthButtons
+        }"
+        (click)="cancelQuantity()"
+      >
+        Cancelar
+      </button>
+    </div>
+    @if (loadingForthStep) {
+    <app-loading-overlay></app-loading-overlay>
+    }
+  </form>
   }
-
-
 
   <!-- <img src="https://raw.githubusercontent.com/eidy-8/imagens/main/e-commerce/esporte/vecteezy_vibrant-cricket-helmet-in-yellow-with-a-polished-surface_55985493.png" alt="Imagem do produto"> -->
   @if (showFifthStep) {
-    <br>
-  
-    <form
-      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 w-full lg:w-2/4 md:w-3/4 sm:w-full"
-      [ngClass]="{ 'bg-white/25': blurFifthStep }"
-    >
-      <p>Foto</p>
-      <p class="text-gray-500">Envie uma foto boa para que o produto tenha destaque.</p>
-  
-      <br />
-      <hr />
-      <br />
-  
-      <div class="mb-4 rounded-lg">
-        <input
-          [(ngModel)]="productImage"
-          (ngModelChange)="onImageChange()"
-          [ngClass]="{ 'border-error-color': isImageError, 'bg-white/25 pointer-events-none': blurFifthStep }"
-          name="title"
-          class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
-          id="title"
-          type="text"
-          placeholder="Insira a URL da imagem"
-          (keydown)="sharedMethod.preventSpace($event)"
-        />
-        @if (isImageError) {
-          <p class="text-error-color text-xs italic mb-4 mt-3">
-            {{ errorMessage }}
-          </p>
-        }
-      </div>
-  
-      <br />
-      <hr />
-      <br />
-  
-      <div class="flex gap-5 flex-row-reverse">
-        <button
-          class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
-          (click)="confirmImage()"
-          [ngClass]="{ 'bg-tertiary-button-color pointer-events-none': blurFifthButtons }"
-        >
-          Confirmar
-        </button>
-        <button
-          class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg"
-          [ngClass]="{ 'text-tertiary-button-color pointer-events-none': blurFifthButtons }"
-          (click)="cancelImage()"
-        >
-          Cancelar
-        </button>
-      </div>
-      @if (loadingFifthStep) {
-          <app-loading-overlay></app-loading-overlay>
+  <br />
+
+  <form
+    class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 w-full lg:w-2/4 md:w-3/4 sm:w-full"
+    [ngClass]="{ 'bg-white/25': blurFifthStep }"
+  >
+    <p>Foto</p>
+    <p class="text-gray-500">
+      Envie uma foto boa para que o produto tenha destaque.
+    </p>
+
+    <br />
+    <hr />
+    <br />
+
+    <div class="mb-4 rounded-lg">
+      <input
+        [(ngModel)]="productImage"
+        (ngModelChange)="onImageChange()"
+        [ngClass]="{
+          'border-error-color': isImageError,
+          'bg-white/25 pointer-events-none': blurFifthStep
+        }"
+        name="title"
+        class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+        id="title"
+        type="text"
+        placeholder="Insira a URL da imagem"
+        (keydown)="sharedMethod.preventSpace($event)"
+      />
+      @if (isImageError) {
+      <p class="text-error-color text-xs italic mb-4 mt-3">
+        {{ errorMessage }}
+      </p>
       }
-    </form>
-  }
+    </div>
 
+    <br />
+    <hr />
+    <br />
 
+    <div class="flex gap-5 flex-row-reverse">
+      <button
+        class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
+        (click)="confirmImage()"
+        [ngClass]="{
+          'bg-tertiary-button-color pointer-events-none': blurFifthButtons
+        }"
+      >
+        Confirmar
+      </button>
+      <button
+        class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg"
+        [ngClass]="{
+          'text-tertiary-button-color pointer-events-none': blurFifthButtons
+        }"
+        (click)="cancelImage()"
+      >
+        Cancelar
+      </button>
+    </div>
+    @if (loadingFifthStep) {
+    <app-loading-overlay></app-loading-overlay>
+    }
+  </form>
+  } @if (showSixthStep) {
+  <br />
 
-  @if (showSixthStep) {
-    <br>
-  
-    <form
-      class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 w-full lg:w-2/4 md:w-3/4 sm:w-full"
-      [ngClass]="{ 'bg-white/25': blurSixthStep }"
-    >
-      <p>Descrição</p>
-      <p class="text-gray-500">Detalhe as principais características do seu produto.</p>
-  
-      <br />
-      <hr />
-      <br />
-  
-      <div class="mb-4 rounded-lg">
-        <textarea
-          [(ngModel)]="productDescription"
-          (ngModelChange)="onDescriptionChange()"
-          [ngClass]="{ 'border-error-color': isDescriptionError, 'bg-white/25 pointer-events-none': blurSixthStep }"
-          name="title"
-          class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
-          id="title"
-          type="text"
-          placeholder="Digite aqui mais informações para seus compradores."
-          rows="10"
-          maxlength="5000"
-        ></textarea>
-        @if (isDescriptionError) {
-          <p class="text-error-color text-xs italic mb-4 mt-3">
-            {{ errorMessage }}
-          </p>
-        }
-      </div>
-  
-      <br />
-      <hr />
-      <br />
-  
-      <div class="flex gap-5 flex-row-reverse">
-        <button
-          class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
-          (click)="confirmDescription()"
-          [ngClass]="{ 'bg-tertiary-button-color pointer-events-none': blurSixthButtons }"
-        >
-          Confirmar
-        </button>
-        <button
-          class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg"
-          [ngClass]="{ 'text-tertiary-button-color pointer-events-none': blurSixthButtons }"
-          (click)="cancelDescription()"
-        >
-          Cancelar
-        </button>
-      </div>
-      @if (loadingSixthStep) {
-        <app-loading-overlay></app-loading-overlay>
+  <form
+    class="relative bg-white shadow-md rounded-lg px-8 pb-8 pt-8 w-full lg:w-2/4 md:w-3/4 sm:w-full"
+    [ngClass]="{ 'bg-white/25': blurSixthStep }"
+  >
+    <p>Descrição</p>
+    <p class="text-gray-500">
+      Detalhe as principais características do seu produto.
+    </p>
+
+    <br />
+    <hr />
+    <br />
+
+    <div class="mb-4 rounded-lg">
+      <textarea
+        [(ngModel)]="productDescription"
+        (ngModelChange)="onDescriptionChange()"
+        [ngClass]="{
+          'border-error-color': isDescriptionError,
+          'bg-white/25 pointer-events-none': blurSixthStep
+        }"
+        name="title"
+        class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+        id="title"
+        type="text"
+        placeholder="Digite aqui mais informações para seus compradores."
+        rows="10"
+        maxlength="5000"
+      ></textarea>
+      @if (isDescriptionError) {
+      <p class="text-error-color text-xs italic mb-4 mt-3">
+        {{ errorMessage }}
+      </p>
       }
-    </form>
+    </div>
+
+    <br />
+    <hr />
+    <br />
+
+    <div class="flex gap-5 flex-row-reverse">
+      <button
+        class="px-6 py-3 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
+        (click)="confirmDescription()"
+        [ngClass]="{
+          'bg-tertiary-button-color pointer-events-none': blurSixthButtons
+        }"
+      >
+        Confirmar
+      </button>
+      <button
+        class="px-6 py-3 text-primary-button-color hover:bg-tertiary-button-color rounded-lg"
+        [ngClass]="{
+          'text-tertiary-button-color pointer-events-none': blurSixthButtons
+        }"
+        (click)="cancelDescription()"
+      >
+        Cancelar
+      </button>
+    </div>
+    @if (loadingSixthStep) {
+    <app-loading-overlay></app-loading-overlay>
+    }
+  </form>
   }
 
   <div class="flex justify-end w-full lg:w-2/4 md:w-3/4 sm:w-full">
     <button
       class="px-6 py-3 mt-8 text-white bg-primary-button-color hover:bg-secondary-button-color rounded-lg"
       (click)="advertiseProduct()"
-      [ngClass]="{ 'bg-tertiary-button-color pointer-events-none': !isAllStepsCompleted }"
+      [ngClass]="{
+        'bg-tertiary-button-color pointer-events-none': !isAllStepsCompleted
+      }"
     >
       Anunciar
     </button>

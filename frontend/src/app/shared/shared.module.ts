@@ -13,6 +13,7 @@ import { FooterDynamicComponent } from './components/footer-dynamic/footer-dynam
 import { HeaderComponent } from './components/header/header.component';
 import { PopupMenuComponent } from './components/popup-menu/popup-menu.component';
 import { LoadingOverlayComponent } from './components/reusable/loading-overlay/loading-overlay.component';
+import { ModalComponent } from './components/reusable/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LoadingOverlayComponent } from './components/reusable/loading-overlay/l
     FooterDynamicComponent,
     HeaderComponent,
     PopupMenuComponent,
-    LoadingOverlayComponent
+    LoadingOverlayComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +47,8 @@ import { LoadingOverlayComponent } from './components/reusable/loading-overlay/l
     FooterDynamicComponent,
     HeaderComponent,
     PopupMenuComponent,
-    LoadingOverlayComponent
+    LoadingOverlayComponent,
+    ModalComponent
   ]
 })
 export class SharedModule { }

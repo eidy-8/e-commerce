@@ -1,0 +1,31 @@
+<div class="modal-backdrop" *ngIf="isOpen">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>{{ title }}</h2>
+      </div>
+  
+      <hr class="divider" />
+  
+      <div class="modal-body">
+        <ng-content></ng-content>
+      </div>
+
+      <br>
+
+      <hr class="divider" />
+  
+      <div class="modal-footer">
+        <button 
+          [ngClass]="secondaryButton.styleClass || 'btn-secondary'" 
+          (click)="handleSecondaryClick()">
+          {{ secondaryButton.label }}
+        </button>
+        <button 
+          [ngClass]="primaryButton.styleClass || 'btn-primary'" 
+          (click)="handlePrimaryClick()">
+          {{ primaryButton.label }}
+        </button>
+      </div>
+    </div>
+</div>
+  

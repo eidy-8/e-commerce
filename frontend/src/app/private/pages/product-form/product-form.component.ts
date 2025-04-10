@@ -79,6 +79,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
   protected isLoading$: Observable<boolean>;
 
+  protected isModalOpen: boolean = false;
+
   constructor(private route: ActivatedRoute, public sharedMethod: MethodsService, public productService: ProductService,  private router: Router, public userService: UserService, private loadingService: LoadingService) {
     this.isLoading$ = this.loadingService.loading$;
   }
@@ -109,7 +111,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.productService.postProduct(productData).pipe( takeUntil( this.unsubscribe ) ).subscribe({
       next: res => {
         console.log(res.message);
-        this.router.navigate(['/']);
+
+        this.isModalOpen = true;
       },
       error: error => {
         console.log(error);
