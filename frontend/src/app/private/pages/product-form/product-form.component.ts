@@ -5,6 +5,7 @@ import { ProductService } from '../../services/product.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { LoadingService } from '../../../shared/services/loading.service';
+import { ToasterService } from '../../../shared/services/toaster.service';
 
 @Component({
   selector: 'app-product-form',
@@ -81,7 +82,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
   protected isModalOpen: boolean = false;
 
-  constructor(private route: ActivatedRoute, public sharedMethod: MethodsService, public productService: ProductService,  private router: Router, public userService: UserService, private loadingService: LoadingService) {
+  constructor(private route: ActivatedRoute, public sharedMethod: MethodsService, public productService: ProductService,  private router: Router, public userService: UserService, private loadingService: LoadingService, private toasterService: ToasterService) {
     this.isLoading$ = this.loadingService.loading$;
   }
 
@@ -116,7 +117,14 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       },
       error: error => {
         console.log(error);
+
         this.errorMessage = error.message;
+
+        this.toasterService.show({
+          type: 'error',
+          title: 'Erro',
+          message: this.errorMessage
+        });
       }
     });
   }
