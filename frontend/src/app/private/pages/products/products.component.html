@@ -1,5 +1,28 @@
 <app-header></app-header>
 
-<app-slidable-menu></app-slidable-menu>
+<div class="absolute top-0 left-0 w-full h-[340px] bg-background-darker-color z-[-10] pointer-events-none"></div>
 
-<div class="flex flex-col items-center bg-tertiary-color p-16 mb-20"></div>
+<app-side-menu
+  [menuTitle]="'Minha Conta'"
+  [menuItems]="[
+    {
+      label: 'Vendas',
+      icon: 'fa-shopping-basket',
+      children: [
+        { label: 'Resumo', link: '/user/new-product' },
+        { label: 'Novidade', link: '/vendas/novidade' },
+        { label: 'Anúncios', link: '/vendas/anuncios' }
+      ]
+    },
+    {
+      label: 'Produtos',
+      icon: 'fa-shopping-bag',
+      children: [
+        { label: 'Categorias', link: '/produtos/categorias' },
+        { label: 'Estoque', link: '/produtos/estoque' }
+      ]
+    }
+  ]"
+></app-side-menu>
+
+<app-footer-dynamic></app-footer-dynamic>

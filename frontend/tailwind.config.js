@@ -12,6 +12,7 @@ module.exports = {
         "gray-color": "var(--gray-color)",
         "error-color": "var(--error-color)",
         "background-color": "var(--background-color)",
+        "background-darker-color": "var(--background-darker-color)",
         "primary-button-color": "var(--primary-button-color)",
         "secondary-button-color": "var(--secondary-button-color)",
         "tertiary-button-color": "var(--tertiary-button-color)"

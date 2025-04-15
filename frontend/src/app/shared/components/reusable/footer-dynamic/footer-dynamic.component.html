@@ -1,0 +1,40 @@
+<button
+  (click)="toggleInfo()"
+  class="toggle-btn"
+>
+  Mais informações
+  <i
+    class="fa"
+    [ngClass]="isOpen ? 'fa-chevron-down' : 'fa-chevron-up'"
+    aria-hidden="true"
+  ></i>
+</button>
+
+<div
+  *ngIf="isOpen"
+  @slideToggle
+  class="info-box"
+>
+  <b>Redes Sociais</b>
+  <br /><br />
+  <a
+    href="https://linkedin.com/in/enrique-onaga-3b92bb1b6"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="footer-link"
+  >
+    Linkedin
+  </a>
+  <a
+    href="https://stackoverflow.com/users/22126327"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="footer-link"
+  >
+    Stackoverflow
+  </a>
+</div>
+
+<footer class="footer">
+  GitHub: Eidy.8
+</footer>

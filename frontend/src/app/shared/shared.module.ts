@@ -9,13 +9,15 @@ import { HeaderSubNotLoggedComponent } from './components/header-sub-not-logged/
 import { CarouselCardComponent } from './components/reusable/carousel-card/carousel-card.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { YouTubePlayer } from '@angular/youtube-player';
-import { FooterDynamicComponent } from './components/footer-dynamic/footer-dynamic.component';
+import { FooterDynamicComponent } from './components/reusable/footer-dynamic/footer-dynamic.component';
 import { HeaderComponent } from './components/header/header.component';
 import { PopupMenuComponent } from './components/popup-menu/popup-menu.component';
 import { LoadingOverlayComponent } from './components/reusable/loading-overlay/loading-overlay.component';
 import { ModalComponent } from './components/reusable/modal/modal.component';
 import { ToasterComponent } from './components/reusable/toaster/toaster.component';
 import { SlidableMenuComponent } from './components/reusable/slidable-menu/slidable-menu.component';
+import { SideMenuComponent } from './components/reusable/side-menu/side-menu.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -32,11 +34,13 @@ import { SlidableMenuComponent } from './components/reusable/slidable-menu/slida
     LoadingOverlayComponent,
     ModalComponent,
     ToasterComponent,
-    SlidableMenuComponent
+    SlidableMenuComponent,
+    SideMenuComponent
   ],
   imports: [
     CommonModule,
-    YouTubePlayer
+    YouTubePlayer,
+    RouterModule
   ],
   exports: [
     FormsModule,
@@ -54,7 +58,8 @@ import { SlidableMenuComponent } from './components/reusable/slidable-menu/slida
     LoadingOverlayComponent,
     ModalComponent,
     ToasterComponent,
-    SlidableMenuComponent
+    SlidableMenuComponent,
+    SideMenuComponent
   ]
 })
 export class SharedModule { }
