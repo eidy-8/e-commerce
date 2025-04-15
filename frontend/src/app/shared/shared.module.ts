@@ -15,6 +15,7 @@ import { PopupMenuComponent } from './components/popup-menu/popup-menu.component
 import { LoadingOverlayComponent } from './components/reusable/loading-overlay/loading-overlay.component';
 import { ModalComponent } from './components/reusable/modal/modal.component';
 import { ToasterComponent } from './components/reusable/toaster/toaster.component';
+import { SlidableMenuComponent } from './components/reusable/slidable-menu/slidable-menu.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ToasterComponent } from './components/reusable/toaster/toaster.componen
     PopupMenuComponent,
     LoadingOverlayComponent,
     ModalComponent,
-    ToasterComponent
+    ToasterComponent,
+    SlidableMenuComponent
   ],
   imports: [
     CommonModule,
@@ -51,7 +53,8 @@ import { ToasterComponent } from './components/reusable/toaster/toaster.componen
     PopupMenuComponent,
     LoadingOverlayComponent,
     ModalComponent,
-    ToasterComponent
+    ToasterComponent,
+    SlidableMenuComponent
   ]
 })
 export class SharedModule { }
