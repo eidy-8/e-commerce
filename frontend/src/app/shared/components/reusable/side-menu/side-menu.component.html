@@ -1,39 +1,41 @@
-<div class="side-menu">
-    <br>
-    <div class="menu-header">{{ menuTitle }}</div>
-    <br>
-  
-    <div
-      class="menu-item"
-      *ngFor="let item of menuItems"
-    >
-      <div class="menu-option" (click)="toggleItem(item)">
-        <div class="left-content">
-          <i
-            class="menu-icon fa"
-            *ngIf="item.icon"
-            [ngClass]="item.icon"
-          ></i>
-          <span>{{ item.label }}</span>
-        </div>
-        <i
-          class="icon fa"
-          [ngClass]="{
-            'fa-angle-down': !item.expanded,
-            'fa-angle-up': item.expanded
-          }"
-        ></i>
-      </div>
-  
-      <div class="submenu" *ngIf="item.expanded">
-        <a
-          class="submenu-item"
-          *ngFor="let sub of item.children"
-          [routerLink]="sub.link"
+<div class="sticky top-0">
+    <div class="side-menu">
+        <br>
+        <div class="menu-header">{{ menuTitle }}</div>
+        <br>
+      
+        <div
+          class="menu-item"
+          *ngFor="let item of menuItems"
         >
-          {{ sub.label }}
-        </a>
-      </div>
+          <div class="menu-option" (click)="toggleItem(item)">
+            <div class="left-content">
+              <i
+                class="menu-icon fa"
+                *ngIf="item.icon"
+                [ngClass]="item.icon"
+              ></i>
+              <span>{{ item.label }}</span>
+            </div>
+            <i
+              class="icon fa"
+              [ngClass]="{
+                'fa-angle-down': !item.expanded,
+                'fa-angle-up': item.expanded
+              }"
+            ></i>
+          </div>
+      
+          <div class="submenu" *ngIf="item.expanded">
+            <a
+              class="submenu-item"
+              *ngFor="let sub of item.children"
+              [routerLink]="sub.link"
+            >
+              {{ sub.label }}
+            </a>
+          </div>
+        </div>
     </div>
 </div>
   

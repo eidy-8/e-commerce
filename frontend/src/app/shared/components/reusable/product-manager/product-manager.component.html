@@ -1,0 +1,41 @@
+<div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Produto</th>
+          <th>Preço</th>
+          <th>Qtd.</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>
+            <img [src]="product.imageUrl" alt="{{ product.name }}" class="product-img" />
+          </td>
+          <td>
+            <div class="product-info">
+              <div class="product-name">{{ product.name }}</div>
+              <div class="product-id">ID: {{ product.id }}</div>
+            </div>
+          </td>
+          <td>R$ {{ product.price | number:'1.2-2' }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" [checked]="product.active" (change)="toggleStatus(product)" />
+              <span class="slider"></span>
+            </label>
+            <span class="status-label">{{ product.active ? 'Ativo' : 'Inativo' }}</span>
+          </td>
+          <td>
+            <button class="icon-btn edit" (click)="editProduct(product.id)">✏️</button>
+            <button class="icon-btn delete" (click)="deleteProduct(product.id)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+  

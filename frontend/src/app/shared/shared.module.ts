@@ -18,6 +18,7 @@ import { ToasterComponent } from './components/reusable/toaster/toaster.componen
 import { SlidableMenuComponent } from './components/reusable/slidable-menu/slidable-menu.component';
 import { SideMenuComponent } from './components/reusable/side-menu/side-menu.component';
 import { RouterModule } from '@angular/router';
+import { ProductManagerComponent } from './components/reusable/product-manager/product-manager.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { RouterModule } from '@angular/router';
     ModalComponent,
     ToasterComponent,
     SlidableMenuComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    ProductManagerComponent
   ],
   imports: [
     CommonModule,
@@ -59,7 +61,8 @@ import { RouterModule } from '@angular/router';
     ModalComponent,
     ToasterComponent,
     SlidableMenuComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    ProductManagerComponent
   ]
 })
 export class SharedModule { }
