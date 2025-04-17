@@ -1,41 +1,60 @@
-<div class="table-wrapper">
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Produto</th>
-          <th>Preço</th>
-          <th>Qtd.</th>
-          <th>Status</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let product of products">
-          <td>
-            <img [src]="product.imageUrl" alt="{{ product.name }}" class="product-img" />
-          </td>
-          <td>
-            <div class="product-info">
-              <div class="product-name">{{ product.name }}</div>
-              <div class="product-id">ID: {{ product.id }}</div>
-            </div>
-          </td>
-          <td>R$ {{ product.price | number:'1.2-2' }}</td>
-          <td>{{ product.quantity }}</td>
-          <td>
-            <label class="switch">
-              <input type="checkbox" [checked]="product.active" (change)="toggleStatus(product)" />
-              <span class="slider"></span>
-            </label>
-            <span class="status-label">{{ product.active ? 'Ativo' : 'Inativo' }}</span>
-          </td>
-          <td>
-            <button class="icon-btn edit" (click)="editProduct(product.id)">✏️</button>
-            <button class="icon-btn delete" (click)="deleteProduct(product.id)">🗑️</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<div class="toolbar">
+  <label>
+    <input type="checkbox" [checked]="allSelected" (change)="toggleSelectAll()" />
+  </label>
+  <button (click)="pauseSelected()">Pausar</button>
+  <button (click)="activateSelected()">Ativar</button>
 </div>
+
+<div class="product-list">
+  <div class="product-row" *ngFor="let p of products">
+    <input
+      type="checkbox"
+      [(ngModel)]="p.selected"
+      (change)="onProductSelectionChange()"
+    />
+
+    <div class="product-image">
+      <img [src]="p.imageUrl" [alt]="p.name" />
+    </div>
+
+    <div class="product-info">
+      <div class="code">#{{ p.code }}</div>
+      <div class="name">{{ p.name }}</div>
+      <div class="quantity">{{ p.quantity }} unidade</div>
+    </div>
+    
+    <div class="product-info2">
+      <div class="sales-box">
+        <div class="sales">{{ p.sales }} vendas</div>
+        <div class="price">R$ {{ p.price | number:'1.2-2' }}</div>
+      </div>
   
+      <div class="status">
+        <div class="status-message">
+          {{ p.active ? 'Ativo' : 'Pausado' }}
+        </div>
+        <div class="sub-status">{{ p.active ? 'Este produto está ativo neste canal de venda.' : 'Você pausou o produto neste canal de venda.' }}</div>
+      </div>
+
+      <button class="toggle-btn" (click)="toggleProduct(p)">
+        {{ p.active ? 'Pausado' : 'Ativo' }}
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider round"></span>
+        </label>
+      </button>
+      
+    </div>
+
+    <div class="menu">
+      <button class="menu-btn">⋮</button>
+      <ul class="menu-list">
+        <li (click)="editProduct(p)">Editar</li>
+        <li (click)="toggleProduct(p)">{{ p.active ? 'Desativar' : 'Ativar' }}</li>
+        <li (click)="viewProduct(p)">Ver anúncio</li>
+        <li (click)="deleteProduct(p)">Excluir</li>
+      </ul>
+    </div>
+  </div>
+</div>

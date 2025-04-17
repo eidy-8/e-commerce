@@ -13,27 +13,36 @@ export class ProductsComponent implements OnInit {
     this.listaDeProdutos = [
       {
         id: 1001,
+        code: '42201621',
         name: 'Fone de Ouvido Bluetooth',
         price: 199.99,
         quantity: 12,
         active: true,
-        imageUrl: 'https://raw.githubusercontent.com/eidy-8/imagens/main/e-commerce/esporte/vecteezy_vibrant-cricket-helmet-in-yellow-with-a-polished-surface_55985493.png'
+        imageUrl: 'https://raw.githubusercontent.com/eidy-8/imagens/main/e-commerce/esporte/vecteezy_vibrant-cricket-helmet-in-yellow-with-a-polished-surface_55985493.png',
+        sales: 1,
+        selected: true
       },
       {
-        id: 1002,
-        name: 'Mouse Gamer RGB',
-        price: 149.5,
-        quantity: 25,
-        active: false,
-        imageUrl: 'https://raw.githubusercontent.com/eidy-8/imagens/main/e-commerce/esporte/vecteezy_vibrant-cricket-helmet-in-yellow-with-a-polished-surface_55985493.png'
-      },
-      {
-        id: 1003,
-        name: 'Notebook i7 16GB RAM',
-        price: 4299.9,
-        quantity: 5,
+        id: 1001,
+        code: '42201621',
+        name: 'Fone de Ouvido Bluetooth',
+        price: 199.99,
+        quantity: 12,
         active: true,
-        imageUrl: 'https://raw.githubusercontent.com/eidy-8/imagens/main/e-commerce/esporte/vecteezy_vibrant-cricket-helmet-in-yellow-with-a-polished-surface_55985493.png'
+        imageUrl: 'https://raw.githubusercontent.com/eidy-8/imagens/main/e-commerce/esporte/vecteezy_vibrant-cricket-helmet-in-yellow-with-a-polished-surface_55985493.png',
+        sales: 1,
+        selected: false
+      },
+      {
+        id: 1001,
+        code: '42201621',
+        name: 'Fone de Ouvido Bluetooth',
+        price: 199.99,
+        quantity: 12,
+        active: true,
+        imageUrl: 'https://raw.githubusercontent.com/eidy-8/imagens/main/e-commerce/esporte/vecteezy_vibrant-cricket-helmet-in-yellow-with-a-polished-surface_55985493.png',
+        sales: 1,
+        selected: true
       }
     ]
   }

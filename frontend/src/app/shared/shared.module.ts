@@ -42,7 +42,8 @@ import { ProductManagerComponent } from './components/reusable/product-manager/p
   imports: [
     CommonModule,
     YouTubePlayer,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports: [
     FormsModule,

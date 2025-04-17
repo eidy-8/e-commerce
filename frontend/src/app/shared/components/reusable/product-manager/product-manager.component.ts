@@ -2,12 +2,15 @@ import { Component, Input } from '@angular/core';
 
 export interface Product {
   id: number;
+  code: string;
   name: string;
   price: number;
   quantity: number;
   active: boolean;
   imageUrl: string;
-}
+  sales: number;
+  selected?: boolean;
+  }
 
 @Component({
   selector: 'app-product-manager',
@@ -16,16 +19,37 @@ export interface Product {
 })
 export class ProductManagerComponent {
   @Input() products: Product[] = [];
+  allSelected = false;
 
-  toggleStatus(product: Product): void {
-    product.active = !product.active;
+  toggleSelectAll() {
+  this.allSelected = !this.allSelected;
+  this.products.forEach(p => p.selected = this.allSelected);
   }
 
-  editProduct(id: number): void {
-    console.log(`Editar produto: ${id}`);
+  onProductSelectionChange() {
+  this.allSelected = this.products.every(p => p.selected);
   }
 
-  deleteProduct(id: number): void {
-    console.log(`Excluir produto: ${id}`);
+  pauseSelected() {
+  this.products.filter(p => p.selected)
+  .forEach(p => p.active = false);
+  }
+
+  activateSelected() {
+  this.products.filter(p => p.selected)
+  .forEach(p => p.active = true);
+  }
+
+  toggleProduct(p: Product) {
+  p.active = !p.active;
+  }
+
+  editProduct(p: Product) {
+  }
+
+  viewProduct(p: Product) {
+  }
+
+  deleteProduct(p: Product) {
   }
 }
