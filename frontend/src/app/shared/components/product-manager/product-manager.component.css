@@ -6,6 +6,8 @@
   padding: 10px;
   background-color: white;
   border-radius: 8px;
+  color: #374151;
+  font-weight: bold;
 }
 
 .product-list {
@@ -46,9 +48,9 @@
   flex-direction: column;
   gap: 0.25rem;
 
-  .code { color: #555; }
+  .id { font-size: 0.75rem; color: #374151; }
   .name { font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .quantity { color: #555; }
+  .quantity { font-size: 0.75rem; color: #374151; }
 }
 
 .product-info2 {
@@ -76,6 +78,10 @@
   padding-right: 20px;
 }
 
+.sub-status {
+  font-size: 0.75rem; color: #374151;
+}
+
 .status-message {
   font-weight: bold;
 }
@@ -98,28 +104,30 @@
     border: none;
     cursor: pointer;
     font-size: 1.25rem;
+    padding: 0.25rem;
   }
 
   .menu-list {
-    display: none;
     position: absolute;
     right: 0;
-    margin-top: 0.25rem;
+    top: 100%;
     background: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     list-style: none;
     padding: 0.5rem 0;
     border-radius: 4px;
+    z-index: 9999;
+    min-width: 160px;
 
     li {
       padding: 0.5rem 1rem;
       cursor: pointer;
-      &:hover { background: #f0f0f0; }
-    }
-  }
+      white-space: nowrap;
 
-  &:hover .menu-list {
-    display: block;
+      &:hover {
+        background: #f0f0f0;
+      }
+    }
   }
 }
 

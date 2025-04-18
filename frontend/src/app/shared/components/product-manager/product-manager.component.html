@@ -2,6 +2,7 @@
   <label>
     <input type="checkbox" [checked]="allSelected" (change)="toggleSelectAll()" />
   </label>
+  <p>|</p>
   <button (click)="pauseSelected()">Pausar</button>
   <button (click)="activateSelected()">Ativar</button>
 </div>
@@ -19,7 +20,7 @@
     </div>
 
     <div class="product-info">
-      <div class="code">#{{ p.code }}</div>
+      <div class="id">#{{ p.id }}</div>
       <div class="name">{{ p.name }}</div>
       <div class="quantity">{{ p.quantity }} unidade</div>
     </div>
@@ -47,14 +48,16 @@
       
     </div>
 
-    <div class="menu">
-      <button class="menu-btn">⋮</button>
-      <ul class="menu-list">
-        <li (click)="editProduct(p)">Editar</li>
-        <li (click)="toggleProduct(p)">{{ p.active ? 'Desativar' : 'Ativar' }}</li>
-        <li (click)="viewProduct(p)">Ver anúncio</li>
-        <li (click)="deleteProduct(p)">Excluir</li>
+    <div class="menu" (appClickOutside)="p.showMenu = false">
+      <button class="menu-btn" (click)="p.showMenu = !p.showMenu">⋮</button>
+      <ul
+        class="menu-list"
+        *ngIf="p.showMenu"
+        [style.zIndex]="9999"
+      >
+        <li (click)="editProduct(p); p.showMenu = false">Editar</li>
+        <li (click)="viewProduct(p); p.showMenu = false">Ver anúncio</li>
+        <li (click)="deleteProduct(p); p.showMenu = false">Excluir</li>
       </ul>
     </div>
-  </div>
 </div>

@@ -18,7 +18,8 @@ import { ToasterComponent } from './components/reusable/toaster/toaster.componen
 import { SlidableMenuComponent } from './components/reusable/slidable-menu/slidable-menu.component';
 import { SideMenuComponent } from './components/reusable/side-menu/side-menu.component';
 import { RouterModule } from '@angular/router';
-import { ProductManagerComponent } from './components/reusable/product-manager/product-manager.component';
+import { ProductManagerComponent } from './components/product-manager/product-manager.component';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ProductManagerComponent } from './components/reusable/product-manager/p
     ToasterComponent,
     SlidableMenuComponent,
     SideMenuComponent,
-    ProductManagerComponent
+    ProductManagerComponent,
+    ClickOutsideDirective
   ],
   imports: [
     CommonModule,

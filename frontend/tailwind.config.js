@@ -11,6 +11,7 @@ module.exports = {
         "tertiary-color": "var(--tertiary-color)",
         "gray-color": "var(--gray-color)",
         "error-color": "var(--error-color)",
+        "background-lighter-color": "var(--background-lighter-color)",
         "background-color": "var(--background-color)",
         "background-darker-color": "var(--background-darker-color)",
         "primary-button-color": "var(--primary-button-color)",
