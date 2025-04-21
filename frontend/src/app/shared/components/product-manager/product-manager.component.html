@@ -2,9 +2,26 @@
   <label>
     <input type="checkbox" [checked]="allSelected" (change)="toggleSelectAll()" />
   </label>
+
   <p>|</p>
-  <button (click)="pauseSelected()">Pausar</button>
-  <button (click)="activateSelected()">Ativar</button>
+
+  <button (click)="pauseSelected()"
+    [ngClass]="{
+      'text-background-darker-color pointer-events-none': blurFilterButtons,
+      'text-primary-button-color': !blurFilterButtons
+    }"
+  >
+    Pausar
+  </button>
+
+  <button (click)="activateSelected()"
+    [ngClass]="{
+      'text-background-darker-color pointer-events-none': blurFilterButtons,
+      'text-primary-button-color': !blurFilterButtons
+    }"
+  >
+    Ativar
+  </button>
 </div>
 
 <div class="product-list">

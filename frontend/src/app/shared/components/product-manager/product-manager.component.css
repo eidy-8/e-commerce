@@ -6,8 +6,7 @@
   padding: 10px;
   background-color: white;
   border-radius: 8px;
-  color: #374151;
-  font-weight: bold;
+  color: #e0e0e0;
 }
 
 .product-list {
@@ -180,6 +179,41 @@ input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
+}
+
+input[type="checkbox"] {
+  appearance: none; /* Remove o estilo padrão do checkbox */
+  width: 15px;
+  height: 15px;
+  border: 2px solid #ccc; /* Borda acinzentada */
+  border-radius: 4px; /* Bordas arredondadas (opcional) */
+  cursor: pointer; /* Adiciona o ponteiro ao passar o mouse */
+  transition: all 0.3s ease; /* Transição suave para hover */
+  position: relative; /* Necessário para posicionar o ícone */
+  background-color: #fff; /* Fundo branco */
+}
+
+/* Estilo ao passar o mouse */
+input[type="checkbox"]:hover {
+  border-color: #888; /* Altera a cor da borda ao passar o mouse */
+}
+
+/* Estilo quando o checkbox está marcado */
+input[type="checkbox"]:checked {
+  background-color: #007bff; /* Fundo azul quando marcado */
+  border-color: #007bff; /* Borda azul quando marcado */
+}
+
+/* Adiciona um círculo branco no estado marcado */
+input[type="checkbox"]:checked::after {
+  content: '✔';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%; /* Torna o círculo arredondado */
+  transform: translate(-50%, -50%); /* Centraliza o círculo */
 }
 
 .slider.round {

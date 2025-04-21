@@ -28,13 +28,33 @@ export class ProductManagerComponent {
 
   allSelected = false;
 
+  blurFilterButtons = true;
+
   toggleSelectAll() {
     this.allSelected = !this.allSelected;
     this.products.forEach(p => p.selected = this.allSelected);
+
+    const hasSelected = this.products.map(p => p.selected).some(selected => selected === true);
+
+    if (hasSelected) {
+      this.blurFilterButtons = false;
+    } else {
+      this.blurFilterButtons = true;
+    }
   }
 
-  onProductSelectionChange() {
+  onProductSelectionChange() {  
+    const hasSelected = this.products.map(p => p.selected).some(selected => selected === true);
+
+    if (hasSelected) {
+      this.blurFilterButtons = false;
+    } else {
+      this.blurFilterButtons = true;
+    }
+    
     this.allSelected = this.products.every(p => p.selected);
+
+    console.log(this.products.map(p => p.selected).some(selected => selected === true));
   }
 
   pauseSelected() {
