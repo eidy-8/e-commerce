@@ -3,7 +3,7 @@
   align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
-  padding: 10px;
+  padding: 15px;
   background-color: white;
   border-radius: 8px;
   color: #e0e0e0;
@@ -182,38 +182,38 @@ input:checked + .slider:before {
 }
 
 input[type="checkbox"] {
-  appearance: none; /* Remove o estilo padrão do checkbox */
+  appearance: none;
   width: 15px;
   height: 15px;
-  border: 2px solid #ccc; /* Borda acinzentada */
-  border-radius: 4px; /* Bordas arredondadas (opcional) */
-  cursor: pointer; /* Adiciona o ponteiro ao passar o mouse */
-  transition: all 0.3s ease; /* Transição suave para hover */
-  position: relative; /* Necessário para posicionar o ícone */
-  background-color: #fff; /* Fundo branco */
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  background-color: #fff;
 }
 
-/* Estilo ao passar o mouse */
 input[type="checkbox"]:hover {
-  border-color: #888; /* Altera a cor da borda ao passar o mouse */
+  border-color: #888;
 }
 
-/* Estilo quando o checkbox está marcado */
 input[type="checkbox"]:checked {
-  background-color: #007bff; /* Fundo azul quando marcado */
-  border-color: #007bff; /* Borda azul quando marcado */
+  background-color: #007bff;
+  border-color: #007bff;
 }
 
-/* Adiciona um círculo branco no estado marcado */
 input[type="checkbox"]:checked::after {
-  content: '✔';
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%; /* Torna o círculo arredondado */
-  transform: translate(-50%, -50%); /* Centraliza o círculo */
+  width: 12px;
+  height: 12px;
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M6.00039 11.2002L2.80039 8.0002L1.86606 8.93453L6.00039 13.0689L15.0004 4.06885L14.0661 3.13452L6.00039 11.2002Z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80%;
+  transform: translate(-50%, -50%);
 }
 
 .slider.round {
@@ -222,4 +222,9 @@ input[type="checkbox"]:checked::after {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.filterButton:hover {
+  background-color: #e3edfb;
+  border-radius: 4px;
 }

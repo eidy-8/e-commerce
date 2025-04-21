@@ -6,21 +6,33 @@
   <p>|</p>
 
   <button (click)="pauseSelected()"
+    class="filterButton"
     [ngClass]="{
-      'text-background-darker-color pointer-events-none': blurFilterButtons,
-      'text-primary-button-color': !blurFilterButtons
+      'text-background-darker-color pointer-events-none': blurPauseButton,
+      'text-primary-button-color': !blurPauseButton
     }"
   >
     Pausar
   </button>
 
   <button (click)="activateSelected()"
+    class="filterButton"
     [ngClass]="{
-      'text-background-darker-color pointer-events-none': blurFilterButtons,
-      'text-primary-button-color': !blurFilterButtons
+      'text-background-darker-color pointer-events-none': blurActivateButton,
+      'text-primary-button-color': !blurActivateButton
     }"
   >
-    Ativar
+    Reativar
+  </button>
+
+  <button (click)="excludeSelected()"
+    class="filterButton"
+    [ngClass]="{
+      'text-background-darker-color pointer-events-none': blurExcludeButton,
+      'text-primary-button-color': !blurExcludeButton
+    }"
+  >
+    Excluir
   </button>
 </div>
 

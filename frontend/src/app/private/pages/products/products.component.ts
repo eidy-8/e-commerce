@@ -25,7 +25,7 @@ export class ProductsComponent implements OnInit {
         name: 'Fone de Ouvido Bluetooth',
         price: 199.99,
         quantity: 12,
-        active: true,
+        active: false,
         imageUrl: 'https://raw.githubusercontent.com/eidy-8/imagens/main/e-commerce/esporte/vecteezy_vibrant-cricket-helmet-in-yellow-with-a-polished-surface_55985493.png',
         sales: 1
       },

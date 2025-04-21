@@ -28,7 +28,9 @@ export class ProductManagerComponent {
 
   allSelected = false;
 
-  blurFilterButtons = true;
+  blurPauseButton = true;
+  blurActivateButton = true;
+  blurExcludeButton = true;
 
   toggleSelectAll() {
     this.allSelected = !this.allSelected;
@@ -37,24 +39,30 @@ export class ProductManagerComponent {
     const hasSelected = this.products.map(p => p.selected).some(selected => selected === true);
 
     if (hasSelected) {
-      this.blurFilterButtons = false;
+      this.blurExcludeButton = false;
+      this.blurActivateButton = false;
+      this.blurPauseButton = false;
     } else {
-      this.blurFilterButtons = true;
+      this.blurExcludeButton = false;
+      this.blurActivateButton = false;
+      this.blurPauseButton = false; 
     }
   }
 
-  onProductSelectionChange() {  
+  onProductSelectionChange() {    
     const hasSelected = this.products.map(p => p.selected).some(selected => selected === true);
 
     if (hasSelected) {
-      this.blurFilterButtons = false;
+      this.blurExcludeButton = false;
+      this.blurActivateButton = false;
+      this.blurPauseButton = false;
     } else {
-      this.blurFilterButtons = true;
+      this.blurExcludeButton = false;
+      this.blurActivateButton = false;
+      this.blurPauseButton = false; 
     }
     
     this.allSelected = this.products.every(p => p.selected);
-
-    console.log(this.products.map(p => p.selected).some(selected => selected === true));
   }
 
   pauseSelected() {
@@ -67,6 +75,10 @@ export class ProductManagerComponent {
   }
 
   activateSelected() {
+    this.products.filter(p => p.selected).forEach(p => p.active = true);
+  }
+
+  excludeSelected() {
     this.products.filter(p => p.selected).forEach(p => p.active = true);
   }
 
