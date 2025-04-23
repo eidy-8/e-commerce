@@ -45,7 +45,7 @@
     />
 
     <div class="product-image">
-      <img [src]="p.imageUrl" [alt]="p.name" />
+      <img [src]='p.imageurl' [alt]="p.name" />
     </div>
 
     <div class="product-info">
@@ -56,25 +56,28 @@
     
     <div class="product-info2">
       <div class="sales-box">
-        <div class="sales">{{ p.sales }} vendas</div>
+        <div class="sales">{{ p.sales }} venda</div>
         <div class="price">R$ {{ p.price | number:'1.2-2' }}</div>
       </div>
   
       <div class="status">
         <div class="status-message">
-          {{ p.active ? 'Ativo' : 'Pausado' }}
+          {{ p.isactive === 'T' ? 'Ativo' : 'Pausado' }}
         </div>
-        <div class="sub-status">{{ p.active ? 'Este produto está ativo neste canal de venda.' : 'Você pausou o produto neste canal de venda.' }}</div>
+        <div class="sub-status">{{ p.isactive === 'T' ? 'Este produto está ativo neste canal de venda.' : 'Você pausou o produto neste canal de venda.' }}</div>
       </div>
 
       <button class="toggle-btn" (click)="toggleProduct(p)">
-        {{ p.active ? 'Pausado' : 'Ativo' }}
+        {{ p.isactive === 'F' ? 'Pausado' : 'Ativo' }}
         <label class="switch">
-          <input type="checkbox">
+          <input
+            type="checkbox"
+            [checked]="p.isactive === 'T'"
+            (change)="toggleProduct(p)"
+          />
           <span class="slider round"></span>
         </label>
       </button>
-      
     </div>
 
     <div class="menu" (appClickOutside)="p.showMenu = false">

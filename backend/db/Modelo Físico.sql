@@ -47,6 +47,7 @@ CREATE TABLE Product (
 	quantity NUMERIC(18),
 	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	updatedAt TIMESTAMP,
+	sale NUMERIC(18),
 	seller_id UUID NOT NULL REFERENCES Seller(id) ON DELETE CASCADE,
 	category_id UUID NOT NULL REFERENCES Category(id) ON DELETE CASCADE
 );
@@ -55,11 +56,10 @@ CREATE TABLE Product (
 SELECT * FROM product;
 
 INSERT INTO Seller (user_id) VALUES ('77ebb9bf-6426-428a-8cc0-98a286b8a2da');
-
 INSERT INTO Buyer (user_id) VALUES ('77ebb9bf-6426-428a-8cc0-98a286b8a2da');
 
-INSERT INTO Product (name, price, isUsed, isActive, imageUrl, description, quantity, seller_id, category_id) 
-VALUES ('nameTeste', 50.0, 'F', 'T', 'testeImageUrl', 'descriptionTeste', 2, '2815099b-0cb2-4192-8d08-edff52609209', '4935a834-10ee-408c-b573-987ff8533c20');
+INSERT INTO Product (name, price, isUsed, isActive, imageUrl, description, quantity, seller_id, category_id, sale) 
+VALUES ('nameTeste3', 53.0, 'T', 'T', 'testeImageUrl3', 'descriptionTeste3', 3, '2815099b-0cb2-4192-8d08-edff52609209', '4935a834-10ee-408c-b573-987ff8533c20', 4);
 
 ALTER TABLE Users ADD COLUMN imageUrl VARCHAR(512);
 
@@ -76,6 +76,10 @@ SET name = COALESCE('nameTesteModificado', name),
          description = COALESCE('descriptionTesteModificado', description),
          quantity = COALESCE(1, quantity)
      WHERE id = 'f9593da0-00c0-4f6f-9595-f4ff98ae25cd';
+
+UPDATE Product 
+SET imageUrl = COALESCE('https://raw.githubusercontent.com/eidy-8/imagens/main/e-commerce/esporte/vecteezy_vibrant-cricket-helmet-in-yellow-with-a-polished-surface_55985493.png', imageUrl)
+WHERE id = '07255487-dc91-4585-847c-711b6836a0b6';
 
 DELETE FROM Users WHERE id = '648efb8c-3571-4541-b654-9b3270144ef9';
 

@@ -5,8 +5,8 @@ export interface Product {
   name: string;
   price: number;
   quantity: number;
-  active: boolean;
-  imageUrl: string;
+  isactive: string;
+  imageurl: string;
   sales: number;
   selected?: boolean;
   showMenu?: boolean;
@@ -43,23 +43,25 @@ export class ProductManagerComponent {
       this.blurActivateButton = false;
       this.blurPauseButton = false;
     } else {
-      this.blurExcludeButton = false;
-      this.blurActivateButton = false;
-      this.blurPauseButton = false; 
+      this.blurExcludeButton = true;
+      this.blurActivateButton = true;
+      this.blurPauseButton = true; 
     }
   }
 
   onProductSelectionChange() {    
     const hasSelected = this.products.map(p => p.selected).some(selected => selected === true);
 
+    console.log(hasSelected);
+
     if (hasSelected) {
       this.blurExcludeButton = false;
       this.blurActivateButton = false;
       this.blurPauseButton = false;
     } else {
-      this.blurExcludeButton = false;
-      this.blurActivateButton = false;
-      this.blurPauseButton = false; 
+      this.blurExcludeButton = true;
+      this.blurActivateButton = true;
+      this.blurPauseButton = true; 
     }
     
     this.allSelected = this.products.every(p => p.selected);
@@ -67,7 +69,7 @@ export class ProductManagerComponent {
 
   pauseSelected() {
     const selectedProducts = this.products.filter(p => p.selected)
-    this.products.filter(p => p.selected).forEach(p => p.active = false);
+    this.products.filter(p => p.selected).forEach(p => p.isactive = 'F');
 
     for (let i = 0; i < selectedProducts.length; i++) {
       console.log(selectedProducts[i].id);
@@ -75,15 +77,19 @@ export class ProductManagerComponent {
   }
 
   activateSelected() {
-    this.products.filter(p => p.selected).forEach(p => p.active = true);
+    this.products.filter(p => p.selected).forEach(p => p.isactive = 'T');
   }
 
   excludeSelected() {
-    this.products.filter(p => p.selected).forEach(p => p.active = true);
+    this.products.filter(p => p.selected).forEach(p => p.isactive = 'T');
   }
 
   toggleProduct(p: Product) {
-    p.active = !p.active;
+    if (p.isactive = 'T') {
+      p.isactive = 'F';
+    } else {
+      p.isactive = 'T'
+    }
   }
 
   editProduct(p: Product) {
