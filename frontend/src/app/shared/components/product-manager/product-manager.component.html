@@ -51,13 +51,13 @@
     <div class="product-info">
       <div class="id">#{{ p.id }}</div>
       <div class="name">{{ p.name }}</div>
-      <div class="quantity">{{ p.quantity }} unidade</div>
+      <div class="quantity">{{ p.quantity > 1 ? p.quantity + ' unidades' : p.quantity + ' unidade' }}</div>
     </div>
     
     <div class="product-info2">
       <div class="sales-box">
-        <div class="sales">{{ p.sales }} venda</div>
-        <div class="price">R$ {{ p.price | number:'1.2-2' }}</div>
+        <div class="sales">{{ p.sale > 1 ? p.sale + ' vendas' : p.sale + ' venda' }}</div>
+        <div class="price">R$ {{ p.price | number:'1.2-2':'pt-BR' }}</div>
       </div>
   
       <div class="status">
@@ -68,7 +68,7 @@
       </div>
 
       <button class="toggle-btn" (click)="toggleProduct(p)">
-        {{ p.isactive === 'F' ? 'Pausado' : 'Ativo' }}
+        {{ p.isactive == 'F' ? 'Pausado' : 'Ativo' }}
         <label class="switch">
           <input
             type="checkbox"

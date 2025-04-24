@@ -9,6 +9,10 @@ import { PublicModule } from './public/public.module';
 import { PrivateModule } from './private/private.module';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { Interceptor } from './auth/interceptors/interceptor';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [

@@ -7,7 +7,7 @@ export interface Product {
   quantity: number;
   isactive: string;
   imageurl: string;
-  sales: number;
+  sale: number;
   selected?: boolean;
   showMenu?: boolean;
 }
@@ -85,7 +85,9 @@ export class ProductManagerComponent {
   }
 
   toggleProduct(p: Product) {
-    if (p.isactive = 'T') {
+    console.log(p.isactive);
+    
+    if (p.isactive == 'T') {
       p.isactive = 'F';
     } else {
       p.isactive = 'T'
