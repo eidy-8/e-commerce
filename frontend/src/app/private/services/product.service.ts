@@ -17,7 +17,7 @@ export class ProductService {
   constructor(private httpClient: HttpClient) { }
 
   public getProduct(): Observable<any> {
-    return this.httpClient.get<any>(`${this.urlProduct}`)
+    return this.httpClient.get<any>(this.urlProduct)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -26,6 +26,22 @@ export class ProductService {
 
   public postProduct(productData: any): Observable<any> {
     return this.httpClient.post<any>(this.urlProduct, JSON.stringify(productData), this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
+
+  public putProduct(productUpdate: any, product_id: any): Observable<any> {
+    return this.httpClient.put<any>(`${this.urlProduct}/${product_id}`, JSON.stringify(productUpdate), this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      )
+  }
+
+  public deleteProduct(product_id: any): Observable<any> {
+    return this.httpClient.delete<any>(`${this.urlProduct}/${product_id}`)
       .pipe(
         retry(1),
         catchError(this.handleError)

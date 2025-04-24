@@ -1,4 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { ProductService } from '../../../private/services/product.service';
+import { Subject, takeUntil } from 'rxjs';
+import { ToasterService } from '../../services/toaster.service';
 
 export interface Product {
   id: string;
@@ -17,7 +20,7 @@ export interface Product {
   templateUrl: './product-manager.component.html',
   styleUrl: './product-manager.component.css'
 })
-export class ProductManagerComponent {
+export class ProductManagerComponent implements OnDestroy {
   @Input() set products(value: Product[]) {
     this._products = value.map(p => ({ ...p, showMenu: false }));
   }
@@ -31,6 +34,10 @@ export class ProductManagerComponent {
   blurPauseButton = true;
   blurActivateButton = true;
   blurExcludeButton = true;
+
+  private unsubscribe = new Subject<void>;
+
+  constructor(public productService: ProductService, private toasterService: ToasterService) {}
 
   toggleSelectAll() {
     this.allSelected = !this.allSelected;
@@ -49,10 +56,18 @@ export class ProductManagerComponent {
     }
   }
 
+  unSelectAll() {
+    this.allSelected = false;
+
+    this.blurExcludeButton = true;
+    this.blurActivateButton = true;
+    this.blurPauseButton = true;
+
+    this.products.filter(p => p.selected).forEach(p => p.selected = false);
+  }
+
   onProductSelectionChange() {    
     const hasSelected = this.products.map(p => p.selected).some(selected => selected === true);
-
-    console.log(hasSelected);
 
     if (hasSelected) {
       this.blurExcludeButton = false;
@@ -68,29 +83,143 @@ export class ProductManagerComponent {
   }
 
   pauseSelected() {
-    const selectedProducts = this.products.filter(p => p.selected)
+    const selectedProducts = this.products.filter(p => p.selected);
     this.products.filter(p => p.selected).forEach(p => p.isactive = 'F');
 
-    for (let i = 0; i < selectedProducts.length; i++) {
-      console.log(selectedProducts[i].id);
+    let productUpdate = {
+      isActive: 'F'
     }
+
+    selectedProducts.forEach(async p => {
+      p.isactive = 'F';
+  
+      await this.productService.putProduct(productUpdate, p.id).pipe( takeUntil( this.unsubscribe ) ).subscribe({
+        next: res => {
+          this.toasterService.show({
+            type: 'success',
+            title: 'Sucesso',
+            message: res.message
+          });
+
+          this.unSelectAll();
+        },
+        error: error => {    
+          this.toasterService.show({
+            type: 'error',
+            title: 'Erro',
+            message: error
+          });
+        }
+      });
+    });
   }
 
   activateSelected() {
+    const selectedProducts = this.products.filter(p => p.selected);
     this.products.filter(p => p.selected).forEach(p => p.isactive = 'T');
+
+    let productUpdate = {
+      isActive: 'T'
+    }
+
+    selectedProducts.forEach(async p => {
+      p.isactive = 'T';
+  
+      await this.productService.putProduct(productUpdate, p.id).pipe( takeUntil( this.unsubscribe ) ).subscribe({
+        next: res => {
+          this.toasterService.show({
+            type: 'success',
+            title: 'Sucesso',
+            message: res.message
+          });
+
+          this.unSelectAll();
+        },
+        error: error => {    
+          this.toasterService.show({
+            type: 'error',
+            title: 'Erro',
+            message: error
+          });
+        }
+      });
+    });
   }
 
   excludeSelected() {
-    this.products.filter(p => p.selected).forEach(p => p.isactive = 'T');
+    const selectedProducts = this.products.filter(p => p.selected);
+
+    selectedProducts.forEach(async p => {
+      await this.productService.deleteProduct(p.id).pipe( takeUntil( this.unsubscribe ) ).subscribe({
+        next: res => {
+          this.toasterService.show({
+            type: 'success',
+            title: 'Sucesso',
+            message: res.message
+          });
+
+          this.unSelectAll();
+
+          this.products = this.products.filter(prod => prod.id !== p.id);
+        },
+        error: error => {    
+          this.toasterService.show({
+            type: 'error',
+            title: 'Erro',
+            message: error
+          });
+        }
+      });
+    });
   }
 
-  toggleProduct(p: Product) {
-    console.log(p.isactive);
-    
+  toggleProduct(p: Product) {    
     if (p.isactive == 'T') {
       p.isactive = 'F';
+
+      let productUpdate = {
+        isActive: 'F'
+      }
+
+      this.productService.putProduct(productUpdate, p.id).pipe( takeUntil( this.unsubscribe ) ).subscribe({
+        next: res => {
+          this.toasterService.show({
+            type: 'success',
+            title: 'Sucesso',
+            message: res.message
+          });
+        },
+        error: error => {    
+          this.toasterService.show({
+            type: 'error',
+            title: 'Erro',
+            message: error
+          });
+        }
+      });
     } else {
       p.isactive = 'T'
+
+      let productUpdate = {
+        isActive: 'T'
+      }
+
+      this.productService.putProduct(productUpdate, p.id).pipe( takeUntil( this.unsubscribe ) ).subscribe({
+        next: res => {
+          this.toasterService.show({
+            type: 'success',
+            title: 'Sucesso',
+            message: res.message
+          });
+        },
+        error: error => {    
+          this.toasterService.show({
+            type: 'error',
+            title: 'Erro',
+            message: error
+          });
+        }
+      });
     }
   }
 
@@ -99,12 +228,38 @@ export class ProductManagerComponent {
   }
 
   viewProduct(p: Product) {
+    console.log(p.id);
   }
 
   deleteProduct(p: Product) {
+    this.productService.deleteProduct(p.id).pipe( takeUntil( this.unsubscribe ) ).subscribe({
+      next: res => {
+        this.toasterService.show({
+          type: 'success',
+          title: 'Sucesso',
+          message: res.message
+        });
+
+        this.unSelectAll();
+
+        this.products = this.products.filter(prod => prod.id !== p.id);
+      },
+      error: error => {    
+        this.toasterService.show({
+          type: 'error',
+          title: 'Erro',
+          message: error
+        });
+      }
+    });
   }
 
   toggleMenu(p: Product) {
     (p as any).showMenu = !(p as any).showMenu;
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 }

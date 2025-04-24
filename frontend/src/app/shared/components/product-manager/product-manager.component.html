@@ -1,3 +1,5 @@
+<app-toaster></app-toaster>
+
 <div class="toolbar">
   <label>
     <input type="checkbox" [checked]="allSelected" (change)="toggleSelectAll()" />
@@ -37,59 +39,65 @@
 </div>
 
 <div class="product-list">
-  <div class="product-row" *ngFor="let p of products">
-    <input
-      type="checkbox"
-      [(ngModel)]="p.selected"
-      (change)="onProductSelectionChange()"
-    />
-
-    <div class="product-image">
-      <img [src]='p.imageurl' [alt]="p.name" />
-    </div>
-
-    <div class="product-info">
-      <div class="id">#{{ p.id }}</div>
-      <div class="name">{{ p.name }}</div>
-      <div class="quantity">{{ p.quantity > 1 ? p.quantity + ' unidades' : p.quantity + ' unidade' }}</div>
-    </div>
-    
-    <div class="product-info2">
-      <div class="sales-box">
-        <div class="sales">{{ p.sale > 1 ? p.sale + ' vendas' : p.sale + ' venda' }}</div>
-        <div class="price">R$ {{ p.price | number:'1.2-2':'pt-BR' }}</div>
+  @for (p of products; track p) {
+    <div
+      class="product-row"
+      [ngStyle]="{ 'background-color': p.isactive === 'F' ? '#f2f2f2' : '' }"
+    >
+      <input
+        type="checkbox"
+        [(ngModel)]="p.selected"
+        (change)="onProductSelectionChange()"
+      />
+  
+      <div class="product-image">
+        <img [src]='p.imageurl' [alt]="p.name" />
       </div>
   
-      <div class="status">
-        <div class="status-message">
-          {{ p.isactive === 'T' ? 'Ativo' : 'Pausado' }}
-        </div>
-        <div class="sub-status">{{ p.isactive === 'T' ? 'Este produto está ativo neste canal de venda.' : 'Você pausou o produto neste canal de venda.' }}</div>
+      <div class="product-info">
+        <div class="id">#{{ p.id }}</div>
+        <div class="name">{{ p.name }}</div>
+        <div class="quantity">{{ p.quantity > 1 ? p.quantity + ' unidades' : p.quantity + ' unidade' }}</div>
       </div>
-
-      <button class="toggle-btn" (click)="toggleProduct(p)">
-        {{ p.isactive == 'F' ? 'Pausado' : 'Ativo' }}
-        <label class="switch">
-          <input
-            type="checkbox"
-            [checked]="p.isactive === 'T'"
-            (change)="toggleProduct(p)"
-          />
-          <span class="slider round"></span>
-        </label>
-      </button>
+      
+      <div class="product-info2">
+        <div class="sales-box">
+          <div class="sales">{{ p.sale > 1 ? p.sale + ' vendas' : p.sale + ' venda' }}</div>
+          <div class="price">R$ {{ p.price | number:'1.2-2':'pt-BR' }}</div>
+        </div>
+    
+        <div class="status">
+          <div class="status-message">
+            {{ p.isactive === 'T' ? 'Ativo' : 'Pausado' }}
+          </div>
+          <div class="sub-status">{{ p.isactive === 'T' ? 'Este produto está ativo neste canal de venda.' : 'Você pausou o produto neste canal de venda.' }}</div>
+        </div>
+  
+        <button class="toggle-btn">
+          {{ p.isactive == 'F' ? 'Pausado' : 'Ativo' }}
+          <label class="switch">
+            <input
+              type="checkbox"
+              [checked]="p.isactive === 'T'"
+              (change)="toggleProduct(p)"
+            />
+            <span class="slider round"></span>
+          </label>
+        </button>
+      </div>
+  
+      <div class="menu" (appClickOutside)="p.showMenu = false">
+        <button class="menu-btn" (click)="p.showMenu = !p.showMenu">⋮</button>
+        <ul
+          class="menu-list"
+          *ngIf="p.showMenu"
+          [style.zIndex]="9999"
+        >
+          <li (click)="editProduct(p); p.showMenu = false">Editar</li>
+          <li (click)="viewProduct(p); p.showMenu = false">Ver anúncio</li>
+          <li (click)="deleteProduct(p); p.showMenu = false">Excluir</li>
+        </ul>
+      </div>
     </div>
-
-    <div class="menu" (appClickOutside)="p.showMenu = false">
-      <button class="menu-btn" (click)="p.showMenu = !p.showMenu">⋮</button>
-      <ul
-        class="menu-list"
-        *ngIf="p.showMenu"
-        [style.zIndex]="9999"
-      >
-        <li (click)="editProduct(p); p.showMenu = false">Editar</li>
-        <li (click)="viewProduct(p); p.showMenu = false">Ver anúncio</li>
-        <li (click)="deleteProduct(p); p.showMenu = false">Excluir</li>
-      </ul>
-    </div>
+  }
 </div>
