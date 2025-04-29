@@ -51,7 +51,7 @@
       />
   
       <div class="product-image">
-        <img [src]='p.imageurl' [alt]="p.name" />
+        <img [src]="p.imageurl" [alt]="p.name" />
       </div>
   
       <div class="product-info">
@@ -70,20 +70,28 @@
           <div class="status-message">
             {{ p.isactive === 'T' ? 'Ativo' : 'Pausado' }}
           </div>
-          <div class="sub-status">{{ p.isactive === 'T' ? 'Este produto está ativo neste canal de venda.' : 'Você pausou o produto neste canal de venda.' }}</div>
+          @if (p.quantity > 0) {
+            <div class="sub-status">{{ p.isactive === 'T' ? 'Este produto está ativo neste canal de venda.' : 'Você pausou o produto neste canal de venda.' }}</div>
+          } @else {
+            <div class="sub-status">Não há mais unidades à venda.</div>
+          }
         </div>
   
-        <button class="toggle-btn">
-          {{ p.isactive == 'F' ? 'Pausado' : 'Ativo' }}
-          <label class="switch">
-            <input
-              type="checkbox"
-              [checked]="p.isactive === 'T'"
-              (change)="toggleProduct(p)"
-            />
-            <span class="slider round"></span>
-          </label>
-        </button>
+        @if (p.quantity > 0) {
+          <button class="toggle-btn">
+            {{ p.isactive == 'F' ? 'Pausado' : 'Ativo' }}
+            <label class="switch">
+              <input
+                type="checkbox"
+                [checked]="p.isactive === 'T'"
+                (change)="toggleProduct(p)"
+              />
+              <span class="slider round"></span>
+            </label>
+          </button>
+        } @else {
+          <div class="noToggle-btn"></div>
+        }
       </div>
   
       <div class="menu" (appClickOutside)="p.showMenu = false">

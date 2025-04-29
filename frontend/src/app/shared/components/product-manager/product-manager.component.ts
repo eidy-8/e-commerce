@@ -116,33 +116,39 @@ export class ProductManagerComponent implements OnDestroy {
 
   activateSelected() {
     const selectedProducts = this.products.filter(p => p.selected);
-    this.products.filter(p => p.selected).forEach(p => p.isactive = 'T');
-
+    
     let productUpdate = {
       isActive: 'T'
     }
 
-    selectedProducts.forEach(async p => {
-      p.isactive = 'T';
+    selectedProducts.forEach(async p => {  
+      if (p.quantity == 0) {
+        this.toasterService.show({
+          type: 'warning',
+          title: 'Aviso',
+          message: `${p.name} não foi ativado devido à falta de estoque.`
+        });
+      } else {
+        p.isactive = 'T'
+        await this.productService.putProduct(productUpdate, p.id).pipe( takeUntil( this.unsubscribe ) ).subscribe({
+          next: res => {
+            this.toasterService.show({
+              type: 'success',
+              title: 'Sucesso',
+              message: res.message
+            });
   
-      await this.productService.putProduct(productUpdate, p.id).pipe( takeUntil( this.unsubscribe ) ).subscribe({
-        next: res => {
-          this.toasterService.show({
-            type: 'success',
-            title: 'Sucesso',
-            message: res.message
-          });
-
-          this.unSelectAll();
-        },
-        error: error => {    
-          this.toasterService.show({
-            type: 'error',
-            title: 'Erro',
-            message: error
-          });
-        }
-      });
+            this.unSelectAll();
+          },
+          error: error => {    
+            this.toasterService.show({
+              type: 'error',
+              title: 'Erro',
+              message: error
+            });
+          }
+        });
+      }
     });
   }
 

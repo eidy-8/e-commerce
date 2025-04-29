@@ -18,7 +18,6 @@ exports.listAllProduct = async (req, res) => {
 
 exports.addNewProduct = async (req, res) => {
     const { name, price, isUsed, isActive, imageUrl, description, quantity, seller_id, category_id } = req.body;
-    console.log(isUsed);
     
     if (!name || !price || isUsed === undefined || isActive === undefined || !imageUrl || !description || quantity < 0 || !seller_id || !category_id) {
       return res.status(400).json({ error: 'Preencha todos os campos obrigatórios' });
