@@ -11,7 +11,7 @@ exports.createProduct = async (name, price, isUsed, isActive, imageUrl, descript
     );
 };
 
-exports.updateProduct = async (id, name, price, isUsed, isActive, imageUrl, description, quantity) => {
+exports.updateProduct = async (id, name, price, isUsed, isActive, imageUrl, description, quantity) => { 
   return pool.query(
     `UPDATE Product 
      SET name = COALESCE($1, name), 
