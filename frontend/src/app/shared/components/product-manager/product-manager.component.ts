@@ -281,6 +281,11 @@ export class ProductManagerComponent implements OnDestroy {
     this.isModalOpen = false;
   }
 
+  onSearch(searchTerm: string) {
+    console.log('Termo de busca:', searchTerm);
+    // Aqui você pode filtrar os produtos localmente ou fazer uma requisição ao backend
+  }
+
   ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();

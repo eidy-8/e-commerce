@@ -25,8 +25,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   private getProducts() {
-    this.productService.getProduct().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {      
+    this.productService.getProduct().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {            
       this.listaDeProdutos = res;
+    });
+  }
+
+  onSearch(searchTerm: string) {
+    console.log(searchTerm);
+    
+    this.productService.getProduct(searchTerm).pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
+      this.listaDeProdutos = res; 
     });
   }
 

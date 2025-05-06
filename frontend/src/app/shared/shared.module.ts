@@ -20,6 +20,7 @@ import { SideMenuComponent } from './components/reusable/side-menu/side-menu.com
 import { RouterModule } from '@angular/router';
 import { ProductManagerComponent } from './components/product-manager/product-manager.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { SearchBarComponent } from './components/reusable/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     SlidableMenuComponent,
     SideMenuComponent,
     ProductManagerComponent,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    SearchBarComponent
   ],
   imports: [
     CommonModule,
@@ -65,7 +67,8 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     ToasterComponent,
     SlidableMenuComponent,
     SideMenuComponent,
-    ProductManagerComponent
+    ProductManagerComponent,
+    SearchBarComponent
   ]
 })
 export class SharedModule { }

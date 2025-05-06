@@ -1,0 +1,12 @@
+<div class="search-container">
+  <button class="search" (click)="onSearch()">
+    <i class="fa fa-search" aria-hidden="true"></i>
+  </button>
+  <input
+    class="searchBar"
+    type="text"
+    placeholder="Buscar..."
+    [(ngModel)]="searchTerm"
+    (input)="onSearchInput()"
+  />
+</div>
