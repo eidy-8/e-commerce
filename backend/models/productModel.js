@@ -34,7 +34,7 @@ exports.searchProductsByKeyword = async (keyword) => {
   const query = `
       SELECT * 
       FROM Product
-      WHERE name ILIKE $1 OR description ILIKE $1
+      WHERE name ILIKE $1
   `;
 
   try {

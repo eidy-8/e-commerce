@@ -15,12 +15,12 @@ exports.listAllProduct = async (req, res) => {
       if (search) {
         result = await productService.searchProductsByKeyword(search);
 
+        return res.status(200).json(result);
       } else {
         result = await productModel.getAllProducts();
-        res.json(result.rows);
-      }
 
-      return res.status(200).json(result);
+        return res.status(200).json(result.rows);
+      }
   } catch (err) {
       console.error(err);
       return res.status(500).json({ error: 'Erro ao buscar produtos.' });
