@@ -37,6 +37,10 @@ export class ProductManagerComponent implements OnDestroy {
 
   private unsubscribe = new Subject<void>;
 
+  protected isModalOpen: boolean = false;
+
+  selectedProduct: any = null;
+
   constructor(public productService: ProductService, private toasterService: ToasterService) {}
 
   toggleSelectAll() {
@@ -249,6 +253,8 @@ export class ProductManagerComponent implements OnDestroy {
         this.unSelectAll();
 
         this.products = this.products.filter(prod => prod.id !== p.id);
+
+        this.isModalOpen = false;
       },
       error: error => {    
         this.toasterService.show({
@@ -256,12 +262,23 @@ export class ProductManagerComponent implements OnDestroy {
           title: 'Erro',
           message: error
         });
+
+        this.isModalOpen = false;
       }
     });
   }
 
   toggleMenu(p: Product) {
     (p as any).showMenu = !(p as any).showMenu;
+  }
+
+  confirmMethod(product: any) {    
+    this.selectedProduct = product;
+    this.isModalOpen = true;
+  }
+
+  cancelMethod() {        
+    this.isModalOpen = false;
   }
 
   ngOnDestroy(): void {

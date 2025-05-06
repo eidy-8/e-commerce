@@ -103,9 +103,27 @@
         >
           <li (click)="editProduct(p); p.showMenu = false">Editar</li>
           <li (click)="viewProduct(p); p.showMenu = false">Ver anúncio</li>
-          <li (click)="deleteProduct(p); p.showMenu = false">Excluir</li>
+          <li (click)="confirmMethod(p); p.showMenu = false">Excluir</li>
         </ul>
       </div>
     </div>
   }
 </div>
+
+<app-modal
+  [isOpen]="isModalOpen"
+  title="Você vai excluir este anúncio"
+  [primaryButton]="{
+    label: 'Confirmar',
+    styleClass: 'btn-primary',
+    action:  deleteProduct.bind(this, selectedProduct)
+  }"
+  [secondaryButton]="{
+    label: 'Cancelar',
+    styleClass: 'btn-secondary',
+    action: cancelMethod.bind(this)
+  }"
+>
+  <br>
+  <p class="text-center">Observe que, se precisar deste anúncio mais tarde, você sempre pode pausá-lo.</p>
+</app-modal>
