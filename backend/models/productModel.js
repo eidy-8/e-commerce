@@ -29,3 +29,19 @@ exports.updateProduct = async (id, name, price, isUsed, isActive, imageUrl, desc
 exports.deleteProduct = async (id) => {
   return pool.query('DELETE FROM Product WHERE id = $1', [id]);
 };
+
+exports.searchProductsByKeyword = async (keyword) => {
+  const query = `
+      SELECT * 
+      FROM Product
+      WHERE name ILIKE $1 OR description ILIKE $1
+  `;
+
+  try {
+      const result = await pool.query(query, [keyword]);
+      return result.rows;
+  } catch (err) {
+      console.error('Erro ao buscar produtos no banco de dados:', err);
+      throw err;
+  }
+};

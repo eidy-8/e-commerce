@@ -17,3 +17,15 @@ exports.updateProduct = async (id, name, price, isUsed, isActive, imageUrl, desc
 
     await productModel.updateProduct(id, name, price, isUsed, isActive, imageUrl, description, quantity);
 };
+
+exports.searchProductsByKeyword = async (keyword) => {
+    const searchKeyword = `%${keyword}%`;
+
+    try {
+        const products = await productModel.searchProductsByKeyword(searchKeyword);
+        return products;
+    } catch (err) {
+        console.error('Erro ao buscar produtos por palavra-chave:', err);
+        throw err;
+    }
+};
