@@ -11,6 +11,9 @@ import { LoadingService } from '../../../shared/services/loading.service';
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   listaDeProdutos: Product[] = [];
+  currentPage: number = 1;
+  pageSize: number = 10;
+  hasNext: boolean = false;
 
   private unsubscribe = new Subject<void>;
 
@@ -24,18 +27,32 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.getProducts();
   }
 
-  private getProducts() {
-    this.productService.getProduct().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {            
-      this.listaDeProdutos = res;
-    });
+  private getProducts(searchTerm: string = '') {
+    this.productService.getProduct(searchTerm, this.currentPage, this.pageSize)
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((res: any) => {        
+        this.listaDeProdutos = res.data; 
+        this.hasNext = res.hasNext; 
+      });
   }
 
-  onSearch(searchTerm: string) {
-    console.log(searchTerm);
-    
-    this.productService.getProduct(searchTerm).pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
-      this.listaDeProdutos = res; 
-    });
+  onSearch(searchTerm: string) {    
+    this.currentPage = 1; 
+    this.getProducts(searchTerm);
+  }
+
+  nextPage() {
+    if (this.hasNext) {
+      this.currentPage++;
+      this.getProducts();
+    }
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.getProducts();
+    }
   }
 
   ngOnDestroy(): void {

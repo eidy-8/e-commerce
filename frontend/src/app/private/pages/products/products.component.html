@@ -31,17 +31,35 @@
     ></app-side-menu>
 
     <div class="w-full mx-28">
-        <div class="my-10 text-gray-color">Vendas  <i class="fa fa-angle-right" aria-hidden="true"></i>  Anúncios</div>
+        <div class="my-10 text-gray-color">
+            Vendas <i class="fa fa-angle-right" aria-hidden="true"></i> Anúncios
+        </div>
 
-        <br><br><br>
-
-        <div class="flex items-center gap-4 mb-4 rounded-lg text-gray-300">
+        <div class="flex items-center gap-4 mb-6 rounded-lg bg-white p-4 shadow-md">
             <app-search-bar [emitOnInput]="false" (search)="onSearch($event)"></app-search-bar>
             <p class="text-gray-400">|</p>
             <i class="fa fa-filter text-gray-600" aria-hidden="true"></i>
             <button class="text-gray-600 hover:text-gray-800 font-medium">Filtrar e ordenar</button>
         </div>
+
         <app-product-manager [products]="listaDeProdutos"></app-product-manager>
+
+        <div class="pagination flex justify-center items-center gap-4 mr-60">
+            <button 
+                class="btn btn-primary px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 disabled:bg-gray-300"
+                (click)="previousPage()" 
+                [disabled]="currentPage === 1">
+                Anterior
+            </button>
+            <span class="text-gray-600 font-medium">Página {{ currentPage }}</span>
+            <button 
+                class="btn btn-primary px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 disabled:bg-gray-300"
+                (click)="nextPage()" 
+                [disabled]="!hasNext">
+                Próxima
+            </button>
+        </div>
+        <br><br>
     </div>
 </div>
 

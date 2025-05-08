@@ -16,20 +16,17 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getProduct(searchTerm: string = ''): Observable<any> {
-    if (searchTerm) {
-      return this.httpClient.get<any>(`${this.urlProduct}?search=${searchTerm}`)
+  public getProduct(searchTerm: string = '', page: number = 1, pageSize: number = 10): Observable<any> {
+    const params = new HttpParams()
+      .set('search', searchTerm)
+      .set('page', page.toString())
+      .set('pageSize', pageSize.toString());
+  
+    return this.httpClient.get<any>(this.urlProduct, { params })
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
-    } else {
-      return this.httpClient.get<any>(this.urlProduct)
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      );
-    }
   }
 
   public postProduct(productData: any): Observable<any> {
