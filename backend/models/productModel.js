@@ -1,8 +1,68 @@
 const pool = require('../db/db');
 
-exports.getAllProducts = async () => {
-    return pool.query('SELECT * FROM Product');
-}
+exports.getAllProducts = async (offset, limit) => {
+  const query = `
+      SELECT * 
+      FROM Product
+      OFFSET $1 LIMIT $2
+  `;
+
+  try {
+      const result = await pool.query(query, [offset, limit]);
+      return result.rows;
+  } catch (err) {
+      console.error('Erro ao listar produtos no banco de dados:', err);
+      throw err;
+  }
+};
+
+exports.countAllProducts = async () => {
+  const query = `
+      SELECT COUNT(*) AS total
+      FROM Product
+  `;
+
+  try {
+      const result = await pool.query(query);
+      return parseInt(result.rows[0].total, 10);
+  } catch (err) {
+      console.error('Erro ao contar produtos no banco de dados:', err);
+      throw err;
+  }
+};
+
+exports.searchProductsByKeyword = async (keyword, offset, limit) => {
+  const query = `
+        SELECT * 
+        FROM Product
+        WHERE name ILIKE $1
+        OFFSET $2 LIMIT $3
+  `;
+
+  try {
+      const result = await pool.query(query, [keyword, offset, limit]);
+      return result.rows;
+  } catch (err) {
+      console.error('Erro ao buscar produtos no banco de dados:', err);
+      throw err;
+  }
+};
+
+exports.countProductsByKeyword = async (keyword) => {
+  const query = `
+      SELECT COUNT(*) AS total
+      FROM Product
+      WHERE name ILIKE $1
+  `;
+
+  try {
+      const result = await pool.query(query, [keyword]);
+      return parseInt(result.rows[0].total, 10);
+  } catch (err) {
+      console.error('Erro ao contar produtos por palavra-chave no banco de dados:', err);
+      throw err;
+  }
+};
 
 exports.createProduct = async (name, price, isUsed, isActive, imageUrl, description, quantity, seller_id, category_id) => {
     return pool.query(
@@ -28,20 +88,4 @@ exports.updateProduct = async (id, name, price, isUsed, isActive, imageUrl, desc
 
 exports.deleteProduct = async (id) => {
   return pool.query('DELETE FROM Product WHERE id = $1', [id]);
-};
-
-exports.searchProductsByKeyword = async (keyword) => {
-  const query = `
-      SELECT * 
-      FROM Product
-      WHERE name ILIKE $1
-  `;
-
-  try {
-      const result = await pool.query(query, [keyword]);
-      return result.rows;
-  } catch (err) {
-      console.error('Erro ao buscar produtos no banco de dados:', err);
-      throw err;
-  }
 };

@@ -55,11 +55,16 @@ CREATE TABLE Product (
 --Comandos para testes
 SELECT * FROM product;
 
+SELECT * FROM Product WHERE name ILIKE $1
+
 INSERT INTO Seller (user_id) VALUES ('77ebb9bf-6426-428a-8cc0-98a286b8a2da');
 INSERT INTO Buyer (user_id) VALUES ('77ebb9bf-6426-428a-8cc0-98a286b8a2da');
 
 INSERT INTO Product (name, price, isUsed, isActive, imageUrl, description, quantity, seller_id, category_id, sale) 
-VALUES ('nameTeste3', 53.0, 'F', 'T', 'https://raw.githubusercontent.com/eidy-8/imagens/main/e-commerce/esporte/vecteezy_vibrant-cricket-helmet-in-yellow-with-a-polished-surface_55985493.png', 'descriptionTeste3', 0, '2815099b-0cb2-4192-8d08-edff52609209', '4935a834-10ee-408c-b573-987ff8533c20', 0);
+VALUES ('nameTeste1', 
+53.0, 'F', 'T', 
+'https://raw.githubusercontent.com/eidy-8/imagens/main/e-commerce/esporte/vecteezy_vibrant-cricket-helmet-in-yellow-with-a-polished-surface_55985493.png', 
+'descriptionTeste3', 0, '2815099b-0cb2-4192-8d08-edff52609209', '4935a834-10ee-408c-b573-987ff8533c20', 0);
 
 ALTER TABLE Users ADD COLUMN imageUrl VARCHAR(512);
 
@@ -78,7 +83,8 @@ SET name = COALESCE('nameTesteModificado', name),
      WHERE id = 'f9593da0-00c0-4f6f-9595-f4ff98ae25cd';
 
 UPDATE Product 
-SET imageUrl = COALESCE('https://raw.githubusercontent.com/eidy-8/imagens/main/e-commerce/esporte/vecteezy_vibrant-cricket-helmet-in-yellow-with-a-polished-surface_55985493.png', imageUrl)
+SET imageUrl = COALESCE('https://raw.githubusercontent.com/eidy-8/imagens/main/e-commerce/esporte/vecteezy_vibrant-cricket-helmet-in-yellow-with-a-polished-surface_55985493.png', 
+imageUrl)
 WHERE id = '07255487-dc91-4585-847c-711b6836a0b6';
 
 UPDATE Product 

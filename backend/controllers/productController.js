@@ -7,20 +7,18 @@ const productService = require('../services/productService');
 dotenv.config();
 
 exports.listAllProduct = async (req, res) => {
-  const { search } = req.query;
+  const { search, page = 1, pageSize = 10 } = req.query; 
 
   try {
       let result;
 
       if (search) {
-        result = await productService.searchProductsByKeyword(search);
-
-        return res.status(200).json(result);
+          result = await productService.searchProductsByKeyword(search, page, pageSize);
       } else {
-        result = await productModel.getAllProducts();
-
-        return res.status(200).json(result.rows);
+          result = await productService.listAllProducts(page, pageSize);
       }
+
+      return res.status(200).json(result);
   } catch (err) {
       console.error(err);
       return res.status(500).json({ error: 'Erro ao buscar produtos.' });
