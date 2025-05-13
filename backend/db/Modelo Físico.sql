@@ -79,8 +79,8 @@ SET name = COALESCE('nameTesteModificado', name),
          isActive = COALESCE('F', isActive),
          imageUrl = COALESCE('testeImageUrlModificado', imageUrl),
          description = COALESCE('descriptionTesteModificado', description),
-         quantity = COALESCE(1, quantity)
-     WHERE id = 'f9593da0-00c0-4f6f-9595-f4ff98ae25cd';
+         quantity = COALESCE(0, quantity)
+     WHERE id = '2ea49fdc-d045-443d-9df6-a749e9229f9c';
 
 UPDATE Product 
 SET imageUrl = COALESCE('https://raw.githubusercontent.com/eidy-8/imagens/main/e-commerce/esporte/vecteezy_vibrant-cricket-helmet-in-yellow-with-a-polished-surface_55985493.png', 

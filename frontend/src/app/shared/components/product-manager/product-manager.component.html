@@ -73,7 +73,7 @@
           @if (p.quantity > 0) {
             <div class="sub-status">{{ p.isactive === 'T' ? 'Este produto está ativo neste canal de venda.' : 'Você pausou o produto neste canal de venda.' }}</div>
           } @else {
-            <div class="sub-status">Não há mais unidades à venda.</div>
+            <div class="sub-status">Este produto está pausado por falta de estoque.</div>
           }
         </div>
   

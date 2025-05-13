@@ -7,32 +7,43 @@
 <div class="absolute top-0 left-0 w-full h-[230px] bg-background-darker-color z-[-10] pointer-events-none"></div>
 
 <div class="flex flex-row">
-    <app-side-menu
-    [menuTitle]="'Minha Conta'"
-    [menuItems]="[
-        {
-            label: 'Vendas',
-            icon: 'fa-shopping-basket',
-            children: [
-                { label: 'Resumo', link: '/user/new-product' },
-                { label: 'Novidade', link: '/vendas/novidade' },
-                { label: 'Anúncios', link: '/vendas/anuncios' }
-            ]
-        },
-        {
-            label: 'Produtos',
-            icon: 'fa-shopping-bag',
-            children: [
-                { label: 'Categorias', link: '/produtos/categorias' },
-                { label: 'Estoque', link: '/produtos/estoque' }
-            ]
-        }
-    ]"
-    ></app-side-menu>
 
-    <div class="w-full mx-28">
-        <div class="my-10 text-gray-color">
-            Vendas <i class="fa fa-angle-right" aria-hidden="true"></i> Anúncios
+    <div class="hidden 2xl:block xl:block">
+        <app-side-menu
+        [menuTitle]="'Minha Conta'"
+        [menuItems]="[
+            {
+                label: 'Vendas',
+                icon: 'fa-shopping-basket',
+                children: [
+                    { label: 'Resumo', link: '/user/new-product' },
+                    { label: 'Novidade', link: '/vendas/novidade' },
+                    { label: 'Anúncios', link: '/vendas/anuncios' }
+                ]
+            },
+            {
+                label: 'Produtos',
+                icon: 'fa-shopping-bag',
+                children: [
+                    { label: 'Categorias', link: '/produtos/categorias' },
+                    { label: 'Estoque', link: '/produtos/estoque' }
+                ]
+            }
+        ]"
+        ></app-side-menu>
+    </div>
+
+    <div class="mx-2 w-full 2xl:mx-28 text-sm">
+        <div class="flex my-10 text-gray-color justify-between">
+            <div>
+                Vendas <i class="fa fa-angle-right" aria-hidden="true"></i> Anúncios
+            </div>
+
+            <button 
+                class="bg-tertiary-button-color text-primary-button-color rounded-md py-1 px-2"
+                (click)="navigateToNewProduct()">
+                <p>Anunciar</p>
+            </button>
         </div>
 
         <div class="flex items-center gap-4 mb-6 rounded-lg bg-white p-4 shadow-md">
@@ -44,7 +55,7 @@
 
         <app-product-manager [products]="listaDeProdutos"></app-product-manager>
 
-        <div class="pagination flex justify-center items-center gap-4 mr-60">
+        <div class="mr-0 flex justify-center items-center gap-4 2xl:mr-[260px]">
             <button 
                 class="btn btn-primary px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 disabled:bg-gray-300"
                 (click)="previousPage()" 

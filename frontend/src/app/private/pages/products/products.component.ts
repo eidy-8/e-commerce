@@ -3,6 +3,7 @@ import { Product } from '../../../shared/components/product-manager/product-mana
 import { ProductService } from '../../services/product.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { LoadingService } from '../../../shared/services/loading.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -19,7 +20,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   protected isLoading$: Observable<boolean>;
 
-  constructor(public productService: ProductService, public loadingService: LoadingService) {
+  constructor(public productService: ProductService, public loadingService: LoadingService, private router: Router) {
     this.isLoading$ = this.loadingService.loading$;
   }
 
@@ -53,6 +54,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.currentPage--;
       this.getProducts();
     }
+  }
+
+  navigateToNewProduct(): void {
+    this.router.navigate(['/user/new-product']);
   }
 
   ngOnDestroy(): void {
