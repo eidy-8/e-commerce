@@ -69,6 +69,19 @@
   margin: 0.5rem 0;
 }
 
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.close-button:hover {
+  color: #ff0000; 
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

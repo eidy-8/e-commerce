@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MethodsService } from '../../../shared/services/shared.service';
 import { ProductService } from '../../services/product.service';
@@ -6,6 +6,7 @@ import { Observable, Subject, takeUntil } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { LoadingService } from '../../../shared/services/loading.service';
 import { ToasterService } from '../../../shared/services/toaster.service';
+import { ModalComponent } from '../../../shared/components/reusable/modal/modal.component';
 
 @Component({
   selector: 'app-product-form',
@@ -13,6 +14,8 @@ import { ToasterService } from '../../../shared/services/toaster.service';
   styleUrl: './product-form.component.css'
 })
 export class ProductFormComponent implements OnInit, OnDestroy {
+
+  @ViewChild('modal') modal!: ModalComponent;
 
   protected category: any;
 
@@ -80,8 +83,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
   protected isLoading$: Observable<boolean>;
 
-  protected isModalOpen: boolean = false;
-
   constructor(private route: ActivatedRoute, public sharedMethod: MethodsService, public productService: ProductService,  private router: Router, public userService: UserService, private loadingService: LoadingService, private toasterService: ToasterService) {
     this.isLoading$ = this.loadingService.loading$;
   }
@@ -113,7 +114,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       next: res => {
         console.log(res.message);
 
-        this.isModalOpen = true;
+        this.modal.open(); 
       },
       error: error => {
         console.log(error);

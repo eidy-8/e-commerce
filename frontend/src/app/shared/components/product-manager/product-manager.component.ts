@@ -1,7 +1,8 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, ViewChild } from '@angular/core';
 import { ProductService } from '../../../private/services/product.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ToasterService } from '../../services/toaster.service';
+import { ModalComponent } from '../reusable/modal/modal.component';
 
 export interface Product {
   id: string;
@@ -24,6 +25,8 @@ export class ProductManagerComponent implements OnDestroy {
   @Input() set products(value: Product[]) {
     this._products = value.map(p => ({ ...p, showMenu: false }));
   }
+  @ViewChild('modal') modal!: ModalComponent;
+
   get products() {
     return this._products;
   }
@@ -36,8 +39,6 @@ export class ProductManagerComponent implements OnDestroy {
   blurExcludeButton = true;
 
   private unsubscribe = new Subject<void>;
-
-  protected isModalOpen: boolean = false;
 
   selectedProduct: any = null;
 
@@ -242,7 +243,7 @@ export class ProductManagerComponent implements OnDestroy {
   }
 
   deleteProduct(p: Product) {
-    this.productService.deleteProduct(p.id).pipe( takeUntil( this.unsubscribe ) ).subscribe({
+    this.productService.deleteProduct(p.id).pipe(takeUntil(this.unsubscribe)).subscribe({
       next: res => {
         this.toasterService.show({
           type: 'success',
@@ -251,19 +252,16 @@ export class ProductManagerComponent implements OnDestroy {
         });
 
         this.unSelectAll();
-
         this.products = this.products.filter(prod => prod.id !== p.id);
-
-        this.isModalOpen = false;
+        this.modal.closeModal(); 
       },
-      error: error => {    
+      error: error => {
         this.toasterService.show({
           type: 'error',
           title: 'Erro',
           message: error
         });
-
-        this.isModalOpen = false;
+        this.modal.closeModal(); 
       }
     });
   }
@@ -272,18 +270,17 @@ export class ProductManagerComponent implements OnDestroy {
     (p as any).showMenu = !(p as any).showMenu;
   }
 
-  confirmMethod(product: any) {    
+  confirmMethod(product: any) {
     this.selectedProduct = product;
-    this.isModalOpen = true;
+    this.modal.open(); 
   }
 
-  cancelMethod() {        
-    this.isModalOpen = false;
+  cancelMethod() {
+    this.modal.closeModal(); 
   }
 
   onSearch(searchTerm: string) {
     console.log('Termo de busca:', searchTerm);
-    // Aqui você pode filtrar os produtos localmente ou fazer uma requisição ao backend
   }
 
   ngOnDestroy(): void {

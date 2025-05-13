@@ -111,12 +111,12 @@
 </div>
 
 <app-modal
-  [isOpen]="isModalOpen"
+  #modal
   title="Você vai excluir este anúncio"
   [primaryButton]="{
     label: 'Confirmar',
     styleClass: 'btn-primary',
-    action:  deleteProduct.bind(this, selectedProduct)
+    action: deleteProduct.bind(this, selectedProduct)
   }"
   [secondaryButton]="{
     label: 'Cancelar',

@@ -1,34 +1,37 @@
 @if (isOpen) {
   <div class="modal-backdrop">
-      <div class="modal-box">
-        <div class="modal-header">
-          <h2>{{ title }}</h2>
-        </div>
-    
-        <hr class="divider" />
-    
-        <div class="modal-body">
-          <ng-content></ng-content>
-        </div>
-  
-        <br>
-  
-        <hr class="divider" />
-    
-        <div class="modal-footer">
-          <button 
-            [ngClass]="secondaryButton.styleClass || 'btn-secondary'" 
-            (click)="handleSecondaryClick()">
-            {{ secondaryButton.label }}
-          </button>
-          <button 
-            [ngClass]="primaryButton.styleClass || 'btn-primary'" 
-            (click)="handlePrimaryClick()">
-            {{ primaryButton.label }}
-          </button>
-        </div>
+    <div class="modal-box">
+      <div class="modal-header flex justify-between items-center">
+        <h2>{{ title }}</h2>
+        <button 
+          class="close-button text-gray-500 hover:text-gray-700" 
+          (click)="closeModal()">
+          &times;
+        </button>
       </div>
+  
+      <hr class="divider" />
+  
+      <div class="modal-body">
+        <ng-content></ng-content>
+      </div>
+
+      <br>
+
+      <hr class="divider" />
+  
+      <div class="modal-footer">
+        <button 
+          [ngClass]="secondaryButton.styleClass || 'btn-secondary'" 
+          (click)="handleSecondaryClick()">
+          {{ secondaryButton.label }}
+        </button>
+        <button 
+          [ngClass]="primaryButton.styleClass || 'btn-primary'" 
+          (click)="handlePrimaryClick()">
+          {{ primaryButton.label }}
+        </button>
+      </div>
+    </div>
   </div>
 }
-
-  
