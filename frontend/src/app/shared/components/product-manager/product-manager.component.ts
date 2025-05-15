@@ -3,6 +3,7 @@ import { ProductService } from '../../../private/services/product.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ToasterService } from '../../services/toaster.service';
 import { ModalComponent } from '../reusable/modal/modal.component';
+import { Router } from '@angular/router';
 
 export interface Product {
   id: string;
@@ -42,7 +43,7 @@ export class ProductManagerComponent implements OnDestroy {
 
   selectedProduct: any = null;
 
-  constructor(public productService: ProductService, private toasterService: ToasterService) {}
+  constructor(public productService: ProductService, private toasterService: ToasterService, private router: Router) {}
 
   toggleSelectAll() {
     this.allSelected = !this.allSelected;
@@ -235,7 +236,7 @@ export class ProductManagerComponent implements OnDestroy {
   }
 
   editProduct(p: Product) {
-    console.log(p.id);
+    this.router.navigate([`user/detail-product/${p.id}`]);
   }
 
   viewProduct(p: Product) {

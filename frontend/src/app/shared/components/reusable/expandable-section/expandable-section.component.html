@@ -1,0 +1,24 @@
+<div class="expandable-section" #expandableSection>
+    <div class="header">
+        <div class="info">
+        <h3 class="title">{{ title }}</h3>
+        <p class="value">{{ value }}</p>
+        </div>
+        <button class="toggle-button" (click)="toggleExpand()">
+        <i [ngClass]="isExpanded ? 'fa fa-chevron-up' : 'fa fa-chevron-down'"></i>
+        </button>
+    </div>
+
+    <div class="content" *ngIf="isExpanded">
+        <hr class="divider" />
+
+        <ng-content></ng-content>
+
+        <hr class="divider" />
+
+        <div class="actions">
+        <button class="cancel-button" (click)="onCancel()">Cancelar</button>
+        <button class="confirm-button" (click)="onConfirm()">Confirmar</button>
+        </div>
+    </div>
+</div>

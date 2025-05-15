@@ -65,3 +65,16 @@ exports.searchProductsByKeyword = async (keyword, page, pageSize) => {
         throw err;
     }
 };
+
+exports.listSpecificProduct = async (id) => {
+    try {
+        const products = await productModel.getSpecificProduct(id);
+
+        return {
+            data: products
+        }
+    } catch (err) {
+        console.error('Erro ao listar produtos com paginação:', err);
+        throw err;
+    }
+};

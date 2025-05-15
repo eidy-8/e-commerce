@@ -1,0 +1,113 @@
+<app-header-regular></app-header-regular>
+
+<div class="flex flex-col items-center w-full">
+    <div class="container w-full lg:w-2/4 md:w-3/4 sm:w-full">
+        <div class="mt-4 mb-10">
+            <button class="text-primary-button-color flex items-center" (click)="goBack()">
+                <i class="fa fa-angle-left mr-2" aria-hidden="true"></i> Voltar
+            </button>
+        </div>
+
+        <app-expandable-section
+            title="Título"
+            [value]="this.productId"
+            (confirm)="onConfirmTitleChange()"
+        >
+            <div class="flex flex-col gap-4">
+                <label>
+                    <span>Campo 1:</span>
+                    <input type="text" class="input" />
+                </label>
+                <label>
+                    <span>Campo 2:</span>
+                    <input type="text" class="input" />
+                </label>
+            </div>
+        </app-expandable-section>
+
+        <app-expandable-section
+            title="Preço"
+            [value]="this.productId"
+            (confirm)="onConfirmTitleChange()"
+        >
+            <div class="flex flex-col gap-4">
+                <label>
+                    <span>Campo 1:</span>
+                    <input type="text" class="input" />
+                </label>
+                <label>
+                    <span>Campo 2:</span>
+                    <input type="text" class="input" />
+                </label>
+            </div>
+        </app-expandable-section>
+
+        <app-expandable-section
+            title="Condição"
+            [value]="this.productId"
+            (confirm)="onConfirmTitleChange()"
+        >
+            <div class="flex flex-col gap-4">
+                <label>
+                    <span>Campo 1:</span>
+                    <input type="text" class="input" />
+                </label>
+                <label>
+                    <span>Campo 2:</span>
+                    <input type="text" class="input" />
+                </label>
+            </div>
+        </app-expandable-section>
+
+        <app-expandable-section
+            title="Estoque"
+            [value]="this.productId"
+            (confirm)="onConfirmTitleChange()"
+        >
+            <div class="flex flex-col gap-4">
+                <label>
+                    <span>Campo 1:</span>
+                    <input type="text" class="input" />
+                </label>
+                <label>
+                    <span>Campo 2:</span>
+                    <input type="text" class="input" />
+                </label>
+            </div>
+        </app-expandable-section>
+
+        <app-expandable-section
+            title="Foto"
+            [value]="this.productId"
+            (confirm)="onConfirmTitleChange()"
+        >
+            <div class="flex flex-col gap-4">
+                <label>
+                    <span>Campo 1:</span>
+                    <input type="text" class="input" />
+                </label>
+                <label>
+                    <span>Campo 2:</span>
+                    <input type="text" class="input" />
+                </label>
+            </div>
+        </app-expandable-section>
+
+        <app-expandable-section
+            title="Descrição"
+            [value]="this.productId"
+            (confirm)="onConfirmTitleChange()"
+        >
+            <div class="flex flex-col gap-4">
+                <label>
+                    <span>Campo 1:</span>
+                    <input type="text" class="input" />
+                </label>
+                <label>
+                    <span>Campo 2:</span>
+                    <input type="text" class="input" />
+                </label>
+            </div>
+        </app-expandable-section>
+    </div>
+</div>

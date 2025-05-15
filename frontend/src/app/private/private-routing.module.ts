@@ -5,6 +5,7 @@ import { authGuard } from '../auth/guards/auth.guard';
 import { NewProductComponent } from './pages/new-product/new-product.component';
 import { ProductFormComponent } from './pages/product-form/product-form.component';
 import { ProductsComponent } from './pages/products/products.component';
+import { DetailProductComponent } from './pages/update-product/detail-product.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
       {
         path: 'my-products',
         component: ProductsComponent
+      },
+      {
+        path: 'detail-product/:productId',
+        component: DetailProductComponent
       }
     ]
   }

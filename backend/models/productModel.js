@@ -7,7 +7,7 @@ exports.getAllProducts = async () => {
     const result = await pool.query(query);
     return result.rows;
   } catch (err) {
-      console.error('Erro ao listar produtos no banco de dados:', err);
+      console.error('Erro ao listar produtos no banco de dados.', err);
       throw err;
   }
 }
@@ -23,10 +23,22 @@ exports.getPagedProducts = async (offset, limit) => {
       const result = await pool.query(query, [offset, limit]);
       return result.rows;
   } catch (err) {
-      console.error('Erro ao listar produtos no banco de dados:', err);
+      console.error('Erro ao listar produtos no banco de dados.', err);
       throw err;
   }
 };
+
+exports.getSpecificProduct = async (id) => {
+  const query = `SELECT * FROM Product WHERE id = $1`;
+
+  try {
+    const result = await pool.query(query, [id]);
+      return result.rows;
+  } catch (err) {
+      console.error('Erro ao listar produtos no banco de dados.', err);
+      throw err;
+  }
+}
 
 exports.countAllProducts = async () => {
   const query = `
@@ -38,7 +50,7 @@ exports.countAllProducts = async () => {
       const result = await pool.query(query);
       return parseInt(result.rows[0].total, 10);
   } catch (err) {
-      console.error('Erro ao contar produtos no banco de dados:', err);
+      console.error('Erro ao contar produtos no banco de dados.', err);
       throw err;
   }
 };
@@ -55,7 +67,7 @@ exports.searchProductsByKeyword = async (keyword, offset, limit) => {
       const result = await pool.query(query, [keyword, offset, limit]);
       return result.rows;
   } catch (err) {
-      console.error('Erro ao buscar produtos no banco de dados:', err);
+      console.error('Erro ao buscar produtos no banco de dados.', err);
       throw err;
   }
 };
@@ -71,7 +83,7 @@ exports.countProductsByKeyword = async (keyword) => {
       const result = await pool.query(query, [keyword]);
       return parseInt(result.rows[0].total, 10);
   } catch (err) {
-      console.error('Erro ao contar produtos por palavra-chave no banco de dados:', err);
+      console.error('Erro ao contar produtos por palavra-chave no banco de dados.', err);
       throw err;
   }
 };

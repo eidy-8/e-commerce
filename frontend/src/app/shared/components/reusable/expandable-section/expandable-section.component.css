@@ -1,0 +1,88 @@
+.expandable-section {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.value {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 4px 0 0;
+}
+
+.toggle-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #007bff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.toggle-button:hover {
+  color: #0056b3;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 16px 0;
+}
+
+.content {
+  margin-top: 16px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.cancel-button {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover {
+  background-color: #e2e6ea;
+}
+
+.confirm-button {
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  color: #fff;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.confirm-button:hover {
+  background-color: #0056b3;
+}

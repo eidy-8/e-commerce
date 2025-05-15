@@ -16,7 +16,17 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getProduct(searchTerm: string = '', page: number = 1, pageSize: number = 10): Observable<any> {
+  public getProduct(searchTerm: string = '', page: number = 1, pageSize: number = 10, productId?: string): Observable<any> {
+    console.log(searchTerm);
+    
+    if (productId) {
+      return this.httpClient.get<any>(`${this.urlProduct}/${productId}`)
+        .pipe(
+          retry(1),
+          catchError(this.handleError)
+        );
+    }
+  
     const params = new HttpParams()
       .set('search', searchTerm)
       .set('page', page.toString())
