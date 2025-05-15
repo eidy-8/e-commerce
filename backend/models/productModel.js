@@ -1,6 +1,18 @@
 const pool = require('../db/db');
 
-exports.getAllProducts = async (offset, limit) => {
+exports.getAllProducts = async () => {
+  const query = `SELECT * FROM Product`;
+
+  try {
+    const result = await pool.query(query);
+    return result.rows;
+  } catch (err) {
+      console.error('Erro ao listar produtos no banco de dados:', err);
+      throw err;
+  }
+}
+
+exports.getPagedProducts = async (offset, limit) => {
   const query = `
       SELECT * 
       FROM Product

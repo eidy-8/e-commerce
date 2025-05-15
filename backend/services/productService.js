@@ -23,15 +23,22 @@ exports.listAllProducts = async (page, pageSize) => {
     const limit = parseInt(pageSize, 10); 
 
     try {
-        const products = await productModel.getAllProducts(offset, limit);
+        if (!pageSize) {
+            const products = await productModel.getAllProducts();
 
-        const totalProducts = await productModel.countAllProducts();
-        const hasNext = (page * pageSize) < totalProducts;
-
-        return {
-            data: products,
-            hasNext
-        };
+            return {
+                data: products
+            }
+        } else {
+            const products = await productModel.getPagedProducts(offset, limit);
+            const totalProducts = await productModel.countAllProducts();
+            const hasNext = (page * pageSize) < totalProducts;
+    
+            return {
+                data: products,
+                hasNext
+            };
+        }
     } catch (err) {
         console.error('Erro ao listar produtos com paginação:', err);
         throw err;

@@ -7,7 +7,7 @@ const productService = require('../services/productService');
 dotenv.config();
 
 exports.listAllProduct = async (req, res) => {
-  const { search, page = 1, pageSize = 10 } = req.query; 
+  const { search, page, pageSize } = req.query; 
 
   try {
       let result;
