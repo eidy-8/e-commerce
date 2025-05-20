@@ -8,14 +8,16 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 export class ExpandableSectionComponent {
   @Input() title: string = ''; 
   @Input() value: string = '';
+  @Input() isExpanded: boolean = false;
   @Output() confirm = new EventEmitter<void>(); 
+  @Output() cancel = new EventEmitter<void>(); 
+  @Output() toggle = new EventEmitter<boolean>();
 
   @ViewChild('expandableSection') expandableSection!: ElementRef;
 
-  isExpanded: boolean = false;
-
   toggleExpand(): void {
     this.isExpanded = !this.isExpanded;
+    this.toggle.emit(this.isExpanded);
 
     if (this.isExpanded) {
       setTimeout(() => {
@@ -25,7 +27,7 @@ export class ExpandableSectionComponent {
   }
 
   onCancel(): void {
-    this.isExpanded = false;
+    this.cancel.emit(); 
   }
 
   onConfirm(): void {

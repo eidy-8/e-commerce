@@ -13,18 +13,18 @@
         <app-expandable-section
             title="Título"
             [value]="this.productId"
-            (confirm)="onConfirmTitleChange()"
+            [isExpanded]="this.isNameExpanded"
+            (confirm)="onConfirmChange(0)"
+            (cancel)="onCancelChange(0)" 
+            (toggle)="onToggleNameExpanded($event)"
         >
             <div class="flex flex-col gap-4">
                 <input
                     [(ngModel)]="productName"
                     [ngClass]="{
-                    'border-error-color': isNameError,
-                    'bg-white/25 pointer-events-none': blurFirstStep
+                    'border-error-color': isFieldError,
                     }"
-                    name="title"
                     class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
-                    id="title"
                     type="text"
                     placeholder="Insira o título"
                 />
@@ -34,27 +34,58 @@
         <app-expandable-section
             title="Preço"
             [value]="this.productId"
-            (confirm)="onConfirmTitleChange()"
+            [isExpanded]="this.isPriceExpanded"
+            (confirm)="onConfirmChange(1)"
+            (cancel)="onCancelChange(1)" 
+            (toggle)="onTogglePriceExpanded($event)"
         >
             <div class="flex flex-col gap-4">
-     
+                <input
+                    [(ngModel)]="productPrice"
+                    [ngClass]="{
+                    'border-error-color': isFieldError,
+                    }"
+                    class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+                    type="number"
+                    placeholder="Insira o preço"
+                    (keydown)="sharedMethod.preventSpace($event)"
+                />
             </div>
         </app-expandable-section>
 
         <app-expandable-section
             title="Condição"
             [value]="this.productId"
-            (confirm)="onConfirmTitleChange()"
+            (confirm)="onConfirmChange(2)"
         >
             <div class="flex flex-col gap-4">
-            
+                <label>
+                <input
+                    type="radio"
+                    [(ngModel)]="productCondition"
+                    [value]="'F'"
+                    name="productCondition"
+                    class="mr-2"
+                />
+                Novo
+                </label>
+                <label>
+                <input
+                    type="radio"
+                    [(ngModel)]="productCondition"
+                    [value]="'T'"
+                    name="productCondition"
+                    class="mr-2"
+                />
+                Usado
+                </label>
             </div>
         </app-expandable-section>
 
         <app-expandable-section
             title="Estoque"
             [value]="this.productId"
-            (confirm)="onConfirmTitleChange()"
+            (confirm)="onConfirmChange(3)"
         >
             <div class="flex flex-col gap-4">
              
@@ -64,7 +95,7 @@
         <app-expandable-section
             title="Foto"
             [value]="this.productId"
-            (confirm)="onConfirmTitleChange()"
+            (confirm)="onConfirmChange(4)"
         >
             <div class="flex flex-col gap-4">
                
@@ -74,7 +105,7 @@
         <app-expandable-section
             title="Descrição"
             [value]="this.productId"
-            (confirm)="onConfirmTitleChange()"
+            (confirm)="onConfirmChange(5)"
         >
             <div class="flex flex-col gap-4">
                 
