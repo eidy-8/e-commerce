@@ -1,3 +1,5 @@
+<app-toaster></app-toaster>
+
 <app-header-regular></app-header-regular>
 
 <div class="flex flex-col items-center w-full">
@@ -14,14 +16,18 @@
             (confirm)="onConfirmTitleChange()"
         >
             <div class="flex flex-col gap-4">
-                <label>
-                    <span>Campo 1:</span>
-                    <input type="text" class="input" />
-                </label>
-                <label>
-                    <span>Campo 2:</span>
-                    <input type="text" class="input" />
-                </label>
+                <input
+                    [(ngModel)]="productName"
+                    [ngClass]="{
+                    'border-error-color': isNameError,
+                    'bg-white/25 pointer-events-none': blurFirstStep
+                    }"
+                    name="title"
+                    class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+                    id="title"
+                    type="text"
+                    placeholder="Insira o título"
+                />
             </div>
         </app-expandable-section>
 
@@ -31,14 +37,7 @@
             (confirm)="onConfirmTitleChange()"
         >
             <div class="flex flex-col gap-4">
-                <label>
-                    <span>Campo 1:</span>
-                    <input type="text" class="input" />
-                </label>
-                <label>
-                    <span>Campo 2:</span>
-                    <input type="text" class="input" />
-                </label>
+     
             </div>
         </app-expandable-section>
 
@@ -48,14 +47,7 @@
             (confirm)="onConfirmTitleChange()"
         >
             <div class="flex flex-col gap-4">
-                <label>
-                    <span>Campo 1:</span>
-                    <input type="text" class="input" />
-                </label>
-                <label>
-                    <span>Campo 2:</span>
-                    <input type="text" class="input" />
-                </label>
+            
             </div>
         </app-expandable-section>
 
@@ -65,14 +57,7 @@
             (confirm)="onConfirmTitleChange()"
         >
             <div class="flex flex-col gap-4">
-                <label>
-                    <span>Campo 1:</span>
-                    <input type="text" class="input" />
-                </label>
-                <label>
-                    <span>Campo 2:</span>
-                    <input type="text" class="input" />
-                </label>
+             
             </div>
         </app-expandable-section>
 
@@ -82,14 +67,7 @@
             (confirm)="onConfirmTitleChange()"
         >
             <div class="flex flex-col gap-4">
-                <label>
-                    <span>Campo 1:</span>
-                    <input type="text" class="input" />
-                </label>
-                <label>
-                    <span>Campo 2:</span>
-                    <input type="text" class="input" />
-                </label>
+               
             </div>
         </app-expandable-section>
 
@@ -99,14 +77,7 @@
             (confirm)="onConfirmTitleChange()"
         >
             <div class="flex flex-col gap-4">
-                <label>
-                    <span>Campo 1:</span>
-                    <input type="text" class="input" />
-                </label>
-                <label>
-                    <span>Campo 2:</span>
-                    <input type="text" class="input" />
-                </label>
+                
             </div>
         </app-expandable-section>
     </div>

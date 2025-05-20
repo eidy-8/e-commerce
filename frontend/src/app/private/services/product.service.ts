@@ -16,9 +16,7 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getProduct(searchTerm: string = '', page: number = 1, pageSize: number = 10, productId?: string): Observable<any> {
-    console.log(searchTerm);
-    
+  public getProduct(searchTerm: string = '', page: number = 1, pageSize: number = 10, productId?: string): Observable<any> {    
     if (productId) {
       return this.httpClient.get<any>(`${this.urlProduct}/${productId}`)
         .pipe(
