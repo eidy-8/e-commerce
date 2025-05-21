@@ -26,7 +26,7 @@
                     }"
                     class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
                     type="text"
-                    placeholder="Insira o título"
+                    placeholder="Insira um título"
                 />
             </div>
         </app-expandable-section>
@@ -47,7 +47,7 @@
                     }"
                     class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
                     type="number"
-                    placeholder="Insira o preço"
+                    placeholder="Insira um preço"
                     (keydown)="sharedMethod.preventSpace($event)"
                 />
             </div>
@@ -56,7 +56,10 @@
         <app-expandable-section
             title="Condição"
             [value]="this.productId"
+            [isExpanded]="this.isConditionExpanded"
             (confirm)="onConfirmChange(2)"
+            (cancel)="onCancelChange(2)" 
+            (toggle)="onToggleConditionExpanded($event)"
         >
             <div class="flex flex-col gap-4">
                 <label>
@@ -85,30 +88,66 @@
         <app-expandable-section
             title="Estoque"
             [value]="this.productId"
+            [isExpanded]="this.isQuantityExpanded"
             (confirm)="onConfirmChange(3)"
+            (cancel)="onCancelChange(3)" 
+            (toggle)="onToggleQuantityExpanded($event)"
         >
             <div class="flex flex-col gap-4">
-             
+                <input
+                    [(ngModel)]="productQuantity"
+                    [ngClass]="{
+                    'border-error-color': isFieldError,
+                    }"
+                    class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+                    type="number"
+                    placeholder="Insira uma quantidade"
+                    (keydown)="sharedMethod.preventSpace($event)"
+                />
             </div>
         </app-expandable-section>
 
         <app-expandable-section
             title="Foto"
             [value]="this.productId"
+            [isExpanded]="this.isPhotoExpanded"
             (confirm)="onConfirmChange(4)"
+            (cancel)="onCancelChange(4)" 
+            (toggle)="onTogglePhotoExpanded($event)"
         >
             <div class="flex flex-col gap-4">
-               
+                <input
+                    [(ngModel)]="productPhoto"
+                    [ngClass]="{
+                    'border-error-color': isFieldError,
+                    }"
+                    class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+                    type="text"
+                    placeholder="Insira uma url"
+                />
             </div>
         </app-expandable-section>
 
         <app-expandable-section
             title="Descrição"
             [value]="this.productId"
+            [isExpanded]="this.isDescriptionExpanded"
             (confirm)="onConfirmChange(5)"
+            (cancel)="onCancelChange(5)" 
+            (toggle)="onToggleDescriptionExpanded($event)"
         >
             <div class="flex flex-col gap-4">
-                
+                <textarea
+                    [(ngModel)]="productDescription"
+                    [ngClass]="{
+                    'border-error-color': isFieldError,
+                    }"
+                    class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+                    type="text"
+                    placeholder="Digite aqui mais informações para seus compradores."
+                    rows="10"
+                    maxlength="5000"
+                ></textarea>
             </div>
         </app-expandable-section>
     </div>

@@ -54,9 +54,20 @@ export class DetailProductComponent implements OnInit, OnDestroy {
         this.productName = res.data[0].name;
         this.productNameOriginal = res.data[0].name;
 
+        this.productPrice = res.data[0].price;
+        this.productPriceOriginal = res.data[0].price;
 
         this.productCondition = res.data[0].isused;
         this.productConditionOriginal = res.data[0].isused;
+
+        this.productQuantity = res.data[0].quantity;
+        this.productQuantityOriginal = res.data[0].quantity;
+
+        this.productPhoto = res.data[0].imageurl;
+        this.productPhotoOriginal = res.data[0].imageurl;
+
+        this.productDescription = res.data[0].description;
+        this.productDescriptionOriginal = res.data[0].description;
       });
   }
 
@@ -64,7 +75,18 @@ export class DetailProductComponent implements OnInit, OnDestroy {
     this.productService.putProduct(updateData, productId).pipe( takeUntil( this.unsubscribe ) ).subscribe({
       next: res => {       
         this.isNameExpanded = false;
+        this.isPriceExpanded = false;
+        this.isConditionExpanded = false;
+        this.isQuantityExpanded = false;
+        this.isPhotoExpanded = false;
+        this.isDescriptionExpanded = false;
+        
         this.productNameOriginal = this.productName;
+        this.productPriceOriginal = this.productPrice;
+        this.productConditionOriginal = this.productCondition;
+        this.productQuantityOriginal = this.productQuantity;
+        this.productPhotoOriginal = this.productPhoto;
+        this.productDescriptionOriginal = this.productDescription;
         
         this.toasterService.show({
           type: 'success',
@@ -106,7 +128,7 @@ export class DetailProductComponent implements OnInit, OnDestroy {
       }
       case 2: {
         let newCondition = {
-          isused: this.productCondition
+          isUsed: this.productCondition
         }
     
         this.putProduct(newCondition, this.productId);
@@ -124,7 +146,7 @@ export class DetailProductComponent implements OnInit, OnDestroy {
       }
       case 4: {
         let newPhoto = {
-          imageurl: this.productPhoto
+          imageUrl: this.productPhoto
         }
     
         this.putProduct(newPhoto, this.productId);
@@ -183,6 +205,10 @@ export class DetailProductComponent implements OnInit, OnDestroy {
   onToggleNameExpanded(isExpanded: boolean): void {
     this.isNameExpanded = isExpanded;
     this.isPriceExpanded = false;
+    this.isConditionExpanded = false;
+    this.isQuantityExpanded = false;
+    this.isPhotoExpanded = false;
+    this.isDescriptionExpanded = false;
 
     this.productName = this.productNameOriginal;
 
@@ -192,6 +218,10 @@ export class DetailProductComponent implements OnInit, OnDestroy {
   onTogglePriceExpanded(isExpanded: boolean): void {
     this.isNameExpanded = false;
     this.isPriceExpanded = isExpanded;
+    this.isConditionExpanded = false;
+    this.isQuantityExpanded = false;
+    this.isPhotoExpanded = false;
+    this.isDescriptionExpanded = false;
 
     this.productPrice = this.productPriceOriginal;
 
@@ -200,36 +230,52 @@ export class DetailProductComponent implements OnInit, OnDestroy {
 
   onToggleConditionExpanded(isExpanded: boolean): void {
     this.isNameExpanded = false;
-    this.isPriceExpanded = isExpanded;
+    this.isPriceExpanded = false;
+    this.isConditionExpanded = isExpanded;
+    this.isQuantityExpanded = false;
+    this.isPhotoExpanded = false;
+    this.isDescriptionExpanded = false;
 
-    this.productPrice = this.productPriceOriginal;
+    this.productCondition = this.productConditionOriginal;
 
     this.isFieldError = false;
   }
 
   onToggleQuantityExpanded(isExpanded: boolean): void {
     this.isNameExpanded = false;
-    this.isPriceExpanded = isExpanded;
+    this.isPriceExpanded = false;
+    this.isConditionExpanded = false;
+    this.isQuantityExpanded = isExpanded;
+    this.isPhotoExpanded = false;
+    this.isDescriptionExpanded = false;
 
-    this.productPrice = this.productPriceOriginal;
+    this.productQuantity = this.productQuantityOriginal;
 
     this.isFieldError = false;
   }
 
   onTogglePhotoExpanded(isExpanded: boolean): void {
     this.isNameExpanded = false;
-    this.isPriceExpanded = isExpanded;
+    this.isPriceExpanded = false;
+    this.isConditionExpanded = false;
+    this.isQuantityExpanded = false;
+    this.isPhotoExpanded = isExpanded;
+    this.isDescriptionExpanded = false;
 
-    this.productPrice = this.productPriceOriginal;
+    this.productPhoto = this.productPhotoOriginal;
 
     this.isFieldError = false;
   }
 
   onToggleDescriptionExpanded(isExpanded: boolean): void {
     this.isNameExpanded = false;
-    this.isPriceExpanded = isExpanded;
+    this.isPriceExpanded = false;
+    this.isConditionExpanded = false;
+    this.isQuantityExpanded = false;
+    this.isPhotoExpanded = false;
+    this.isDescriptionExpanded = isExpanded;
 
-    this.productPrice = this.productPriceOriginal;
+    this.productDescription = this.productDescriptionOriginal;
 
     this.isFieldError = false;
   }
