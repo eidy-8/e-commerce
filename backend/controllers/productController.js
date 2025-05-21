@@ -51,8 +51,8 @@ exports.updateProduct = async (req, res) => {
   const { id } = req.params;  
   const { name, price, isUsed, isActive, imageUrl, description, quantity } = req.body;
 
-  if (name == "" || imageUrl == "" || description == "") {
-    return res.status(400).json({ error: 'Preencha o campo com algum valor' });
+  if (name == "" || imageUrl == "" || description == "" || quantity < 0) {
+    return res.status(400).json({ error: 'Preencha o campo corretamente' });
   }
 
   try {            

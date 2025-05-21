@@ -1,6 +1,8 @@
 --Comandos para criar o banco
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+SET TIMEZONE = 'America/Sao_Paulo';
+
 CREATE TABLE Users (
 	id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
 	username VARCHAR(255) UNIQUE NOT NULL,
@@ -61,7 +63,7 @@ INSERT INTO Seller (user_id) VALUES ('77ebb9bf-6426-428a-8cc0-98a286b8a2da');
 INSERT INTO Buyer (user_id) VALUES ('77ebb9bf-6426-428a-8cc0-98a286b8a2da');
 
 INSERT INTO Product (name, price, isUsed, isActive, imageUrl, description, quantity, seller_id, category_id, sale) 
-VALUES ('nameTeste1', 
+VALUES ('123', 
 53.0, 'F', 'T', 
 'https://raw.githubusercontent.com/eidy-8/imagens/main/e-commerce/esporte/vecteezy_vibrant-cricket-helmet-in-yellow-with-a-polished-surface_55985493.png', 
 'descriptionTeste3', 0, '2815099b-0cb2-4192-8d08-edff52609209', '4935a834-10ee-408c-b573-987ff8533c20', 0);
@@ -95,4 +97,6 @@ DELETE FROM Users WHERE id = '648efb8c-3571-4541-b654-9b3270144ef9';
 
 TRUNCATE TABLE Product CASCADE;
 
-DROP TABLE Product;
+DROP TABLE Product CASCADE;
+
+SHOW timezone;

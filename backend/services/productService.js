@@ -15,7 +15,11 @@ exports.updateProduct = async (id, name, price, isUsed, isActive, imageUrl, desc
         isActive = 'F';
     }
 
-    await productModel.updateProduct(id, name, price, isUsed, isActive, imageUrl, description, quantity);
+    const updatedAt = new Date();
+    updatedAt.setHours(updatedAt.getHours() - 6); 
+    const formattedDate = updatedAt.toISOString();
+
+    await productModel.updateProduct(id, name, price, isUsed, isActive, imageUrl, description, quantity, formattedDate);
 };
 
 exports.listAllProducts = async (page, pageSize) => {
