@@ -21,6 +21,8 @@ export class DetailProductComponent implements OnInit, OnDestroy {
   protected productPhoto: any;
   protected productDescription: any;
 
+  protected isProductActive: any;
+
   protected productNameOriginal: any;
   protected productPriceOriginal: any;
   protected productConditionOriginal: any;
@@ -47,10 +49,16 @@ export class DetailProductComponent implements OnInit, OnDestroy {
     this.getProducts(this.productId);
   }
 
+  public reactivateProduct() {
+    console.log("oi");
+  }
+
   private getProducts(productId: any) {    
     this.productService.getProduct('', 1, 10, productId)
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res: any) => {     
+        console.log(res);
+
         this.productName = res.data[0].name;
         this.productNameOriginal = res.data[0].name;
 
@@ -67,7 +75,9 @@ export class DetailProductComponent implements OnInit, OnDestroy {
         this.productPhotoOriginal = res.data[0].imageurl;
 
         this.productDescription = res.data[0].description;
-        this.productDescriptionOriginal = res.data[0].description;
+        this.productDescriptionOriginal = res.data[0].description;        
+
+        this.isProductActive = res.data[0].isactive
       });
   }
 

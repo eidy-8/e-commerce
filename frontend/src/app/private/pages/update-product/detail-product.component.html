@@ -10,6 +10,15 @@
             </button>
         </div>
 
+        <app-info-card
+            [title]="'Inativo'"
+            [description]="'O anúncio está pausado.'"
+            [buttonLabel]="'Reativar'"
+            (buttonClicked)="reactivateProduct()"
+        ></app-info-card>
+
+        <div class="mb-10"></div>
+
         <app-expandable-section
             title="Título"
             [value]="this.productId"
@@ -152,3 +161,5 @@
         </app-expandable-section>
     </div>
 </div>
+
+<app-footer-regular></app-footer-regular>

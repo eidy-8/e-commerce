@@ -22,6 +22,7 @@ import { ProductManagerComponent } from './components/product-manager/product-ma
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { SearchBarComponent } from './components/reusable/search-bar/search-bar.component';
 import { ExpandableSectionComponent } from './components/reusable/expandable-section/expandable-section.component';
+import { InfoCardComponent } from './components/reusable/info-card/info-card.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ExpandableSectionComponent } from './components/reusable/expandable-sec
     ProductManagerComponent,
     ClickOutsideDirective,
     SearchBarComponent,
-    ExpandableSectionComponent
+    ExpandableSectionComponent,
+    InfoCardComponent
   ],
   imports: [
     CommonModule,
@@ -71,7 +73,8 @@ import { ExpandableSectionComponent } from './components/reusable/expandable-sec
     SideMenuComponent,
     ProductManagerComponent,
     SearchBarComponent,
-    ExpandableSectionComponent
+    ExpandableSectionComponent,
+    InfoCardComponent  
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,24 @@
+<div class="card-container">
+    <div class="left-accent"></div>
+    <div class="card-content">
+      <div class="card-header">
+        <i class="fa fa-info-circle info-icon"></i>
+        <input
+          type="text"
+          [(ngModel)]="title"
+          placeholder="Digite o título"
+          class="title-input"
+        />
+      </div>
+      <div class="card-description">
+        {{ description }}
+      </div>
+      <button
+        class="custom-button"
+        (click)="onButtonClick()"
+      >
+        {{ buttonLabel }}
+      </button>
+    </div>
+</div>
+  
