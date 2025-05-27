@@ -10,14 +10,32 @@
             </button>
         </div>
 
-        <app-info-card
-            [title]="'Inativo'"
-            [description]="'O anúncio está pausado.'"
-            [buttonLabel]="'Reativar'"
-            (buttonClicked)="reactivateProduct()"
-        ></app-info-card>
+        @if (isProductActive == 'F') {
+            <app-info-card
+                [title]="'Inativo'"
+                [description]="'O anúncio está pausado.'"
+                [buttonLabel]="'Reativar'"
+                (buttonClicked)="reactivateProduct()"
+            ></app-info-card>
+        }
 
-        <div class="mb-10"></div>
+        <div class="flex justify-between mt-10 mb-10">
+            <div>
+                <p class="font-bold text-2xl">{{ productName }}</p>
+                <br>
+                <p class="text-gray-500">#{{ productId }}</p>
+                <br>
+                <p class="text-gray-500">{{ productSale > 1 ? productSale + ' unidades vendidas.' : productSale + ' unidade vendida.' }}</p>
+            </div>
+
+            <div class="w-28 h-28 bg-white rounded-full">
+                <img
+                  [src]="productPhoto"
+                  alt="imagem do anúncio"
+                  class="w-full h-full"
+                />
+            </div>
+        </div>
 
         <app-expandable-section
             title="Título"

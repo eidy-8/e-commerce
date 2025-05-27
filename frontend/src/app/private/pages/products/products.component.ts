@@ -47,6 +47,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.currentPage++;
       this.getProducts();
     }
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' 
+    });
   }
 
   previousPage() {
@@ -54,6 +59,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.currentPage--;
       this.getProducts();
     }
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
 
   navigateToNewProduct(): void {

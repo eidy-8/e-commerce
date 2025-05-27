@@ -6,11 +6,11 @@ import { ToasterService } from '../../../shared/services/toaster.service';
 import { MethodsService } from '../../../shared/services/shared.service';
 
 @Component({
-  selector: 'app-detail-product',
-  templateUrl: './detail-product.component.html',
-  styleUrl: './detail-product.component.css'
+  selector: 'app-update-product',
+  templateUrl: './update-product.component.html',
+  styleUrl: './update-product.component.css'
 })
-export class DetailProductComponent implements OnInit, OnDestroy {
+export class UpdateProductComponent implements OnInit, OnDestroy {
 
   protected productId: any;
 
@@ -22,6 +22,7 @@ export class DetailProductComponent implements OnInit, OnDestroy {
   protected productDescription: any;
 
   protected isProductActive: any;
+  protected productSale: any;
 
   protected productNameOriginal: any;
   protected productPriceOriginal: any;
@@ -50,7 +51,30 @@ export class DetailProductComponent implements OnInit, OnDestroy {
   }
 
   public reactivateProduct() {
-    console.log("oi");
+    let updateData = {
+      isActive: 'T'
+    }
+
+    this.productService.putProduct(updateData, this.productId).pipe( takeUntil( this.unsubscribe ) ).subscribe({
+      next: res => {       
+        this.toasterService.show({
+          type: 'success',
+          title: 'Sucesso',
+          message: res.message
+        });
+
+        this.isProductActive = 'T';
+      },
+      error: error => {    
+        this.isFieldError = true;
+        
+        this.toasterService.show({
+          type: 'error',
+          title: 'Erro',
+          message: error.fullError.error.error
+        });
+      }
+    });
   }
 
   private getProducts(productId: any) {    
@@ -77,7 +101,9 @@ export class DetailProductComponent implements OnInit, OnDestroy {
         this.productDescription = res.data[0].description;
         this.productDescriptionOriginal = res.data[0].description;        
 
-        this.isProductActive = res.data[0].isactive
+        this.isProductActive = res.data[0].isactive;      
+        
+        this.productSale = res.data[0].sale;
       });
   }
 

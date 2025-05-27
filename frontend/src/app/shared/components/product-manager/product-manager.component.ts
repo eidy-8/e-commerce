@@ -236,7 +236,7 @@ export class ProductManagerComponent implements OnDestroy {
   }
 
   editProduct(p: Product) {
-    this.router.navigate([`user/detail-product/${p.id}`]);
+    this.router.navigate([`user/update-product/${p.id}`]);
   }
 
   viewProduct(p: Product) {
