@@ -1,24 +1,33 @@
-<div class="card-container">
-    <div class="left-accent"></div>
-    <div class="card-content">
-      <div class="card-header">
-        <i class="fa fa-info-circle info-icon"></i>
-        <input
-          type="text"
-          [(ngModel)]="title"
-          placeholder="Digite o título"
-          class="title-input"
-        />
-      </div>
-      <div class="card-description">
-        {{ description }}
-      </div>
-      <button
-        class="custom-button"
-        (click)="onButtonClick()"
-      >
-        {{ buttonLabel }}
-      </button>
+<div class="card-container" [ngClass]="type">
+  <div class="left-accent"></div>
+  <div class="card-content">
+    <div class="card-header">
+      <i
+        class="fa"
+        [ngClass]="{
+          'fa fa-info-circle': type === 'info',
+          'fa fa-check-circle': type === 'success',
+          'fa fa-exclamation-circle': type === 'warning',
+          'fa fa-times-circle': type === 'error'
+        }"
+        class="info-icon"
+      ></i>
+      <input
+        type="text"
+        [(ngModel)]="title"
+        placeholder="Digite o título"
+        class="title-input"
+      />
     </div>
+    <div *ngIf="description" class="card-description">
+      {{ description }}
+    </div>
+    <button
+      *ngIf="buttonLabel"
+      class="custom-button"
+      (click)="onButtonClick()"
+    >
+      {{ buttonLabel }}
+    </button>
+  </div>
 </div>
-  

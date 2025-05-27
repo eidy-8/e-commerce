@@ -6,14 +6,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './info-card.component.css'
 })
 export class InfoCardComponent {
-  @Input() title: string = 'Título do card';
-  @Input() description: string = 'Descrição do card.';
-  @Input() buttonLabel: string = 'Ação';
-  @Input() buttonColor: string = '#28a745'; // Verde padrão
+  @Input() title: string = ''; 
+  @Input() description?: string; 
+  @Input() buttonLabel?: string; 
+  @Input() type: 'info' | 'success' | 'warning' | 'error' = 'info'; 
+  @Output() buttonClicked = new EventEmitter<void>(); 
 
-  @Output() buttonClicked = new EventEmitter<void>();
-
-  onButtonClick() {
+  onButtonClick(): void {
     this.buttonClicked.emit();
   }
 }

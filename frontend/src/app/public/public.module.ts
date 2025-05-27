@@ -5,11 +5,13 @@ import { PublicRoutingModule } from './public-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { MainComponent } from './main/main.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ProductListingComponent } from './pages/product-listing/product-listing.component';
 
 @NgModule({
   declarations: [
     MainComponent,
-    HomeComponent
+    HomeComponent,
+    ProductListingComponent
   ],
   imports: [
     CommonModule,

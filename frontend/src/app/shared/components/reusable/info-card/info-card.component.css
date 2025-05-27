@@ -1,17 +1,36 @@
 .card-container {
   display: flex;
-  border: 1px solid #ccc;
-  border-left: 6px solid #007bff;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 16px;
-  width: 300px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #e0e0e0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
+}
+
+.card-container.info {
+  border-left: 4px solid #007bff;
+}
+
+.card-container.success {
+  border-left: 4px solid #28a745;
+}
+
+.card-container.warning {
+  border-left: 4px solid #ffc107;
+}
+
+.card-container.error {
+  border-left: 4px solid #dc3545;
+}
+
+.left-accent {
+  width: 4px;
 }
 
 .card-content {
   flex: 1;
+  padding: 16px;
 }
 
 .card-header {
@@ -21,37 +40,34 @@
 }
 
 .info-icon {
-  font-size: 20px;
-  color: #007bff;
+  font-size: 24px;
   margin-right: 8px;
 }
 
 .title-input {
-  font-size: 16px;
-  font-weight: bold;
   border: none;
-  outline: none;
+  font-size: 18px;
+  font-weight: bold;
   width: 100%;
+  outline: none;
   background-color: #e0e0e0;
 }
 
 .card-description {
-  margin: 8px 0 16px;
-  color: #555;
-  font-size: 14px;
-  margin-left: 25px;
+  margin-bottom: 16px;
+  color: #666;
 }
 
 .custom-button {
-  padding: 8px 12px;
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 4px;
+  padding: 8px 16px;
   cursor: pointer;
-  margin-left: 25px;
-  background-color: #007aff;
+  transition: background-color 0.3s ease;
 }
 
 .custom-button:hover {
-    background-color: #0061CC;
+  background-color: #0056b3;
 }
