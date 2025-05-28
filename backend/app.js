@@ -6,6 +6,7 @@ const cors = require('cors');
 const registerRoute = require('./routes/registerRoute');
 const loginRoute = require('./routes/loginRoute');
 const productRoute = require('./routes/productRoute');
+const categoryRoute = require('./routes/categoryRoute');
 
 const middlewares = require('./middlewares/tokenValited');
 
@@ -29,9 +30,11 @@ app.use('/register', registerRoute);
 
 app.use('/login', loginRoute);
 
-app.use('*', middlewares.tokenValited);
-
 app.use('/product', productRoute);
+
+app.use('/category', categoryRoute);
+
+app.use('*', middlewares.tokenValited);
 
 app.use('/private', async (req, res) => {
     try {
