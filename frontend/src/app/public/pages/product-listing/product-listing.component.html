@@ -1,102 +1,120 @@
-<app-info-card
-  title="Anúncio pausado"
-  type="warning"
-></app-info-card>
 
-<div class="container">
-  <div class="main-content">
-    <div class="image-section">
-      <div class="main-image">
-        <img [src]="mainImage" alt="imagem do produto" />
-      </div>
-      <div class="thumbnails">
-        <img
-          *ngFor="let image of images; let i = index"
-          [src]="image"
-          (click)="changeMainImage(i)"
-          class="thumbnail"
-          [ngClass]="{ 'thumbnail-active': i === currentImageIndex }"
-        />
-      </div>
-    </div>
+<div class="screen">
+  <app-info-card
+    title="Anúncio pausado"
+    type="warning"
+  ></app-info-card>
 
-    <div class="info-section">
-      <button
-        (click)="toggleFavorite()"
-        class="favorite-button"
-        [ngClass]="{ favorited: isFavorited }"
-      >
-        ♥
-      </button>
-      <p class="condition">
-        {{ product.condition }} | {{ product.soldQuantity }} vendidos
-      </p>
-      <h1 class="title">{{ product.title }}</h1>
-      <p class="price">{{ product.price | currency : "BRL" }}</p>
-      <p class="installments">
-        em até 12x {{ product.price / 12 | currency : "BRL" }} sem juros
-      </p>
-      <p class="shipping">Frete grátis</p>
-      <p class="stock">
-        Estoque disponível: {{ product.availableQuantity }} unidades
-        <span *ngIf="product.availableQuantity === 1" class="last-available">
-          | Último disponível!</span
+  <p class="category">{{ category }}</p>
+
+  <div class="container">
+    <div class="main-content">
+      <div class="image-section">
+        <div class="main-image">
+          <img [src]="mainImage" alt="imagem do produto" />
+        </div>
+        <div class="thumbnails">
+          <img
+            *ngFor="let image of images; let i = index"
+            [src]="image"
+            (click)="changeMainImage(i)"
+            class="thumbnail"
+            [ngClass]="{ 'thumbnail-active': i === currentImageIndex }"
+          />
+        </div>
+      </div>
+  
+      <div class="info-section">
+        <button
+          (click)="toggleFavorite()"
+          class="favorite-button"
+          [ngClass]="{ favorited: isFavorited }"
         >
-      </p>
-
-      <div class="buttons">
-        <button (click)="buyNow()" class="buy-now">Comprar agora</button>
-        <button (click)="addToCart()" class="add-to-cart">
-          Adicionar ao carrinho
+          ♥
+        </button>
+        <p class="condition">
+          {{ product.condition === 'F' ? 'Novo' : 'Usado' }} | {{ product.soldQuantity }} {{ product.soldQuantity === 1 ? 'vendido' : 'vendidos' }}
+        </p>
+        <h1 class="title">{{ product.title }}</h1>
+        <p class="price">{{ product.price | currency : "BRL" }}</p>
+        <p class="stock">
+          Estoque disponível: {{ product.availableQuantity }} unidades
+          <span *ngIf="product.availableQuantity === 1" class="last-available">
+            | Último disponível!</span
+          >
+        </p>
+  
+        <div class="buttons">
+          <button (click)="buyNow()" class="buy-now">Comprar agora</button>
+          <button (click)="addToCart()" class="add-to-cart">
+            Adicionar ao carrinho
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="description-section">
+      <h2>Descrição do produto</h2>
+      <div class="description-wrapper">
+        <div
+          class="description-content"
+          [ngClass]="{ blurred: !showFullDescription }"
+        >
+          {{ product.description }}
+        </div>
+        <div *ngIf="!showFullDescription" class="fade-overlay">
+          <button (click)="toggleDescription()" class="toggle-button">
+            Ver descrição completa
+          </button>
+        </div>
+        <button
+          *ngIf="showFullDescription"
+          (click)="toggleDescription()"
+          class="toggle-button"
+        >
+          Ocultar descrição
         </button>
       </div>
     </div>
+  
+    <!-- <div class="details-section">
+      <h2>Detalhes do produto</h2>
+      <div class="details-wrapper">
+        <ul class="details-content" [ngClass]="{ blurred: !showFullDetails }">
+          <li *ngFor="let detail of product.details">
+            {{ detail.key }}: {{ detail.value }}
+          </li>
+        </ul>
+        <div *ngIf="!showFullDetails" class="fade-overlay">
+          <button (click)="toggleDetails()" class="toggle-button">
+            Ver detalhes completos
+          </button>
+        </div>
+        <button
+          *ngIf="showFullDetails"
+          (click)="toggleDetails()"
+          class="toggle-button"
+        >
+          Ocultar detalhes
+        </button>
+      </div>
+    </div> -->
   </div>
 
-  <div class="description-section">
-    <h2>Descrição do produto</h2>
-    <div class="description-wrapper">
-      <div
-        class="description-content"
-        [ngClass]="{ blurred: !showFullDescription }"
-      >
-        {{ product.description }}
-      </div>
-      <div *ngIf="!showFullDescription" class="fade-overlay">
-        <button (click)="toggleDescription()" class="toggle-button">
-          Ver descrição completa
-        </button>
-      </div>
-      <button
-        *ngIf="showFullDescription"
-        (click)="toggleDescription()"
-        class="toggle-button"
-      >
-        Ocultar descrição
-      </button>
-    </div>
-  </div>
+  <br>
 
-  <!-- <div class="details-section">
-    <h2>Detalhes do produto</h2>
-    <div class="details-wrapper">
-      <ul class="details-content" [ngClass]="{ blurred: !showFullDetails }">
-        <li *ngFor="let detail of product.details">
-          {{ detail.key }}: {{ detail.value }}
-        </li>
-      </ul>
-      <div *ngIf="!showFullDetails" class="fade-overlay">
-        <button (click)="toggleDetails()" class="toggle-button">
-          Ver detalhes completos
-        </button>
-      </div>
-      <button
-        *ngIf="showFullDetails"
-        (click)="toggleDetails()"
-        class="toggle-button"
-      >
-        Ocultar detalhes
-      </button>
-    </div>
-  </div> -->
+  <div class="sm:flex justify-between w-full mx-auto">
+    <img
+      class="sm:w-[640px] h-auto rounded-lg"
+      src="../../../../assets/Banner3.png"
+      alt=""
+    />
+
+    <img
+      class="sm:w-[640px] h-auto rounded-lg"
+      src="../../../../assets/Banner4.png"
+      alt=""
+    />
+  </div>
 </div>
+

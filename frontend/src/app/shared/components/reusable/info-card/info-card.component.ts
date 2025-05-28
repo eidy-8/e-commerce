@@ -15,4 +15,14 @@ export class InfoCardComponent {
   onButtonClick(): void {
     this.buttonClicked.emit();
   }
+
+  getIcon(type: string): string {
+    switch (type) {
+      case 'success': return 'fa fa-check-circle';
+      case 'error': return 'fa fa-times-circle';
+      case 'info': return 'fa fa-info-circle';
+      case 'warning': return 'fa fa-exclamation-circle';
+      default: return '';
+    }
+  }
 }

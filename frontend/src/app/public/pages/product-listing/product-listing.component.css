@@ -1,10 +1,13 @@
 .container {
-  max-width: 1250px;
-  margin: 0 auto;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 24px;
+}
+
+.screen {
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
 .main-content {
@@ -102,8 +105,6 @@
   margin-top: 16px;
 }
 
-.installments,
-.shipping,
 .stock {
   font-size: 14px;
   color: #6b7280;
@@ -133,17 +134,17 @@
 }
 
 .buy-now {
-  background-color: #2563eb;
+  background-color: #007aff;
   color: white;
 }
 
 .buy-now:hover {
-  background-color: #1d4ed8;
+  background-color: #0061CC;
 }
 
 .add-to-cart {
-  background-color: #dbeafe;
-  color: #2563eb;
+  background-color: #e3edfb;
+  color: #007aff;
 }
 
 .add-to-cart:hover {
@@ -202,7 +203,7 @@
 .toggle-button {
   background: none;
   border: none;
-  color: #2563eb;
+  color: #007aff;
   font-size: 14px;
   cursor: pointer;
   text-decoration: underline;
@@ -210,9 +211,14 @@
 }
 
 .toggle-button:hover {
-  color: #1d4ed8;
+  color: #0061CC;
 }
 
 .details-content li {
   margin-bottom: 8px;
+}
+
+.category {
+  color: #007aff;
+  margin-bottom: 16px;
 }

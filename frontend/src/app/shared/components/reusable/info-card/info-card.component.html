@@ -3,13 +3,7 @@
   <div class="card-content">
     <div class="card-header">
       <i
-        class="fa"
-        [ngClass]="{
-          'fa fa-info-circle': type === 'info',
-          'fa fa-check-circle': type === 'success',
-          'fa fa-exclamation-circle': type === 'warning',
-          'fa fa-times-circle': type === 'error'
-        }"
+        [class]="getIcon(type)"
         class="info-icon"
       ></i>
       <input

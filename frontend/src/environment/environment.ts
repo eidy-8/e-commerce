@@ -3,5 +3,6 @@ export enum Environment {
     ENV_REGISTER =       'http://localhost:3000/register',
     ENV_PRIVATE =        'http://localhost:3000/private',
     
-    ENV_PRODUCT =        'http://localhost:3000/product'
+    ENV_PRODUCT =        'http://localhost:3000/product',
+    ENV_CATEGORY =       'http://localhost:3000/category'
 }

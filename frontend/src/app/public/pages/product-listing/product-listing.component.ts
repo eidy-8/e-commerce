@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../private/services/product.service';
 import { Subject, takeUntil } from 'rxjs';
+import { CategoryService } from '../../../private/services/category.service';
 
 @Component({
   selector: 'app-product-listing',
@@ -25,7 +26,9 @@ export class ProductListingComponent implements OnInit, OnDestroy {
   showFullDescription: boolean = false;
   showFullDetails: boolean = false;
 
-  constructor(private route: ActivatedRoute, public productService: ProductService) {}
+  category!: string;
+
+  constructor(private route: ActivatedRoute, public productService: ProductService, public categoryService: CategoryService) {}
 
   ngOnInit(): void {
     this.productId = this.route.snapshot.paramMap.get('productId'); 
@@ -34,34 +37,44 @@ export class ProductListingComponent implements OnInit, OnDestroy {
   }
 
   private getProducts(productId: any) {    
-      this.productService.getProduct('', 1, 10, productId)
-        .pipe(takeUntil(this.unsubscribe))
-        .subscribe((res: any) => {     
-          this.product = {
-            title: res.data[0].name,
-            price: res.data[0].price,
-            condition: res.data[0].isused,
-            soldQuantity: res.data[0].sale,
-            availableQuantity: res.data[0].quantity, 
-            description: res.data[0].description,
-            details: [
-              { key: 'Marca', value: 'XYZ' },
-              { key: 'Modelo', value: 'Pro 2023' },
-              { key: 'Memória RAM', value: '6GB' },
-              { key: 'Armazenamento', value: '128GB' },
-              { key: 'Câmera', value: '48MP + 12MP + 5MP' },
-              { key: 'Bateria', value: '4500mAh' },
-              { key: 'Conectividade', value: '5G' }
-            ]
-          }
+    this.productService.getProduct('', 1, 10, productId)
+    .pipe(takeUntil(this.unsubscribe))
+    .subscribe((res: any) => {     
+      this.product = {
+        title: res.data[0].name,
+        price: res.data[0].price,
+        condition: res.data[0].isused,
+        soldQuantity: res.data[0].sale,
+        availableQuantity: res.data[0].quantity, 
+        description: res.data[0].description,
+        details: [
+          { key: 'Marca', value: 'XYZ' },
+          { key: 'Modelo', value: 'Pro 2023' },
+          { key: 'Memória RAM', value: '6GB' },
+          { key: 'Armazenamento', value: '128GB' },
+          { key: 'Câmera', value: '48MP + 12MP + 5MP' },
+          { key: 'Bateria', value: '4500mAh' },
+          { key: 'Conectividade', value: '5G' }
+        ]
+      }
 
-          this.images = [
-            `${res.data[0].imageurl}`
-          ];
+      this.images = [
+        `${res.data[0].imageurl}`
+      ];
 
-          this.mainImage = this.images[0];          
-        });
-    }
+      this.mainImage = this.images[0];      
+      
+      this.getCategory(res.data[0].category_id);
+    });
+  }
+
+  private getCategory(categoryId: any) {    
+    this.categoryService.getCategory(categoryId)
+    .pipe(takeUntil(this.unsubscribe))
+    .subscribe((res: any) => {     
+      this.category = res.data[0].name;
+    });
+  }
 
   changeMainImage(index: number): void {
     this.currentImageIndex = index;

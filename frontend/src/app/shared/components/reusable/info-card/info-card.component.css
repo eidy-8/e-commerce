@@ -3,6 +3,7 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
+  margin-top: 16px;
   margin-bottom: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #e0e0e0;
@@ -30,7 +31,7 @@
 
 .card-content {
   flex: 1;
-  padding: 16px;
+  padding: 10px;
 }
 
 .card-header {
@@ -40,7 +41,6 @@
 }
 
 .info-icon {
-  font-size: 24px;
   margin-right: 8px;
 }
 
