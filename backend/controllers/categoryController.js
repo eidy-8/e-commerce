@@ -8,9 +8,7 @@ exports.listAllCategories = async (req, res) => {
 
     if (id === undefined) {
         result = await categoryService.listAllCategories();
-    } else {
-        console.log("com id");
-        
+    } else {        
         result = await categoryService.listSpecificCategory(id);
     }
 
