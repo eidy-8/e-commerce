@@ -103,15 +103,26 @@
 
   <br>
 
+  <div class="mx-0 sm:mx-[-25px]">
+    <app-catalog
+      [catalogTitle]="'Quem viu este produto também comprou'"
+      [products]="products"
+      [cardsPerPage]="catalogCardsPerPage"
+      [scrollStep]="catalogScrollStep"
+    ></app-catalog>
+  </div>
+
+  <br>
+
   <div class="sm:flex justify-between w-full mx-auto">
     <img
-      class="sm:w-[640px] h-auto rounded-lg"
+      class="sm:w-[625px] h-auto rounded-lg"
       src="../../../../assets/Banner3.png"
       alt=""
     />
 
     <img
-      class="sm:w-[640px] h-auto rounded-lg"
+      class="sm:w-[625px] h-auto rounded-lg"
       src="../../../../assets/Banner4.png"
       alt=""
     />

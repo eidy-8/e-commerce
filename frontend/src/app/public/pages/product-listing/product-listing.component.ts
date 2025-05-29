@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../private/services/product.service';
 import { Subject, takeUntil } from 'rxjs';
@@ -28,12 +28,39 @@ export class ProductListingComponent implements OnInit, OnDestroy {
 
   category!: string;
 
+  protected products = [{}];
+
+  protected catalogCardsPerPage: number = 6;
+  protected catalogScrollStep: number = 6;
+
   constructor(private route: ActivatedRoute, public productService: ProductService, public categoryService: CategoryService) {}
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event?: any) {
+    if (window.innerWidth <= 768) { 
+      this.catalogCardsPerPage = 2;
+      this.catalogScrollStep = 2;
+    }
+  }
 
   ngOnInit(): void {
     this.productId = this.route.snapshot.paramMap.get('productId'); 
 
     this.getProducts(this.productId);
+
+    this.products = [
+      { title: 'Comida', price: '1 real', image: '../../../../assets/undraw_breakfast_rgx5.svg', link: 'http://localhost:4200/' },
+      { title: 'Tecnologia', price: '1 real', image: '../../../../assets/undraw_mobile-images_b202.svg', link: 'http://localhost:4200/' },
+      { title: 'Moda', price: '1 real', image: '../../../../assets/undraw_window-shopping_9l2k.svg', link: 'http://localhost:4200/' },
+      { title: 'Móveis', price: '1 real', image: '../../../../assets/undraw_special-event_hv54.svg', link: 'http://localhost:4200/' },
+      { title: 'Limpeza', price: '1 real', image: '../../../../assets/undraw_clean-up_af4s.svg', link: 'http://localhost:4200/' },
+      { title: 'Brinquedo', price: '1 real', image: '../../../../assets/undraw_toy-car_ugyu.svg', link: 'http://localhost:4200/' },
+      { title: 'Card 7', price: '1 real', image: '../../../../assets/undraw_breakfast_rgx5.svg', link: 'http://localhost:4200/' },
+      { title: 'Card 8', price: '1 real', image: '../../../../assets/undraw_breakfast_rgx5.svg', link: 'http://localhost:4200/' },
+      { title: 'Card 9', price: '1 real', image: '../../../../assets/undraw_breakfast_rgx5.svg', link: 'http://localhost:4200/' }
+    ];
+
+    this.onResize();
   }
 
   private getProducts(productId: any) {    
