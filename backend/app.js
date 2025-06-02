@@ -7,6 +7,7 @@ const registerRoute = require('./routes/registerRoute');
 const loginRoute = require('./routes/loginRoute');
 const productRoute = require('./routes/productRoute');
 const categoryRoute = require('./routes/categoryRoute');
+const wishListRoute = require('./routes/wishListRoute');
 
 const middlewares = require('./middlewares/tokenValited');
 
@@ -35,6 +36,8 @@ app.use('/product', productRoute);
 app.use('/category', categoryRoute);
 
 app.use('*', middlewares.tokenValited);
+
+app.use('/wishList', wishListRoute);
 
 app.use('/private', async (req, res) => {
     try {

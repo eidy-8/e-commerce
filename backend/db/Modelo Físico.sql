@@ -18,6 +18,11 @@ CREATE TABLE Buyer (
 	user_id UUID UNIQUE NOT NULL REFERENCES Users(id) ON DELETE CASCADE
 );
 
+CREATE TABLE WishlistItem (
+    wishlist_id UUID NOT NULL REFERENCES Wishlist(id) ON DELETE CASCADE,
+    product_id UUID NOT NULL REFERENCES Product(id) ON DELETE CASCADE
+);
+
 CREATE TABLE Cart (
 	id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
 	buyer_id UUID UNIQUE NOT NULL REFERENCES Buyer(id) ON DELETE CASCADE
@@ -55,7 +60,7 @@ CREATE TABLE Product (
 );
 
 --Comandos para testes
-SELECT * FROM product;
+SELECT * FROM Wishlist;
 
 SELECT * FROM Product WHERE name ILIKE $1
 
