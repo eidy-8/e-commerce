@@ -18,7 +18,7 @@ CREATE TABLE Buyer (
 	user_id UUID UNIQUE NOT NULL REFERENCES Users(id) ON DELETE CASCADE
 );
 
-CREATE TABLE WishlistItem (
+CREATE TABLE Wishlist_Product (
     wishlist_id UUID NOT NULL REFERENCES Wishlist(id) ON DELETE CASCADE,
     product_id UUID NOT NULL REFERENCES Product(id) ON DELETE CASCADE
 );
@@ -60,9 +60,11 @@ CREATE TABLE Product (
 );
 
 --Comandos para testes
-SELECT * FROM Wishlist;
+SELECT * FROM Buyer;
 
 SELECT * FROM Product WHERE name ILIKE $1
+
+SELECT * FROM Wishlist_Product WHERE wishlist_id = 'a6eaba31-9a03-4f22-aeee-4dd4299f8493' AND product_id = 'f014b047-a2c9-4d5f-bdf0-00ef012b3a5f';
 
 INSERT INTO Seller (user_id) VALUES ('77ebb9bf-6426-428a-8cc0-98a286b8a2da');
 INSERT INTO Buyer (user_id) VALUES ('77ebb9bf-6426-428a-8cc0-98a286b8a2da');
@@ -102,6 +104,10 @@ DELETE FROM Users WHERE id = '648efb8c-3571-4541-b654-9b3270144ef9';
 
 TRUNCATE TABLE Product CASCADE;
 
-DROP TABLE Product CASCADE;
+DROP TABLE WishlistItem CASCADE;
 
 SHOW timezone;
+
+SELECT wp.product_id
+FROM Wishlist_Product wp
+WHERE wp.wishlist_id = 'a6eaba31-9a03-4f22-aeee-4dd4299f8493';

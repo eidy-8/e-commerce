@@ -2,7 +2,7 @@ const db = require("../db/db");
 
 async function postBuyer(data) {
     return new Promise((resolve, reject) => {
-        const query = "INSERT INTO Buyer (user_id) VALUES ($1)";
+        const query = "INSERT INTO Buyer (user_id) VALUES ($1) RETURNING *";
         db.query(
             query,
             [data],

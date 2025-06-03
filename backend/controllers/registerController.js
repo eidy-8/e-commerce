@@ -29,7 +29,7 @@ exports.register = async (req, res) => {
 
             const buyerId = await buyerModel.postBuyer(createdUser.id);
 
-            await wishListModel.createWishlist(buyerId);
+            await wishListModel.createWishlist(buyerId.id);
 
             await sellerModel.postSeller(createdUser.id);
 
