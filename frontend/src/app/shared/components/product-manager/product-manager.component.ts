@@ -240,7 +240,7 @@ export class ProductManagerComponent implements OnDestroy {
   }
 
   viewProduct(p: Product) {
-    console.log(p.id);
+    this.router.navigate([`${p.id}`]);
   }
 
   deleteProduct(p: Product) {

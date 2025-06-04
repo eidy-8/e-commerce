@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../private/services/product.service';
 import { Subject, takeUntil } from 'rxjs';
 import { CategoryService } from '../../../private/services/category.service';
+import { UserService } from '../../../private/services/user.service';
 
 @Component({
   selector: 'app-product-listing',
@@ -33,7 +34,11 @@ export class ProductListingComponent implements OnInit, OnDestroy {
   protected catalogCardsPerPage: number = 6;
   protected catalogScrollStep: number = 6;
 
-  constructor(private route: ActivatedRoute, public productService: ProductService, public categoryService: CategoryService) {}
+  protected isOwnProduct!: boolean;
+
+  protected sellerId!: string;
+
+  constructor(private route: ActivatedRoute, public productService: ProductService, public categoryService: CategoryService, private userService: UserService) {}
 
   @HostListener('window:resize', ['$event'])
   onResize(event?: any) {
@@ -45,8 +50,6 @@ export class ProductListingComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.productId = this.route.snapshot.paramMap.get('productId'); 
-
-    this.getProducts(this.productId);
 
     this.products = [
       { title: 'Comida', price: '1 real', image: '../../../../assets/undraw_breakfast_rgx5.svg', link: 'http://localhost:4200/' },
@@ -61,10 +64,15 @@ export class ProductListingComponent implements OnInit, OnDestroy {
     ];
 
     this.onResize();
+
+    this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
+      this.sellerId = res.data.sellerId;
+      this.getProducts(this.productId, this.sellerId);
+    });
   }
 
-  private getProducts(productId: any) {    
-    this.productService.getProduct('', 1, 10, productId)
+  private getProducts(productId: string, sellerId: string) {    
+    this.productService.getProduct('', 1, 10, sellerId, productId)
     .pipe(takeUntil(this.unsubscribe))
     .subscribe((res: any) => {     
       this.product = {

@@ -4,6 +4,7 @@ import { ProductService } from '../../services/product.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ToasterService } from '../../../shared/services/toaster.service';
 import { MethodsService } from '../../../shared/services/shared.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-update-product',
@@ -42,12 +43,18 @@ export class UpdateProductComponent implements OnInit, OnDestroy {
 
   private unsubscribe = new Subject<void>;
 
-  constructor(private route: ActivatedRoute, private router: Router, public productService: ProductService, private toasterService: ToasterService, public sharedMethod: MethodsService) {}
+  private sellerId!: string;
+
+  constructor(private route: ActivatedRoute, private router: Router, public productService: ProductService, private toasterService: ToasterService, public sharedMethod: MethodsService, private userService: UserService) {}
 
   ngOnInit(): void {
     this.productId = this.route.snapshot.paramMap.get('productId'); 
 
-    this.getProducts(this.productId);
+    this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
+      this.sellerId = res.data.sellerId;
+      
+      this.getProducts(this.productId, this.sellerId);
+    });
   }
 
   public reactivateProduct() {
@@ -77,11 +84,10 @@ export class UpdateProductComponent implements OnInit, OnDestroy {
     });
   }
 
-  private getProducts(productId: any) {    
-    this.productService.getProduct('', 1, 10, productId)
+  private getProducts(productId: string, sellerId: string) {    
+    this.productService.getProduct('', 1, 10, sellerId, productId)
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res: any) => {     
-        console.log(res);
 
         this.productName = res.data[0].name;
         this.productNameOriginal = res.data[0].name;

@@ -83,6 +83,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
   protected isLoading$: Observable<boolean>;
 
+  protected createdProductId!: string;
+
   constructor(private route: ActivatedRoute, public sharedMethod: MethodsService, public productService: ProductService,  private router: Router, public userService: UserService, private loadingService: LoadingService, private toasterService: ToasterService) {
     this.isLoading$ = this.loadingService.loading$;
   }
@@ -108,11 +110,9 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       category_id: this.category
     }
 
-    console.log(productData);
-
     this.productService.postProduct(productData).pipe( takeUntil( this.unsubscribe ) ).subscribe({
       next: res => {
-        console.log(res.message);
+        this.createdProductId = res.id;
 
         this.modal.open(); 
       },
@@ -985,6 +985,14 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     if (isChanging) {
       this.isAllStepsCompleted = false;
     }
+  }
+
+  protected seeProducts() {
+    this.router.navigate(['/user/my-products']);
+  }
+
+  protected seeProduct() {
+    this.router.navigate([`/${this.createdProductId}`]);
   }
 
   ngOnDestroy(): void {

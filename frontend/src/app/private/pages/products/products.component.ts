@@ -4,6 +4,7 @@ import { ProductService } from '../../services/product.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { LoadingService } from '../../../shared/services/loading.service';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-products',
@@ -16,22 +17,28 @@ export class ProductsComponent implements OnInit, OnDestroy {
   pageSize: number = 10;
   hasNext: boolean = false;
 
+  sellerId!: string;
+
   private unsubscribe = new Subject<void>;
 
   protected isLoading$: Observable<boolean>;
 
-  constructor(public productService: ProductService, public loadingService: LoadingService, private router: Router) {
+  constructor(public productService: ProductService, public loadingService: LoadingService, private router: Router, private userService: UserService) {
     this.isLoading$ = this.loadingService.loading$;
   }
 
   ngOnInit(): void {
-    this.getProducts();
+    this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
+      this.sellerId = res.data.sellerId
+      this.getProducts();
+    });
+
   }
 
   private getProducts(searchTerm: string = '') {
-    this.productService.getProduct(searchTerm, this.currentPage, this.pageSize)
+    this.productService.getProduct(searchTerm, this.currentPage, this.pageSize, this.sellerId)
       .pipe(takeUntil(this.unsubscribe))
-      .subscribe((res: any) => {        
+      .subscribe((res: any) => {                
         this.listaDeProdutos = res.data; 
         this.hasNext = res.hasNext; 
       });
