@@ -12,15 +12,16 @@ exports.getAllProducts = async () => {
   }
 }
 
-exports.getPagedProducts = async (offset, limit) => {
+exports.getPagedProducts = async (offset, limit, sellerId) => {
   const query = `
       SELECT * 
       FROM Product
-      OFFSET $1 LIMIT $2
+      WHERE seller_id = $1
+      OFFSET $2 LIMIT $3
   `;
 
   try {
-      const result = await pool.query(query, [offset, limit]);
+      const result = await pool.query(query, [sellerId, offset, limit]);
       return result.rows;
   } catch (err) {
       console.error('Erro ao listar produtos no banco de dados.', err);
@@ -28,11 +29,11 @@ exports.getPagedProducts = async (offset, limit) => {
   }
 };
 
-exports.getSpecificProduct = async (id) => {
-  const query = `SELECT * FROM Product WHERE id = $1`;
+exports.getSpecificProduct = async (id, sellerId) => {
+  const query = `SELECT * FROM Product WHERE id = $1 AND seller_id = $2`;
 
   try {
-    const result = await pool.query(query, [id]);
+    const result = await pool.query(query, [id, sellerId]);
       return result.rows;
   } catch (err) {
       console.error('Erro ao listar produtos no banco de dados.', err);
@@ -40,14 +41,15 @@ exports.getSpecificProduct = async (id) => {
   }
 }
 
-exports.countAllProducts = async () => {
+exports.countAllProducts = async (sellerId) => {
   const query = `
       SELECT COUNT(*) AS total
-      FROM Product
+      FROM Product 
+      WHERE seller_id = $1
   `;
 
   try {
-      const result = await pool.query(query);
+      const result = await pool.query(query, [sellerId]);
       return parseInt(result.rows[0].total, 10);
   } catch (err) {
       console.error('Erro ao contar produtos no banco de dados.', err);
@@ -55,16 +57,17 @@ exports.countAllProducts = async () => {
   }
 };
 
-exports.searchProductsByKeyword = async (keyword, offset, limit) => {
+exports.searchProductsByKeyword = async (keyword, offset, limit, sellerId) => {
   const query = `
         SELECT * 
         FROM Product
         WHERE name ILIKE $1
-        OFFSET $2 LIMIT $3
+        AND seller_id = $2
+        OFFSET $3 LIMIT $4
   `;
 
   try {
-      const result = await pool.query(query, [keyword, offset, limit]);
+      const result = await pool.query(query, [keyword, sellerId, offset, limit]);
       return result.rows;
   } catch (err) {
       console.error('Erro ao buscar produtos no banco de dados.', err);

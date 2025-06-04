@@ -8,19 +8,19 @@ dotenv.config();
 
 exports.listAllProduct = async (req, res) => {
   const { id } = req.params;
-  const { search, page, pageSize } = req.query; 
+  const { search, page, pageSize, sellerId } = req.query; 
 
   try {
     let result;
 
     if (id === undefined) {
       if (search) {
-          result = await productService.searchProductsByKeyword(search, page, pageSize);
+          result = await productService.searchProductsByKeyword(search, page, pageSize, sellerId);
       } else {
-          result = await productService.listAllProducts(page, pageSize);
+          result = await productService.listAllProducts(page, pageSize, sellerId);
       }
     } else {      
-      result = await productService.listSpecificProduct(id);
+      result = await productService.listSpecificProduct(id, sellerId);
     }
 
     return res.status(200).json(result);
@@ -38,9 +38,9 @@ exports.addNewProduct = async (req, res) => {
     }
   
     try {
-      await productService.addNewProduct({ name, price, isUsed, isActive, imageUrl, description, quantity, seller_id, category_id });
+      const id = await productService.addNewProduct({ name, price, isUsed, isActive, imageUrl, description, quantity, seller_id, category_id });
   
-      res.status(201).json({ message: `Produto adicionado com sucesso!`});
+      res.status(201).json({ message: `Produto adicionado com sucesso!`, id: id.id});
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: 'Erro ao adicionar o produto' });
