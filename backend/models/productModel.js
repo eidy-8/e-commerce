@@ -93,7 +93,7 @@ exports.countProductsByKeyword = async (keyword) => {
 
 exports.createProduct = async (name, price, isUsed, isActive, imageUrl, description, quantity, seller_id, category_id) => {
     return pool.query(
-      'INSERT INTO Product (name, price, isUsed, isActive, imageUrl, description, quantity, seller_id, category_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
+      'INSERT INTO Product (name, price, isUsed, isActive, imageUrl, description, quantity, seller_id, category_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id',
       [name, price, isUsed, isActive, imageUrl, description, quantity, seller_id, category_id]
     );
 };

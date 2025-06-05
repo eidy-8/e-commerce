@@ -8,7 +8,6 @@ exports.addNewProduct = async (productData) => {
     }
 
     const result = await productModel.createProduct(name, price, isUsed, isActive, imageUrl, description, quantity, seller_id, category_id);
-    console.log(result.rows[0].id);
     
     return result.rows[0];
 };
