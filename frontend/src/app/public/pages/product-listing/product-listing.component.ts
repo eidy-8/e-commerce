@@ -36,8 +36,6 @@ export class ProductListingComponent implements OnInit, OnDestroy {
 
   protected isOwnProduct!: boolean;
 
-  protected sellerId!: string;
-
   constructor(private route: ActivatedRoute, public productService: ProductService, public categoryService: CategoryService, private userService: UserService) {}
 
   @HostListener('window:resize', ['$event'])
@@ -65,32 +63,21 @@ export class ProductListingComponent implements OnInit, OnDestroy {
 
     this.onResize();
 
-    this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
-      this.sellerId = res.data.sellerId;
-      this.getProducts(this.productId, this.sellerId);
-    });
+    this.getProducts(this.productId);
   }
 
-  private getProducts(productId: string, sellerId: string) {    
-    this.productService.getProduct('', 1, 10, sellerId, productId)
+  private getProducts(productId: string) {    
+    this.productService.getProduct('', 1, 10, '', productId)
     .pipe(takeUntil(this.unsubscribe))
     .subscribe((res: any) => {     
+      
       this.product = {
         title: res.data[0].name,
         price: res.data[0].price,
         condition: res.data[0].isused,
         soldQuantity: res.data[0].sale,
         availableQuantity: res.data[0].quantity, 
-        description: res.data[0].description,
-        details: [
-          { key: 'Marca', value: 'XYZ' },
-          { key: 'Modelo', value: 'Pro 2023' },
-          { key: 'Memória RAM', value: '6GB' },
-          { key: 'Armazenamento', value: '128GB' },
-          { key: 'Câmera', value: '48MP + 12MP + 5MP' },
-          { key: 'Bateria', value: '4500mAh' },
-          { key: 'Conectividade', value: '5G' }
-        ]
+        description: res.data[0].description
       }
 
       this.images = [

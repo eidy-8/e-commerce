@@ -29,11 +29,11 @@ exports.getPagedProducts = async (offset, limit, sellerId) => {
   }
 };
 
-exports.getSpecificProduct = async (id, sellerId) => {
-  const query = `SELECT * FROM Product WHERE id = $1 AND seller_id = $2`;
+exports.getSpecificProduct = async (id) => {
+  const query = `SELECT * FROM Product WHERE id = $1`;
 
   try {
-    const result = await pool.query(query, [id, sellerId]);
+    const result = await pool.query(query, [id]);
       return result.rows;
   } catch (err) {
       console.error('Erro ao listar produtos no banco de dados.', err);

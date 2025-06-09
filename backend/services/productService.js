@@ -72,9 +72,9 @@ exports.searchProductsByKeyword = async (keyword, page, pageSize, sellerId) => {
     }
 };
 
-exports.listSpecificProduct = async (id, sellerId) => {
+exports.listSpecificProduct = async (id) => {
     try {
-        const products = await productModel.getSpecificProduct(id, sellerId);
+        const products = await productModel.getSpecificProduct(id);
 
         return {
             data: products

@@ -42,6 +42,7 @@ app.use('/wishList', wishListRoute);
 app.use('/private', async (req, res) => {
     try {
         const { user } = req.headers;
+        
         const currentUser = JSON.parse(user);
 
         const seller = await sellerModel.getSellerByUserId(currentUser[0].id);

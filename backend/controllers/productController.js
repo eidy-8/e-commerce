@@ -20,7 +20,7 @@ exports.listAllProduct = async (req, res) => {
           result = await productService.listAllProducts(page, pageSize, sellerId);
       }
     } else {      
-      result = await productService.listSpecificProduct(id, sellerId);
+      result = await productService.listSpecificProduct(id);
     }
 
     return res.status(200).json(result);

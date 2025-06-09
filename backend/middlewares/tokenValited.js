@@ -7,8 +7,10 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 exports.tokenValited = (request, response, next) => {    
     const [, token] = request.headers.authorization?.split(' ') || [' ', ' '];
-
-    if (!token) return response.status(401).send('Nenhum token fornecido.');
+    
+    if (token == 0) {        
+        return response.status(401).send('Nenhum token fornecido.');  
+    } 
 
     try {
         const payload = jsonwebtoken.verify(token, PRIVATE_KEY);
