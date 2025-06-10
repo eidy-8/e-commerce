@@ -4,5 +4,6 @@ export enum Environment {
     ENV_PRIVATE =        'http://localhost:3000/private',
     
     ENV_PRODUCT =        'http://localhost:3000/product',
-    ENV_CATEGORY =       'http://localhost:3000/category'
+    ENV_CATEGORY =       'http://localhost:3000/category',
+    ENV_WISHLIST =       'http://localhost:3000/wishList'
 }

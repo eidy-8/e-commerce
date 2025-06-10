@@ -1,9 +1,11 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../../private/services/product.service';
-import { Subject, takeUntil } from 'rxjs';
+import { catchError, Subject, takeUntil, throwError } from 'rxjs';
 import { CategoryService } from '../../../private/services/category.service';
 import { UserService } from '../../../private/services/user.service';
+import { WishListService } from '../../../private/services/wish-list.service';
+import { ToasterService } from '../../../shared/services/toaster.service';
 
 @Component({
   selector: 'app-product-listing',
@@ -36,7 +38,9 @@ export class ProductListingComponent implements OnInit, OnDestroy {
 
   protected isOwnProduct!: boolean;
 
-  constructor(private route: ActivatedRoute, public productService: ProductService, public categoryService: CategoryService, private userService: UserService) {}
+  protected buyerId!: string;
+
+  constructor(private route: ActivatedRoute, public productService: ProductService, public categoryService: CategoryService, private userService: UserService, private router: Router, private wishListService: WishListService, private toasterService: ToasterService) {}
 
   @HostListener('window:resize', ['$event'])
   onResize(event?: any) {
@@ -64,6 +68,19 @@ export class ProductListingComponent implements OnInit, OnDestroy {
     this.onResize();
 
     this.getProducts(this.productId);
+
+    this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {       
+      this.buyerId = res.data.buyerId;      
+
+      this.wishListService.getWishList(this.buyerId).pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
+        for (let i = 0; i < res.length; i++) {          
+          if (this.productId == res[i].product_id) {
+            this.isFavorited = true;
+            break;
+          }
+        }
+      });
+    });
   }
 
   private getProducts(productId: string) {    
@@ -104,8 +121,47 @@ export class ProductListingComponent implements OnInit, OnDestroy {
   }
 
   toggleFavorite(): void {
-    this.isFavorited = !this.isFavorited;
-    console.log('Anúncio favoritado:', this.isFavorited ? 'Sim' : 'Não');
+    const product = { "productId": this.productId }
+
+    if (this.isFavorited == false) {
+      this.wishListService.postWishList(this.buyerId, product).pipe( takeUntil( this.unsubscribe ) ).subscribe({
+        next: res => {
+          this.toasterService.show({
+            type: 'success',
+            title: 'Sucesso',
+            message: res.message
+          });
+
+          this.isFavorited = true;
+        },
+        error: error => {
+          this.toasterService.show({
+            type: 'error',
+            title: 'Erro',
+            message: error
+          });
+        }
+      });
+    } else {
+      this.wishListService.deleteFromWishList(this.buyerId, product).pipe(takeUntil(this.unsubscribe)).subscribe({
+        next: res => {
+          this.toasterService.show({
+            type: 'success',
+            title: 'Sucesso',
+            message: res.message
+          });
+
+          this.isFavorited = false;
+        },
+        error: error => {
+          this.toasterService.show({
+            type: 'error',
+            title: 'Erro',
+            message: error
+          });
+        }
+      });
+    }
   }
 
   toggleDescription(): void {
@@ -125,6 +181,7 @@ export class ProductListingComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    console.clear();
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }

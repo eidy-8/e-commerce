@@ -60,7 +60,9 @@ CREATE TABLE Product (
 );
 
 --Comandos para testes
-SELECT * FROM Buyer;
+SELECT * FROM Users WHERE id = '6e51b1bb-ce9a-40cf-b56e-5102719f7f3e';
+
+SELECT * FROM Wishlist WHERE buyer_id = '7acd543e-1067-465c-bb18-ff68b1ee7599';
 
 SELECT * FROM Product WHERE name ILIKE $1
 
