@@ -37,6 +37,8 @@ app.use('/category', categoryRoute);
 
 app.use('*', middlewares.tokenValited);
 
+app.use('/cart', cartRoute);
+
 app.use('/wishList', wishListRoute);
 
 app.use('/private', async (req, res) => {

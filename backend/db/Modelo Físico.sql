@@ -18,11 +18,6 @@ CREATE TABLE Buyer (
 	user_id UUID UNIQUE NOT NULL REFERENCES Users(id) ON DELETE CASCADE
 );
 
-CREATE TABLE Wishlist_Product (
-    wishlist_id UUID NOT NULL REFERENCES Wishlist(id) ON DELETE CASCADE,
-    product_id UUID NOT NULL REFERENCES Product(id) ON DELETE CASCADE
-);
-
 CREATE TABLE Cart (
 	id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
 	buyer_id UUID UNIQUE NOT NULL REFERENCES Buyer(id) ON DELETE CASCADE
@@ -31,6 +26,16 @@ CREATE TABLE Cart (
 CREATE TABLE Wishlist (
 	id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
 	buyer_id UUID UNIQUE NOT NULL REFERENCES Buyer(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Cart_Product (
+    cart_id UUID NOT NULL REFERENCES Cart(id) ON DELETE CASCADE,
+    product_id UUID NOT NULL REFERENCES Product(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Wishlist_Product (
+    wishlist_id UUID NOT NULL REFERENCES Wishlist(id) ON DELETE CASCADE,
+    product_id UUID NOT NULL REFERENCES Product(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Seller (
@@ -60,7 +65,7 @@ CREATE TABLE Product (
 );
 
 --Comandos para testes
-SELECT * FROM Users WHERE id = '6e51b1bb-ce9a-40cf-b56e-5102719f7f3e';
+SELECT * FROM Cart_Product;
 
 SELECT * FROM Wishlist WHERE buyer_id = '7acd543e-1067-465c-bb18-ff68b1ee7599';
 
