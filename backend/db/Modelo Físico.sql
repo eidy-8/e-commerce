@@ -65,7 +65,7 @@ CREATE TABLE Product (
 );
 
 --Comandos para testes
-SELECT * FROM Cart_Product;
+SELECT * FROM product;
 
 SELECT * FROM Wishlist WHERE buyer_id = '7acd543e-1067-465c-bb18-ff68b1ee7599';
 

@@ -8,6 +8,7 @@ const loginRoute = require('./routes/loginRoute');
 const productRoute = require('./routes/productRoute');
 const categoryRoute = require('./routes/categoryRoute');
 const wishListRoute = require('./routes/wishListRoute');
+const cartRoute = require('./routes/cartRoute');
 
 const middlewares = require('./middlewares/tokenValited');
 

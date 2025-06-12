@@ -54,7 +54,7 @@ exports.deleteToWishlist = async (req, res) => {
     try {
         let wishlist = await wishlistModel.getWishlistByBuyerId(buyerId);
         
-        const result = await wishlistModel.deleteWishlistItem(wishlist.id, productId);
+        await wishlistModel.deleteWishlistItem(wishlist.id, productId);
     
         res.status(200).json({ message: 'Item deletado da lista de desejos com sucesso' });
       } catch (err) {

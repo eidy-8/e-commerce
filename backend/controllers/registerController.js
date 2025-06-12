@@ -3,6 +3,7 @@ const userModel = require("../models/userModel");
 const buyerModel = require("../models/buyerModel");
 const sellerModel = require("../models/sellerModel");
 const wishListModel = require("../models/wishListModel");
+const cartModel = require("../models/cartModel");
 
 exports.register = async (req, res) => {
     const { username, email, password } = req.body;
@@ -30,6 +31,8 @@ exports.register = async (req, res) => {
             const buyerId = await buyerModel.postBuyer(createdUser.id);
 
             await wishListModel.createWishlist(buyerId.id);
+
+            await cartModel.createCart(buyerId.id);
 
             await sellerModel.postSeller(createdUser.id);
 
