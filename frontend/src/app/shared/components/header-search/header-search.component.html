@@ -1,8 +1,14 @@
 <header class="bg-primary-color">
-    <nav class="mx-auto flex max-w-[1250px] items-center justify-between p-2">
-        <a href="/">
-            <img class="h-8 w-auto" src="../../../assets/shopping-cart-svgrepo-com.svg" alt="logo da empresa">
+    <nav class="mx-auto flex max-w-[1250px] items-center p-2 ">
+        <a href="/" class="pr-2 sm:pr-20">
+            <img class="h-10 w-20 sm:w-10" src="../../../assets/shopping-cart-svgrepo-com.svg" alt="logo da empresa">
         </a>
-        <input type="text">
+        <div class="w-[800px]">
+            <app-search-bar-main></app-search-bar-main>
+        </div>
+        <div class="hidden sm:flex items-center ml-auto">
+            <i class="fa fa-tag pr-2" aria-hidden="true"></i>
+            <p>Ofertas por tempo limitado</p>
+        </div>
     </nav>
 </header>

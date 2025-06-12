@@ -1,0 +1,29 @@
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-container .fa-search {
+  position: absolute;
+  right: 10px;
+  color: #aaa;
+  font-size: 16px;
+  bottom: 12px;
+}
+
+.search-container p {
+  position: absolute;
+  right: 32px;
+  color: #aaa;
+  font-size: 16px;
+  bottom: 8px;
+}
+
+.search-container .searchBar {
+  width: 100%;
+  padding: 8px 8px 8px 16px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  color: black;
+}
