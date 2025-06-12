@@ -6,6 +6,7 @@ import { CategoryService } from '../../../private/services/category.service';
 import { UserService } from '../../../private/services/user.service';
 import { WishListService } from '../../../private/services/wish-list.service';
 import { ToasterService } from '../../../shared/services/toaster.service';
+import { CartService } from '../../../private/services/cart.service';
 
 @Component({
   selector: 'app-product-listing',
@@ -40,7 +41,7 @@ export class ProductListingComponent implements OnInit, OnDestroy {
 
   protected buyerId!: string;
 
-  constructor(private route: ActivatedRoute, public productService: ProductService, public categoryService: CategoryService, private userService: UserService, private router: Router, private wishListService: WishListService, private toasterService: ToasterService) {}
+  constructor(private route: ActivatedRoute, public productService: ProductService, public categoryService: CategoryService, private userService: UserService, private router: Router, private wishListService: WishListService, private toasterService: ToasterService, private cartService: CartService) {}
 
   @HostListener('window:resize', ['$event'])
   onResize(event?: any) {
@@ -157,7 +158,7 @@ export class ProductListingComponent implements OnInit, OnDestroy {
           this.toasterService.show({
             type: 'error',
             title: 'Erro',
-            message: error
+            message: error.message
           });
         }
       });
@@ -173,7 +174,26 @@ export class ProductListingComponent implements OnInit, OnDestroy {
   }
 
   addToCart(): void {
-    console.log('Produto adicionado ao carrinho:', this.product.title);
+    const product = { "productId": this.productId }
+
+    this.cartService.postCart(this.buyerId, product).pipe( takeUntil( this.unsubscribe ) ).subscribe({
+        next: res => {
+          this.toasterService.show({
+            type: 'success',
+            title: 'Sucesso',
+            message: res.message
+          });
+
+          this.isFavorited = true;
+        },
+        error: error => {          
+          this.toasterService.show({
+            type: 'error',
+            title: 'Erro',
+            message: error.message
+          });
+        }
+    });
   }
 
   buyNow(): void {
