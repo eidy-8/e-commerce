@@ -5,8 +5,6 @@
 }
 
 .trigger-text {
-  color: #007bff;
-  font-weight: bold;
   display: flex;
   align-items: center;
   gap: 5px;
