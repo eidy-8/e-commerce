@@ -9,7 +9,9 @@ import { UserService } from '../../../private/services/user.service';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  protected text: string = 'EnriqueOnaga';
+  protected text!: string;
+
+  protected img!: string;
 
   private unsubscribe = new Subject<void>;
 
@@ -23,7 +25,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.isLogged = await this.authService.isAuthenticated();     
   
       this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
-        this.text = res.data.userLogged[0].username;        
+        this.text = res.data.userLogged[0].username;   
+        this.img = res.data.userLogged[0].imageurl;       
       });
     }
   }

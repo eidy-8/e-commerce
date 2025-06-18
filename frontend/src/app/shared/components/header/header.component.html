@@ -1,7 +1,9 @@
 <app-header-search></app-header-search>
 
 @if (isLogged) {
-    <app-header-sub-logged [text]="text"></app-header-sub-logged>
+    <div class="hidden sm:block">
+        <app-header-sub-logged [text]="text" [img]="img"></app-header-sub-logged>
+    </div>
 } @else {
     <app-header-sub-not-logged></app-header-sub-not-logged>
 }

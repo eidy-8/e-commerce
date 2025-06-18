@@ -9,13 +9,26 @@ import { Router } from '@angular/router';
 })
 export class HeaderSubLoggedComponent {
   @Input() text: any;
-  protected options = [
+  @Input() img: any;
+  protected userOptions = [
     { name: 'Minha conta', link: 'https://github.com/eidy-8/postgreAnotacao' },
     { name: 'Compras', link: 'https://github.com/eidy-8/postgreAnotacao' },
     { name: 'Vender', action: () => this.router.navigate([ '/user/new-product' ]) },
     { name: 'Anúncios', action: () => this.router.navigate([ '/user/my-products' ]) },
     { name: 'Sair', action: () => this.logout() }
   ];
+
+  protected categoryOptions = [
+    { name: 'Beleza', action: () => this.router.navigate([ '/user/new-product' ]) },
+    { name: 'Brinquedo', action: () => this.router.navigate([ '/user/my-products' ]) },
+    { name: 'Comida', action: () => this.router.navigate([ '/user/new-product' ]) },
+    { name: 'Esporte', action: () => this.router.navigate([ '/user/new-product' ]) },
+    { name: 'Limpeza', action: () => this.router.navigate([ '/user/new-product' ]) },
+    { name: 'Moda', action: () => this.router.navigate([ '/user/new-product' ]) },
+    { name: 'Móveis', action: () => this.router.navigate([ '/user/new-product' ]) },
+    { name: 'Tecnologia', action: () => this.router.navigate([ '/user/new-product' ]) },
+    { name: 'Veículos', action: () => this.router.navigate([ '/user/new-product' ]) }
+  ]
 
   constructor(private authService: AuthService, private router: Router) {}
 
