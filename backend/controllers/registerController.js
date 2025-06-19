@@ -6,7 +6,7 @@ const wishListModel = require("../models/wishListModel");
 const cartModel = require("../models/cartModel");
 
 exports.register = async (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, email, password, imageurl } = req.body;
 
     try {
         const usersUsername = await userModel.getUserByUsername(username);
@@ -23,7 +23,8 @@ exports.register = async (req, res) => {
             const newUserData = {
                 username: username,
                 email: email,
-                password: hashPassword
+                password: hashPassword,
+                imageurl: imageurl 
             };            
 
             const createdUser = await userModel.postUser(newUserData);
