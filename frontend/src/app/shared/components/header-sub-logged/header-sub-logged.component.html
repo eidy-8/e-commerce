@@ -1,15 +1,15 @@
 <header class="bg-primary-color">
-    <nav class="mx-auto flex max-w-[1250px] items-center p-2 gap-x-[800px]">
-        <div class="ml-[120px]">
+    <nav class="mx-auto flex max-w-[1250px] items-center p-2 justify-between flex-wrap">
+        <div class="flex-1 min-w-[200px] ml-[120px]">
             <app-popup-menu [text]="'Categorias'" [options]="categoryOptions"></app-popup-menu>
         </div>
-        <div class="flex w-40 gap-x-[24px] mr-8">
-            <div class="flex">
-                <img [src]="img" alt="foto de perfil do usuário" class="w-6 h-6 object-cover rounded-full">
-                <app-popup-menu [text]="'asasddsaasdasdd'" [options]="userOptions"></app-popup-menu>
+        <div class="flex items-center gap-x-6">
+            <div class="flex items-center gap-x-2">
+                <img [src]="img" alt="foto de perfil do usuário" class="w-6 h-6 object-cover rounded-full bg-white">
+                <app-popup-menu [text]="text" [options]="userOptions"></app-popup-menu>
             </div>
-            <button><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
             <button><i class="fa fa-heart" aria-hidden="true"></i></button>
+            <button><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
         </div>
     </nav>
 </header>

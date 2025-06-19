@@ -9,6 +9,18 @@ import { Router } from '@angular/router';
 export class HeaderSubNotLoggedComponent {
   constructor(private router: Router) {}
 
+  protected categoryOptions = [
+    { name: 'Beleza', action: () => this.router.navigate([ '/user/new-product' ]) },
+    { name: 'Brinquedo', action: () => this.router.navigate([ '/user/my-products' ]) },
+    { name: 'Comida', action: () => this.router.navigate([ '/user/new-product' ]) },
+    { name: 'Esporte', action: () => this.router.navigate([ '/user/new-product' ]) },
+    { name: 'Limpeza', action: () => this.router.navigate([ '/user/new-product' ]) },
+    { name: 'Moda', action: () => this.router.navigate([ '/user/new-product' ]) },
+    { name: 'Móveis', action: () => this.router.navigate([ '/user/new-product' ]) },
+    { name: 'Tecnologia', action: () => this.router.navigate([ '/user/new-product' ]) },
+    { name: 'Veículos', action: () => this.router.navigate([ '/user/new-product' ]) }
+  ]
+
   protected redirectToLogin() {
     this.router.navigate(['/auth/login']);
   }

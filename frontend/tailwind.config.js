@@ -18,6 +18,9 @@ module.exports = {
         "secondary-button-color": "var(--secondary-button-color)",
         "tertiary-button-color": "var(--tertiary-button-color)"
       },
+      fontFamily: {
+        sans: ['Nunito', 'sans-serif'],
+      },
     },
   },
   plugins: [],

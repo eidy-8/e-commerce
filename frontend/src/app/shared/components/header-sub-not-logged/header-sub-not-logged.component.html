@@ -1,7 +1,13 @@
 <header class="bg-primary-color">
-    <nav class="mx-auto flex max-w-[1250px] items-center justify-between p-2">
-        <button (click)="redirectToRegister()">Crie a sua conta</button>
-        <button (click)="redirectToLogin()">Entre</button>
-        <button (click)="redirectToLogin()">Compras</button>
+    <nav class="mx-auto flex max-w-[1250px] items-center p-2 justify-between flex-wrap">
+        <div class="flex-1 min-w-[200px] ml-[120px]">
+            <app-popup-menu [text]="'Categorias'" [options]="categoryOptions"></app-popup-menu>
+        </div>
+        <div class="flex items-center gap-x-6">
+            <button (click)="redirectToRegister()">Crie a sua conta</button>
+            <button (click)="redirectToLogin()">Entre</button>
+            <button (click)="redirectToLogin()">Compras</button>
+            <button (click)="redirectToLogin()"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+        </div>
     </nav>
 </header>

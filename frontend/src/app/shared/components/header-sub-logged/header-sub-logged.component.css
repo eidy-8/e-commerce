@@ -1,5 +1,0 @@
-app-popup-menu {
-  display: flex;
-  justify-content: flex-end; /* Faz o texto crescer para a esquerda */
-  white-space: nowrap; /* Evita quebra de linha */
-}
