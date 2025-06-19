@@ -34,6 +34,20 @@
     </div>
 
     <div class="mb-4">
+        <label class="block text-gray-color text-sm mb-2" for="Imagem de perfil">profileImage</label>
+        <input
+          [(ngModel)]="profileImage"
+          name="profileImage"
+          [ngClass]="{ 'border-error-color': profileImageError }"
+          class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+          id="profileImage"
+          type="text"
+          placeholder="Insira o link da imagem do seu perfil"
+          (keydown)="sharedMethod.preventSpace($event)"
+        />
+    </div>
+
+    <div class="mb-4">
       <label class="block text-gray-color text-sm mb-2" for="password"
         >Senha</label
       >

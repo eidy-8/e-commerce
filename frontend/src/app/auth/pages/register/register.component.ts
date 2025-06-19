@@ -13,11 +13,13 @@ export class RegisterComponent implements OnDestroy {
   private unsubscribe = new Subject<void>;
   protected email!: string;
   protected name!: string;
+  protected profileImage!: string;
   protected password!: string;
   protected password2!: string;
   protected showPassword: boolean = false;
 
   protected registerError: boolean = false;
+  protected profileImageError: boolean = false;
   protected emailRegisterError: boolean = false;
   protected passwordRegisterError: boolean = false;
   protected errorMessage!: string;
@@ -40,6 +42,9 @@ export class RegisterComponent implements OnDestroy {
     } else if (this.name == undefined) {
       this.errorMessage = "Digite um nome."
       this.registerError = true;
+    } else if (this.profileImage == undefined) {
+      this.errorMessage = "Insira uma imagem de perfil.";
+      this.profileImageError = true;
     } else if (this.password == undefined || this.password.length < 8) {
       this.errorMessage = "Digite uma senha segura de no mínimo 8 digitos."
       this.passwordRegisterError = true;
@@ -53,7 +58,8 @@ export class RegisterComponent implements OnDestroy {
       const registerData = {
         username: this.name,
         email: this.email,
-        password: this.password
+        password: this.password,
+        imageurl: this.profileImage
       }
 
       console.log(registerData);
@@ -70,6 +76,7 @@ export class RegisterComponent implements OnDestroy {
           this.registerError = true;
           this.emailRegisterError = true;
           this.passwordRegisterError = true;
+          this.profileImageError = true;
         }
       });
     }
