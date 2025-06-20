@@ -1,0 +1,20 @@
+<div class="grid">
+    @for (p of products; track p) {
+        <div class="card">
+          <img [src]="p.imageurl" alt="{{ p.name }}">
+          <div class="info">
+            <h4>{{ p.name }}</h4>
+            <p class="preco">R$ {{ p.price }}</p>
+            <p class="condicao">{{ p.isused }}</p>
+          </div>
+        
+          <button
+                (click)="toggleFavorite(p.id)"
+                class="favorito"
+                [ngClass]="{ favorited: isFavorited }"
+            >
+                <i class="fa fa-heart"></i>
+            </button>
+        </div>
+    }
+</div>

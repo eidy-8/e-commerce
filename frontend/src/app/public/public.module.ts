@@ -6,12 +6,14 @@ import { SharedModule } from '../shared/shared.module';
 import { MainComponent } from './main/main.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductListingComponent } from './pages/product-listing/product-listing.component';
+import { CategoryComponent } from './pages/category/category.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     HomeComponent,
-    ProductListingComponent
+    ProductListingComponent,
+    CategoryComponent
   ],
   imports: [
     CommonModule,

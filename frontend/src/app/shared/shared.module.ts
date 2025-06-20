@@ -24,6 +24,7 @@ import { SearchBarComponent } from './components/reusable/search-bar/search-bar.
 import { ExpandableSectionComponent } from './components/reusable/expandable-section/expandable-section.component';
 import { InfoCardComponent } from './components/reusable/info-card/info-card.component';
 import { SearchBarMainComponent } from './components/reusable/search-bar-main/search-bar-main.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { SearchBarMainComponent } from './components/reusable/search-bar-main/se
     SearchBarComponent,
     ExpandableSectionComponent,
     InfoCardComponent,
-    SearchBarMainComponent
+    SearchBarMainComponent,
+    ProductCardComponent
   ],
   imports: [
     CommonModule,
@@ -77,7 +79,8 @@ import { SearchBarMainComponent } from './components/reusable/search-bar-main/se
     SearchBarComponent,
     ExpandableSectionComponent,
     InfoCardComponent,
-    SearchBarMainComponent
+    SearchBarMainComponent,
+    ProductCardComponent
   ]
 })
 export class SharedModule { }

@@ -19,7 +19,7 @@ export class HeaderSubLoggedComponent {
   ];
 
   protected categoryOptions = [
-    { name: 'Beleza', action: () => this.router.navigate([ '/user/new-product' ]) },
+    { name: 'Beleza', action: () => this.router.navigate([ '/category/1b30d362-085a-44a5-a0e6-c2dc9b969349' ]) },
     { name: 'Brinquedo', action: () => this.router.navigate([ '/user/my-products' ]) },
     { name: 'Comida', action: () => this.router.navigate([ '/user/new-product' ]) },
     { name: 'Esporte', action: () => this.router.navigate([ '/user/new-product' ]) },
