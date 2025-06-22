@@ -37,7 +37,7 @@ exports.listAllProducts = async (page, pageSize, sellerId) => {
             }
         } else {
             const products = await productModel.getPagedProducts(offset, limit, sellerId);
-            const totalProducts = await productModel.countAllProducts(sellerId);
+            const totalProducts = await productModel.countAllProductsBySellerId(sellerId);
             const hasNext = (page * pageSize) < totalProducts;
     
             return {
@@ -84,3 +84,23 @@ exports.listSpecificProduct = async (id) => {
         throw err;
     }
 };
+
+exports.listProductsByCategory = async (page, pageSize, categoryId) => {
+    const offset = (page - 1) * pageSize; 
+    const limit = parseInt(pageSize, 10); 
+
+    try {
+        const products = await productModel.getProductsByCategory(offset, limit, categoryId);
+        const totalProducts = await productModel.countAllProductsByCategoryId(categoryId);
+        
+        const hasNext = (page * pageSize) < totalProducts;
+
+        return {
+            data: products,
+            hasNext
+        }
+    } catch (err) {
+        console.error('Erro ao listar produtos por categoria:', err);
+        throw err;
+    }
+}

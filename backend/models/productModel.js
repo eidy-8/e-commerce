@@ -41,7 +41,7 @@ exports.getSpecificProduct = async (id) => {
   }
 }
 
-exports.countAllProducts = async (sellerId) => {
+exports.countAllProductsBySellerId = async (sellerId) => {
   const query = `
       SELECT COUNT(*) AS total
       FROM Product 
@@ -56,6 +56,39 @@ exports.countAllProducts = async (sellerId) => {
       throw err;
   }
 };
+
+exports.countAllProductsByCategoryId = async (categoryId) => {
+  const query = `
+      SELECT COUNT(*) AS total
+      FROM Product 
+      WHERE category_id = $1
+  `;
+
+  try {
+      const result = await pool.query(query, [categoryId]);
+      return parseInt(result.rows[0].total, 10);
+  } catch (err) {
+      console.error('Erro ao contar produtos no banco de dados.', err);
+      throw err;
+  }
+};
+
+exports.getProductsByCategory = async (offset, limit, categoryId) => {
+  const query = `
+      SELECT * 
+      FROM Product
+      WHERE category_id = $1
+      OFFSET $2 LIMIT $3
+  `;
+
+  try {
+      const result = await pool.query(query, [categoryId, offset, limit]);
+      return result.rows;
+  } catch (err) {
+      console.error('Erro ao listar produtos no banco de dados.', err);
+      throw err;
+  }
+}
 
 exports.searchProductsByKeyword = async (keyword, offset, limit, sellerId) => {
   const query = `

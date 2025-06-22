@@ -8,16 +8,18 @@ dotenv.config();
 
 exports.listAllProduct = async (req, res) => {
   const { id } = req.params;
-  const { search, page, pageSize, sellerId } = req.query; 
+  const { search, page, pageSize, sellerId, categoryId } = req.query; 
 
   try {
     let result;
 
     if (id === undefined) {
       if (search) {
-          result = await productService.searchProductsByKeyword(search, page, pageSize, sellerId);
+        result = await productService.searchProductsByKeyword(search, page, pageSize, sellerId);
+      } else if (categoryId) {
+        result = await productService.listProductsByCategory(page, pageSize, categoryId);
       } else {
-          result = await productService.listAllProducts(page, pageSize, sellerId);
+        result = await productService.listAllProducts(page, pageSize, sellerId);
       }
     } else {      
       result = await productService.listSpecificProduct(id);
