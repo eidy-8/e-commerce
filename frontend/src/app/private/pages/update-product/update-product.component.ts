@@ -59,7 +59,7 @@ export class UpdateProductComponent implements OnInit, OnDestroy {
 
   public reactivateProduct() {
     let updateData = {
-      isActive: 'T'
+      isActive: '1'
     }
 
     this.productService.putProduct(updateData, this.productId).pipe( takeUntil( this.unsubscribe ) ).subscribe({
@@ -70,7 +70,7 @@ export class UpdateProductComponent implements OnInit, OnDestroy {
           message: res.message
         });
 
-        this.isProductActive = 'T';
+        this.isProductActive = '1';
       },
       error: error => {    
         this.isFieldError = true;

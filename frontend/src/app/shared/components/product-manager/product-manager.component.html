@@ -42,7 +42,7 @@
   @for (p of products; track p) {
     <div
       class="product-row"
-      [ngStyle]="{ 'background-color': p.isactive === 'F' ? '#f2f2f2' : '' }"
+      [ngStyle]="{ 'background-color': p.isactive === '0' ? '#f2f2f2' : '' }"
     >
       <input
         type="checkbox"
@@ -68,10 +68,10 @@
     
         <div class="status">
           <div class="status-message">
-            {{ p.isactive === 'T' ? 'Ativo' : 'Pausado' }}
+            {{ p.isactive === '1' ? 'Ativo' : 'Pausado' }}
           </div>
           @if (p.quantity > 0) {
-            <div class="sub-status">{{ p.isactive === 'T' ? 'Este produto está ativo neste canal de venda.' : 'Você pausou o produto neste canal de venda.' }}</div>
+            <div class="sub-status">{{ p.isactive === '1' ? 'Este produto está ativo neste canal de venda.' : 'Você pausou o produto neste canal de venda.' }}</div>
           } @else {
             <div class="sub-status">Este produto está pausado por falta de estoque.</div>
           }
@@ -79,11 +79,11 @@
   
         @if (p.quantity > 0) {
           <button class="toggle-btn">
-            {{ p.isactive == 'F' ? 'Pausado' : 'Ativo' }}
+            {{ p.isactive == '0' ? 'Pausado' : 'Ativo' }}
             <label class="switch">
               <input
                 type="checkbox"
-                [checked]="p.isactive === 'T'"
+                [checked]="p.isactive === '1'"
                 (change)="toggleProduct(p)"
               />
               <span class="slider round"></span>

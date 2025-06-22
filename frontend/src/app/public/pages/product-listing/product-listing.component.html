@@ -34,7 +34,7 @@
           <i class="fa fa-heart" aria-hidden="true"></i>
         </button>
         <p class="condition">
-          {{ product.condition === 'F' ? 'Novo' : 'Usado' }} | {{ product.soldQuantity }} {{ product.soldQuantity === 1 ? 'vendido' : 'vendidos' }}
+          {{ product.condition === '0' ? 'Novo' : 'Usado' }} | {{ product.soldQuantity }} {{ product.soldQuantity === 1 ? 'vendido' : 'vendidos' }}
         </p>
         <h1 class="title">{{ product.title }}</h1>
         <p class="price">{{ product.price | currency : "BRL" }}</p>

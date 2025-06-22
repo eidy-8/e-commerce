@@ -1,5 +1,21 @@
 <div class="max-w-[1300px] mx-auto">
     <app-product-card
-    [products]="listaDeProdutos"
+        [products]="listaDeProdutos"
     ></app-product-card>
+
+    <div class="mr-0 flex justify-center items-center gap-4">
+        <button 
+            class="btn btn-primary px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 disabled:bg-gray-300"
+            (click)="previousPage()" 
+            [disabled]="currentPage === 1">
+            Anterior
+        </button>
+        <span class="text-gray-600 font-medium">Página {{ currentPage }}</span>
+        <button 
+            class="btn btn-primary px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 disabled:bg-gray-300"
+            (click)="nextPage()" 
+            [disabled]="!hasNext">
+            Próxima
+        </button>
+    </div>
 </div>

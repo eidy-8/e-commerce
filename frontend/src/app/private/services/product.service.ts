@@ -16,7 +16,7 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getProduct(searchTerm: string = '', page: number = 1, pageSize: number = 10, sellerId: string = '', productId?: string): Observable<any> {    
+  public getProduct(searchTerm: string = '', page: number = 1, pageSize: number = 10, sellerId: string = '', productId?: string, categoryId: string = ''): Observable<any> {    
     if (productId) {
       const params = new HttpParams()
       .set('sellerId', sellerId)
@@ -33,6 +33,7 @@ export class ProductService {
     .set('page', page.toString())
     .set('pageSize', pageSize.toString())
     .set('sellerId', sellerId)
+    .set('categoryId', categoryId)
   
     return this.httpClient.get<any>(this.urlProduct, { params })
       .pipe(

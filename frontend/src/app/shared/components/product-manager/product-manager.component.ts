@@ -90,14 +90,14 @@ export class ProductManagerComponent implements OnDestroy {
 
   pauseSelected() {
     const selectedProducts = this.products.filter(p => p.selected);
-    this.products.filter(p => p.selected).forEach(p => p.isactive = 'F');
+    this.products.filter(p => p.selected).forEach(p => p.isactive = '0');
 
     let productUpdate = {
-      isActive: 'F'
+      isActive: '0'
     }
 
     selectedProducts.forEach(async p => {
-      p.isactive = 'F';
+      p.isactive = '0';
   
       await this.productService.putProduct(productUpdate, p.id).pipe( takeUntil( this.unsubscribe ) ).subscribe({
         next: res => {
@@ -124,7 +124,7 @@ export class ProductManagerComponent implements OnDestroy {
     const selectedProducts = this.products.filter(p => p.selected);
     
     let productUpdate = {
-      isActive: 'T'
+      isActive: '1'
     }
 
     selectedProducts.forEach(async p => {  
@@ -135,7 +135,7 @@ export class ProductManagerComponent implements OnDestroy {
           message: `${p.name} não foi ativado devido à falta de estoque.`
         });
       } else {
-        p.isactive = 'T'
+        p.isactive = '1'
         await this.productService.putProduct(productUpdate, p.id).pipe( takeUntil( this.unsubscribe ) ).subscribe({
           next: res => {
             this.toasterService.show({
@@ -186,11 +186,11 @@ export class ProductManagerComponent implements OnDestroy {
   }
 
   toggleProduct(p: Product) {    
-    if (p.isactive == 'T') {
-      p.isactive = 'F';
+    if (p.isactive == '1') {
+      p.isactive = '0';
 
       let productUpdate = {
-        isActive: 'F'
+        isActive: '0'
       }
 
       this.productService.putProduct(productUpdate, p.id).pipe( takeUntil( this.unsubscribe ) ).subscribe({
@@ -210,10 +210,10 @@ export class ProductManagerComponent implements OnDestroy {
         }
       });
     } else {
-      p.isactive = 'T'
+      p.isactive = '1'
 
       let productUpdate = {
-        isActive: 'T'
+        isActive: '1'
       }
 
       this.productService.putProduct(productUpdate, p.id).pipe( takeUntil( this.unsubscribe ) ).subscribe({

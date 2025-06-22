@@ -10,7 +10,7 @@
             </button>
         </div>
 
-        @if (isProductActive == 'F') {
+        @if (isProductActive == '0') {
             <app-info-card
                 [title]="'Inativo'"
                 [description]="'O anúncio está pausado.'"
@@ -94,7 +94,7 @@
                 <input
                     type="radio"
                     [(ngModel)]="productCondition"
-                    [value]="'F'"
+                    [value]="'0'"
                     name="productCondition"
                     class="mr-2"
                 />
@@ -104,7 +104,7 @@
                 <input
                     type="radio"
                     [(ngModel)]="productCondition"
-                    [value]="'T'"
+                    [value]="'1'"
                     name="productCondition"
                     class="mr-2"
                 />

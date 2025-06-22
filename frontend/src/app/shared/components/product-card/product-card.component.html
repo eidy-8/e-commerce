@@ -1,3 +1,5 @@
+<app-toaster></app-toaster>
+
 <div class="grid">
     @for (p of products; track p) {
         <div class="card">
@@ -5,13 +7,15 @@
           <div class="info">
             <h4>{{ p.name }}</h4>
             <p class="preco">R$ {{ p.price }}</p>
-            <p class="condicao">{{ p.isused }}</p>
+            <p class="condicao">
+                {{ p.isused === '0' ? 'Novo' : 'Usado' }}
+            </p>
           </div>
         
           <button
-                (click)="toggleFavorite(p.id)"
+                (click)="toggleFavorite(p)"
                 class="favorito"
-                [ngClass]="{ favorited: isFavorited }"
+                [ngClass]="{ favorited: p.isFavorited }"
             >
                 <i class="fa fa-heart"></i>
             </button>
