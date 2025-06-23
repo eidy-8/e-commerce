@@ -6,6 +6,7 @@ import { NewProductComponent } from './pages/new-product/new-product.component';
 import { ProductFormComponent } from './pages/product-form/product-form.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { UpdateProductComponent } from './pages/update-product/update-product.component';
+import { WishlistComponent } from './pages/wishlist/wishlist.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: 'update-product/:productId',
         component: UpdateProductComponent
+      },
+      {
+        path: 'my-wishlist',
+        component: WishlistComponent
       }
     ]
   }

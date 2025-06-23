@@ -32,7 +32,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.sellerId = res.data.sellerId
       this.getProducts();
     });
-
   }
 
   private getProducts(searchTerm: string = '') {

@@ -32,6 +32,10 @@ export class HeaderSubLoggedComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  navigateToWishlist() {
+    this.router.navigate([ '/user/my-wishlist' ])
+  }
+
   protected logout() {    
     this.authService.logout();
 

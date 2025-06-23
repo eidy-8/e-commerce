@@ -8,6 +8,7 @@ import { NewProductComponent } from './pages/new-product/new-product.component';
 import { ProductFormComponent } from './pages/product-form/product-form.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { UpdateProductComponent } from './pages/update-product/update-product.component';
+import { WishlistComponent } from './pages/wishlist/wishlist.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { UpdateProductComponent } from './pages/update-product/update-product.co
     NewProductComponent,
     ProductFormComponent,
     ProductsComponent,
-    UpdateProductComponent
+    UpdateProductComponent,
+    WishlistComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,69 @@
+@if (this.isLoading$ | async) {
+    <app-loading-overlay [fullScreen]="true"></app-loading-overlay>
+}
+
+<app-toaster></app-toaster>
+
+<app-header></app-header>
+
+<div class="flex flex-row">
+    <div class="hidden 2xl:block xl:block">
+        <app-side-menu
+        [menuTitle]="'Minha Conta'"
+        [menuItems]="[
+            {
+                label: 'Vendas',
+                icon: 'fa-shopping-basket',
+                children: [
+                    { label: 'Resumo', link: '/user/new-product' },
+                    { label: 'Novidade', link: '/vendas/novidade' },
+                    { label: 'Anúncios', link: '/vendas/anuncios' }
+                ]
+            },
+            {
+                label: 'Produtos',
+                icon: 'fa-shopping-bag',
+                children: [
+                    { label: 'Categorias', link: '/produtos/categorias' },
+                    { label: 'Estoque', link: '/produtos/estoque' }
+                ]
+            }
+        ]"
+        ></app-side-menu>
+    </div>
+
+    <div class="mx-2 w-full 2xl:mx-28 text-sm">
+        <div class="flex my-10 text-gray-color justify-between">
+            <div>
+                Compras <i class="fa fa-angle-right" aria-hidden="true"></i> Favoritos
+            </div>
+        </div>
+        <p class="font-bold text-2xl">Favoritos</p>
+        <br>
+        <div class="product-list">
+            @for (p of products; track p) {
+                <div
+                    class="product-row"
+                    (click)="navigateToProduct(p.product_id)"
+                >
+            
+                    <div class="product-image">
+                        <img [src]="p.imagem_produto" [alt]="p.nome_produto" />
+                    </div>
+                
+                    <div class="product-info">
+                        <div class="id">#{{ p.product_id }}</div>
+                        <div class="name">{{ p.nome_produto }}</div>
+                        <div class="price">R$ {{ p.preco }}</div>
+
+                        <div>
+                            <button (click)="excludeFromTheList(p.product_id); $event.stopPropagation()" class="excludeButton">Excluir</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<app-footer-dynamic></app-footer-dynamic>

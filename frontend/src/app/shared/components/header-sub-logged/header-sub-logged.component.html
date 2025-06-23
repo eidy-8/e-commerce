@@ -8,7 +8,7 @@
                 <img [src]="img" alt="foto de perfil do usuário" class="w-6 h-6 object-cover rounded-full bg-white">
                 <app-popup-menu [text]="text" [options]="userOptions"></app-popup-menu>
             </div>
-            <button><i class="fa fa-heart" aria-hidden="true"></i></button>
+            <button (click)="navigateToWishlist()"><i class="fa fa-heart" aria-hidden="true"></i></button>
             <button><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
         </div>
     </nav>
