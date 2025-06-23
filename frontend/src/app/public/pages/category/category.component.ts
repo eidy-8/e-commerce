@@ -19,7 +19,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
   private unsubscribe = new Subject<void>;
 
   private getProducts() {
-      this.productService.getProduct('', this.currentPage, this.pageSize, '', '', '4935a834-10ee-408c-b573-987ff8533c20')
+      this.productService.getProduct('', this.currentPage, this.pageSize, '', '', this.categoryId)
         .pipe(takeUntil(this.unsubscribe))
         .subscribe((res: any) => {                 
           this.listaDeProdutos = res.data; 
@@ -30,9 +30,11 @@ export class CategoryComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, public productService: ProductService) { }
 
   ngOnInit(): void {
-    this.categoryId = this.route.snapshot.paramMap.get('categoryId'); 
-
-    this.getProducts();
+    this.route.paramMap.pipe(takeUntil(this.unsubscribe)).subscribe(params => {
+      this.categoryId = params.get('categoryId');
+      this.currentPage = 1; 
+      this.getProducts();
+    });
   }
 
   nextPage() {

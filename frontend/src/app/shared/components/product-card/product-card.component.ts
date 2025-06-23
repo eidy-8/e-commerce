@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { WishListService } from '../../../private/services/wish-list.service';
 import { Subject, takeUntil } from 'rxjs';
 import { UserService } from '../../../private/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-card',
@@ -20,7 +21,7 @@ export class ProductCardComponent implements OnInit, OnDestroy {
 
   protected buyerId!: string;
 
-  constructor (private wishListService: WishListService, private userService: UserService) {}
+  constructor (private wishListService: WishListService, private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {       
@@ -44,6 +45,10 @@ export class ProductCardComponent implements OnInit, OnDestroy {
       next: res => {
       }
     });
+  }
+
+  goToProduct(productId: string) {
+    this.router.navigate(['/', productId]);
   }
 
   ngOnDestroy(): void {

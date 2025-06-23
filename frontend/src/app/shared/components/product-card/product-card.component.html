@@ -1,8 +1,8 @@
 <app-toaster></app-toaster>
 
 <div class="grid">
-    @for (p of products; track p) {
-        <div class="card">
+    @for (p of products; track p) { 
+        <div class="card" (click)="goToProduct(p.id)">
           <img [src]="p.imageurl" alt="{{ p.name }}">
           <div class="info">
             <h4>{{ p.name }}</h4>
