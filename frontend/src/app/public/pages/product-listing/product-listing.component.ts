@@ -183,8 +183,6 @@ export class ProductListingComponent implements OnInit, OnDestroy {
             title: 'Sucesso',
             message: res.message
           });
-
-          this.isFavorited = true;
         },
         error: error => {          
           this.toasterService.show({

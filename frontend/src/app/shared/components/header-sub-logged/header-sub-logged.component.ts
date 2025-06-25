@@ -33,7 +33,11 @@ export class HeaderSubLoggedComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   navigateToWishlist() {
-    this.router.navigate([ '/user/my-wishlist' ])
+    this.router.navigate([ '/user/my-wishlist' ]);
+  }
+
+  navigateToCart() {
+    this.router.navigate([ '/user/my-cart' ]);
   }
 
   protected logout() {    

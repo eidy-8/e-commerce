@@ -9,6 +9,7 @@ import { ProductFormComponent } from './pages/product-form/product-form.componen
 import { ProductsComponent } from './pages/products/products.component';
 import { UpdateProductComponent } from './pages/update-product/update-product.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { WishlistComponent } from './pages/wishlist/wishlist.component';
     ProductFormComponent,
     ProductsComponent,
     UpdateProductComponent,
-    WishlistComponent
+    WishlistComponent,
+    CartComponent
   ],
   imports: [
     CommonModule,

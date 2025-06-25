@@ -1,0 +1,63 @@
+@if (this.isLoading$ | async) {
+    <app-loading-overlay [fullScreen]="true"></app-loading-overlay>
+}
+
+<app-toaster></app-toaster>
+
+<div class="min-h-screen flex flex-col">
+  <div class="flex-1 flex flex-col">
+
+      <app-header></app-header>
+      
+      <div class="sm:flex xl:mx-80 lg:mx-40 md:mx-20 gap-4 my-6">
+          <div class="product-list">
+              @for (p of products; track p) {
+                  <div
+                      class="product-row"
+                      (click)="navigateToProduct(p.product_id)"
+                  >
+              
+                      <div class="product-image">
+                          <img [src]="p.imagem_produto" [alt]="p.nome_produto" />
+                      </div>
+                  
+                      <div class="product-info">
+                          <div class="id">#{{ p.product_id }}</div>
+                          <div class="flex justify-between">
+                              <div class="name">{{ p.nome_produto }}</div>
+                              <div class="price">R$ {{ p.preco }}</div>
+                          </div>
+          
+                          <div>
+                              <button (click)="excludeFromTheList(p.product_id); $event.stopPropagation()" class="excludeButton">Excluir</button>
+                          </div>
+                      </div>
+                  </div>
+              }
+          </div>
+          
+          <div class="sm:w-[450px] h-[250px] rounded-lg bg-white shadow-md p-[15px] flex flex-col">
+              <div class="p-2 flex-1 flex flex-col">
+                  <p class="font-bold pb-2">
+                      Resumo da compra
+                  </p>
+                  <hr>
+                  <div class="flex justify-between pt-2">
+                      <p>Produtos ({{ totalProduct }})</p>
+                      <p>R$ {{ totalPrice }}</p>
+                  </div>
+      
+                  <div class="flex justify-between pt-2 font-bold">
+                      <p>Total</p>
+                      <p>R$ {{ totalPrice }}</p>
+                  </div>
+                  <button class="w-full p-[12px] rounded-[8px] bg-[#007aff] hover:bg-[#0061CC] text-white text-[16px] cursor-pointer border-none mt-auto">
+                      Continuar a compra
+                  </button>
+              </div>
+            </div>
+            <br><br>
+      </div>
+    </div>
+    <app-footer-dynamic></app-footer-dynamic>
+</div>

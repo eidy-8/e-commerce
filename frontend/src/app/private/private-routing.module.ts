@@ -7,6 +7,7 @@ import { ProductFormComponent } from './pages/product-form/product-form.componen
 import { ProductsComponent } from './pages/products/products.component';
 import { UpdateProductComponent } from './pages/update-product/update-product.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
       {
         path: 'my-wishlist',
         component: WishlistComponent
+      },
+      {
+        path: 'my-cart',
+        component: CartComponent
       }
     ]
   }
