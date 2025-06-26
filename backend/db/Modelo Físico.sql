@@ -64,8 +64,33 @@ CREATE TABLE Product (
 	category_id UUID NOT NULL REFERENCES Category(id) ON DELETE CASCADE
 );
 
+CREATE TABLE PayType (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    paymentMethod VARCHAR(255)
+);
+
+CREATE TABLE Payment (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    purchaseDate TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    payType_id UUID NOT NULL REFERENCES PayType(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Orders (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    orderDate TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(255),
+    seller_id UUID NOT NULL REFERENCES Seller(id) ON DELETE CASCADE,
+    buyer_id UUID NOT NULL REFERENCES Buyer(id) ON DELETE CASCADE,
+    payment_id UUID NOT NULL REFERENCES Payment(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Order_Product (
+    order_id UUID NOT NULL REFERENCES Orders(id) ON DELETE CASCADE,
+    product_id UUID NOT NULL REFERENCES Product(id) ON DELETE CASCADE
+);
+
 --Comandos para testes
-SELECT * FROM product;
+SELECT * FROM orders;
 
 SELECT * FROM Wishlist WHERE buyer_id = '7acd543e-1067-465c-bb18-ff68b1ee7599';
 
@@ -111,7 +136,7 @@ DELETE FROM Users WHERE id = '648efb8c-3571-4541-b654-9b3270144ef9';
 
 TRUNCATE TABLE Product CASCADE;
 
-DROP TABLE WishlistItem CASCADE;
+DROP TABLE Payment CASCADE;
 
 SHOW timezone;
 
