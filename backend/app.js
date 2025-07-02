@@ -9,6 +9,8 @@ const productRoute = require('./routes/productRoute');
 const categoryRoute = require('./routes/categoryRoute');
 const wishListRoute = require('./routes/wishListRoute');
 const cartRoute = require('./routes/cartRoute');
+const paymentMethodRoute = require('./routes/paymentMethodRoute');
+const orderRoute = require('./routes/orderRoute');
 
 const middlewares = require('./middlewares/tokenValited');
 
@@ -38,9 +40,13 @@ app.use('/category', categoryRoute);
 
 app.use('*', middlewares.tokenValited);
 
+app.use ('/paymentMethod', paymentMethodRoute);
+
 app.use('/cart', cartRoute);
 
 app.use('/wishList', wishListRoute);
+
+app.use('/order', orderRoute);
 
 app.use('/private', async (req, res) => {
     try {
