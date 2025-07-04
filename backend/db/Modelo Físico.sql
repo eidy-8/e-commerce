@@ -72,6 +72,7 @@ CREATE TABLE PayType (
 CREATE TABLE Payment (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     purchaseDate TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+	order_id UUID,
     payType_id UUID NOT NULL REFERENCES PayType(id) ON DELETE CASCADE
 );
 
@@ -90,7 +91,15 @@ CREATE TABLE Order_Product (
 );
 
 --Comandos para testes
-SELECT * FROM orders;
+SELECT * FROM Seller WHERE user_id = '77ebb9bf-6426-428a-8cc0-98a286b8a2da';
+SELECT * FROM Orders;
+SELECT * FROM Payment;
+
+INSERT INTO Order (orderDate, status, seller_id, buyer_id, payment_id) 
+VALUES (NOW(), 'Em preparação', '7101788d-b49d-4c1d-bf26-0d6fc13b1427', '2815099b-0cb2-4192-8d08-edff52609209', '');
+
+INSERT INTO Payment (purchaseDate, payType_id) 
+VALUES (NOW(), '6557586e-597b-4430-8a6c-5c752889cfc6');
 
 SELECT * FROM Wishlist WHERE buyer_id = '7acd543e-1067-465c-bb18-ff68b1ee7599';
 
@@ -134,7 +143,7 @@ WHERE id = '07255487-dc91-4585-847c-711b6836a0b6';
 
 DELETE FROM Users WHERE id = '648efb8c-3571-4541-b654-9b3270144ef9';
 
-TRUNCATE TABLE Product CASCADE;
+TRUNCATE TABLE Orders CASCADE;
 
 DROP TABLE Payment CASCADE;
 
