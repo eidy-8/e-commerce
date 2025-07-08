@@ -8,6 +8,7 @@ import { ProductsComponent } from './pages/products/products.component';
 import { UpdateProductComponent } from './pages/update-product/update-product.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { PaymentComponent } from './pages/payment/payment.component';
 
 const routes: Routes = [
   {
@@ -38,7 +39,11 @@ const routes: Routes = [
       {
         path: 'my-cart',
         component: CartComponent
-      }
+      },
+      {
+        path: 'payment',
+        component: PaymentComponent
+      }   
     ]
   }
 ];
