@@ -91,15 +91,19 @@ CREATE TABLE Order_Product (
 );
 
 --Comandos para testes
-SELECT * FROM Seller WHERE user_id = '77ebb9bf-6426-428a-8cc0-98a286b8a2da';
+SELECT * FROM Users;
+SELECT * FROM Seller WHERE user_id = '7101788d-b49d-4c1d-bf26-0d6fc13b1427';
+SELECT * FROM Buyer WHERE user_id = '77ebb9bf-6426-428a-8cc0-98a286b8a2da';
 SELECT * FROM Orders;
 SELECT * FROM Payment;
+SELECT * FROM paytype;
+SELECT * FROM Order_Product;
 
-INSERT INTO Order (orderDate, status, seller_id, buyer_id, payment_id) 
-VALUES (NOW(), 'Em preparação', '7101788d-b49d-4c1d-bf26-0d6fc13b1427', '2815099b-0cb2-4192-8d08-edff52609209', '');
+INSERT INTO Orders (orderDate, status, seller_id, buyer_id, payment_id) 
+VALUES (NOW(), 'Em preparação', '58f4df34-9162-4d32-a773-7fc600fec3e4', 'a4b08eae-0bcb-4c85-868c-5b6c2d22a5d6', 'cf28552b-da29-41b0-a39d-d51a4b6c5b39');
 
 INSERT INTO Payment (purchaseDate, payType_id) 
-VALUES (NOW(), '6557586e-597b-4430-8a6c-5c752889cfc6');
+VALUES (NOW(), 'cbc8dc06-9e95-4212-a18f-e985f110b65a');
 
 SELECT * FROM Wishlist WHERE buyer_id = '7acd543e-1067-465c-bb18-ff68b1ee7599';
 
@@ -143,7 +147,7 @@ WHERE id = '07255487-dc91-4585-847c-711b6836a0b6';
 
 DELETE FROM Users WHERE id = '648efb8c-3571-4541-b654-9b3270144ef9';
 
-TRUNCATE TABLE Orders CASCADE;
+TRUNCATE TABLE Payment CASCADE;
 
 DROP TABLE Payment CASCADE;
 
