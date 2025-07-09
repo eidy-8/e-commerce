@@ -77,7 +77,13 @@ exports.getCartItem = async ( cartId ) => {
 
     try {
         const result = await pool.query(query, [cartId]);
-        return result.rows;
+        
+        const rowsWithCartId = result.rows.map(item => ({
+            ...item,
+            cart_id: cartId
+        }));
+
+        return rowsWithCartId;
     } catch (err) {
         console.error('Erro ao adicionar produto ao carrinho de compras.', err);
         throw err;
