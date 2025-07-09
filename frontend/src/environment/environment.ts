@@ -6,5 +6,6 @@ export enum Environment {
     ENV_PRODUCT =        'http://localhost:3000/product',
     ENV_CATEGORY =       'http://localhost:3000/category',
     ENV_WISHLIST =       'http://localhost:3000/wishList',
-    ENV_CART =           'http://localhost:3000/cart'
+    ENV_CART =           'http://localhost:3000/cart',
+    ENV_PAYMENTMETHOD =  'http://localhost:3000/paymentMethod'
 }

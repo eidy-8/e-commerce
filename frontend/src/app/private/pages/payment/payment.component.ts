@@ -1,14 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductService } from '../../services/product.service';
+import { Observable, Subject, takeUntil } from 'rxjs';
+import { PaymentMethodService } from '../../services/payment-method.service';
+import { LoadingService } from '../../../shared/services/loading.service';
+import { ToasterService } from '../../../shared/services/toaster.service';
 
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.css'
 })
-export class PaymentComponent {
-  total = 170.54;
+export class PaymentComponent implements OnInit, OnDestroy {
+  constructor(private toasterService: ToasterService, public loadingService: LoadingService, public productService: ProductService, private route: ActivatedRoute, public paymentMethodsService: PaymentMethodService, private router: Router) {
+    this.isLoading$ = this.loadingService.loading$;
+  }
 
-  groupedOptions: any[] = [
+  ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id'); 
+
+    this.getProducts(this.id);
+
+    this.getPaymentMethods();
+  }
+
+  protected isLoading$: Observable<boolean>;
+
+  protected id: any;
+
+  private unsubscribe = new Subject<void>;
+
+  protected total!: number;
+
+  protected groupedOptions: any[] = [
     {
       id: '1',
       paymentmethod: 'Crédito'
@@ -29,11 +53,44 @@ export class PaymentComponent {
 
   selectedMethod: string | null = null;
 
+  private getProducts(productId: string) {    
+    this.productService.getProduct('', 1, 1, '', productId)
+    .pipe(takeUntil(this.unsubscribe))
+    .subscribe((res: any) => {     
+      
+      this.total = res.data[0].price
+    });
+  }
+
+  private getPaymentMethods() {
+    this.paymentMethodsService.getPaymentMethods()
+    .pipe(takeUntil(this.unsubscribe))
+    .subscribe((res: any) => {     
+      
+      this.groupedOptions = res.data;
+    });
+  }
+
   selectMethod(id: string): void {
     this.selectedMethod = id;
   }
 
-  aoo() {
-    console.log(this.selectedMethod);
+  continue(selectedMethod: any) {
+    if (selectedMethod) {
+      // this.router.navigate([ '/order', selectedMethod ]);
+      console.log(selectedMethod);
+    } else {
+      this.toasterService.show({
+        type: 'error',
+        title: 'Erro',
+        message: 'Selecione uma forma de pagamento.'
+      });
+    }
+  }
+
+  ngOnDestroy(): void {
+    console.clear();
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 }

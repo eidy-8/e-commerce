@@ -195,7 +195,7 @@ export class ProductListingComponent implements OnInit, OnDestroy {
   }
 
   buyNow(): void {
-    console.log('Iniciando compra do produto:', this.product.title);
+    this.router.navigate([ '/user/payment', this.productId ]);
   }
 
   ngOnDestroy(): void {

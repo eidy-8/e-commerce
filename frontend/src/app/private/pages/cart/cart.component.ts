@@ -14,6 +14,7 @@ import { CartService } from '../../services/cart.service';
 export class CartComponent implements OnInit, OnDestroy{
   protected isLoading$: Observable<boolean>;
 
+  public id: any;
   public products: any;
   public totalProduct!: number;
   public totalPrice: any;
@@ -65,7 +66,8 @@ export class CartComponent implements OnInit, OnDestroy{
   private getCart() {
     this.cartService.getCart(this.buyerId)
       .pipe(takeUntil(this.unsubscribe))
-      .subscribe((res: any) => {      
+      .subscribe((res: any) => {    
+        this.id = res[0].cart_id;         
         this.products = res; 
         this.totalProduct = res.length;
 
@@ -75,6 +77,10 @@ export class CartComponent implements OnInit, OnDestroy{
           this.totalPrice += Number(res[i].preco); // converte para número
         }
       });
+  }
+
+  buyNow(): void {
+    this.router.navigate([ '/user/payment', this.id ]);
   }
 
   ngOnDestroy(): void {

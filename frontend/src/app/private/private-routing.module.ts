@@ -41,7 +41,7 @@ const routes: Routes = [
         component: CartComponent
       },
       {
-        path: 'payment',
+        path: 'payment/:id',
         component: PaymentComponent
       }   
     ]
