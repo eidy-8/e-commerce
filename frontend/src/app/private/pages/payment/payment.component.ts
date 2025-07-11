@@ -5,6 +5,8 @@ import { Observable, Subject, takeUntil } from 'rxjs';
 import { PaymentMethodService } from '../../services/payment-method.service';
 import { LoadingService } from '../../../shared/services/loading.service';
 import { ToasterService } from '../../../shared/services/toaster.service';
+import { CartService } from '../../services/cart.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-payment',
@@ -12,12 +14,14 @@ import { ToasterService } from '../../../shared/services/toaster.service';
   styleUrl: './payment.component.css'
 })
 export class PaymentComponent implements OnInit, OnDestroy {
-  constructor(private toasterService: ToasterService, public loadingService: LoadingService, public productService: ProductService, private route: ActivatedRoute, public paymentMethodsService: PaymentMethodService, private router: Router) {
+  constructor(private toasterService: ToasterService, public loadingService: LoadingService, public productService: ProductService, private route: ActivatedRoute, public paymentMethodsService: PaymentMethodService, private router: Router, public cartService: CartService, public userService: UserService) {
     this.isLoading$ = this.loadingService.loading$;
   }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id'); 
+
+    this.getUser();
 
     this.getProducts(this.id);
 
@@ -31,6 +35,10 @@ export class PaymentComponent implements OnInit, OnDestroy {
   private unsubscribe = new Subject<void>;
 
   protected total!: number;
+
+  protected buyerId: any;
+
+  public totalProduct!: number;
 
   protected groupedOptions: any[] = [
     {
@@ -57,8 +65,12 @@ export class PaymentComponent implements OnInit, OnDestroy {
     this.productService.getProduct('', 1, 1, '', productId)
     .pipe(takeUntil(this.unsubscribe))
     .subscribe((res: any) => {     
-      
-      this.total = res.data[0].price
+
+      if (res.data.length == 0) {
+        this.getCartItems();
+      } else {
+        this.total = res.data[0].price;
+      }
     });
   }
 
@@ -68,6 +80,26 @@ export class PaymentComponent implements OnInit, OnDestroy {
     .subscribe((res: any) => {     
       
       this.groupedOptions = res.data;
+    });
+  }
+
+  private getCartItems() {
+    this.cartService.getCart(this.buyerId)
+    .pipe(takeUntil(this.unsubscribe))
+    .subscribe((res: any) => {      
+      this.totalProduct = res.length;
+      
+      for (let i = 0; i < this.totalProduct; i++) {
+        this.total += Number(res[i].preco); 
+      }
+
+      console.log(res[0].preco);
+    });
+  }
+
+  private getUser(){
+    this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
+      this.buyerId = res.data.buyerId;      
     });
   }
 
