@@ -21,8 +21,6 @@ export class PaymentComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id'); 
 
-    this.getUser();
-
     this.getProducts(this.id);
 
     this.getPaymentMethods();
@@ -34,30 +32,11 @@ export class PaymentComponent implements OnInit, OnDestroy {
 
   private unsubscribe = new Subject<void>;
 
-  protected total!: number;
+  protected total: number = 0;
 
-  protected buyerId: any;
+  public totalProduct: number = 0;
 
-  public totalProduct!: number;
-
-  protected groupedOptions: any[] = [
-    {
-      id: '1',
-      paymentmethod: 'Crédito'
-    },
-    {
-      id: '2',
-      paymentmethod: 'Pix'
-    },
-    {
-      id: '3',
-      paymentmethod: 'Boleto'
-    },
-    {
-      id: '4',
-      paymentmethod: 'Débito'
-    }
-  ];
+  protected groupedOptions: any[] = [];
 
   selectedMethod: string | null = null;
 
@@ -67,8 +46,9 @@ export class PaymentComponent implements OnInit, OnDestroy {
     .subscribe((res: any) => {     
 
       if (res.data.length == 0) {
-        this.getCartItems();
+        this.getUser();
       } else {
+        this.totalProduct = 1;
         this.total = res.data[0].price;
       }
     });
@@ -83,8 +63,8 @@ export class PaymentComponent implements OnInit, OnDestroy {
     });
   }
 
-  private getCartItems() {
-    this.cartService.getCart(this.buyerId)
+  private getCartItems(buyerId: any) {    
+    this.cartService.getCart(buyerId)
     .pipe(takeUntil(this.unsubscribe))
     .subscribe((res: any) => {      
       this.totalProduct = res.length;
@@ -92,14 +72,12 @@ export class PaymentComponent implements OnInit, OnDestroy {
       for (let i = 0; i < this.totalProduct; i++) {
         this.total += Number(res[i].preco); 
       }
-
-      console.log(res[0].preco);
     });
   }
 
   private getUser(){
     this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
-      this.buyerId = res.data.buyerId;      
+      this.getCartItems(res.data.buyerId);
     });
   }
 
@@ -107,10 +85,9 @@ export class PaymentComponent implements OnInit, OnDestroy {
     this.selectedMethod = id;
   }
 
-  continue(selectedMethod: any) {
+  continue(selectedMethod: any) {    
     if (selectedMethod) {
-      // this.router.navigate([ '/order', selectedMethod ]);
-      console.log(selectedMethod);
+      this.router.navigate([ 'user/order', this.id, selectedMethod ]);
     } else {
       this.toasterService.show({
         type: 'error',

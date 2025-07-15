@@ -1,0 +1,74 @@
+@if (this.isLoading$ | async) {
+<app-loading-overlay [fullScreen]="true"></app-loading-overlay>
+}
+
+<app-header-regular></app-header-regular>
+
+<div class="order-page">
+  <div class="sm:flex justify-center max-w-[1250px] mx-auto gap-8 px-4">
+    <div class="order-review">
+      <h2>Revise e confirme</h2>
+
+      <b>Detalhe da entrega</b>
+        @for (p of products; track p; let i = $index) {
+            <div class="product-row">
+                <div class="product-image">
+                    <img [src]="p.imagem_produto" [alt]="p.nome_produto" />
+                </div>
+                
+                <div class="product-info">
+                    <p class="productIndex">Envio {{ i }}</p>
+                    <div class="deliverDetail">Chegará amanhã</div>
+                    <div class="name">{{ p.nome_produto }}</div>
+                </div>
+            </div>
+        }
+
+      <br />
+
+      <b>Detalhe do pagamento</b>
+        <div class="payment-div">
+            <div class="payment-info">
+                <b>o método de pagamento</b>
+                <p>Total</p>
+                <hr>
+                <button>Alterar forma de pagamento</button>
+            </div>
+        </div>
+    </div>
+
+    <div
+      class="w-auto sm:w-[400px] h-[250px] rounded-lg bg-white shadow-md p-[15px] sm:flex flex-col"
+    >
+      <div class="p-2 flex-1 flex flex-col">
+        <p class="font-bold pb-2">Resumo da compra</p>
+        <hr />
+        <br />
+        <div class="flex justify-between pt-2">
+          <p>
+            {{
+              totalProduct > 1
+                ? "Produtos (" + totalProduct + ")"
+                : "Produto (" + totalProduct + ")"
+            }}
+          </p>
+          <p>R$ {{ total }}</p>
+        </div>
+        <br />
+        <hr />
+        <div class="flex justify-between pt-2 font-bold">
+          <p>Você pagará</p>
+          <p>R$ {{ total }}</p>
+        </div>
+        <br />
+        <button
+          class="p-[12px] px-8 rounded-[8px] bg-[#007aff] hover:bg-[#0061CC] text-white text-[16px] cursor-pointer border-none"
+        >
+          Confirmar a compra
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer-regular></app-footer-regular>

@@ -9,6 +9,7 @@ import { UpdateProductComponent } from './pages/update-product/update-product.co
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { PaymentComponent } from './pages/payment/payment.component';
+import { OrderComponent } from './pages/order/order.component';
 
 const routes: Routes = [
   {
@@ -43,7 +44,11 @@ const routes: Routes = [
       {
         path: 'payment/:id',
         component: PaymentComponent
-      }   
+      },
+      {
+        path: 'order/:productId/:paymentMethodId',
+        component: OrderComponent
+      }
     ]
   }
 ];

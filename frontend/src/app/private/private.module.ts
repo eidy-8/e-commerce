@@ -11,6 +11,7 @@ import { UpdateProductComponent } from './pages/update-product/update-product.co
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { PaymentComponent } from './pages/payment/payment.component';
+import { OrderComponent } from './pages/order/order.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { PaymentComponent } from './pages/payment/payment.component';
     UpdateProductComponent,
     WishlistComponent,
     CartComponent,
-    PaymentComponent
+    PaymentComponent,
+    OrderComponent
   ],
   imports: [
     CommonModule,
