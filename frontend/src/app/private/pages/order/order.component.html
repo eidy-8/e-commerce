@@ -17,7 +17,7 @@
                 </div>
                 
                 <div class="product-info">
-                    <p class="productIndex">Envio {{ i }}</p>
+                    <p class="productIndex">Envio {{ i + 1 }}</p>
                     <div class="deliverDetail">Chegará amanhã</div>
                     <div class="name">{{ p.nome_produto }}</div>
                 </div>
@@ -30,9 +30,9 @@
         <div class="payment-div">
             <div class="payment-info">
                 <b>o método de pagamento</b>
-                <p>Total</p>
+                <p>R$ {{ total }}</p>
                 <hr>
-                <button>Alterar forma de pagamento</button>
+                <button class="change-button" (click)="changePaymentMethod()">Alterar forma de pagamento</button>
             </div>
         </div>
     </div>

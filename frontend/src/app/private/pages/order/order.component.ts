@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { LoadingService } from '../../../shared/services/loading.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { UserService } from '../../services/user.service';
 import { CartService } from '../../services/cart.service';
@@ -12,7 +12,7 @@ import { CartService } from '../../services/cart.service';
   styleUrl: './order.component.css'
 })
 export class OrderComponent implements OnInit, OnDestroy {
-  constructor(public loadingService: LoadingService, private route: ActivatedRoute, public productService: ProductService, public userService: UserService, public cartService: CartService) {
+  constructor(public loadingService: LoadingService, private route: ActivatedRoute, public productService: ProductService, public userService: UserService, public cartService: CartService, private router: Router) {
     this.isLoading$ = this.loadingService.loading$;
   }
 
@@ -66,6 +66,10 @@ export class OrderComponent implements OnInit, OnDestroy {
         this.total += Number(res[i].preco); 
       }
     });
+  }
+
+  public changePaymentMethod() {
+    this.router.navigate([ 'user/payment', this.id ]);
   }
 
   ngOnDestroy(): void {
