@@ -15,15 +15,15 @@ exports.getOrderByBuyerId = async (buyerId) => {
     }
 };
 
-exports.createOrder = async (orderDate, status, seller_id, buyer_id, payment_id) => {
+exports.createOrder = async (status, seller_id, buyer_id, payment_id) => {
     const query = `
         INSERT INTO Orders (orderDate, status, seller_id, buyer_id, payment_id)
-        VALUES ($1, $2, $3, $4, $5)
+        VALUES (NOW(), $1, $2, $3, $4)
         RETURNING *;
     `;
 
     try {
-        const result = await pool.query(query, [orderDate, status, seller_id, buyer_id, payment_id]);
+        const result = await pool.query(query, [status, seller_id, buyer_id, payment_id]);
         return result.rows[0];
     } catch (err) {
         console.error('Erro ao criar pedido.', err);

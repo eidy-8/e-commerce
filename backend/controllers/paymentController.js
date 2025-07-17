@@ -25,10 +25,10 @@ exports.addNewPayment = async (req, res) => {
     
     try {           
         const payment = await paymentModel.createPayment(payType_id);
-        console.log(payment);
 
         return res.status(200).json({
-            message: 'Pagamento realizado com sucesso.'
+            message: 'Pagamento realizado com sucesso.',
+            payment: payment.rows[0].id
         });
     } catch (error) {
         console.error(error.message); 
