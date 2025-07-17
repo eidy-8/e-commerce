@@ -12,6 +12,7 @@ import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { OrderComponent } from './pages/order/order.component';
+import { PurchasesComponent } from './pages/purchases/purchases.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { OrderComponent } from './pages/order/order.component';
     WishlistComponent,
     CartComponent,
     PaymentComponent,
-    OrderComponent
+    OrderComponent,
+    PurchasesComponent
   ],
   imports: [
     CommonModule,

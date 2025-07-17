@@ -2,6 +2,8 @@
 <app-loading-overlay [fullScreen]="true"></app-loading-overlay>
 }
 
+<app-toaster></app-toaster>
+
 <app-header-regular></app-header-regular>
 
 <div class="order-page">
@@ -29,7 +31,7 @@
       <b>Detalhe do pagamento</b>
         <div class="payment-div">
             <div class="payment-info">
-                <b>o método de pagamento</b>
+                <b>{{ paymentMethodLabel }}</b>
                 <p>R$ {{ total }}</p>
                 <hr>
                 <button class="change-button" (click)="changePaymentMethod()">Alterar forma de pagamento</button>
@@ -62,6 +64,7 @@
         </div>
         <br />
         <button
+          (click)="purchase()"
           class="p-[12px] px-8 rounded-[8px] bg-[#007aff] hover:bg-[#0061CC] text-white text-[16px] cursor-pointer border-none"
         >
           Confirmar a compra

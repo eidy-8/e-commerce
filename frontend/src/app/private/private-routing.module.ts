@@ -10,6 +10,7 @@ import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { OrderComponent } from './pages/order/order.component';
+import { PurchasesComponent } from './pages/purchases/purchases.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,10 @@ const routes: Routes = [
       {
         path: 'order/:productId/:paymentMethodId',
         component: OrderComponent
+      },
+      {
+        path: 'my-purchases',
+        component: PurchasesComponent
       }
     ]
   }

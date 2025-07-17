@@ -7,5 +7,7 @@ export enum Environment {
     ENV_CATEGORY =       'http://localhost:3000/category',
     ENV_WISHLIST =       'http://localhost:3000/wishList',
     ENV_CART =           'http://localhost:3000/cart',
-    ENV_PAYMENTMETHOD =  'http://localhost:3000/paymentMethod'
+    ENV_PAYMENTMETHOD =  'http://localhost:3000/paymentMethod',
+    ENV_PAYMENT =        'http://localhost:3000/payment',
+    ENV_ORDER =          'http://localhost:3000/order'
 }
