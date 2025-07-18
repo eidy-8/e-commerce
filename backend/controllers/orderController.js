@@ -21,11 +21,11 @@ exports.listOrder = async (req, res) => {
 };
 
 exports.addOrder = async (req, res) => {
-    const { orderDate, status, seller_id, buyer_id, payment_id } = req.body;
+    const { status, seller_id, buyer_id, payment_id } = req.body;
 
     try {
 
-        await orderModel.createOrder(orderDate, status, seller_id, buyer_id, payment_id);
+        await orderModel.createOrder(status, seller_id, buyer_id, payment_id);
 
         return res.status(201).json({
             message: 'Produto adicionado ao pedido com sucesso.'

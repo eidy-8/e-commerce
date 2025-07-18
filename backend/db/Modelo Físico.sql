@@ -93,11 +93,13 @@ CREATE TABLE Order_Product (
 --Comandos para testes
 SELECT * FROM Users;
 SELECT * FROM Seller WHERE user_id = '7101788d-b49d-4c1d-bf26-0d6fc13b1427';
-SELECT * FROM Buyer WHERE user_id = '77ebb9bf-6426-428a-8cc0-98a286b8a2da';
+SELECT * FROM Buyer WHERE user_id = '7101788d-b49d-4c1d-bf26-0d6fc13b1427';
 SELECT * FROM Orders;
 SELECT * FROM Payment;
 SELECT * FROM paytype;
 SELECT * FROM Order_Product;
+
+SELECT * FROM Cart WHERE buyer_id = 'd23f16b6-e10f-4991-8156-1ed69523ccdd';
 
 INSERT INTO Orders (orderDate, status, seller_id, buyer_id, payment_id) 
 VALUES (NOW(), 'Em preparação', '58f4df34-9162-4d32-a773-7fc600fec3e4', 'a4b08eae-0bcb-4c85-868c-5b6c2d22a5d6', 'cf28552b-da29-41b0-a39d-d51a4b6c5b39');
