@@ -33,6 +33,8 @@ export class OrderService {
   }
 
   public postOrder(orderData: any): Observable<any> {
+    console.log(JSON.stringify(orderData));
+    
     return this.httpClient.post<any>(this.urlOrder, JSON.stringify(orderData), this.httpOptions)
     .pipe(
       retry(1),

@@ -8,6 +8,7 @@ import { CartService } from '../../services/cart.service';
 import { PaymentMethodService } from '../../services/payment-method.service';
 import { PaymentService } from '../../services/payment.service';
 import { ToasterService } from '../../../shared/services/toaster.service';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-order',
@@ -15,7 +16,7 @@ import { ToasterService } from '../../../shared/services/toaster.service';
   styleUrl: './order.component.css'
 })
 export class OrderComponent implements OnInit, OnDestroy {
-  constructor(public loadingService: LoadingService, private route: ActivatedRoute, public productService: ProductService, public userService: UserService, public cartService: CartService, private router: Router, private paymentService: PaymentService, private toasterService: ToasterService) {
+  constructor(public loadingService: LoadingService, private route: ActivatedRoute, public productService: ProductService, public userService: UserService, public cartService: CartService, private router: Router, private paymentService: PaymentService, private orderService: OrderService, private toasterService: ToasterService) {
     this.isLoading$ = this.loadingService.loading$;
   }
 
@@ -43,6 +44,8 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   protected isLoading$: Observable<boolean>;
+
+  protected buyerId: any;
 
   protected id: any;
 
@@ -74,6 +77,8 @@ export class OrderComponent implements OnInit, OnDestroy {
 
   private getUser(){
     this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
+      this.buyerId = res.data.buyerId;
+
       this.getCartItems(res.data.buyerId);
     });
   }
@@ -97,8 +102,6 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   public purchase() {
-    // this.router.navigate([ 'user/my-purchases' ]);
-
     const payTypeData = { payType_id: this.paymentMethodId }
 
     this.paymentService.postPayment(payTypeData).pipe( takeUntil( this.unsubscribe ) ).subscribe({
@@ -109,7 +112,36 @@ export class OrderComponent implements OnInit, OnDestroy {
             message: res.message
           });
 
-          
+          let orderData = {
+            status: "Em preparação", 
+            seller_id: "2815099b-0cb2-4192-8d08-edff52609209", 
+            buyer_id: this.buyerId, 
+            payment_id: res.payment
+          }
+
+          console.log(orderData);
+
+          this.orderService.postOrder(orderData).pipe( takeUntil( this.unsubscribe ) ).subscribe({
+            next: res => {
+              this.toasterService.show({
+                type: 'success',
+                title: 'Sucesso',
+                message: res.message
+              });
+              
+              this.router.navigate([ 'user/my-purchases' ]);
+            },
+            error: error => {
+
+              let errorMessage = error.message;
+
+              this.toasterService.show({
+                type: 'error',
+                title: 'Erro',
+                message: errorMessage
+              });
+            }
+          });
         },
         error: error => {          
           this.toasterService.show({
