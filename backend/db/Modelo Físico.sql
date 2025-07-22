@@ -9,6 +9,7 @@ CREATE TABLE Users (
 	email VARCHAR(320) UNIQUE NOT NULL,
 	password VARCHAR(255) NOT NULL,
 	imageUrl VARCHAR(512),
+	address VARCHAR(512),
 	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	lastLogin TIMESTAMP
 );
@@ -30,7 +31,8 @@ CREATE TABLE Wishlist (
 
 CREATE TABLE Cart_Product (
     cart_id UUID NOT NULL REFERENCES Cart(id) ON DELETE CASCADE,
-    product_id UUID NOT NULL REFERENCES Product(id) ON DELETE CASCADE
+    product_id UUID NOT NULL REFERENCES Product(id) ON DELETE CASCADE,
+	quantity DECIMAL(18,2)
 );
 
 CREATE TABLE Wishlist_Product (
@@ -72,6 +74,7 @@ CREATE TABLE PayType (
 CREATE TABLE Payment (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     purchaseDate TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+	totalPrice DECIMAL(18,2),
 	order_id UUID,
     payType_id UUID NOT NULL REFERENCES PayType(id) ON DELETE CASCADE
 );
@@ -80,7 +83,6 @@ CREATE TABLE Orders (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     orderDate TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     status VARCHAR(255),
-    seller_id UUID NOT NULL REFERENCES Seller(id) ON DELETE CASCADE,
     buyer_id UUID NOT NULL REFERENCES Buyer(id) ON DELETE CASCADE,
     payment_id UUID NOT NULL REFERENCES Payment(id) ON DELETE CASCADE
 );
@@ -97,7 +99,7 @@ SELECT * FROM Buyer WHERE user_id = '7101788d-b49d-4c1d-bf26-0d6fc13b1427';
 SELECT * FROM Orders;
 SELECT * FROM Payment;
 SELECT * FROM paytype;
-SELECT * FROM Order_Product;
+SELECT * FROM Cart_Product;
 
 SELECT * FROM Cart WHERE buyer_id = 'd23f16b6-e10f-4991-8156-1ed69523ccdd';
 
@@ -122,7 +124,7 @@ VALUES ('123',
 'https://raw.githubusercontent.com/eidy-8/imagens/main/e-commerce/esporte/vecteezy_vibrant-cricket-helmet-in-yellow-with-a-polished-surface_55985493.png', 
 'descriptionTeste3', 0, '2815099b-0cb2-4192-8d08-edff52609209', '4935a834-10ee-408c-b573-987ff8533c20', 0);
 
-ALTER TABLE Users ADD COLUMN imageUrl VARCHAR(512);
+ALTER TABLE Orders DROP COLUMN seller_id;
 
 ALTER TABLE Product
 ALTER COLUMN isUsed TYPE boolean
