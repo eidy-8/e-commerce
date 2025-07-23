@@ -64,7 +64,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   private getProducts(productId: string) {    
     this.productService.getProduct('', 1, 1, '', productId)
     .pipe(takeUntil(this.unsubscribe))
-    .subscribe((res: any) => {     
+    .subscribe((res: any) => {           
 
       if (res.data.length == 0) {
         this.getUser();
@@ -87,7 +87,7 @@ export class OrderComponent implements OnInit, OnDestroy {
     this.cartService.getCart(buyerId)
     .pipe(takeUntil(this.unsubscribe))
     .subscribe((res: any) => {      
-      this.products = res; 
+      this.products = res;       
 
       this.totalProduct = res.length;
       
@@ -102,7 +102,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   }
 
   public purchase() {
-    const payTypeData = { payType_id: this.paymentMethodId }
+    const payTypeData = { payType_id: this.paymentMethodId, totalPrice: this.total }
 
     this.paymentService.postPayment(payTypeData).pipe( takeUntil( this.unsubscribe ) ).subscribe({
         next: res => {
@@ -114,9 +114,11 @@ export class OrderComponent implements OnInit, OnDestroy {
 
           let orderData = {
             status: "Em preparação", 
-            seller_id: "2815099b-0cb2-4192-8d08-edff52609209", 
             buyer_id: this.buyerId, 
-            payment_id: res.payment
+            payment_id: res.payment,
+            products: this.products.map((p: any) => ({
+            product_id: p.product_id
+          }))
           }
 
           console.log(orderData);
