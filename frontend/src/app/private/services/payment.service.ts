@@ -32,6 +32,14 @@ export class PaymentService {
     )
   }
 
+  public putPayment(paymentId: string, paymentUpdate: any): Observable<any> {
+    return this.httpClient.put<any>(`${this.urlPayment}/${paymentId}`, JSON.stringify(paymentUpdate), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage = '';
   

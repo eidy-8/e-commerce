@@ -61,6 +61,8 @@ export class OrderComponent implements OnInit, OnDestroy {
 
   protected paymentMethodLabel: any;
 
+  protected paymentId: any;
+
   private getProducts(productId: string) {    
     this.productService.getProduct('', 1, 1, '', productId)
     .pipe(takeUntil(this.unsubscribe))
@@ -112,16 +114,16 @@ export class OrderComponent implements OnInit, OnDestroy {
             message: res.message
           });
 
+          this.paymentId = res.payment;
+
           let orderData = {
             status: "Em preparação", 
             buyer_id: this.buyerId, 
-            payment_id: res.payment,
+            payment_id: this.paymentId,
             products: this.products.map((p: any) => ({
-            product_id: p.product_id
-          }))
+              product_id: p.product_id
+            }))
           }
-
-          console.log(orderData);
 
           this.orderService.postOrder(orderData).pipe( takeUntil( this.unsubscribe ) ).subscribe({
             next: res => {
@@ -130,8 +132,27 @@ export class OrderComponent implements OnInit, OnDestroy {
                 title: 'Sucesso',
                 message: res.message
               });
-              
-              this.router.navigate([ 'user/my-purchases' ]);
+
+              let orderData = { orderId: res.orderId }
+
+              this.paymentService.putPayment(this.paymentId, orderData).pipe( takeUntil( this.unsubscribe ) ).subscribe({
+                next: res => {
+                  this.toasterService.show({
+                    type: 'success',
+                    title: 'Sucesso',
+                    message: res.message
+                  });
+
+                  this.router.navigate([ 'user/my-purchases' ]);
+                },
+                error: error => {    
+                  this.toasterService.show({
+                    type: 'error',
+                    title: 'Erro',
+                    message: error
+                  });
+                }
+              });
             },
             error: error => {
 
