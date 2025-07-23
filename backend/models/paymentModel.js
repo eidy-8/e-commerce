@@ -24,9 +24,9 @@ exports.listSpecificPayment = async (id) => {
     }
 }
 
-exports.createPayment = async (payType_id) => {
-    return pool.query(
-      'INSERT INTO Payment (purchaseDate, payType_id) VALUES (NOW(), $1) RETURNING *',
-      [payType_id]
-    );
+exports.createPayment = async (payType_id, totalPrice) => {
+  return pool.query(
+    'INSERT INTO Payment (purchaseDate, payType_id, totalPrice) VALUES (NOW(), $1, $2) RETURNING *',
+    [payType_id, totalPrice]
+  );
 };

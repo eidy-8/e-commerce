@@ -21,10 +21,10 @@ exports.listAllPayment = async (req, res) => {
 };
 
 exports.addNewPayment = async (req, res) => {    
-    const { payType_id } = req.body;
+    const { payType_id, totalPrice } = req.body;
     
     try {           
-        const payment = await paymentModel.createPayment(payType_id);
+        const payment = await paymentModel.createPayment(payType_id, totalPrice);
 
         return res.status(200).json({
             message: 'Pagamento realizado com sucesso.',

@@ -21,30 +21,21 @@ exports.listOrder = async (req, res) => {
 };
 
 exports.addOrder = async (req, res) => {
-    const { status, buyer_id, payment_id } = req.body;
+    const { status, buyer_id, payment_id, products } = req.body;
 
     try {
 
-        await orderModel.createOrder(status, buyer_id, payment_id);
+        const order = await orderModel.createOrder(status, buyer_id, payment_id);
+
+        if (Array.isArray(products)) {
+            for (const item of products) {
+                await orderModel.addOrderItem(order.id, item.product_id);
+            }
+        }
 
         return res.status(201).json({
-            message: 'Produto adicionado ao pedido com sucesso.'
-        });
-    } catch (error) {
-        console.error(error.message);
-        res.status(400).json({ message: error.message });
-    }
-};
-
-exports.addToOrder = async (req, res) => {
-    const { order_id, product_id } = req.body;
-
-    try {
-
-        await orderModel.addOrderItem(order_id, product_id);
-
-        return res.status(201).json({
-            message: 'Produto adicionado ao pedido com sucesso.'
+            message: 'Pedido criado com sucesso.',
+            orderId: order.id
         });
     } catch (error) {
         console.error(error.message);
