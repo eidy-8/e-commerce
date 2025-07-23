@@ -37,3 +37,21 @@ exports.addNewPayment = async (req, res) => {
         });
     }
 }
+
+exports.updatePayment = async (req, res) => {
+  const { id } = req.params;  
+  const { orderId } = req.body;
+
+  if (orderId == "") {
+    return res.status(400).json({ error: 'Preencha o campo corretamente' });
+  }
+
+  try {            
+    await paymentModel.updatePayment(id, orderId);
+
+    res.json({ message: `Pagamento atualizado com sucesso!` });
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Erro ao atualizar o pagamento' });
+  }
+};

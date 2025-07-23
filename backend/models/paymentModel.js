@@ -30,3 +30,12 @@ exports.createPayment = async (payType_id, totalPrice) => {
     [payType_id, totalPrice]
   );
 };
+
+exports.updatePayment = async (id, orderId) => { 
+  return pool.query(
+    `UPDATE Payment 
+     SET order_id = $1
+     WHERE id = $2 RETURNING *`,
+    [orderId, id]
+  );
+};
