@@ -1,1 +1,66 @@
-<p>purchases works!</p>
+@if (this.isLoading$ | async) {
+    <app-loading-overlay [fullScreen]="true"></app-loading-overlay>
+}
+
+<app-header></app-header>
+
+<div class="flex flex-row">
+
+    <div class="hidden 2xl:block xl:block">
+        <app-side-menu
+        [menuTitle]="'Minha Conta'"
+        [menuItems]="[
+            {
+                label: 'Vendas',
+                icon: 'fa-shopping-basket',
+                children: [
+                    { label: 'Resumo', link: '/user/new-product' },
+                    { label: 'Novidade', link: '/vendas/novidade' },
+                    { label: 'Anúncios', link: '/vendas/anuncios' }
+                ]
+            },
+            {
+                label: 'Produtos',
+                icon: 'fa-shopping-bag',
+                children: [
+                    { label: 'Categorias', link: '/produtos/categorias' },
+                    { label: 'Estoque', link: '/produtos/estoque' }
+                ]
+            }
+        ]"
+        ></app-side-menu>
+    </div>
+
+    <div class="mx-2 w-full 2xl:mx-28 text-sm">
+        <div class="flex my-10 text-gray-color justify-between">
+            <p class="font-bold text-2xl">Compras</p>
+        </div>
+
+        <div class="flex items-center gap-4 mb-6 rounded-lg bg-white p-4 shadow-md">
+            <app-search-bar [emitOnInput]="false" (search)="onSearch($event)"></app-search-bar>
+            <p class="text-gray-400">|</p>
+            <i class="fa fa-filter text-gray-600" aria-hidden="true"></i>
+            <button class="text-gray-600 hover:text-gray-800 font-medium">Todas</button>
+        </div>
+
+        <!-- <app-product-manager [products]="listaDeProdutos"></app-product-manager> FAZER COMPONENTE PARA PEDIDOS-->
+
+        <div class="mr-0 flex justify-center items-center gap-4 2xl:mr-[260px]">
+            <button 
+                class="btn btn-primary px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 disabled:bg-gray-300"
+                (click)="previousPage()" 
+                [disabled]="currentPage === 1">
+                Anterior
+            </button>
+            <span class="text-gray-600 font-medium">Página {{ currentPage }}</span>
+            <button 
+                class="btn btn-primary px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 disabled:bg-gray-300"
+                (click)="nextPage()" 
+                [disabled]="!hasNext">
+                Próxima
+            </button>
+        </div>
+    </div>
+</div>
+
+<app-footer-dynamic></app-footer-dynamic>
