@@ -25,6 +25,7 @@ import { ExpandableSectionComponent } from './components/reusable/expandable-sec
 import { InfoCardComponent } from './components/reusable/info-card/info-card.component';
 import { SearchBarMainComponent } from './components/reusable/search-bar-main/search-bar-main.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { OrderManagerComponent } from './components/order-manager/order-manager.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     ExpandableSectionComponent,
     InfoCardComponent,
     SearchBarMainComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    OrderManagerComponent
   ],
   imports: [
     CommonModule,
@@ -80,7 +82,8 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     ExpandableSectionComponent,
     InfoCardComponent,
     SearchBarMainComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    OrderManagerComponent
   ]
 })
 export class SharedModule { }

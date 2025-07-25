@@ -12,7 +12,7 @@ import { UserService } from '../../services/user.service';
   styleUrl: './products.component.css'
 })
 export class ProductsComponent implements OnInit, OnDestroy {
-  listaDeProdutos: Product[] = [];
+  productsList: Product[] = [];
   currentPage: number = 1;
   pageSize: number = 10;
   hasNext: boolean = false;
@@ -38,7 +38,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.productService.getProduct(searchTerm, this.currentPage, this.pageSize, this.sellerId)
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res: any) => {                
-        this.listaDeProdutos = res.data; 
+        this.productsList = res.data; 
         this.hasNext = res.hasNext; 
       });
   }

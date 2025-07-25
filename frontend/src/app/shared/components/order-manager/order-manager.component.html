@@ -1,0 +1,23 @@
+<app-toaster></app-toaster>
+
+<div class="product-list">
+  @for (p of products; track p) {
+    <div
+      class="product-row"
+      [ngStyle]="{ 'background-color': p.isactive === '0' ? '#f2f2f2' : '' }"
+    >
+  
+      <div class="product-image">
+        <img [src]="p.imageurl" [alt]="p.name" />
+      </div>
+  
+      <div class="product-info">
+        <div class="id">#{{ p.id }}</div>
+        <div class="name">{{ p.name }}</div>
+        <div class="quantity">{{ p.quantity > 1 ? p.quantity + ' unidades' : p.quantity + ' unidade' }}</div>
+      </div>
+    </div>
+  }
+</div>
+
+<br><br>
