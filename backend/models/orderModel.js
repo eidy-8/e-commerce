@@ -8,7 +8,7 @@ exports.getOrderByBuyerId = async (buyerId) => {
 
     try {
         const result = await pool.query(query, [buyerId]);
-        return result.rows[0];
+        return result.rows;
     } catch (err) {
         console.error('Erro ao buscar pedido.', err);
         throw err;
