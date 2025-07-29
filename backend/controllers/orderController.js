@@ -6,14 +6,40 @@ dotenv.config();
 
 exports.listOrder = async (req, res) => {
     const { buyerId } = req.params;
+    const { search, page, pageSize } = req.query; 
+    const offset = (page - 1) * pageSize;
 
-    try {        
+    try {
+        // if (buyerId === undefined) {
+        //     if (search) {
+        //         result = await orderModel.searchOrdersByKeyword(search, page, pageSize, buyerId);
+        //     } else {
+        //         result = await orderModel.listAllOrders(page, pageSize, buyerId);
+        //     }
+        // } else {
+        //     result = await orderModel.getOrderByBuyerId(buyerId);
+        // }
 
-        let result = await orderModel.getOrderByBuyerId(buyerId);
+        const totalOrders = await orderModel.countOrdersByBuyerId(buyerId);
 
-        // para buscar os produtos do pedido: let result = await orderModel.getOrderItem(order.id);
+        let orders = await orderModel.getOrderByBuyerId(buyerId, offset, pageSize);
 
-        return res.status(200).json(result);
+        const ordersWithItems = await Promise.all(
+            orders.map(async (order) => {
+                const items = await orderModel.getOrderItem(order.id);
+                return {
+                    ...order,
+                    products: items
+                };
+            })
+        );
+
+        const hasNext = (page * pageSize) < totalOrders;
+
+        return res.status(200).json({
+            orders: ordersWithItems,
+            hasNext
+        });
     } catch (error) {
         console.error(error.message);
         res.status(400).json({ message: error.message });

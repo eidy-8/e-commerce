@@ -1,18 +1,20 @@
 const pool = require('../db/db');
 
-exports.getOrderByBuyerId = async (buyerId) => {
+exports.getOrderByBuyerId = async (buyerId, offset, limit) => {
     const query = `
         SELECT * FROM Orders
-        WHERE buyer_id = $1;
+        WHERE buyer_id = $1
+        ORDER BY orderdate DESC
+        OFFSET $2 LIMIT $3
     `;
+    const result = await pool.query(query, [buyerId, offset, limit]);
+    return result.rows;
+};
 
-    try {
-        const result = await pool.query(query, [buyerId]);
-        return result.rows;
-    } catch (err) {
-        console.error('Erro ao buscar pedido.', err);
-        throw err;
-    }
+exports.countOrdersByBuyerId = async (buyerId) => {
+    const query = `SELECT COUNT(*) FROM Orders WHERE buyer_id = $1`;
+    const result = await pool.query(query, [buyerId]);
+    return parseInt(result.rows[0].count, 10);
 };
 
 exports.createOrder = async (status, buyer_id, payment_id) => {
@@ -64,7 +66,7 @@ exports.getOrderItem = async ( orderId ) => {
         const result = await pool.query(query, [orderId]);
         return result.rows;
     } catch (err) {
-        console.error('Erro ao adicionar produto ao pedido.', err);
+        console.error('Erro ao listar produtos do pedido.', err);
         throw err;
     }
 };
