@@ -3,6 +3,7 @@ import { Observable, Subject, takeUntil } from 'rxjs';
 import { LoadingService } from '../../../shared/services/loading.service';
 import { ProductService } from '../../services/product.service';
 import { UserService } from '../../services/user.service';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-purchases',
@@ -18,17 +19,31 @@ export class PurchasesComponent implements OnInit, OnDestroy {
   pageSize: number = 10;
 
   sellerId!: string;
+  buyerId!: string;
 
   private unsubscribe = new Subject<void>;
 
-  constructor(public productService: ProductService, public loadingService: LoadingService, private userService: UserService) {
+  constructor(public productService: ProductService, public loadingService: LoadingService, private userService: UserService, private orderService: OrderService) {
     this.isLoading$ = this.loadingService.loading$;
   }
   ngOnInit(): void {
     this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
+      console.log(res);
+      this.buyerId = res.data.buyerId;
+      this.getOrders();
+      
       this.sellerId = res.data.sellerId
       this.getProducts();
     });
+  }
+
+  private getOrders() {
+    this.orderService.getOrder(this.buyerId)
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((res: any) => {                
+        console.log(res);
+        
+      });
   }
 
   private getProducts(searchTerm: string = '') {
