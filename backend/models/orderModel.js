@@ -70,3 +70,59 @@ exports.getOrderItem = async ( orderId ) => {
         throw err;
     }
 };
+
+//teste
+exports.searchOrdersByKeyword = async (keyword, page, pageSize, buyerId) => {
+    const searchKeyword = `%${keyword}%`;
+    const offset = (page - 1) * pageSize;
+    const limit = parseInt(pageSize, 10);
+
+    try {        
+        const products = await searchOrdersByKeyword2(searchKeyword, offset, limit, buyerId);
+
+        const totalProducts = await productModel.countProductsByKeyword(searchKeyword);
+        const hasNext = (page * pageSize) < totalProducts;
+
+        let orders = await orderModel.getOrderByBuyerId(buyerId, offset, pageSize);
+        const ordersWithItems = await Promise.all(
+            orders.map(async (order) => {
+                const items = await orderModel.getOrderItem(order.id);
+
+                console.log(items);
+
+
+
+                return {
+                    ...order,
+                    products: items
+                };
+            })
+        );
+
+        return {
+            data: products,
+            hasNext
+        };
+    } catch (err) {
+        console.error('Erro ao buscar produtos por palavra-chave com paginação:', err);
+        throw err;
+    }
+};
+
+exports.searchOrdersByKeyword2 = async (keyword, offset, limit, buyerId) => {
+  const query = `
+        SELECT * 
+        FROM Order_Product
+        WHERE name ILIKE $1
+        AND buyer_id = $2
+        OFFSET $3 LIMIT $4
+  `;
+
+  try {
+      const result = await pool.query(query, [keyword, buyerId, offset, limit]);
+      return result.rows;
+  } catch (err) {
+      console.error('Erro ao buscar produtos no banco de dados.', err);
+      throw err;
+  }
+};
