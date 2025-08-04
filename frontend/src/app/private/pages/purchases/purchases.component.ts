@@ -28,7 +28,6 @@ export class PurchasesComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
-      console.log(res);
       this.buyerId = res.data.buyerId;
       this.getOrders();
       
@@ -38,11 +37,10 @@ export class PurchasesComponent implements OnInit, OnDestroy {
   }
 
   private getOrders() {
-    this.orderService.getOrder(this.buyerId)
+    this.orderService.getOrder(1, 10, this.buyerId)
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res: any) => {                
-        console.log(res);
-        
+        this.ordersList = res;         
       });
   }
 
@@ -50,7 +48,6 @@ export class PurchasesComponent implements OnInit, OnDestroy {
     this.productService.getProduct(searchTerm, this.currentPage, this.pageSize, this.sellerId)
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res: any) => {                
-        this.ordersList = res.data; 
         this.hasNext = res.hasNext; 
       });
   }

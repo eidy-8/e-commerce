@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Environment } from '../../../environment/environment';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 
 @Injectable({
@@ -16,9 +16,13 @@ export class OrderService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getOrder(buyerId?: string): Observable<any> {  
+  public getOrder(page: number = 1, pageSize: number = 10, buyerId?: string): Observable<any> {  
     if (buyerId) {
-      return this.httpClient.get<any>(`${this.urlOrder}/${buyerId}`)
+      const params = new HttpParams()
+      .set('page', page.toString())
+      .set('pageSize', pageSize.toString())
+
+      return this.httpClient.get<any>(`${this.urlOrder}/${buyerId}`, { params })
       .pipe(
         retry(1),
         catchError(this.handleError)
