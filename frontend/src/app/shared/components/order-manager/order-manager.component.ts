@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 })
 export class OrderManagerComponent {
   @Input() set orders(value: any) {
-    console.log(value);
     this.ordersList = value.orders;
   }
   
@@ -31,6 +30,14 @@ export class OrderManagerComponent {
     const dia = date.getDate();
     const mes = meses[date.getMonth()];
     return `${dia} de ${mes}`;
+  }
+
+  seePurchase(order_id: any) {    
+    this.router.navigate([ '/user/my-purchases', order_id ]);
+  }
+
+  buyAgain(product_id: any) {
+    this.router.navigate([ '/', product_id ]);    
   }
 
   ngOnDestroy(): void {

@@ -13,6 +13,7 @@ import { CartComponent } from './pages/cart/cart.component';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { OrderComponent } from './pages/order/order.component';
 import { PurchasesComponent } from './pages/purchases/purchases.component';
+import { PurchaseDetailComponent } from './pages/purchase-detail/purchase-detail.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { PurchasesComponent } from './pages/purchases/purchases.component';
     CartComponent,
     PaymentComponent,
     OrderComponent,
-    PurchasesComponent
+    PurchasesComponent,
+    PurchaseDetailComponent
   ],
   imports: [
     CommonModule,

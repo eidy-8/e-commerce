@@ -1,7 +1,7 @@
 .product-list {
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: transparent;
   border-radius: 8px;
 }
 
@@ -11,6 +11,7 @@
   padding: 15px;
   border: 1px solid #eee;
   border-radius: 4px;
+  background-color: white;
 }
 
 .product-image {
@@ -38,6 +39,39 @@
   .id { font-size: 0.75rem; color: #374151; }
   .name { font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .quantity { font-size: 0.75rem; color: #374151; }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.buy-now,
+.add-to-cart {
+  padding: 5px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+}
+
+.buy-now {
+  background-color: #007aff;
+  color: white;
+}
+
+.buy-now:hover {
+  background-color: #0061CC;
+}
+
+.add-to-cart {
+  background-color: #e3edfb;
+  color: #007aff;
+}
+
+.add-to-cart:hover {
+  background-color: #bfdbfe;
 }
 
 @media (max-width: 768px) {

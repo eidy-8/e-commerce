@@ -17,11 +17,13 @@
             <div class="name">{{ p.nome_produto }}</div>
             <div class="quantity">{{ p.quantidade > 1 ? p.quantidade + ' unidades' : p.quantidade + ' unidade' }}</div>
           </div>
+          <div class="buttons">
+            <button (click)="seePurchase(o.id)" class="buy-now">Ver compra</button>
+            <button (click)="buyAgain(p.product_id)" class="add-to-cart">Comprar novamente</button>
+          </div>
         </div>
-        <br>
       }
     </div>
+    <br>
   }
 </div>
-
-<br><br>

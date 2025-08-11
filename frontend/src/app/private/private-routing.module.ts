@@ -11,6 +11,7 @@ import { CartComponent } from './pages/cart/cart.component';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { OrderComponent } from './pages/order/order.component';
 import { PurchasesComponent } from './pages/purchases/purchases.component';
+import { PurchaseDetailComponent } from './pages/purchase-detail/purchase-detail.component';
 
 const routes: Routes = [
   {
@@ -53,6 +54,10 @@ const routes: Routes = [
       {
         path: 'my-purchases',
         component: PurchasesComponent
+      },
+      {
+        path: 'my-purchases/:orderId',
+        component: PurchaseDetailComponent
       }
     ]
   }

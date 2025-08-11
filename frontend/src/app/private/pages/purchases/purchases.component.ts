@@ -37,9 +37,11 @@ export class PurchasesComponent implements OnInit, OnDestroy {
   }
 
   private getOrders() {
-    this.orderService.getOrder(1, 10, this.buyerId)
+    this.orderService.getOrder(this.currentPage, this.pageSize, this.buyerId)
       .pipe(takeUntil(this.unsubscribe))
-      .subscribe((res: any) => {                
+      .subscribe((res: any) => {        
+        this.hasNext = res.hasNext; 
+                
         this.ordersList = res;         
       });
   }
@@ -52,33 +54,33 @@ export class PurchasesComponent implements OnInit, OnDestroy {
       });
   }
 
-  onSearch(searchTerm: string) {    
-    // this.currentPage = 1; 
-    // this.getProducts(searchTerm);
-  }
+  // onSearch(searchTerm: string) {    
+  //   this.currentPage = 1; 
+  //   this.getProducts(searchTerm);
+  // }
 
   previousPage() {
-    // if (this.currentPage > 1) {
-    //   this.currentPage--;
-    //   this.getProducts();
-    // }
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.getOrders();
+    }
 
-    // window.scrollTo({
-    //   top: 0,
-    //   behavior: 'smooth'
-    // });
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
 
   nextPage() {
-    // if (this.hasNext) {
-    //   this.currentPage++;
-    //   this.getProducts();
-    // }
+    if (this.hasNext) {
+      this.currentPage++;
+      this.getOrders();
+    }
 
-    // window.scrollTo({
-    //   top: 0,
-    //   behavior: 'smooth' 
-    // });
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' 
+    });
   }
 
   ngOnDestroy(): void {
