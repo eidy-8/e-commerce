@@ -11,6 +11,15 @@ exports.getOrderByBuyerId = async (buyerId, offset, limit) => {
     return result.rows;
 };
 
+exports.getOrderById = async (orderId) => {
+    const query = `
+        SELECT * FROM Orders
+        WHERE id = $1;
+    `;
+    const result = await pool.query(query, [orderId]);
+    return result.rows;
+};
+
 exports.countOrdersByBuyerId = async (buyerId) => {
     const query = `SELECT COUNT(*) FROM Orders WHERE buyer_id = $1`;
     const result = await pool.query(query, [buyerId]);
