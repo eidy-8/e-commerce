@@ -1,0 +1,36 @@
+.product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.product-row {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 12px;
+}
+
+.product-image img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-info {
+  flex: 1;
+  margin-left: 16px;
+}
+
+.price {
+  font-weight: bold;
+}
+
+.quantity {
+  color: #555;
+  font-size: 14px;
+}

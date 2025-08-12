@@ -74,7 +74,7 @@ export class CartComponent implements OnInit, OnDestroy{
         this.totalPrice = 0; 
 
         for (let i = 0; i < this.totalProduct; i++) {
-          this.totalPrice += Number(res[i].preco); // converte para número
+          this.totalPrice += Number(res[i].preco);
         }
       });
   }

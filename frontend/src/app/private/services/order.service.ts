@@ -16,20 +16,21 @@ export class OrderService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getOrder(page: number = 1, pageSize: number = 10, buyerId?: string): Observable<any> {  
+  public getOrder(page: number = 1, pageSize: number = 10, buyerId?: string, orderId?: string): Observable<any> {  
     if (buyerId) {
       const params = new HttpParams()
+      .set('buyerId', buyerId.toString())
       .set('page', page.toString())
       .set('pageSize', pageSize.toString())
 
-      return this.httpClient.get<any>(`${this.urlOrder}/${buyerId}`, { params })
+      return this.httpClient.get<any>(`${this.urlOrder}/${orderId}`, { params })
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
-    }  
+    }      
 
-    return this.httpClient.get<any>(`${this.urlOrder}`)
+    return this.httpClient.get<any>(`${this.urlOrder}/${orderId}`)
     .pipe(
       retry(1),
       catchError(this.handleError)

@@ -1,1 +1,72 @@
-<p>purchase-detail works!</p>
+@if (this.isLoading$ | async) {
+    <app-loading-overlay [fullScreen]="true"></app-loading-overlay>
+}
+
+<app-header></app-header>
+
+<div class="flex flex-row">
+
+    <div class="hidden 2xl:block xl:block">
+        <app-side-menu
+        [menuTitle]="'Minha Conta'"
+        [menuItems]="[
+            {
+                label: 'Vendas',
+                icon: 'fa-shopping-basket',
+                children: [
+                    { label: 'Resumo', link: '/user/new-product' },
+                    { label: 'Novidade', link: '/vendas/novidade' },
+                    { label: 'Anúncios', link: '/vendas/anuncios' }
+                ]
+            },
+            {
+                label: 'Produtos',
+                icon: 'fa-shopping-bag',
+                children: [
+                    { label: 'Categorias', link: '/produtos/categorias' },
+                    { label: 'Estoque', link: '/produtos/estoque' }
+                ]
+            }
+        ]"
+        ></app-side-menu>
+    </div>
+
+    <div class="flex-1 px-2 sm:px-6 lg:px-12 xl:px-20 py-8">
+        <div class="flex flex-col lg:flex-row gap-8 w-full">
+            <div class="flex-1">
+                <div class="product-list w-full">
+                    @for (p of products; track p) {
+                        <div class="product-row flex flex-col sm:flex-row items-center justify-between bg-white rounded-lg shadow p-4 mb-4">
+                            <div class="flex items-center gap-4 w-full sm:w-auto">
+                                <div class="product-image">
+                                    <img [src]="p.imagem_produto" [alt]="p.nome_produto" class="w-16 h-16 object-cover rounded-lg" />
+                                </div>
+                                <div class="product-info text-center sm:text-left">
+                                    <div class="font-semibold text-lg">{{ p.nome_produto }}</div>
+                                    <div class="quantity text-gray-600">1 unidade</div>
+                                </div>
+                            </div>
+                            <div class="price font-bold text-lg mt-2 sm:mt-0">
+                                R$ {{ p.preco }}
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="w-full lg:w-[400px] max-w-md mx-auto lg:mx-0 rounded-lg bg-white shadow-md p-6 flex flex-col h-fit">
+                <p class="font-bold text-xl pb-2 text-center">Detalhe da compra</p>
+                <hr>
+                <div class="flex justify-between pt-4 text-base">
+                    <p>Produtos ({{ totalProduct }})</p>
+                    <p>R$ {{ totalPrice }}</p>
+                </div>
+                <div class="flex justify-between pt-4 font-bold text-lg">
+                    <p>Total</p>
+                    <p>R$ {{ totalPrice }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer-dynamic></app-footer-dynamic>
