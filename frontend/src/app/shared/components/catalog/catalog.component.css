@@ -84,9 +84,9 @@ button:hover {
 
 .catalog-track {
   display: flex;
-  gap: 18px;
+  gap: 18.5px;
   transition: transform 0.3s ease-in-out;
-  margin-left: 18px;
+  margin-left: 14px;
 }
 
 .card {

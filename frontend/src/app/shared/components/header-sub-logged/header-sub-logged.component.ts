@@ -40,6 +40,10 @@ export class HeaderSubLoggedComponent {
     this.router.navigate([ '/user/my-cart' ]);
   }
 
+  navigateToPurchase() {
+    this.router.navigate([ '/user/my-purchases' ]);
+  }
+
   protected logout() {    
     this.authService.logout();
 
