@@ -1,11 +1,13 @@
-import { Component, HostListener, Inject, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, OnDestroy, OnInit } from '@angular/core';
+import { ProductService } from '../../../private/services/product.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   protected cards = [{}];
   protected products = [{}];
   protected product = [{}];
@@ -13,6 +15,10 @@ export class HomeComponent implements OnInit {
   protected scrollStep: number = 6;
   protected catalogCardsPerPage: number = 6;
   protected catalogScrollStep: number = 6;
+
+  protected food = [{}];
+
+  private unsubscribe = new Subject<void>;
 
   @HostListener('window:resize', ['$event'])
   onResize(event?: any) {
@@ -24,6 +30,8 @@ export class HomeComponent implements OnInit {
       this.catalogScrollStep = 2;
     }
   }
+
+  constructor(public productService: ProductService) {}
 
   ngOnInit(): void {
     this.cards = [
@@ -54,6 +62,30 @@ export class HomeComponent implements OnInit {
       { title: 'Comida', price: '1 real', image: '../../../../assets/undraw_breakfast_rgx5.svg', link: 'http://localhost:4200/' }
     ]
 
+    this.getProducts();
+
     this.onResize();
+  }
+
+  private getProducts() {    
+    this.productService.getProduct('', 1, 10, '', 'b237e77a-325a-481a-bcfc-6a8300b80f84')
+    .pipe(takeUntil(this.unsubscribe))
+    .subscribe((res: any) => {   
+      
+      console.log(res);
+      
+      this.food = [{
+        title: res.data[0].name,
+        price: res.data[0].price,
+        image: res.data[0].imageurl,
+        link : `http://localhost:4200/${res.data[0].id}`
+      }];           
+    });
+  }
+
+  ngOnDestroy(): void {
+    console.clear();
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 }
