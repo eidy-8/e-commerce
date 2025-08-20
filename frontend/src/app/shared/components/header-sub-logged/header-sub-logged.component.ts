@@ -11,10 +11,11 @@ export class HeaderSubLoggedComponent {
   @Input() text: any;
   @Input() img: any;
   protected userOptions = [
-    { name: 'Minha conta', link: 'https://github.com/eidy-8/postgreAnotacao' },
-    { name: 'Compras', link: '/user/my-purchases' },
+    { name: 'Minha conta', action: () => this.router.navigate([ '/user/my-products' ]) },
+    { name: 'Compras', action: () => this.router.navigate([ '/user/my-purchases' ]) },
     { name: 'Vender', action: () => this.router.navigate([ '/user/new-product' ]) },
     { name: 'Anúncios', action: () => this.router.navigate([ '/user/my-products' ]) },
+    { name: 'Vendas', action: () => this.router.navigate([ '/user/my-products' ]) },
     { name: 'Sair', action: () => this.logout() }
   ];
 

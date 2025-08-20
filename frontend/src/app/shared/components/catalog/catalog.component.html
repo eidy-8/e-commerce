@@ -11,15 +11,15 @@
       <b>{{ catalogTitle }}</b>
       <br>
       <div class="catalog-track" [style.transform]="getTransform()">
-        <div class="card"[style.flex]="'0 0 calc((100% / ' + cardsPerPage + ') - 18px)'" *ngFor="let product of products">
-          <a href={{product.link}}>
-              <img src={{product.image}} alt="Imagens do catálogo">
+        <div class="card group" [style.flex]="'0 0 calc((100% / ' + cardsPerPage + ') - 18px)'" *ngFor="let product of products">
+          <a class="name" href={{product.link}}>
+              <img src={{product.imageurl}} alt="Imagens do catálogo">
               <br>
-              <p>{{ product.title }}</p>
+              <p class="transition-colors group-hover:text-[--primary-color]">{{ product.name }}</p>
               <br>
               <b>R$ {{ product.price }}</b>
           </a>  
-        </div>
+      </div>
       </div>
     </div>
   
