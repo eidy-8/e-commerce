@@ -8,7 +8,7 @@ dotenv.config();
 
 exports.listOrder = async (req, res) => {
     const { orderId } = req.params;
-    const { buyerId, page, pageSize } = req.query; 
+    const { buyerId, page, pageSize, sellerId } = req.query; 
     const offset = (page - 1) * pageSize;
 
     try {
@@ -33,12 +33,36 @@ exports.listOrder = async (req, res) => {
                 orders: ordersWithItems,
                 hasNext
             });
-        } else {
+        } 
+
+        if (orderId) {
             const order = await orderModel.getOrderById(orderId);
             const items = await orderModel.getOrderItem(orderId);
             return res.status(200).json({
                 order: order,
                 products: items
+            });
+        }
+
+        if (sellerId) {
+            const totalOrders = await orderModel.countOrdersBySellerId(buyerId);        //desenvolva este método
+            let orders = await orderModel.getOrderBySellerId(buyerId, offset, pageSize);  //desenvolva este método
+            const ordersWithItems = await Promise.all(
+                orders.map(async (order) => {
+                    const items = await orderModel.getOrderItem(order.id);
+    
+                    return {
+                        ...order,
+                        products: items
+                    };
+                })
+            );
+    
+            const hasNext = (page * pageSize) < totalOrders;
+    
+            return res.status(200).json({
+                orders: ordersWithItems,
+                hasNext
             });
         }
     } catch (error) {
