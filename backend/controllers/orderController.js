@@ -12,6 +12,7 @@ exports.listOrder = async (req, res) => {
     const offset = (page - 1) * pageSize;
 
     try {
+        console.log(buyerId);
 
         if (buyerId) {
             const totalOrders = await orderModel.countOrdersByBuyerId(buyerId);        
@@ -45,8 +46,8 @@ exports.listOrder = async (req, res) => {
         }
 
         if (sellerId) {
-            const totalOrders = await orderModel.countOrdersBySellerId(buyerId);        //desenvolva este método
-            let orders = await orderModel.getOrderBySellerId(buyerId, offset, pageSize);  //desenvolva este método
+            const totalOrders = await orderModel.countOrdersBySellerId(sellerId);        //desenvolva este método
+            let orders = await orderModel.getOrderBySellerId(sellerId, offset, pageSize);  //desenvolva este método
             const ordersWithItems = await Promise.all(
                 orders.map(async (order) => {
                     const items = await orderModel.getOrderItem(order.id);

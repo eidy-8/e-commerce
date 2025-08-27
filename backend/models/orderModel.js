@@ -26,6 +26,32 @@ exports.countOrdersByBuyerId = async (buyerId) => {
     return parseInt(result.rows[0].count, 10);
 };
 
+exports.countOrdersBySellerId = async (sellerId) => {
+    // const query = `
+    //     SELECT 
+    //         p.id AS product_id,
+    //         p.name AS product_name,
+    //         p.price,
+    //         p.quantity AS stock_quantity,
+    //         o.id AS order_id,
+    //         o.orderDate,
+    //         o.status,
+    //         b.id AS buyer_id,
+    //         u.username AS buyer_username
+    //     FROM Product p
+    //     JOIN Seller s ON p.seller_id = s.id
+    //     JOIN Order_Product op ON p.id = op.product_id
+    //     JOIN Orders o ON op.order_id = o.id
+    //     JOIN Buyer b ON o.buyer_id = b.id
+    //     JOIN Users u ON b.user_id = u.id
+    //     WHERE s.id = '2815099b-0cb2-4192-8d08-edff52609209';
+    // `; // Select trazendo todas as vendas do seller retornando todos os produtos vendidos
+
+    const query = `SELECT COUNT(*) FROM Orders WHERE buyer_id = $1`;
+    const result = await pool.query(query, [sellerId]);
+    return parseInt(result.rows[0].count, 10);
+};
+
 exports.createOrder = async (status, buyer_id, payment_id) => {
     const query = `
         INSERT INTO Orders (orderDate, status, buyer_id, payment_id)
@@ -64,7 +90,8 @@ exports.getOrderItem = async ( orderId ) => {
             p.id AS product_id,
             p.name AS nome_produto,
             p.price AS preco,
-            p.imageUrl AS imagem_produto
+            p.imageUrl AS imagem_produto,
+            p.seller_id AS seller_id
         FROM Order_Product wp
         JOIN Product p ON wp.product_id = p.id
         WHERE wp.order_id = $1

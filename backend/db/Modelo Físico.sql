@@ -93,8 +93,9 @@ CREATE TABLE Order_Product (
 );
 
 --Comandos para testes
-SELECT * FROM Users;
-SELECT * FROM Seller WHERE user_id = '7101788d-b49d-4c1d-bf26-0d6fc13b1427';
+SELECT * FROM Users WHERE id = '6e51b1bb-ce9a-40cf-b56e-5102719f7f3e';
+SELECT * FROM Users WHERE sellerId = '2815099b-0cb2-4192-8d08-edff52609209';
+SELECT * FROM Seller WHERE id = '266123bf-5c9b-4b07-9bf5-62b2abf107f7';
 SELECT * FROM Buyer WHERE user_id = '7101788d-b49d-4c1d-bf26-0d6fc13b1427';
 SELECT * FROM Orders;
 SELECT * FROM Payment;
@@ -111,7 +112,7 @@ VALUES (NOW(), 'cbc8dc06-9e95-4212-a18f-e985f110b65a');
 
 SELECT * FROM Wishlist WHERE buyer_id = '7acd543e-1067-465c-bb18-ff68b1ee7599';
 
-SELECT * FROM Product WHERE name ILIKE $1
+SELECT * FROM Product;
 
 SELECT * FROM Wishlist_Product WHERE wishlist_id = 'a6eaba31-9a03-4f22-aeee-4dd4299f8493' AND product_id = 'f014b047-a2c9-4d5f-bdf0-00ef012b3a5f';
 
@@ -160,3 +161,32 @@ SHOW timezone;
 SELECT wp.product_id
 FROM Wishlist_Product wp
 WHERE wp.wishlist_id = 'a6eaba31-9a03-4f22-aeee-4dd4299f8493';
+
+SELECT 
+	p.id AS product_id,
+	p.name AS nome_produto,
+	p.price AS preco,
+	p.imageUrl AS imagem_produto,
+	p.seller_id AS seller_id
+FROM Order_Product wp
+JOIN Product p ON wp.product_id = p.id
+WHERE p.seller_id = '2815099b-0cb2-4192-8d08-edff52609209'
+ORDER BY p.name;
+
+SELECT 
+    p.id AS product_id,
+    p.name AS product_name,
+    p.price,
+    p.quantity AS stock_quantity,
+    o.id AS order_id,
+    o.orderDate,
+    o.status,
+    b.id AS buyer_id,
+    u.username AS buyer_username
+FROM Product p
+JOIN Seller s ON p.seller_id = s.id
+JOIN Order_Product op ON p.id = op.product_id
+JOIN Orders o ON op.order_id = o.id
+JOIN Buyer b ON o.buyer_id = b.id
+JOIN Users u ON b.user_id = u.id
+WHERE s.id = '2815099b-0cb2-4192-8d08-edff52609209';
