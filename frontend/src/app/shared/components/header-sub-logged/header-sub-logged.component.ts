@@ -15,7 +15,7 @@ export class HeaderSubLoggedComponent {
     { name: 'Compras', action: () => this.router.navigate([ '/user/my-purchases' ]) },
     { name: 'Vender', action: () => this.router.navigate([ '/user/new-product' ]) },
     { name: 'Anúncios', action: () => this.router.navigate([ '/user/my-products' ]) },
-    { name: 'Vendas', action: () => this.router.navigate([ '/user/my-products' ]) },
+    { name: 'Vendas', action: () => this.router.navigate([ '/user/my-sales' ]) },
     { name: 'Sair', action: () => this.logout() }
   ];
 
