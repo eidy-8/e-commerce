@@ -11,6 +11,32 @@ exports.getOrderByBuyerId = async (buyerId, offset, limit) => {
     return result.rows;
 };
 
+exports.getOrderBySellerId = async (sellerId, offset, limit) => {
+    const query = `
+        SELECT 
+            p.id AS product_id,
+            p.name AS product_name,
+            p.price,
+            p.quantity AS stock_quantity,
+            o.id AS order_id,
+            o.orderDate,
+            o.status,
+            b.id AS buyer_id,
+            u.username AS buyer_username
+        FROM Product p
+        JOIN Seller s ON p.seller_id = s.id
+        JOIN Order_Product op ON p.id = op.product_id
+        JOIN Orders o ON op.order_id = o.id
+        JOIN Buyer b ON o.buyer_id = b.id
+        JOIN Users u ON b.user_id = u.id
+        WHERE s.id = $1
+        ORDER BY o.orderDate DESC
+        OFFSET $2 LIMIT $3;
+    `;
+    const result = await pool.query(query, [sellerId, offset, limit]);
+    return result.rows;
+};
+
 exports.getOrderById = async (orderId) => {
     const query = `
         SELECT * FROM Orders
@@ -27,27 +53,28 @@ exports.countOrdersByBuyerId = async (buyerId) => {
 };
 
 exports.countOrdersBySellerId = async (sellerId) => {
-    // const query = `
-    //     SELECT 
-    //         p.id AS product_id,
-    //         p.name AS product_name,
-    //         p.price,
-    //         p.quantity AS stock_quantity,
-    //         o.id AS order_id,
-    //         o.orderDate,
-    //         o.status,
-    //         b.id AS buyer_id,
-    //         u.username AS buyer_username
-    //     FROM Product p
-    //     JOIN Seller s ON p.seller_id = s.id
-    //     JOIN Order_Product op ON p.id = op.product_id
-    //     JOIN Orders o ON op.order_id = o.id
-    //     JOIN Buyer b ON o.buyer_id = b.id
-    //     JOIN Users u ON b.user_id = u.id
-    //     WHERE s.id = '2815099b-0cb2-4192-8d08-edff52609209';
-    // `; // Select trazendo todas as vendas do seller retornando todos os produtos vendidos
-
-    const query = `SELECT COUNT(*) FROM Orders WHERE buyer_id = $1`;
+    const query = `
+        SELECT COUNT(*)
+        FROM (
+            SELECT
+                p.id AS product_id,
+                p.name AS product_name,
+                p.price,
+                p.quantity AS stock_quantity,
+                o.id AS order_id,
+                o.orderDate,
+                o.status,
+                b.id AS buyer_id,
+                u.username AS buyer_username
+            FROM Product p
+            JOIN Seller s ON p.seller_id = s.id
+            JOIN Order_Product op ON p.id = op.product_id
+            JOIN Orders o ON op.order_id = o.id
+            JOIN Buyer b ON o.buyer_id = b.id
+            JOIN Users u ON b.user_id = u.id
+            WHERE s.id = $1
+        ) AS sub;
+    `;
     const result = await pool.query(query, [sellerId]);
     return parseInt(result.rows[0].count, 10);
 };
