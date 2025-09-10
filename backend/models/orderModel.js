@@ -13,11 +13,7 @@ exports.getOrderByBuyerId = async (buyerId, offset, limit) => {
 
 exports.getOrderBySellerId = async (sellerId, offset, limit) => {
     const query = `
-        SELECT 
-            p.id AS product_id,
-            p.name AS product_name,
-            p.price,
-            p.quantity AS stock_quantity,
+        SELECT DISTINCT
             o.id AS order_id,
             o.orderDate,
             o.status,

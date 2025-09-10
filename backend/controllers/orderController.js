@@ -44,11 +44,15 @@ exports.listOrder = async (req, res) => {
         }
 
         if (sellerId) {            
-            const totalOrders = await orderModel.countOrdersBySellerId(sellerId);       
+            const totalOrders = await orderModel.countOrdersBySellerId(sellerId);  
+            console.log(totalOrders);
+                 
             let orders = await orderModel.getOrderBySellerId(sellerId, offset, pageSize); 
+            console.log(orders);
+            
             const ordersWithItems = await Promise.all(
                 orders.map(async (order) => {
-                    const items = await orderModel.getOrderItem(order.id);
+                    const items = await orderModel.getOrderItem(order.order_id);
     
                     return {
                         ...order,
