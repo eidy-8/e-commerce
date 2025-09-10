@@ -37,7 +37,7 @@ export class PurchasesComponent implements OnInit, OnDestroy {
   }
 
   private getOrders() {
-    this.orderService.getOrder(this.currentPage, this.pageSize, this.buyerId)
+    this.orderService.getOrderByBuyerId(this.currentPage, this.pageSize, this.buyerId)
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((res: any) => {        
         this.hasNext = res.hasNext; 

@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { LoadingService } from '../../shared/services/loading.service';
+import { UserService } from '../services/user.service';
+import { OrderService } from '../services/order.service';
 
 @Component({
   selector: 'app-sales',
@@ -9,37 +11,45 @@ import { LoadingService } from '../../shared/services/loading.service';
 })
 export class SalesComponent implements OnInit, OnDestroy {
 
-  salesList: any = [];
+  ordersList: any = [];
   currentPage: number = 1;
   hasNext: boolean = false;
+  pageSize: number = 10;
+
+  sellerId!: string;
+  buyerId!: string;
 
   private unsubscribe = new Subject<void>;
 
   protected isLoading$: Observable<boolean>;
 
-  constructor(public loadingService: LoadingService) {
+  constructor(public loadingService: LoadingService, private userService: UserService, private orderService: OrderService) {
     this.isLoading$ = this.loadingService.loading$;
   }
 
-  ngOnInit(): void {}
-
-  private getSales(searchTerm: string = '') {
-    // this.productService.getProduct(searchTerm, this.currentPage, this.pageSize, this.sellerId)
-    // .pipe(takeUntil(this.unsubscribe))
-    // .subscribe((res: any) => {                
-    //   this.productsList = res.data; 
-    //   this.hasNext = res.hasNext; 
-    // });
+  ngOnInit(): void {    
+    this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
+      this.sellerId = res.data.sellerId;
+      this.getOrders();
+    });
   }
 
-  onSearch(searchTerm: string) {
+  private getOrders() {
+    this.orderService.getOrderBySellerId(this.currentPage, this.pageSize, this.sellerId)
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((res: any) => {        
+        this.hasNext = res.hasNext; 
 
+        console.log(res);
+                
+        this.ordersList = res;         
+      });
   }
 
   nextPage() {
     if (this.hasNext) {
       this.currentPage++;
-      this.getSales();
+      this.getOrders();
     }
 
     window.scrollTo({
@@ -51,7 +61,7 @@ export class SalesComponent implements OnInit, OnDestroy {
   previousPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
-      this.getSales();
+      this.getOrders();
     }
 
     window.scrollTo({

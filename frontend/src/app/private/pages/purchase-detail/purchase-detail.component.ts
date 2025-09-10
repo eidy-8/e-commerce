@@ -30,7 +30,7 @@ export class PurchaseDetailComponent implements OnInit {
   }
 
   private getOrders() {
-    this.orderService.getOrder(0, 0, undefined, this.orderId)
+    this.orderService.getOrderByBuyerId(0, 0, undefined, this.orderId)
     .pipe(takeUntil(this.unsubscribe))
     .subscribe((res: any) => {       
       console.log(res);

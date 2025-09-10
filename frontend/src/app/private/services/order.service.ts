@@ -16,7 +16,7 @@ export class OrderService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getOrder(page: number = 1, pageSize: number = 10, buyerId?: string, orderId?: string): Observable<any> {  
+  public getOrderByBuyerId(page: number = 1, pageSize: number = 10, buyerId?: string, orderId?: string): Observable<any> {  
     if (buyerId) {
       const params = new HttpParams()
       .set('buyerId', buyerId.toString())
@@ -36,6 +36,24 @@ export class OrderService {
       catchError(this.handleError)
     );
   }
+
+  public getOrderBySellerId(page: number = 1, pageSize: number = 10, sellerId?: string): Observable<any> {  
+    
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('pageSize', pageSize.toString());
+
+    if (sellerId !== undefined && sellerId !== null) {
+      params = params.set('sellerId', sellerId.toString());
+    }
+
+    return this.httpClient.get<any>(`${this.urlOrder}`, { params })
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }    
+  
 
   public postOrder(orderData: any): Observable<any> {
     console.log(JSON.stringify(orderData));

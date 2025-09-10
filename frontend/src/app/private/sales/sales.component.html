@@ -35,19 +35,10 @@
 
     <div class="mx-2 w-full 2xl:mx-28 text-sm">
         <div class="flex my-10 text-gray-color justify-between">
-            <div>
-                Vendas
-            </div>
+            <p class="font-bold text-2xl">Vendas</p>
         </div>
 
-        <div class="flex items-center gap-4 mb-6 rounded-lg bg-white p-4 shadow-md">
-            <app-search-bar [emitOnInput]="false" (search)="onSearch($event)"></app-search-bar>
-            <p class="text-gray-400">|</p>
-            <i class="fa fa-filter text-gray-600" aria-hidden="true"></i>
-            <button class="text-gray-600 hover:text-gray-800 font-medium">Filtrar e ordenar</button>
-        </div>
-
-        <app-product-manager [products]="salesList"></app-product-manager>
+        <app-order-manager [orders]="ordersList"></app-order-manager>
 
         <div class="mr-0 flex justify-center items-center gap-4 2xl:mr-[260px]">
             <button 

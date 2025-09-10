@@ -13,6 +13,8 @@ export class OrderManagerComponent {
   @Input() set orders(value: any) {
     this.ordersList = value.orders;
   }
+
+  @Input() type!: string;
   
   ordersProducts: any;
 
