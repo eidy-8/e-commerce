@@ -2,6 +2,8 @@ const dotenv = require("dotenv");
 
 const wishlistModel = require("../models/wishListModel")
 
+const productService = require("../services/productService")
+
 dotenv.config();
 
 exports.listWishlist = async (req, res) => {
@@ -22,18 +24,25 @@ exports.listWishlist = async (req, res) => {
 exports.addToWishlist = async (req, res) => {
     const { buyerId } = req.params;
     const { productId } = req.body;
+    const { sellerId } = req.body;
 
     try {
-        let wishlist = await wishlistModel.getWishlistByBuyerId(buyerId);
+        
+        let wishlist = await wishlistModel.getWishlistByBuyerId(buyerId);        
 
-        const wishlist_ProductRelation = await wishlistModel.getWishlist_ProductRelation(wishlist.id, productId);
+        const wishlist_ProductRelation = await wishlistModel.getWishlist_ProductRelation(wishlist.id, productId.productId);
+
+        let productsSellerId = await productService.listSpecificProduct(productId.productId);        
+        if (sellerId == productsSellerId.data[0].seller_id) {
+            throw new Error('Não é possivel favoritar o próprio produto.');
+        }
 
         if (wishlist_ProductRelation.length > 0) {
             throw new Error('Produto já adicionado no carrinho.');
         } else {
             await wishlistModel.addWishlistItem(
                 wishlist.id,
-                productId
+                productId.productId
             );
         }
         
