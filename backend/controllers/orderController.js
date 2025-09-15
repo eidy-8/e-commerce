@@ -52,7 +52,7 @@ exports.listOrder = async (req, res) => {
             
             const ordersWithItems = await Promise.all(
                 orders.map(async (order) => {
-                    const items = await orderModel.getOrderItem(order.order_id);
+                    const items = await orderModel.getOrderItemBySellerId(order.order_id, sellerId);
     
                     return {
                         ...order,

@@ -129,3 +129,27 @@ exports.getOrderItem = async ( orderId ) => {
         throw err;
     }
 };
+
+exports.getOrderItemBySellerId = async (orderId, sellerId) => {
+    const query = `
+        SELECT 
+            p.id AS product_id,
+            p.name AS nome_produto,
+            p.price AS preco,
+            p.imageUrl AS imagem_produto,
+            p.seller_id AS seller_id
+        FROM Order_Product op
+        JOIN Product p ON op.product_id = p.id
+        WHERE op.order_id = $1
+          AND p.seller_id = $2
+        ORDER BY p.name;
+    `;
+
+    try {
+        const result = await pool.query(query, [orderId, sellerId]);
+        return result.rows;
+    } catch (err) {
+        console.error('Erro ao listar produtos do pedido para o vendedor.', err);
+        throw err;
+    }
+};
