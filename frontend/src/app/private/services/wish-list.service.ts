@@ -24,8 +24,12 @@ export class WishListService {
       );
   }
 
-  public postWishList(buyerId: string, productId: any): Observable<any> {
-    return this.httpClient.post<any>(`${this.urlWishList}/${buyerId}`, JSON.stringify(productId), this.httpOptions)
+  public postWishList(buyerId: string, productId: any, sellerId: string): Observable<any> {
+    return this.httpClient.post<any>(
+      `${this.urlWishList}/${buyerId}`,
+      JSON.stringify({ productId, sellerId }),
+      this.httpOptions
+    )
       .pipe(
         retry(1),
         catchError(this.handleError)

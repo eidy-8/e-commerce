@@ -40,6 +40,7 @@ export class ProductListingComponent implements OnInit, OnDestroy {
   protected isOwnProduct!: boolean;
 
   protected buyerId!: string;
+  protected sellerId!: string
 
   constructor(private route: ActivatedRoute, public productService: ProductService, public categoryService: CategoryService, private userService: UserService, private router: Router, private wishListService: WishListService, private toasterService: ToasterService, private cartService: CartService) {}
 
@@ -71,7 +72,9 @@ export class ProductListingComponent implements OnInit, OnDestroy {
     this.getProducts(this.productId);
 
     this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {       
-      this.buyerId = res.data.buyerId;      
+      this.buyerId = res.data.buyerId;  
+      
+      this.sellerId = res.data.sellerId;
 
       this.wishListService.getWishList(this.buyerId).pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {
         for (let i = 0; i < res.length; i++) {          
@@ -125,7 +128,7 @@ export class ProductListingComponent implements OnInit, OnDestroy {
     const product = { "productId": this.productId }
 
     if (this.isFavorited == false) {
-      this.wishListService.postWishList(this.buyerId, product).pipe( takeUntil( this.unsubscribe ) ).subscribe({
+      this.wishListService.postWishList(this.buyerId, product, this.sellerId).pipe( takeUntil( this.unsubscribe ) ).subscribe({
         next: res => {
           this.toasterService.show({
             type: 'success',
@@ -139,7 +142,7 @@ export class ProductListingComponent implements OnInit, OnDestroy {
           this.toasterService.show({
             type: 'error',
             title: 'Erro',
-            message: error
+            message: error.message
           });
         }
       });

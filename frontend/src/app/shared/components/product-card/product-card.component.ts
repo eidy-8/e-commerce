@@ -20,12 +20,14 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   private unsubscribe = new Subject<void>;
 
   protected buyerId!: string;
+  protected sellerId!: string;
 
   constructor (private wishListService: WishListService, private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.userService.getUser().pipe(takeUntil(this.unsubscribe)).subscribe((res: any) => {       
       this.buyerId = res.data.buyerId;   
+      this.sellerId = res.data.sellerId;
     });
   }
 
@@ -41,7 +43,7 @@ export class ProductCardComponent implements OnInit, OnDestroy {
     const product = { "productId": p.id }
     p.isFavorited = true;
     
-    this.wishListService.postWishList(this.buyerId, product).pipe( takeUntil( this.unsubscribe ) ).subscribe({
+    this.wishListService.postWishList(this.buyerId, product, this.sellerId).pipe( takeUntil( this.unsubscribe ) ).subscribe({
       next: res => {
       }
     });
