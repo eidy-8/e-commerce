@@ -24,6 +24,7 @@
   border: 1px solid #eee;
   border-radius: 4px;
   height: 185px;
+  cursor: pointer;
 }
 
 .product-image {

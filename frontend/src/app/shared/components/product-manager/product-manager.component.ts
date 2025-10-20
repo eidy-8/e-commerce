@@ -284,6 +284,10 @@ export class ProductManagerComponent implements OnDestroy {
     console.log('Termo de busca:', searchTerm);
   }
 
+  navigateToProduct(productId: string) {    
+    this.router.navigate([ '/', productId ])
+  }
+
   ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();

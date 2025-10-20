@@ -42,6 +42,7 @@
   @for (p of products; track p) {
     <div
       class="product-row"
+      (click)="navigateToProduct(p.id)"
       [ngStyle]="{ 'background-color': p.isactive === '0' ? '#f2f2f2' : '' }"
     >
       <input
@@ -78,7 +79,7 @@
         </div>
   
         @if (p.quantity > 0) {
-          <button class="toggle-btn">
+          <button (click)="$event.stopPropagation()" class="toggle-btn">
             {{ p.isactive == '0' ? 'Pausado' : 'Ativo' }}
             <label class="switch">
               <input
@@ -95,7 +96,7 @@
       </div>
   
       <div class="menu" (appClickOutside)="p.showMenu = false">
-        <button class="menu-btn" (click)="p.showMenu = !p.showMenu">⋮</button>
+        <button class="menu-btn" (click)="p.showMenu = !p.showMenu; $event.stopPropagation()">⋮</button>
         <ul
           class="menu-list"
           *ngIf="p.showMenu"
