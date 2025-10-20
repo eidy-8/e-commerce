@@ -28,7 +28,9 @@ exports.addToWishlist = async (req, res) => {
 
     try {
         
-        let wishlist = await wishlistModel.getWishlistByBuyerId(buyerId);        
+        let wishlist = await wishlistModel.getWishlistByBuyerId(buyerId);     
+        
+        console.log(wishlist);
 
         const wishlist_ProductRelation = await wishlistModel.getWishlist_ProductRelation(wishlist.id, productId.productId);
 
