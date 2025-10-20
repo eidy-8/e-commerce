@@ -42,6 +42,8 @@ export class ProductListingComponent implements OnInit, OnDestroy {
   protected buyerId!: string;
   protected sellerId!: string
 
+  protected sellerProductId!: string
+
   constructor(private route: ActivatedRoute, public productService: ProductService, public categoryService: CategoryService, private userService: UserService, private router: Router, private wishListService: WishListService, private toasterService: ToasterService, private cartService: CartService) {}
 
   @HostListener('window:resize', ['$event'])
@@ -90,7 +92,8 @@ export class ProductListingComponent implements OnInit, OnDestroy {
   private getProducts(productId: string) {    
     this.productService.getProduct('', 1, 10, '', productId)
     .pipe(takeUntil(this.unsubscribe))
-    .subscribe((res: any) => {     
+    .subscribe((res: any) => {    
+      console.log(res);
       
       this.product = {
         title: res.data[0].name,
@@ -105,7 +108,9 @@ export class ProductListingComponent implements OnInit, OnDestroy {
         `${res.data[0].imageurl}`
       ];
 
-      this.mainImage = this.images[0];      
+      this.mainImage = this.images[0];    
+      
+      this.sellerProductId = res.data[0].seller_id;
       
       this.getCategory(res.data[0].category_id);
     });
@@ -198,7 +203,15 @@ export class ProductListingComponent implements OnInit, OnDestroy {
   }
 
   buyNow(): void {
-    this.router.navigate([ '/user/payment', this.productId ]);
+    if (this.sellerProductId == this.sellerId) {
+      this.toasterService.show({
+        type: 'error',
+        title: 'Erro',
+        message: 'Não é possível comprar o próprio produto.'
+      });
+    } else {
+      this.router.navigate([ '/user/payment', this.productId ]);
+    }
   }
 
   ngOnDestroy(): void {
