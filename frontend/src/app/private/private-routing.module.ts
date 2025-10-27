@@ -13,6 +13,7 @@ import { OrderComponent } from './pages/order/order.component';
 import { PurchasesComponent } from './pages/purchases/purchases.component';
 import { PurchaseDetailComponent } from './pages/purchase-detail/purchase-detail.component';
 import { SalesComponent } from './sales/sales.component';
+import { AccountComponent } from './pages/account/account/account.component';
 
 const routes: Routes = [
   {
@@ -63,6 +64,10 @@ const routes: Routes = [
       {
         path: 'my-sales',
         component: SalesComponent
+      },
+      {
+        path: 'my-account',
+        component: AccountComponent
       }
     ]
   }

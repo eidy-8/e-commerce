@@ -1,0 +1,37 @@
+@if (this.isLoading$ | async) {
+    <app-loading-overlay [fullScreen]="true"></app-loading-overlay>
+}
+
+<app-header></app-header>
+
+<div class="flex flex-row">
+
+    <div class="hidden 2xl:block xl:block">
+        <app-side-menu
+        [menuTitle]="'Minha Conta'"
+        [menuItems]="[
+            {
+                label: 'Vendas',
+                icon: 'fa-shopping-basket',
+                children: [
+                    { label: 'Resumo', link: '/user/new-product' },
+                    { label: 'Novidade', link: '/vendas/novidade' },
+                    { label: 'Anúncios', link: '/vendas/anuncios' }
+                ]
+            },
+            {
+                label: 'Produtos',
+                icon: 'fa-shopping-bag',
+                children: [
+                    { label: 'Categorias', link: '/produtos/categorias' },
+                    { label: 'Estoque', link: '/produtos/estoque' }
+                ]
+            }
+        ]"
+        ></app-side-menu>
+    </div>
+
+    <div>my-account works</div>
+</div>
+
+<app-footer-dynamic></app-footer-dynamic>

@@ -11,7 +11,7 @@ export class HeaderSubLoggedComponent {
   @Input() text: any;
   @Input() img: any;
   protected userOptions = [
-    { name: 'Minha conta', action: () => this.router.navigate([ '/user/my-products' ]) },
+    { name: 'Minha conta', action: () => this.router.navigate([ '/user/my-account' ]) },
     { name: 'Compras', action: () => this.router.navigate([ '/user/my-purchases' ]) },
     { name: 'Vender', action: () => this.router.navigate([ '/user/new-product' ]) },
     { name: 'Anúncios', action: () => this.router.navigate([ '/user/my-products' ]) },

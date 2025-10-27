@@ -15,6 +15,7 @@ import { OrderComponent } from './pages/order/order.component';
 import { PurchasesComponent } from './pages/purchases/purchases.component';
 import { PurchaseDetailComponent } from './pages/purchase-detail/purchase-detail.component';
 import { SalesComponent } from './sales/sales.component';
+import { AccountComponent } from './pages/account/account/account.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { SalesComponent } from './sales/sales.component';
     OrderComponent,
     PurchasesComponent,
     PurchaseDetailComponent,
-    SalesComponent
+    SalesComponent,
+    AccountComponent
   ],
   imports: [
     CommonModule,
