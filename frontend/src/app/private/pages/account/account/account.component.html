@@ -4,34 +4,69 @@
 
 <app-header></app-header>
 
-<div class="flex flex-row">
+<div class="min-h-screen flex flex-col">
 
-    <div class="hidden 2xl:block xl:block">
-        <app-side-menu
-        [menuTitle]="'Minha Conta'"
-        [menuItems]="[
-            {
-                label: 'Vendas',
-                icon: 'fa-shopping-basket',
-                children: [
-                    { label: 'Resumo', link: '/user/new-product' },
-                    { label: 'Novidade', link: '/vendas/novidade' },
-                    { label: 'Anúncios', link: '/vendas/anuncios' }
-                ]
-            },
-            {
-                label: 'Produtos',
-                icon: 'fa-shopping-bag',
-                children: [
-                    { label: 'Categorias', link: '/produtos/categorias' },
-                    { label: 'Estoque', link: '/produtos/estoque' }
-                ]
-            }
-        ]"
-        ></app-side-menu>
+    <div class="flex-1">
+        <div class="flex flex-row">
+        
+            <div class="hidden 2xl:block xl:block">
+                <app-side-menu
+                [menuTitle]="'Minha Conta'"
+                [menuItems]="[
+                    {
+                        label: 'Vendas',
+                        icon: 'fa-shopping-basket',
+                        children: [
+                            { label: 'Resumo', link: '/user/new-product' },
+                            { label: 'Novidade', link: '/vendas/novidade' },
+                            { label: 'Anúncios', link: '/vendas/anuncios' }
+                        ]
+                    },
+                    {
+                        label: 'Produtos',
+                        icon: 'fa-shopping-bag',
+                        children: [
+                            { label: 'Categorias', link: '/produtos/categorias' },
+                            { label: 'Estoque', link: '/produtos/estoque' }
+                        ]
+                    }
+                ]"
+                ></app-side-menu>
+            </div>
+        
+            <div class="bg-gray-300 mx-10 w-full h-auto my-10 rounded-lg text-center">
+                <div class="m-10">
+                    <p class="text-gray-color text-3xl px-2 mb-2">
+                        Insira os dados para alterar a conta.
+                    </p>
+            
+                    <label class="block text-gray-color text-sm mb-2" for="email">E-mail</label>
+                    <input
+                        [(ngModel)]="email"
+                        name="email"
+                        [ngClass]="{ 'border-error-color': loginError }"
+                        class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out mb-2"
+                        id="email"
+                        type="text"
+                        placeholder="Insira o e-mail"
+                        (keydown)="sharedMethod.preventSpace($event)"
+                    />
+            
+                    <label class="block text-gray-color text-sm mb-2" for="email">E-mail</label>
+                    <input
+                        [(ngModel)]="email"
+                        name="email"
+                        [ngClass]="{ 'border-error-color': loginError }"
+                        class="shadow appearance-none border rounded-lg w-full px-6 py-3 text-gray-color leading-tight focus:outline-none focus:shadow-outline transition duration-500 ease-in-out"
+                        id="email"
+                        type="text"
+                        placeholder="Insira o e-mail"
+                        (keydown)="sharedMethod.preventSpace($event)"
+                    />
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div>my-account works</div>
+    
+    <app-footer-dynamic></app-footer-dynamic>
 </div>
-
-<app-footer-dynamic></app-footer-dynamic>

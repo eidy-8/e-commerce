@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { LoadingService } from '../../../../shared/services/loading.service';
 import { UserService } from '../../../services/user.service';
+import { MethodsService } from '../../../../shared/services/shared.service';
 
 @Component({
   selector: 'app-account',
@@ -18,11 +19,14 @@ export class AccountComponent implements OnInit, OnDestroy {
   sellerId!: string;
   buyerId!: string;
 
+  protected email!: string;
+  protected loginError: boolean = false;
+
   private unsubscribe = new Subject<void>;
 
   protected isLoading$: Observable<boolean>;
 
-  constructor(public loadingService: LoadingService, private userService: UserService) {
+  constructor(public loadingService: LoadingService, private userService: UserService, public sharedMethod: MethodsService) {
     this.isLoading$ = this.loadingService.loading$;
   }
 
